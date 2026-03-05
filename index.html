@@ -148,7 +148,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 <div class="page active" id="page-0">
   <div class="hdr">
     <div class="htag">COMPREHENSIVE FINANCIAL PLAN</div>
-    <h1>Your Path to <span>&#8377;66 Crore</span> Retirement</h1>
+    <h1>Your Path to <span id="dash-retirement-goal">&#8377;66 Crore</span> Retirement</h1>
     <p>BRUTAL REALITY EDITION &middot; MARCH 2026 &middot; AGE 31 &rarr; 60</p>
   </div>
   <div class="banner">
@@ -169,7 +169,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="bc">
       <div class="bc-lbl">RETIREMENT TARGET</div>
       <div class="bc-items">
-        <div class="bci"><div class="l">Target Corpus</div><div class="v aj">&#8377;66 Cr</div><div class="s">by age 60 (2054)</div></div>
+        <div class="bci"><div class="l">Target Corpus</div><div class="v aj" id="dash-target-corpus">&#8377;66 Cr</div><div class="s">by age 60 (2054)</div></div>
       </div>
     </div>
     <div class="bc">
@@ -224,7 +224,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <div class="gtl">Combined Family Corpus by Age 60</div>
           <div class="gm">Target: &#8377;10 Cr (today's value) = &#8377;52.3 Cr (2054 value)</div>
         </div>
-        <div><div class="gpl">projected</div><div class="gpv aj">&#8377;66 Cr</div></div>
+        <div><div class="gpl">projected</div><div class="gpv aj" id="dash-projected-corpus">&#8377;66 Cr</div></div>
       </div>
       <div class="gb">
         <div class="gs">
@@ -599,50 +599,93 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr>
             <td>Retirement Satellite</td>
             <td>Quant Small Cap Direct</td>
-            <td id="port-sip-4">&#8377;10,000</td>
+            <td id="port-sip-4">&#8377;7,000</td>
             <td>High alpha for long horizon</td>
             <td>10%/year</td>
             <td><span class="tag tr2">VERY HIGH</span></td>
           </tr>
           <tr>
-            <td>Kids Education</td>
-            <td>HDFC Balanced Advantage Direct</td>
-            <td id="port-sip-5">&#8377;15,000</td>
+            <td>Retirement - Small Cap Index</td>
+            <td>Nifty Smallcap 250 Index</td>
+            <td id="port-sip-5">&#8377;5,000</td>
+            <td>Small cap diversified</td>
+            <td>10%/year</td>
+            <td><span class="tag tr2">VERY HIGH</span></td>
+          </tr>
+          <tr>
+            <td>International Equity</td>
+            <td>Motilal S&P 500 Index</td>
+            <td id="port-sip-6">&#8377;15,000</td>
+            <td>US market exposure</td>
+            <td>10%/year</td>
+            <td><span class="tag ty">MODERATE</span></td>
+          </tr>
+          <tr>
+            <td>Kids Education - Hybrid</td>
+            <td>HDFC Balanced Advantage</td>
+            <td id="port-sip-7">&#8377;12,000</td>
             <td>Lower volatility for 18yr goal</td>
             <td>10%/year</td>
             <td><span class="tag ty">MODERATE</span></td>
           </tr>
           <tr>
-            <td>Kids Education</td>
-            <td>Nifty Next 50 Index Direct</td>
-            <td id="port-sip-6">&#8377;8,000</td>
+            <td>Kids Education - Midcap</td>
+            <td>Nifty Next 50 Index</td>
+            <td id="port-sip-8">&#8377;10,000</td>
             <td>Mid-cap index exposure</td>
             <td>10%/year</td>
             <td><span class="tag ty">MODERATE</span></td>
           </tr>
           <tr>
+            <td>Debt - Stability</td>
+            <td>HDFC Corporate Bond</td>
+            <td id="port-sip-9">&#8377;10,000</td>
+            <td>Stable income</td>
+            <td>10%/year</td>
+            <td><span class="tag tg">LOW</span></td>
+          </tr>
+          <tr>
+            <td>Debt - Liquidity</td>
+            <td>ICICI Liquid Fund</td>
+            <td id="port-sip-10">&#8377;5,000</td>
+            <td>Emergency buffer</td>
+            <td>10%/year</td>
+            <td><span class="tag tg">VERY LOW</span></td>
+          </tr>
+          <tr>
+            <td>Debt - Low Risk</td>
+            <td>SBI Banking & PSU Debt</td>
+            <td id="port-sip-11">&#8377;3,000</td>
+            <td>Safe debt allocation</td>
+            <td>10%/year</td>
+            <td><span class="tag tg">VERY LOW</span></td>
+          </tr>
+          <tr>
+            <td>Gold - Inflation Hedge</td>
+            <td>Gold BeES (ETF) ⚠️ <span style="font-size:10px;color:var(--warning)">Using assumption</span></td>
+            <td id="port-sip-12">&#8377;5,700</td>
+            <td>Commodity diversification</td>
+            <td>10%/year</td>
+            <td><span class="tag tg">LOW</span></td>
+          </tr>
+          <tr>
             <td>NPS Tier 1</td>
-            <td>Auto-choice Aggressive</td>
-            <td id="port-sip-7">&#8377;8,000</td>
+            <td>Auto-choice Aggressive ⚠️ <span style="font-size:10px;color:var(--warning)">Using assumption</span></td>
+            <td id="port-sip-13">&#8377;6,200</td>
             <td>80CCD tax saving</td>
             <td>Fixed</td>
             <td><span class="tag ty">MODERATE</span></td>
           </tr>
-          <tr>
-            <td>LIC (Existing)</td>
-            <td>Existing policy</td>
-            <td id="port-sip-8">&#8377;2,500</td>
-            <td>80C, don't break now</td>
-            <td>Fixed</td>
-            <td><span class="tag tg">LOW</span></td>
-          </tr>
           <tr class="ttr">
             <td colspan="2"><strong>TOTAL MONTHLY INVESTMENT</strong></td>
-            <td id="port-total"><strong>&#8377;70,700</strong></td>
+            <td id="port-total"><strong>&#8377;126,900</strong></td>
             <td colspan="3"></td>
           </tr>
         </tbody>
       </table>
+      <div style="margin-top:8px;padding:10px;background:rgba(240,180,41,0.1);border-left:3px solid var(--warning);border-radius:4px;font-size:11px;color:var(--ink3)">
+        <strong>📊 Data Quality Note:</strong> ⚠️ indicates funds using category assumptions (not historical MFAPI data). Gold BeES and NPS use 9% and 11% assumptions respectively as they are not mutual funds. All other funds use actual 5-year CAGR from MFAPI.
+      </div>
     </div>
     <div class="sh"><span class="sh-n">02</span><h2>Portfolio Allocation Visual</h2></div>
     <div class="cw-s"><canvas id="portfolioDonut"></canvas></div>
@@ -686,7 +729,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 <div class="page" id="page-3">
   <div class="hdr">
     <div class="htag">RETIREMENT PLANNING</div>
-    <h1>Path to <span>&#8377;66 Crore</span> by Age 60</h1>
+    <h1>Path to <span id="retirement-header-goal">&#8377;66 Crore</span> by Age 60</h1>
     <p>YEAR-BY-YEAR PROJECTION &middot; 2026-2054 &middot; 28 YEARS HORIZON</p>
   </div>
   <div class="content">
@@ -1154,26 +1197,50 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </thead>
         <tbody id="wife-portfolio-tbody">
           <tr>
-            <td>Retirement SIP 1</td>
-            <td>Nifty 50 Index Fund Direct</td>
-            <td id="wport-sip-1">&#8377;25,000</td>
-            <td>Low-cost retirement base</td>
+            <td>Large Cap Active</td>
+            <td>ICICI Prudential Bluechip Fund</td>
+            <td id="wport-sip-1">&#8377;20,000</td>
+            <td>Large cap alpha</td>
+            <td><span class="tag ty">MODERATE</span></td>
+          </tr>
+          <tr>
+            <td>Large Cap Index</td>
+            <td>Nifty 50 Index Fund</td>
+            <td id="wport-sip-2">&#8377;10,000</td>
+            <td>Low-cost core</td>
             <td><span class="tag tg">LOW</span></td>
           </tr>
           <tr>
-            <td>Retirement SIP 2</td>
-            <td>Parag Parikh Flexi Cap Direct</td>
-            <td id="wport-sip-2">&#8377;25,000</td>
-            <td>Active fund for alpha + global exposure</td>
-            <td><span class="tag ty">MODERATE</span></td>
+            <td>Midcap Growth</td>
+            <td>Axis Midcap Fund</td>
+            <td id="wport-sip-3">&#8377;15,000</td>
+            <td>Growth potential</td>
+            <td><span class="tag tr2">HIGH</span></td>
+          </tr>
+          <tr>
+            <td>Debt - Stability</td>
+            <td>HDFC Corporate Bond</td>
+            <td id="wport-sip-4">&#8377;10,000</td>
+            <td>Stable income</td>
+            <td><span class="tag tg">LOW</span></td>
+          </tr>
+          <tr>
+            <td>Gold - Inflation Hedge</td>
+            <td>Gold BeES (ETF) ⚠️ <span style="font-size:10px;color:var(--warning)">Using assumption</span></td>
+            <td id="wport-sip-5">&#8377;3,500</td>
+            <td>Commodity diversification</td>
+            <td><span class="tag tg">LOW</span></td>
           </tr>
           <tr class="ttr">
             <td colspan="2"><strong>TOTAL WIFE'S INVESTMENTS</strong></td>
-            <td id="wport-total"><strong>&#8377;50,000</strong></td>
-            <td colspan="2"><strong>&#8377;6,00,000/year</strong></td>
+            <td id="wport-total"><strong>&#8377;58,500</strong></td>
+            <td colspan="2"><strong>&#8377;7,02,000/year</strong></td>
           </tr>
         </tbody>
       </table>
+      <div style="margin-top:8px;padding:10px;background:rgba(240,180,41,0.1);border-left:3px solid var(--warning);border-radius:4px;font-size:11px;color:var(--ink3)">
+        <strong>📊 Data Quality Note:</strong> ⚠️ indicates funds using category assumptions. Gold BeES uses 9% assumption (not a mutual fund). All other funds use actual historical CAGR from MFAPI.
+      </div>
     </div>
     <div class="sh"><span class="sh-n">02</span><h2>Wife's Retirement Corpus Projection</h2></div>
     <div class="cw"><canvas id="wifeRetirementChart"></canvas></div>
@@ -1190,10 +1257,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="g2">
       <div class="card j">
         <div class="ch3 j">RETIREMENT (AGE 60/58)</div>
-        <div class="ml"><div class="d">Your Corpus</div><div class="a ay">&#8377;43.7 Cr</div></div>
-        <div class="ml"><div class="d">Wife's Corpus</div><div class="a aw">&#8377;22.3 Cr</div></div>
-        <div class="tr"><div class="tl">Total Family Retirement</div><div class="tv aj">&#8377;66 Cr</div></div>
-        <div class="ml"><div class="d">Inflation-Adjusted Value</div><div class="a ab">&#8377;20.8 Cr</div></div>
+        <div class="ml"><div class="d">Your Corpus</div><div class="a ay" id="retirement-your-corpus">&#8377;43.7 Cr</div></div>
+        <div class="ml"><div class="d">Wife's Corpus</div><div class="a aw" id="retirement-wife-corpus">&#8377;22.3 Cr</div></div>
+        <div class="tr"><div class="tl">Total Family Retirement</div><div class="tv aj" id="retirement-total-corpus">&#8377;66 Cr</div></div>
+        <div class="ml"><div class="d">Inflation-Adjusted Value</div><div class="a ab" id="retirement-infladj-corpus">&#8377;20.8 Cr</div></div>
         <div style="margin-top:10px;padding:10px;background:rgba(48,200,122,.1);border-radius:5px;font-size:11px">&#9989; Target: &#8377;10 Cr (today's value)<br><strong>ACHIEVEMENT: 2.1x TARGET</strong></div>
       </div>
       <div class="card j">
@@ -1813,52 +1880,56 @@ function updateAllDisplays() {
 // SIP TOTALS
 // ============================================================
 function updateSIPTotals() {
-  var total = 0;
-  for (var i = 1; i <= 8; i++) {
-    var el = document.getElementById('sip-' + i);
-    total += el ? (parseInt(el.value) || 0) : 0;
+  // This function is now handled by updateSettingsTotals() for Settings page
+  // And by updatePortfolioPage() / updateWifePortfolioPage() for portfolio pages
+  // Keep for backward compatibility but sync with fund arrays
+
+  if (typeof yourFunds !== 'undefined') {
+    config.yourSIP = yourFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
   }
-  var wTotal = 0;
-  for (var j = 1; j <= 2; j++) {
-    var wel = document.getElementById('wsip-' + j);
-    wTotal += wel ? (parseInt(wel.value) || 0) : 0;
+  if (typeof wifeFunds !== 'undefined') {
+    config.wifeSIP = wifeFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
   }
+
+  // Update any legacy displays
   var stEl = document.getElementById('sip-total-settings');
-  if (stEl) stEl.textContent = '\u20b9' + total.toLocaleString('en-IN');
+  if (stEl) stEl.innerHTML = '&#8377;' + (config.yourSIP || 0).toLocaleString('en-IN');
   var wstEl = document.getElementById('wsip-total-settings');
-  if (wstEl) wstEl.textContent = '\u20b9' + wTotal.toLocaleString('en-IN');
-  config.sips = [];
-  for (var k = 1; k <= 8; k++) {
-    var ke = document.getElementById('sip-' + k);
-    config.sips.push(ke ? (parseInt(ke.value) || 0) : 0);
-  }
-  config.wsips = [];
-  for (var m = 1; m <= 2; m++) {
-    var me = document.getElementById('wsip-' + m);
-    config.wsips.push(me ? (parseInt(me.value) || 0) : 0);
-  }
+  if (wstEl) wstEl.innerHTML = '&#8377;' + (config.wifeSIP || 0).toLocaleString('en-IN');
 }
 
 function updatePortfolioPage() {
-  var labels = [null, 'port-sip-1','port-sip-2','port-sip-3','port-sip-4','port-sip-5','port-sip-6','port-sip-7','port-sip-8'];
-  var total = 0;
-  for (var i = 0; i < config.sips.length; i++) {
-    var el = document.getElementById('port-sip-' + (i + 1));
-    if (el) el.textContent = '\u20b9' + config.sips[i].toLocaleString('en-IN');
-    total += config.sips[i];
+  // Use yourFunds array instead of config.sips
+  if (typeof yourFunds !== 'undefined') {
+    var total = 0;
+    yourFunds.forEach((fund, idx) => {
+      var el = document.getElementById('port-sip-' + (idx + 1));
+      if (el) el.textContent = '\u20b9' + (fund.monthlySIP || 0).toLocaleString('en-IN');
+      total += fund.monthlySIP || 0;
+    });
+    var pt = document.getElementById('port-total');
+    if (pt) pt.innerHTML = '<strong>\u20b9' + total.toLocaleString('en-IN') + '</strong>';
+    console.log('✅ Portfolio page updated with total: ₹' + total.toLocaleString('en-IN'));
+  } else {
+    console.warn('⚠️ yourFunds array not defined');
   }
-  var pt = document.getElementById('port-total');
-  if (pt) pt.innerHTML = '<strong>\u20b9' + total.toLocaleString('en-IN') + '</strong>';
 }
 
 function updateWifePortfolioPage() {
-  for (var j = 0; j < config.wsips.length; j++) {
-    var el = document.getElementById('wport-sip-' + (j + 1));
-    if (el) el.textContent = '\u20b9' + config.wsips[j].toLocaleString('en-IN');
+  // Use wifeFunds array instead of config.wsips
+  if (typeof wifeFunds !== 'undefined') {
+    var total = 0;
+    wifeFunds.forEach((fund, idx) => {
+      var el = document.getElementById('wport-sip-' + (idx + 1));
+      if (el) el.textContent = '\u20b9' + (fund.monthlySIP || 0).toLocaleString('en-IN');
+      total += fund.monthlySIP || 0;
+    });
+    var wpt = document.getElementById('wport-total');
+    if (wpt) wpt.innerHTML = '<strong>\u20b9' + total.toLocaleString('en-IN') + '</strong>';
+    console.log('✅ Wife portfolio page updated with total: ₹' + total.toLocaleString('en-IN'));
+  } else {
+    console.warn('⚠️ wifeFunds array not defined');
   }
-  var wt = config.wsips.reduce(function(a, b){ return a + b; }, 0);
-  var wpt = document.getElementById('wport-total');
-  if (wpt) wpt.innerHTML = '<strong>\u20b9' + wt.toLocaleString('en-IN') + '</strong>';
 }
 
 function updateDashboardBanner() {
@@ -1877,6 +1948,30 @@ function updateDashboardBanner() {
 
   var dashNet = document.getElementById('dash-netpay');
   if (dashNet) dashNet.textContent = '\u20b9' + (config.netPay / 100000).toFixed(2) + 'L';
+
+  // Calculate and update retirement corpus projection
+  try {
+    const retirementData = calculateRetirementProjection();
+    if (retirementData && retirementData.length > 0) {
+      const finalYear = retirementData[retirementData.length - 1];
+      const corpusCr = (finalYear.corpus / 10000000).toFixed(0);
+      const inflAdjCr = (finalYear.inflAdj / 10000000).toFixed(0);
+
+      // Update all instances of retirement corpus
+      const retGoal = document.getElementById('dash-retirement-goal');
+      if (retGoal) retGoal.textContent = '\u20b9' + corpusCr + ' Crore';
+
+      const targetCorpus = document.getElementById('dash-target-corpus');
+      if (targetCorpus) targetCorpus.textContent = '\u20b9' + corpusCr + ' Cr';
+
+      const projCorpus = document.getElementById('dash-projected-corpus');
+      if (projCorpus) projCorpus.textContent = '\u20b9' + corpusCr + ' Cr';
+
+      console.log('✅ Dashboard updated with retirement corpus: ₹' + corpusCr + ' Cr');
+    }
+  } catch (e) {
+    console.error('Error updating dashboard retirement corpus:', e);
+  }
 
   // Update Monthly Allocation section (lines 210-215 in HTML)
   // Note: This updates the dashboard display but HTML still has hardcoded values initially
@@ -2022,19 +2117,29 @@ function renderPortfolioDonut() {
   destroyChart('portfolioDonut');
   var ctx = document.getElementById('portfolioDonut');
   if (!ctx) return;
-  var labels = ['Parag Parikh ELSS','Nifty 50 Index','Motilal Midcap','Quant Small Cap','HDFC Balanced Adv','Nifty Next 50','NPS Tier 1','LIC'];
-  var colors = ['#f0b429','#30c87a','#e040a0','#e85040','#4d9ef0','#a855f7','#60e8a0','#9aa2b0'];
+
+  // Use yourFunds array for dynamic data
+  if (typeof yourFunds === 'undefined' || yourFunds.length === 0) {
+    console.warn('⚠️ yourFunds not available for portfolio donut');
+    return;
+  }
+
+  // Get actual fund names and SIP values from yourFunds array
+  var labels = yourFunds.map(f => f.name.split(' ')[0] + ' ' + (f.name.split(' ')[1] || '')).slice(0, 13);
+  var data = yourFunds.map(f => f.monthlySIP || 0).slice(0, 13);
+  var colors = ['#f0b429','#30c87a','#e040a0','#e85040','#4d9ef0','#a855f7','#60e8a0','#9aa2b0','#fbbf24','#fb923c','#f472b6','#c084fc','#38bdf8'];
+
   chartInstances['portfolioDonut'] = new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: labels,
-      datasets: [{ data: config.sips.slice(), backgroundColor: colors }]
+      datasets: [{ data: data, backgroundColor: colors }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { labels: { color: '#eef0f4', font: { size: 11 } } },
-        title: { display: true, text: 'Your Monthly SIP Allocation', color: '#eef0f4' }
+        title: { display: true, text: 'Your Monthly SIP Allocation (₹' + data.reduce((a,b)=>a+b,0).toLocaleString('en-IN') + '/mo)', color: '#eef0f4' }
       }
     }
   });
@@ -2088,6 +2193,37 @@ function renderRetirementCharts() {
       }
     }
   });
+
+  // Update text elements with calculated values
+  if (data && data.length > 0) {
+    const finalYear = data[data.length - 1];
+    const corpusCr = (finalYear.corpus / 10000000).toFixed(0);
+    const inflAdjCr = (finalYear.inflAdj / 10000000).toFixed(0);
+
+    // Calculate split (assume 65% yours, 35% wife's based on SIP ratio)
+    const yourPct = config.yourSIP / (config.yourSIP + config.wifeSIP);
+    const yourCorpus = (finalYear.corpus * yourPct / 10000000).toFixed(1);
+    const wifeCorpus = (finalYear.corpus * (1 - yourPct) / 10000000).toFixed(1);
+
+    // Update retirement page header
+    const retHeader = document.getElementById('retirement-header-goal');
+    if (retHeader) retHeader.textContent = '\u20b9' + corpusCr + ' Crore';
+
+    // Update retirement summary boxes
+    const yourCorpusEl = document.getElementById('retirement-your-corpus');
+    if (yourCorpusEl) yourCorpusEl.textContent = '\u20b9' + yourCorpus + ' Cr';
+
+    const wifeCorpusEl = document.getElementById('retirement-wife-corpus');
+    if (wifeCorpusEl) wifeCorpusEl.textContent = '\u20b9' + wifeCorpus + ' Cr';
+
+    const totalCorpusEl = document.getElementById('retirement-total-corpus');
+    if (totalCorpusEl) totalCorpusEl.textContent = '\u20b9' + corpusCr + ' Cr';
+
+    const inflAdjEl = document.getElementById('retirement-infladj-corpus');
+    if (inflAdjEl) inflAdjEl.textContent = '\u20b9' + inflAdjCr + ' Cr';
+
+    console.log('✅ Retirement page updated: ₹' + corpusCr + ' Cr nominal, ₹' + inflAdjCr + ' Cr inflation-adjusted');
+  }
 }
 
 // ============================================================
@@ -2328,7 +2464,19 @@ function renderHistoricalChart() {
 // LIVE SIP TOTAL UPDATE (on input change)
 // ============================================================
 document.addEventListener('DOMContentLoaded', async function() {
-  // Load cached historical data first
+  // Load configuration from localStorage FIRST
+  loadConfig();
+
+  // Sync config with fund arrays on initial load
+  if (typeof yourFunds !== 'undefined') {
+    config.yourSIP = yourFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+  }
+  if (typeof wifeFunds !== 'undefined') {
+    config.wifeSIP = wifeFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+  }
+  console.log('✅ Config initialized: Your SIP=₹' + config.yourSIP + ', Wife SIP=₹' + config.wifeSIP);
+
+  // Load cached historical data
   const hasCache = loadFundHistoricalData();
 
   if (!hasCache) {
@@ -4338,14 +4486,14 @@ let config = {
   basicSalary: 139678,
   netPay: 213586,
   wifeGross: 70000,
-  wifeInvestment: 60500,
+  wifeInvestment: 58500,  // Wife's total SIP (matches wifeSIP)
   rent: 40000,
   parents: 20000,
   fixedExpenses: 13000,
   livingExpenses: 49000,
   sinkingFunds: 60000,
-  yourSIP: 116900,
-  wifeSIP: 60500,
+  yourSIP: 126900,  // Sum of all 13 funds
+  wifeSIP: 58500,   // Sum of all 5 wife funds (20000+10000+15000+10000+3500)
   // Investment assumptions
   expectedReturn: 12,  // Expected equity return percentage
   annualStepUp: 10,    // Annual SIP step-up percentage
@@ -4939,8 +5087,8 @@ function saveConfig() {
     if (typeof renderKidsCharts === 'function') renderKidsCharts();
     if (typeof renderInvestmentCharts === 'function') renderInvestmentCharts();
     if (typeof renderWifeCharts === 'function') renderWifeCharts();
-    if (typeof refreshMyPortfolio === 'function') refreshMyPortfolio();
-    if (typeof refreshWifePortfolio === 'function') refreshWifePortfolio();
+    if (typeof updatePortfolioPage === 'function') updatePortfolioPage();
+    if (typeof updateWifePortfolioPage === 'function') updateWifePortfolioPage();
     if (typeof renderMonthlyProjections === 'function') renderMonthlyProjections();
 
     // Critical new features
@@ -5075,7 +5223,6 @@ function initializeSettingsListeners() {
 
 // Call when page loads
 setTimeout(initializeSettingsListeners, 1000);
-}
 
 // ============================================================
 // REVIEW & TRACKING SYSTEM
