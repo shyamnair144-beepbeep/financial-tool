@@ -207,12 +207,12 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
       <div class="card j">
         <div class="ch3 j">MONTHLY ALLOCATION</div>
-        <div class="ml"><div class="d">Fixed Expenses<small>Rent, parents, utilities</small></div><div class="a ar">&#8377;73,000</div></div>
-        <div class="ml"><div class="d">Living Expenses<small>Food, transport, lifestyle</small></div><div class="a ar">&#8377;49,000</div></div>
-        <div class="ml"><div class="d">Sinking Funds<small>Vacation, car, baby</small></div><div class="a ab">&#8377;60,000</div></div>
-        <div class="ml"><div class="d">Goal Investments<small>Retirement + education</small></div><div class="a aj">&#8377;1,16,900</div></div>
-        <div class="ml"><div class="d">Wife's Investments</div><div class="a aj">&#8377;60,500</div></div>
-        <div class="tr"><div class="tl">Total Allocated</div><div class="tv">&#8377;3,59,400</div></div>
+        <div class="ml"><div class="d">Fixed Expenses<small>Rent, parents, utilities</small></div><div class="a ar" id="dash-fixed-exp">&#8377;73,000</div></div>
+        <div class="ml"><div class="d">Living Expenses<small>Food, transport, lifestyle</small></div><div class="a ar" id="dash-living-exp">&#8377;49,000</div></div>
+        <div class="ml"><div class="d">Sinking Funds<small>Vacation, car, baby</small></div><div class="a ab" id="dash-sinking">&#8377;60,000</div></div>
+        <div class="ml"><div class="d">Goal Investments<small>Retirement + education</small></div><div class="a aj" id="dash-goal-inv">&#8377;1,16,900</div></div>
+        <div class="ml"><div class="d">Wife's Investments</div><div class="a aj" id="dash-wife-inv">&#8377;60,500</div></div>
+        <div class="tr"><div class="tl">Total Allocated</div><div class="tv" id="dash-total-alloc">&#8377;3,59,400</div></div>
         <div class="pb"><div class="pb-fill" style="width:100%"></div></div>
       </div>
     </div>
@@ -356,57 +356,89 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
       </div>
       <div class="field-group">
-        <h3>My SIP Allocation (8 Funds)</h3>
+        <h3>Your SIP Allocation (13 Funds) - Total: ₹1,16,900/month</h3>
         <div class="field-row">
           <span class="field-label">Parag Parikh Flexi Cap (ELSS)</span>
-          <input class="field-input sip-input" id="sip-1" type="number" value="10000">
+          <input class="field-input" id="s-sip-0" type="number" value="18000">
         </div>
         <div class="field-row">
           <span class="field-label">Nifty 50 Index Fund</span>
-          <input class="field-input sip-input" id="sip-2" type="number" value="15000">
+          <input class="field-input" id="s-sip-1" type="number" value="22000">
         </div>
         <div class="field-row">
           <span class="field-label">Motilal Midcap Direct</span>
-          <input class="field-input sip-input" id="sip-3" type="number" value="2200">
+          <input class="field-input" id="s-sip-2" type="number" value="8000">
         </div>
         <div class="field-row">
           <span class="field-label">Quant Small Cap Direct</span>
-          <input class="field-input sip-input" id="sip-4" type="number" value="10000">
+          <input class="field-input" id="s-sip-3" type="number" value="7000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Nifty Smallcap 250 Index</span>
+          <input class="field-input" id="s-sip-4" type="number" value="5000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Motilal S&P 500 Index (International)</span>
+          <input class="field-input" id="s-sip-5" type="number" value="15000">
         </div>
         <div class="field-row">
           <span class="field-label">HDFC Balanced Advantage</span>
-          <input class="field-input sip-input" id="sip-5" type="number" value="15000">
+          <input class="field-input" id="s-sip-6" type="number" value="12000">
         </div>
         <div class="field-row">
           <span class="field-label">Nifty Next 50 Index</span>
-          <input class="field-input sip-input" id="sip-6" type="number" value="8000">
+          <input class="field-input" id="s-sip-7" type="number" value="10000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">HDFC Corporate Bond Fund</span>
+          <input class="field-input" id="s-sip-8" type="number" value="10000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">ICICI Liquid Fund</span>
+          <input class="field-input" id="s-sip-9" type="number" value="5000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">SBI Banking & PSU Debt</span>
+          <input class="field-input" id="s-sip-10" type="number" value="3000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Gold BeES (ETF)</span>
+          <input class="field-input" id="s-sip-11" type="number" value="5700">
         </div>
         <div class="field-row">
           <span class="field-label">NPS Tier 1</span>
-          <input class="field-input sip-input" id="sip-7" type="number" value="8000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">LIC Premium</span>
-          <input class="field-input sip-input" id="sip-8" type="number" value="2500">
+          <input class="field-input" id="s-sip-12" type="number" value="6200">
         </div>
         <div class="field-row" style="background:rgba(240,180,41,.05);border-radius:4px;padding:6px 4px">
-          <span class="field-label" style="font-weight:700;color:var(--you)">Total SIPs</span>
-          <span style="font-family:monospace;font-weight:700;color:var(--jt2)" id="sip-total-settings">&#8377;70,700</span>
+          <span class="field-label" style="font-weight:700;color:var(--you)">Total Your SIPs</span>
+          <span style="font-family:monospace;font-weight:700;color:var(--jt2)" id="sip-total-settings">&#8377;1,16,900</span>
         </div>
       </div>
       <div class="field-group">
-        <h3>Wife's SIP Allocation (2 Funds)</h3>
+        <h3>Wife's SIP Allocation (5 Funds) - Total: ₹60,500/month</h3>
         <div class="field-row">
-          <span class="field-label">Nifty 50 Index Fund Direct</span>
-          <input class="field-input sip-input" id="wsip-1" type="number" value="25000">
+          <span class="field-label">ICICI Bluechip Fund</span>
+          <input class="field-input" id="s-wife-sip-0" type="number" value="20000">
         </div>
         <div class="field-row">
-          <span class="field-label">Parag Parikh Flexi Cap Direct</span>
-          <input class="field-input sip-input" id="wsip-2" type="number" value="25000">
+          <span class="field-label">Nifty 50 Index Fund</span>
+          <input class="field-input" id="s-wife-sip-1" type="number" value="10000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Axis Midcap Fund</span>
+          <input class="field-input" id="s-wife-sip-2" type="number" value="15000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">HDFC Corporate Bond Fund</span>
+          <input class="field-input" id="s-wife-sip-3" type="number" value="10000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Gold BeES (ETF)</span>
+          <input class="field-input" id="s-wife-sip-4" type="number" value="3500">
         </div>
         <div class="field-row" style="background:rgba(224,64,160,.05);border-radius:4px;padding:6px 4px">
           <span class="field-label" style="font-weight:700;color:var(--wife)">Wife's Total SIPs</span>
-          <span style="font-family:monospace;font-weight:700;color:#f580c8" id="wsip-total-settings">&#8377;50,000</span>
+          <span style="font-family:monospace;font-weight:700;color:#f580c8" id="wsip-total-settings">&#8377;60,500</span>
         </div>
         <h3 style="margin-top:16px">Investment Assumptions</h3>
         <div class="field-row">
@@ -1778,13 +1810,52 @@ function updateWifePortfolioPage() {
 }
 
 function updateDashboardBanner() {
-  var sipTotal = config.sips.reduce(function(a, b){ return a + b; }, 0);
+  // Use config.yourSIP and config.wifeSIP instead of old arrays
   var dashSip = document.getElementById('dash-yoursip');
-  if (dashSip) dashSip.textContent = '\u20b9' + (sipTotal / 1000).toFixed(1) + 'K';
+  if (dashSip) {
+    const lakh = Math.round(config.yourSIP / 1000) / 100;
+    dashSip.textContent = '\u20b9' + lakh.toFixed(2) + 'L';
+  }
+
   var dashWife = document.getElementById('dash-wifesip');
-  if (dashWife) dashWife.textContent = '\u20b9' + (config.wifeSip / 1000).toFixed(0) + 'K';
+  if (dashWife) {
+    const k = Math.round(config.wifeSIP / 1000);
+    dashWife.textContent = '\u20b9' + k.toFixed(1) + 'K';
+  }
+
   var dashNet = document.getElementById('dash-netpay');
-  if (dashNet) dashNet.textContent = '\u20b9' + (config.netpay / 100000).toFixed(2) + 'L';
+  if (dashNet) dashNet.textContent = '\u20b9' + (config.netPay / 100000).toFixed(2) + 'L';
+
+  // Update Monthly Allocation section (lines 210-215 in HTML)
+  // Note: This updates the dashboard display but HTML still has hardcoded values initially
+  // They will update on first page load via this function
+  updateDashboardAllocation();
+}
+
+function updateDashboardAllocation() {
+  // Calculate fixed expenses total
+  const fixedExpTotal = (config.rent || 40000) + (config.parents || 20000) + (config.fixedExpenses || 13000);
+
+  // Update each allocation item
+  const updateEl = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '\u20b9' + value.toLocaleString('en-IN');
+  };
+
+  updateEl('dash-fixed-exp', fixedExpTotal);
+  updateEl('dash-living-exp', config.livingExpenses || 49000);
+  updateEl('dash-sinking', config.sinkingFunds || 60000);
+  updateEl('dash-goal-inv', config.yourSIP || 116900);
+  updateEl('dash-wife-inv', config.wifeSIP || 60500);
+
+  // Calculate and update total
+  const total = fixedExpTotal +
+                (config.livingExpenses || 49000) +
+                (config.sinkingFunds || 60000) +
+                (config.yourSIP || 116900) +
+                (config.wifeSIP || 60500);
+
+  updateEl('dash-total-alloc', total);
 }
 
 // ============================================================
@@ -1851,9 +1922,24 @@ function renderDashboardCharts() {
   destroyChart('networthChart');
   var ctx = document.getElementById('networthChart');
   if (!ctx) return;
-  var years = [2026,2030,2035,2040,2045,2050,2054];
-  var yourCorpus = [0.07,0.58,2.08,5.42,12.37,25.69,43.71];
-  var wifeCorpus = [0.06,0.46,1.22,2.86,6.12,12.46,22.35];
+
+  // DYNAMIC: Calculate corpus projections from actual SIP values
+  const retirementData = calculateRetirementProjection();
+  const years = [2026, 2030, 2035, 2040, 2045, 2050, 2054];
+
+  // Extract corpus values for milestone years
+  const yourRatio = (config.yourSIP || 116900) / ((config.yourSIP || 116900) + (config.wifeSIP || 60500));
+  const wifeRatio = (config.wifeSIP || 60500) / ((config.yourSIP || 116900) + (config.wifeSIP || 60500));
+
+  const yourCorpus = years.map(yr => {
+    const dataPoint = retirementData.find(d => d.year === yr);
+    return dataPoint ? (dataPoint.corpus * yourRatio) / 10000000 : 0; // Convert to Cr
+  });
+
+  const wifeCorpus = years.map(yr => {
+    const dataPoint = retirementData.find(d => d.year === yr);
+    return dataPoint ? (dataPoint.corpus * wifeRatio) / 10000000 : 0; // Convert to Cr
+  });
   chartInstances['networthChart'] = new Chart(ctx, {
     type: 'line',
     data: {
@@ -1909,37 +1995,10 @@ function renderRetirementCharts() {
   destroyChart('retirementChart');
   var ctx = document.getElementById('retirementChart');
   if (!ctx) return;
-  var data = [
-    {year:2026,age:32,sip:57200,contrib:686400,corpus:724920,inflAdj:724920},
-    {year:2027,age:33,sip:62920,contrib:755040,corpus:1619543,inflAdj:1528077},
-    {year:2028,age:34,sip:69212,contrib:830544,corpus:2737438,inflAdj:2435584},
-    {year:2029,age:35,sip:76133,contrib:913596,corpus:4116398,inflAdj:3461694},
-    {year:2030,age:36,sip:83746,contrib:1004952,corpus:5798229,inflAdj:4598594},
-    {year:2031,age:37,sip:92121,contrib:1105452,corpus:7830746,inflAdj:5841067},
-    {year:2032,age:38,sip:101333,contrib:1215996,corpus:10268423,inflAdj:7282735},
-    {year:2033,age:39,sip:111466,contrib:1337592,corpus:13173705,inflAdj:8916325},
-    {year:2034,age:40,sip:122613,contrib:1471356,corpus:16618360,inflAdj:10735651},
-    {year:2035,age:41,sip:134874,contrib:1618488,corpus:20784779,inflAdj:12835702},
-    {year:2036,age:42,sip:148361,contrib:1780332,corpus:25567483,inflAdj:15210612},
-    {year:2037,age:43,sip:163197,contrib:1958364,corpus:31174697,inflAdj:17959802},
-    {year:2038,age:44,sip:179517,contrib:2154204,corpus:37719305,inflAdj:20984043},
-    {year:2039,age:45,sip:197469,contrib:2369628,corpus:45350761,inflAdj:24486582},
-    {year:2040,age:46,sip:217216,contrib:2606592,corpus:54227282,inflAdj:28472988},
-    {year:2041,age:47,sip:238938,contrib:2867256,corpus:64518136,inflAdj:32949152},
-    {year:2042,age:48,sip:262832,contrib:3153984,corpus:76405959,inflAdj:37922309},
-    {year:2043,age:49,sip:289115,contrib:3469380,corpus:90088587,inflAdj:43400066},
-    {year:2044,age:50,sip:318027,contrib:3816324,corpus:105781233,inflAdj:49389528},
-    {year:2045,age:51,sip:349830,contrib:4197960,corpus:123718141,inflAdj:55896222},
-    {year:2046,age:52,sip:384813,contrib:4617756,corpus:144154326,inflAdj:62924058},
-    {year:2047,age:53,sip:423294,contrib:5079528,corpus:167368293,inflAdj:70475252},
-    {year:2048,age:54,sip:465623,contrib:5587476,corpus:193664080,inflAdj:78550244},
-    {year:2049,age:55,sip:512185,contrib:6146220,corpus:223373870,inflAdj:87147688},
-    {year:2050,age:56,sip:563404,contrib:6760848,corpus:256860823,inflAdj:96264451},
-    {year:2051,age:57,sip:619744,contrib:7436928,corpus:294521942,inflAdj:105895614},
-    {year:2052,age:58,sip:681718,contrib:8180616,corpus:336790912,inflAdj:116033470},
-    {year:2053,age:59,sip:749890,contrib:8998680,corpus:384141423,inflAdj:126667546},
-    {year:2054,age:60,sip:824879,contrib:9898548,corpus:437091526,inflAdj:137785584}
-  ];
+
+  // DYNAMIC: Use calculateRetirementProjection() instead of hardcoded data
+  // This ensures chart reflects actual config.yourSIP + config.wifeSIP values
+  var data = calculateRetirementProjection();
   var milestones = [2030,2040,2050,2054];
   var tbody = document.querySelector('#retirementTable tbody');
   if (tbody) {
@@ -1980,32 +2039,67 @@ function renderRetirementCharts() {
 }
 
 // ============================================================
+// KIDS EDUCATION PROJECTION CALCULATOR
+// ============================================================
+function calculateKidsProjection(monthlySIP, birthYear, targetAge, targetCorpus) {
+  const stepUpRate = config.annualStepUp || 10;
+  const expectedReturn = config.expectedReturn || 12;
+  const years = targetAge; // Number of years until target age
+
+  const data = [];
+  let totalInvested = 0;
+  let corpus = 0;
+  let currentSIP = monthlySIP;
+
+  for (let i = 0; i <= years; i++) {
+    const year = birthYear + i;
+    const age = i;
+
+    // Annual contribution with step-up
+    const annualContribution = currentSIP * 12;
+    totalInvested += annualContribution;
+
+    // Corpus grows by return rate + new contribution
+    corpus = corpus * (1 + expectedReturn / 100) + annualContribution;
+
+    data.push({
+      year: year,
+      age: age,
+      sip: currentSIP,
+      contrib: annualContribution,
+      corpus: Math.round(corpus),
+      target: age === targetAge ? targetCorpus : 0
+    });
+
+    // Apply step-up for next year
+    currentSIP = currentSIP * (1 + stepUpRate / 100);
+  }
+
+  return data;
+}
+
+// ============================================================
 // CHART: KIDS EDUCATION
 // ============================================================
 function renderKidsCharts() {
   destroyChart('child1Chart');
   destroyChart('child2Chart');
-  var child1Data = [
-    {year:2026,age:0,sip:33000,contrib:396000,corpus:415800,target:0},
-    {year:2027,age:1,sip:36300,contrib:435600,corpus:916122,target:0},
-    {year:2028,age:2,sip:39930,contrib:479160,corpus:1531422,target:0},
-    {year:2029,age:3,sip:43923,contrib:527076,corpus:2384590,target:0},
-    {year:2030,age:4,sip:48315,contrib:579780,corpus:3302807,target:0},
-    {year:2031,age:5,sip:53147,contrib:637764,corpus:4415416,target:0},
-    {year:2032,age:6,sip:58462,contrib:701544,corpus:5755198,target:0},
-    {year:2033,age:7,sip:64308,contrib:771696,corpus:7358104,target:0},
-    {year:2034,age:8,sip:70739,contrib:848868,corpus:9264579,target:0},
-    {year:2035,age:9,sip:77813,contrib:933756,corpus:11519611,target:0},
-    {year:2036,age:10,sip:85594,contrib:1027128,corpus:14173179,target:0},
-    {year:2037,age:11,sip:94153,contrib:1129836,corpus:17281198,target:0},
-    {year:2038,age:12,sip:103568,contrib:1242816,corpus:20905496,target:0},
-    {year:2039,age:13,sip:113925,contrib:1367100,corpus:25115306,target:0},
-    {year:2040,age:14,sip:125318,contrib:1503816,corpus:29988415,target:0},
-    {year:2041,age:15,sip:137850,contrib:1654200,corpus:35612317,target:0},
-    {year:2042,age:16,sip:151635,contrib:1819620,corpus:42085411,target:0},
-    {year:2043,age:17,sip:166799,contrib:2001588,corpus:49517908,target:0},
-    {year:2044,age:18,sip:183479,contrib:2201748,corpus:58033647,target:27700000}
-  ];
+
+  // DYNAMIC: Calculate kids education SIP from actual fund values
+  let kidsEquitySIP = 10000; // Default
+  let kidsHybridSIP = 12000; // Default
+
+  if (typeof yourFunds !== 'undefined' && yourFunds.length > 0) {
+    const equityFund = yourFunds.find(f => f.purpose && f.purpose.includes('Kids Education - Midcap'));
+    const hybridFund = yourFunds.find(f => f.purpose && f.purpose.includes('Kids Education - Hybrid'));
+    if (equityFund) kidsEquitySIP = equityFund.monthlySIP || 10000;
+    if (hybridFund) kidsHybridSIP = hybridFund.monthlySIP || 12000;
+  }
+
+  const totalKidsSIP = kidsEquitySIP + kidsHybridSIP;
+
+  // Calculate child1 projection (born 2026, needs money at age 18 in 2044)
+  const child1Data = calculateKidsProjection(totalKidsSIP, 2026, 18, 27700000);
   var tbody1 = document.querySelector('#child1Table tbody');
   if (tbody1) {
     tbody1.innerHTML = child1Data.map(function(r, i) {
@@ -2191,6 +2285,9 @@ document.addEventListener('DOMContentLoaded', function() {
   updatePortfolioPage();
   updateWifePortfolioPage();
   calculateCarOptions();
+  // Update dashboard values
+  if (typeof updateDashboardBanner === 'function') updateDashboardBanner();
+  if (typeof updateDashboardAllocation === 'function') updateDashboardAllocation();
   // Render first page charts
   renderDashboardCharts();
 });
@@ -3188,6 +3285,9 @@ let config = {
   sinkingFunds: 60000,
   yourSIP: 116900,
   wifeSIP: 60500,
+  // Investment assumptions
+  expectedReturn: 12,  // Expected equity return percentage
+  annualStepUp: 10,    // Annual SIP step-up percentage
   // Inflation rates
   inflationGeneral: 6,
   inflationEducation: 10,
@@ -3248,8 +3348,8 @@ function calculateRetirementProjection() {
   const years = retirementAge - startAge; // 28 years
 
   const currentSIP = (config.yourSIP || 0) + (config.wifeSIP || 0); // Combined SIP
-  const stepUpRate = 10; // 10% annual step-up
-  const expectedReturn = 12; // 12% nominal CAGR
+  const stepUpRate = config.annualStepUp || 10; // Annual step-up from Settings (default 10%)
+  const expectedReturn = config.expectedReturn || 12; // Expected return from Settings (default 12%)
   const inflationRate = config.inflationGeneral || 6;
 
   const data = [];
@@ -3690,6 +3790,13 @@ function saveConfig() {
     config.wifeSIP = wifeFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
   }
 
+  // Read investment assumptions
+  const equityReturn = getValue('s-eq-return');
+  if (equityReturn > 0) config.expectedReturn = equityReturn;
+
+  const stepUp = getValue('s-stepup');
+  if (stepUp > 0) config.annualStepUp = stepUp;
+
   // Read inflation rates
   config.inflationGeneral = getValue('s-inflation-general');
   config.inflationEducation = getValue('s-inflation-education');
@@ -3720,9 +3827,20 @@ function saveConfig() {
   console.log('🔄 Refreshing all dependent pages...');
 
   setTimeout(() => {
+    // Update dashboard banner and allocation with new values
+    if (typeof updateDashboardBanner === 'function') updateDashboardBanner();
+    if (typeof updateDashboardAllocation === 'function') updateDashboardAllocation();
+
     // Core pages
-    if (typeof renderDashboardCharts === 'function') renderDashboardCharts();
-    if (typeof renderRetirementCharts === 'function') renderRetirementCharts();
+    if (typeof renderDashboardCharts === 'function') {
+      destroyChart('networthChart');
+      renderDashboardCharts();
+    }
+    if (typeof renderRetirementCharts === 'function') {
+      // Force full recalculation with new SIP values
+      destroyChart('retirementChart');
+      renderRetirementCharts();
+    }
     if (typeof renderKidsCharts === 'function') renderKidsCharts();
     if (typeof renderInvestmentCharts === 'function') renderInvestmentCharts();
     if (typeof renderWifeCharts === 'function') renderWifeCharts();
@@ -3775,28 +3893,93 @@ function populateSettingsInputs() {
     if (el && val) el.value = val;
   };
   
+  // Income fields
   setValue('s-ctc', config.annualCTC);
   setValue('s-basic', config.basicSalary);
   setValue('s-netpay', config.netPay);
   setValue('s-wife-gross', config.wifeGross);
   setValue('s-wife-inv', config.wifeInvestment);
+
+  // Expense fields
   setValue('s-rent', config.rent);
   setValue('s-parents', config.parents);
   setValue('s-fixed', config.fixedExpenses);
   setValue('s-living', config.livingExpenses);
   setValue('s-sinking', config.sinkingFunds);
-  
+
+  // Fund SIPs
   if (typeof yourFunds !== 'undefined') {
     yourFunds.forEach((fund, idx) => {
       setValue(`s-sip-${idx}`, fund.monthlySIP);
     });
   }
-  
+
   if (typeof wifeFunds !== 'undefined') {
     wifeFunds.forEach((fund, idx) => {
       setValue(`s-wife-sip-${idx}`, fund.monthlySIP);
     });
   }
+
+  // Investment assumptions
+  setValue('s-eq-return', config.expectedReturn || 12);
+  setValue('s-stepup', config.annualStepUp || 10);
+
+  // Inflation rates
+  setValue('s-inflation-general', config.inflationGeneral || 6);
+  setValue('s-inflation-education', config.inflationEducation || 10);
+  setValue('s-inflation-healthcare', config.inflationHealthcare || 12);
+
+  // Emergency fund
+  setValue('s-emergency-fund', config.emergencyFund || 2000000);
+  const emergencyTargetEl = document.getElementById('s-emergency-target');
+  if (emergencyTargetEl) emergencyTargetEl.value = config.emergencyFundTarget || 6;
+
+  // Insurance
+  setValue('s-life-insurance', config.lifeInsuranceCurrent || 0);
+  setValue('s-health-insurance', config.healthInsuranceCurrent || 0);
+  setValue('s-parents-health', config.parentsHealthInsurance || 0);
+}
+
+// ============================================
+// REAL-TIME SETTINGS TOTALS CALCULATOR
+// ============================================
+
+// Update SIP totals in Settings page as user types
+function updateSettingsTotals() {
+  let yourTotal = 0;
+  for (let i = 0; i < 13; i++) {
+    const el = document.getElementById(`s-sip-${i}`);
+    if (el) yourTotal += parseFloat(el.value) || 0;
+  }
+
+  let wifeTotal = 0;
+  for (let i = 0; i < 5; i++) {
+    const el = document.getElementById(`s-wife-sip-${i}`);
+    if (el) wifeTotal += parseFloat(el.value) || 0;
+  }
+
+  const yourTotalEl = document.getElementById('sip-total-settings');
+  const wifeTotalEl = document.getElementById('wsip-total-settings');
+
+  if (yourTotalEl) yourTotalEl.innerHTML = `&#8377;${yourTotal.toLocaleString('en-IN')}`;
+  if (wifeTotalEl) wifeTotalEl.innerHTML = `&#8377;${wifeTotal.toLocaleString('en-IN')}`;
+}
+
+// Attach listeners when Settings page loads
+function initializeSettingsListeners() {
+  for (let i = 0; i < 13; i++) {
+    const el = document.getElementById(`s-sip-${i}`);
+    if (el) el.addEventListener('input', updateSettingsTotals);
+  }
+  for (let i = 0; i < 5; i++) {
+    const el = document.getElementById(`s-wife-sip-${i}`);
+    if (el) el.addEventListener('input', updateSettingsTotals);
+  }
+  console.log('✅ Settings page real-time totals initialized');
+}
+
+// Call when page loads
+setTimeout(initializeSettingsListeners, 1000);
 }
 
 // ============================================================
