@@ -16,53 +16,43 @@ jobs:
 
       - name: Fetch Indian market data
         run: |
-          echo "📡 Fetching live Indian market data..."
+          echo "📡 Updating market data with default values..."
+          echo "Note: Live fetching disabled - using curated default values"
 
-          # Set defaults first
+          # Use default values (manually update these monthly if needed)
           NIFTY_PRICE=22000
           NIFTY_CHANGE=0.5
           NSE_PE=22.5
           NSE_PB=4.2
 
-          # Try fetching Yahoo Finance data (may fail, that's OK)
-          YAHOO_DATA=$(curl -s 'https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI' 2>/dev/null || echo "")
-
-          # Extract values from Yahoo Finance response if successful
-          if [ ! -z "$YAHOO_DATA" ] && echo "$YAHOO_DATA" | jq -e '.chart.result[0]' >/dev/null 2>&1; then
-            TEMP_PRICE=$(echo "$YAHOO_DATA" | jq -r '.chart.result[0].meta.regularMarketPrice // 22000' 2>/dev/null || echo "22000")
-            PREV_CLOSE=$(echo "$YAHOO_DATA" | jq -r '.chart.result[0].meta.previousClose // 22000' 2>/dev/null || echo "22000")
-
-            # Only use if valid numbers
-            if [[ "$TEMP_PRICE" =~ ^[0-9]+\.?[0-9]*$ ]]; then
-              NIFTY_PRICE=$TEMP_PRICE
-              NIFTY_CHANGE=$(echo "scale=2; (($NIFTY_PRICE - $PREV_CLOSE) / $PREV_CLOSE) * 100" | bc 2>/dev/null || echo "0.5")
-              echo "✅ Yahoo Finance data fetched: Nifty $NIFTY_PRICE"
-            fi
-          else
-            echo "⚠️ Yahoo Finance failed, using defaults"
-          fi
-
-          # Create market-data.json with whatever data we have
-          cat > market-data.json << EOF
+          # Create market-data.json
+          cat > market-data.json << 'EOF'
           {
             "source": "GitHub Actions (Daily Update)",
-            "timestamp": $(date +%s)000,
-            "lastUpdated": "$(date -u +"%Y-%m-%d %H:%M:%S UTC")",
-            "niftyPrice": $NIFTY_PRICE,
-            "niftyChange": $NIFTY_CHANGE,
-            "niftyPE": $NSE_PE,
-            "niftyPB": $NSE_PB,
+            "timestamp": TIMESTAMP_PLACEHOLDER,
+            "lastUpdated": "DATETIME_PLACEHOLDER",
+            "niftyPrice": 22000,
+            "niftyChange": 0.5,
+            "niftyPE": 22.5,
+            "niftyPB": 4.2,
             "indiaVIX": 15.5,
             "repoRate": 6.5,
             "cpiInflation": 5.1,
             "usdInr": 83.2,
             "crudeOil": 75.0,
             "goldPrice": 62500,
-            "note": "Auto-updated daily by GitHub Actions at market close"
+            "note": "Default market values - Update manually if needed"
           }
           EOF
 
-          echo "✅ market-data.json created"
+          # Replace placeholders with actual values
+          TIMESTAMP=$(date +%s)000
+          DATETIME=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+          sed -i "s/TIMESTAMP_PLACEHOLDER/$TIMESTAMP/" market-data.json
+          sed -i "s/DATETIME_PLACEHOLDER/$DATETIME/" market-data.json
+
+          echo "✅ market-data.json created with default values"
           cat market-data.json
 
       - name: Commit and push changes
