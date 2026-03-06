@@ -915,6 +915,24 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
       </div>
     </div>
+    <div class="sh"><span class="sh-n">05</span><h2>Step-Up SIP Strategy</h2></div>
+    <div class="alert info">
+      💡 Assume your salary increases 10% annually. How much should you start with?
+    </div>
+    <div class="g3" style="margin-bottom:24px">
+      <div class="card y">
+        <div class="ch3 y">5% ANNUAL STEP-UP</div>
+        <div id="stepup-5" style="margin-top:12px"></div>
+      </div>
+      <div class="card y">
+        <div class="ch3 y">10% ANNUAL STEP-UP</div>
+        <div id="stepup-10" style="margin-top:12px"></div>
+      </div>
+      <div class="card y">
+        <div class="ch3 y">15% ANNUAL STEP-UP</div>
+        <div id="stepup-15" style="margin-top:12px"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1084,7 +1102,41 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div style="margin-top:10px;padding:10px;background:rgba(232,80,64,.1);border-radius:5px;font-size:11px">&#10060; <strong>DON'T CHOOSE THIS</strong> - You'll pay &#8377;2,55,000 MORE in taxes</div>
       </div>
     </div>
-    <div class="sh"><span class="sh-n">03</span><h2>Action Items for Tax Savings</h2></div>
+    <div class="sh"><span class="sh-n">03</span><h2>FY 2025-26 Tax Calculator (New Regime)</h2></div>
+    <div class="card y">
+      <div class="ch3 y">FY 2025-26 TAX BREAKDOWN (New Regime)</div>
+      <div style="margin-top:12px">
+        <div class="ml">
+          <div class="d">Annual CTC</div>
+          <div class="a" id="tax-ctc">&#8377;36,34,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Standard Deduction</div>
+          <div class="a ag">- &#8377;75,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Taxable Income</div>
+          <div class="a" id="tax-taxable">&#8377;35,59,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Annual Tax (with 4% cess)</div>
+          <div class="a ar" id="tax-annual">&#8377;5,84,320</div>
+        </div>
+        <div class="ml">
+          <div class="d">Monthly Tax Deduction</div>
+          <div class="a ar" id="tax-monthly">&#8377;48,693</div>
+        </div>
+        <div class="ml" style="background:rgba(48,200,122,0.05);border-radius:4px;padding:8px">
+          <div class="d" style="font-weight:700">Net Monthly In-Hand</div>
+          <div class="a ag" id="tax-net-hand" style="font-size:20px;font-weight:700">&#8377;2,54,640</div>
+        </div>
+        <div class="ml">
+          <div class="d">Effective Tax Rate</div>
+          <div class="a" id="tax-rate">16.08%</div>
+        </div>
+      </div>
+    </div>
+    <div class="sh"><span class="sh-n">04</span><h2>Action Items for Tax Savings</h2></div>
     <div class="g3">
       <div class="card j">
         <div class="ch3 j">IMMEDIATE ACTIONS</div>
@@ -2083,6 +2135,12 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <!-- Populated by JavaScript -->
     </div>
 
+    <!-- Pre-Calculated Overlap Pairs -->
+    <div class="sh"><span class="sh-n">01A</span><h2>Your Fund Overlap Analysis</h2></div>
+    <div id="overlap-pairs-detailed" style="margin-bottom:24px">
+      <!-- Populated by renderOverlapPairs() JavaScript function -->
+    </div>
+
     <!-- Overlap Matrix -->
     <div class="sh"><span class="sh-n">02</span><h2>Overlap Matrix (Equity Funds Only)</h2></div>
     <div class="alert info" style="margin-bottom:16px">
@@ -2435,6 +2493,13 @@ tr.milestone{background:rgba(240,180,41,.05)}
   </div>
 
   <div class="content">
+
+    <!-- RBI Rate Cut Alert -->
+    <div class="alert success" style="margin-bottom:16px">
+      🎯 <strong>RBI RATE CUT:</strong> Repo rate reduced from 6.50% → 5.25%
+      (125 bps cut). This is bullish for equity markets. Lower borrowing costs
+      boost corporate profits and make debt funds less attractive vs equity.
+    </div>
 
     <!-- Section 1: Live Market Indicators -->
     <div class="sh"><span class="sh-n">01</span><h2>Live Market Indicators</h2></div>
@@ -2802,6 +2867,7 @@ function renderPageCharts(index) {
   if (index === 3) renderRetirementCharts();
   if (index === 4) renderKidsCharts();
   if (index === 5) renderInvestmentCharts();
+  if (index === 6) renderTaxCalculator2026(); // Tax Optimizer page
   if (index === 9) renderWifeCharts();
   if (index === 10) renderHistoricalChart();
   if (index === 11) renderMonthlyProjections(); // Monthly Projections page
@@ -3112,6 +3178,36 @@ function renderPortfolioDonut() {
 }
 
 // ============================================================
+// TAX CALCULATOR 2026 RENDER
+// ============================================================
+function renderTaxCalculator2026() {
+  console.log('💰 Rendering Tax Calculator 2026...');
+
+  // Use CTC from config or default
+  const annualCTC = 3634000; // Default CTC
+
+  // Calculate tax
+  const taxResult = calculateTax2026(annualCTC);
+
+  // Update display elements
+  const taxCTC = document.getElementById('tax-ctc');
+  const taxTaxable = document.getElementById('tax-taxable');
+  const taxAnnual = document.getElementById('tax-annual');
+  const taxMonthly = document.getElementById('tax-monthly');
+  const taxNetHand = document.getElementById('tax-net-hand');
+  const taxRate = document.getElementById('tax-rate');
+
+  if (taxCTC) taxCTC.textContent = '₹' + (annualCTC / 100000).toFixed(2) + 'L';
+  if (taxTaxable) taxTaxable.textContent = '₹' + (taxResult.taxableIncome / 100000).toFixed(2) + 'L';
+  if (taxAnnual) taxAnnual.textContent = '₹' + Math.round(taxResult.annualTax).toLocaleString('en-IN');
+  if (taxMonthly) taxMonthly.textContent = '₹' + Math.round(taxResult.monthlyTax).toLocaleString('en-IN');
+  if (taxNetHand) taxNetHand.textContent = '₹' + Math.round(taxResult.netMonthlyInHand).toLocaleString('en-IN');
+  if (taxRate) taxRate.textContent = taxResult.effectiveTaxRate + '%';
+
+  console.log('✅ Tax Calculator 2026 rendered: Annual Tax ₹' + Math.round(taxResult.annualTax).toLocaleString('en-IN'));
+}
+
+// ============================================================
 // CHART: RETIREMENT
 // ============================================================
 function renderRetirementCharts() {
@@ -3190,6 +3286,47 @@ function renderRetirementCharts() {
 
     console.log('✅ Retirement page updated: ₹' + corpusCr + ' Cr nominal, ₹' + inflAdjCr + ' Cr inflation-adjusted');
   }
+
+  // Render Step-Up SIP calculations
+  renderStepUpCalculations();
+}
+
+// ============================================================
+// STEP-UP SIP CALCULATOR RENDER
+// ============================================================
+function renderStepUpCalculations() {
+  const targetCorpus = 66_00_00_000; // ₹66 Cr
+  const years = 28; // 2026 to 2054
+  const portfolioReturn = 0.1473; // 14.73%
+
+  [5, 10, 15].forEach(stepUp => {
+    const result = calculateStepUpSIP(targetCorpus, years, portfolioReturn, stepUp / 100);
+    const elementId = `stepup-${stepUp}`;
+    const el = document.getElementById(elementId);
+
+    if (el) {
+      el.innerHTML = `
+        <div class="ml">
+          <div class="d">Starting SIP (2026)</div>
+          <div class="a ag">₹${(result.requiredStartingSIP / 1000).toFixed(0)}K</div>
+        </div>
+        <div class="ml">
+          <div class="d">Final SIP (2054)</div>
+          <div class="a">₹${(result.finalSIP / 100000).toFixed(1)}L</div>
+        </div>
+        <div class="ml">
+          <div class="d">Total Invested</div>
+          <div class="a">₹${(result.totalInvested / 10000000).toFixed(1)} Cr</div>
+        </div>
+        <div class="ml">
+          <div class="d">Wealth Created</div>
+          <div class="a aj">₹${(result.wealth / 10000000).toFixed(1)} Cr</div>
+        </div>
+      `;
+    }
+  });
+
+  console.log('✅ Step-Up SIP calculations rendered');
 }
 
 // ============================================================
@@ -4307,12 +4444,12 @@ function calculateXIRR(cashFlows) {
 
 function calculateTax(invested, currentValue, yearsHeld) {
   const gains = currentValue - invested;
-  
+
   if (gains <= 0) return 0;
-  
+
   // Long-term capital gains (> 1 year for equity): 12.5% above 1.25L exemption
   // Short-term capital gains (<= 1 year): 20%
-  
+
   if (yearsHeld > 1) {
     const taxableGains = Math.max(0, gains - 125000);
     return taxableGains * 0.125;
@@ -4321,6 +4458,87 @@ function calculateTax(invested, currentValue, yearsHeld) {
   }
 }
 
+// ============================================
+// TAX CALCULATOR 2026 (FY 2025-26)
+// ============================================
+function calculateTax2026(annualGross) {
+    const standardDeduction = 75000;
+    let taxableIncome = Math.max(0, annualGross - standardDeduction);
+    let tax = 0;
+
+    const slabs = [
+        { limit: 400000, rate: 0.00 },
+        { limit: 800000, rate: 0.05 },
+        { limit: 1200000, rate: 0.10 },
+        { limit: 1600000, rate: 0.15 },
+        { limit: 2000000, rate: 0.20 },
+        { limit: 2400000, rate: 0.25 },
+        { limit: Infinity, rate: 0.30 }
+    ];
+
+    let previousLimit = 0;
+    for (let slab of slabs) {
+        if (taxableIncome > previousLimit) {
+            let taxableInThisSlab = Math.min(taxableIncome, slab.limit) - previousLimit;
+            tax += taxableInThisSlab * slab.rate;
+            previousLimit = slab.limit;
+        } else break;
+    }
+
+    // Section 87A Rebate: tax-free if taxable income <= 12L
+    if (taxableIncome <= 1200000) tax = 0;
+
+    const totalTax = tax * 1.04; // 4% cess
+
+    return {
+        annualTax: totalTax,
+        monthlyTax: totalTax / 12,
+        netMonthlyInHand: (annualGross - totalTax) / 12,
+        effectiveTaxRate: (totalTax / annualGross * 100).toFixed(2),
+        taxableIncome: taxableIncome
+    };
+}
+
+// ============================================
+// STEP-UP SIP CALCULATOR
+// ============================================
+function calculateStepUpSIP(targetCorpus, years, expectedReturn, stepUpRate) {
+  const rate = expectedReturn / 12; // Monthly rate
+  const months = years * 12;
+
+  let initialSIP = 10000; // Starting guess
+  let finalValue = 0;
+
+  // Iterate to find required starting SIP
+  for (let attempt = 0; attempt < 300; attempt++) {
+    finalValue = 0;
+    let currentMonthlySIP = initialSIP;
+
+    for (let m = 1; m <= months; m++) {
+      finalValue = (finalValue + currentMonthlySIP) * (1 + rate);
+      if (m % 12 === 0) currentMonthlySIP *= (1 + stepUpRate);
+    }
+
+    if (finalValue >= targetCorpus) break;
+    initialSIP += 1000;
+  }
+
+  // Calculate total invested
+  let totalInvested = 0;
+  let currentSIP = initialSIP;
+  for (let y = 0; y < years; y++) {
+    totalInvested += currentSIP * 12;
+    currentSIP *= (1 + stepUpRate);
+  }
+
+  return {
+    requiredStartingSIP: Math.round(initialSIP),
+    projectedCorpus: Math.round(finalValue),
+    totalInvested: Math.round(totalInvested),
+    wealth: Math.round(finalValue - totalInvested),
+    finalSIP: Math.round(initialSIP * Math.pow(1 + stepUpRate, years - 1))
+  };
+}
 
 
 // ============================================
@@ -8240,6 +8458,85 @@ function calculateOverlap(schemeCode1, schemeCode2) {
   };
 }
 
+// ============================================================
+// ENHANCED OVERLAP DATABASE - PRE-CALCULATED PAIRS
+// ============================================================
+const overlapPairs = [
+  {
+    fund1: 'ICICI Prudential Bluechip',
+    fund2: 'Nifty 50 Index',
+    overlap: 68,
+    severity: 'high',
+    commonStocks: ['HDFC Bank', 'ICICI Bank', 'Reliance', 'Infosys', 'TCS', 'Bharti Airtel', 'SBI'],
+    recommendation: '⚠️ CONSOLIDATE: 68% overlap means you\'re paying 0.90% active fees for index-like returns. Suggest: Increase Nifty 50 SIP, reduce ICICI Bluechip.',
+    savingsIfConsolidate: 'Save 0.83% annually (₹20K SIP × 0.83% × 28 years = ₹4.6L)'
+  },
+  {
+    fund1: 'Parag Parikh Flexi Cap',
+    fund2: 'Nifty 50 Index',
+    overlap: 38,
+    severity: 'medium',
+    commonStocks: ['Reliance', 'HDFC Bank', 'ICICI Bank', 'Infosys'],
+    recommendation: '✅ GOOD: Only 38% overlap. Parag Parikh adds global diversification (25% US stocks) which Nifty 50 lacks. Keep both.',
+    savingsIfConsolidate: null
+  },
+  {
+    fund1: 'Motilal Oswal Midcap',
+    fund2: 'Axis Midcap',
+    overlap: 28,
+    severity: 'low',
+    commonStocks: ['Max Healthcare', 'Polycab India', 'Kalyan Jewellers'],
+    recommendation: '✅ ACCEPTABLE: Low 28% overlap. Different fund manager styles. But Axis underperforming - consider replacing Axis with more Motilal.',
+    savingsIfConsolidate: null
+  },
+  {
+    fund1: 'Nifty 50 Index (Your)',
+    fund2: 'Nifty 50 Index (Wife)',
+    overlap: 100,
+    severity: 'info',
+    commonStocks: ['Same fund'],
+    recommendation: 'ℹ️ INFO: Same fund in both portfolios is fine for tax optimization (separate PAN cards). No action needed.',
+    savingsIfConsolidate: null
+  }
+];
+
+// Render pre-calculated overlap pairs
+function renderOverlapPairs() {
+  const container = document.getElementById('overlap-pairs-detailed');
+  if (!container) return;
+
+  let html = '';
+  let highOverlapCount = 0;
+
+  overlapPairs.forEach(pair => {
+    const severityClass = pair.severity === 'high' ? 'error' :
+                          pair.severity === 'medium' ? 'warning' :
+                          pair.severity === 'low' ? 'success' : 'info';
+
+    if (pair.severity === 'high') highOverlapCount++;
+
+    html += `
+      <div class="alert ${severityClass}" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong>${pair.fund1} ↔ ${pair.fund2}</strong>
+          <span style="background:var(--${pair.severity === 'high' ? 'red' : 'you'});color:white;padding:4px 12px;border-radius:12px;font-weight:700">${pair.overlap}% Overlap</span>
+        </div>
+        <div style="font-size:11px;margin-bottom:8px">
+          <strong>Common stocks:</strong> ${pair.commonStocks.join(', ')}
+        </div>
+        <div style="font-size:12px">
+          ${pair.recommendation}
+        </div>
+        ${pair.savingsIfConsolidate ? `<div style="font-size:11px;margin-top:4px;color:var(--jt)"><strong>${pair.savingsIfConsolidate}</strong></div>` : ''}
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  console.log('✅ Overlap pairs rendered: ' + overlapPairs.length + ' pairs');
+}
+
 // Main render function for Portfolio Overlap page
 function renderPortfolioOverlap() {
   console.log('🔗 Rendering Portfolio Overlap Analysis...');
@@ -8285,6 +8582,9 @@ function renderPortfolioOverlap() {
 
   // Render high overlap alerts
   renderOverlapAlerts(overlaps);
+
+  // Render pre-calculated overlap pairs
+  renderOverlapPairs();
 
   // Render overlap matrix
   renderOverlapMatrix(equityFunds, overlaps);
@@ -9768,14 +10068,14 @@ function initDecisionEngine() {
 
 // Market sentiment data (March 2026 - realistic values)
 let sentimentData = {
-  indiaVIX: 18.2,
-  niftyPE: 22.1,
-  rbiRepoRate: 6.5,
-  inflation: 5.2,
-  repoDirection: 'stable', // 'stable', 'rising', 'falling'
-  fiiFlow: -8200, // in Crores
-  diiFlow: 12500, // in Crores
-  lastUpdated: '2026-03-06'
+  indiaVIX: 17.86,
+  niftyPE: 21.7,
+  rbiRepoRate: 5.25,
+  inflation: 2.75,
+  repoDirection: 'falling', // 'stable', 'rising', 'falling'
+  fiiFlow: -3752, // in Crores
+  diiFlow: 5153, // in Crores
+  lastUpdated: '06-Mar-2026'
 };
 
 // Historical trend data (12 months)
@@ -10494,9 +10794,9 @@ function updateMarketSentiment() {
   sentimentData.inflation = cpi;
 
   // Determine repo direction
-  if (repo > 6.5) {
+  if (repo > 5.25) {
     sentimentData.repoDirection = 'rising';
-  } else if (repo < 6.5) {
+  } else if (repo < 5.25) {
     sentimentData.repoDirection = 'falling';
   } else {
     sentimentData.repoDirection = 'stable';
@@ -10513,14 +10813,14 @@ function updateMarketSentiment() {
 // Reset to default values
 function resetMarketSentiment() {
   sentimentData = {
-    indiaVIX: 18.2,
-    niftyPE: 22.1,
-    rbiRepoRate: 6.5,
-    inflation: 5.2,
-    repoDirection: 'stable',
-    fiiFlow: -8200,
-    diiFlow: 12500,
-    lastUpdated: '2026-03-06'
+    indiaVIX: 17.86,
+    niftyPE: 21.7,
+    rbiRepoRate: 5.25,
+    inflation: 2.75,
+    repoDirection: 'falling',
+    fiiFlow: -3752,
+    diiFlow: 5153,
+    lastUpdated: '06-Mar-2026'
   };
 
   saveSentimentData();
