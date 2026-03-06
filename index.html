@@ -6765,11 +6765,8 @@ function saveConfig() {
     config.wifeSIP = wifeFunds.reduce((sum, f) => sum + safeCalculate(f.monthlySIP, 0), 0);
   }
 
-  // Read investment assumptions
-  const equityReturn = getValue('s-eq-return');
+  // Read investment assumptions (equityReturn and stepUp already declared in validation section above)
   if (equityReturn > 0) config.expectedReturn = equityReturn;
-
-  const stepUp = getValue('s-stepup');
   if (stepUp > 0) config.annualStepUp = stepUp;
 
   // Read inflation rates
