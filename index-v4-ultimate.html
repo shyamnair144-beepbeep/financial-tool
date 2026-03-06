@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shyam's Financial Plan v4.0 ULTIMATE · Complete Wealth Management</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d10;--bg2:#131618;--bg3:#1a1d21;--bg4:#21252a;
+  --ink:#eef0f4;--ink2:#9aa2b0;--ink3:#50586a;--border:#1e2228;
+  --you:#f0b429;--you-s:rgba(240,180,41,.10);
+  --wife:#e040a0;--wife-s:rgba(224,64,160,.10);
+  --jt:#30c87a;--jt2:#60e8a0;--jt-s:rgba(48,200,122,.10);
+  --red:#e85040;--red-s:rgba(232,80,64,.10);
+  --blue:#4d9ef0;--blue-s:rgba(77,158,240,.10);
+  --purple:#a855f7;--purple-s:rgba(168,85,247,.10);
+  --orange:#fb923c;--orange-s:rgba(251,146,60,.10);
+  --r:7px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6;padding-bottom:60px}
+
+.top-nav{display:flex;background:#090b0d;border-bottom:2px solid var(--border);overflow-x:auto;position:sticky;top:0;z-index:200}
+.tn{padding:13px 20px;cursor:pointer;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;color:var(--ink3);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:7px}
+.tn.active{color:var(--you);border-bottom-color:var(--you)}
+.tn:hover:not(.active){color:var(--ink2)}
+.tn.alert-badge{position:relative}
+.tn.alert-badge:after{content:attr(data-badge);position:absolute;top:6px;right:6px;background:var(--red);color:var(--bg);font-size:8px;padding:2px 5px;border-radius:10px;font-weight:700}
+.page{display:none}.page.active{display:block}
+
+.hdr{padding:26px 40px 20px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.htag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--you);text-transform:uppercase;margin-bottom:5px}
+.hdr h1{font-family:'Syne',sans-serif;font-size:1.65rem;font-weight:800;line-height:1.15}
+.hdr h1 span{color:var(--you)}
+.hdr p{font-size:11px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;margin-top:5px}
+
+.content{padding:26px 40px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:13px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin-bottom:13px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.card.y{border-left:3px solid var(--you)}.card.w{border-left:3px solid var(--wife)}
+.card.j{border-left:3px solid var(--jt)}.card.d{border-left:3px solid var(--red)}.card.p{border-left:3px solid var(--purple)}
+.ch3{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.ch3.y{color:var(--you)}.ch3.w{color:#f580c8}.ch3.j{color:var(--jt2)}.ch3.d{color:var(--red)}.ch3.p{color:var(--purple)}
+
+.ml{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ml:last-child{border-bottom:none}
+.ml .d{font-size:12px;color:var(--ink2)}
+.ml .a{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500}
+.ay{color:var(--you)}.aw{color:#f580c8}.aj{color:var(--jt2)}.ar{color:var(--red)}.ai{color:var(--ink3)}.ab{color:var(--blue)}.ap{color:var(--purple)}
+
+.edit-input{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:6px 10px;color:var(--you);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;width:100%;text-align:left;transition:all .2s}
+.edit-input:focus{outline:none;border-color:var(--you);background:var(--bg4);box-shadow:0 0 0 2px rgba(240,180,41,.2)}
+.edit-input.small{width:80px;text-align:right}
+
+.edit-btn{background:var(--you);color:var(--bg);border:none;border-radius:4px;padding:8px 16px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-left:10px}
+.edit-btn:hover{background:var(--jt);transform:translateY(-1px)}
+.edit-btn:disabled{opacity:.5;cursor:not-allowed}
+.edit-btn.secondary{background:var(--bg3);color:var(--ink2);border:1px solid var(--border)}
+.edit-btn.danger{background:var(--red)}
+
+.sh{border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px;margin-top:20px;display:flex;align-items:baseline;gap:7px;justify-content:space-between}
+.sh:first-child{margin-top:0}
+.sh-n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--you);letter-spacing:2px}
+.sh h2{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700}
+.sh-right{display:flex;gap:10px;align-items:center}
+
+.alert{padding:12px 16px;background:var(--bg3);border-left:3px solid var(--blue);border-radius:var(--r);margin-bottom:13px;font-size:12px}
+.alert.success{border-left-color:var(--jt)}
+.alert.warning{border-left-color:var(--you)}
+.alert.danger{border-left-color:var(--red)}
+.alert.info{border-left-color:var(--blue)}
+
+.notification{position:fixed;top:70px;right:20px;background:var(--bg2);border:2px solid var(--you);border-radius:var(--r);padding:16px;max-width:350px;box-shadow:0 4px 12px rgba(0,0,0,.5);z-index:300;animation:slideIn .3s}
+.notification.success{border-color:var(--jt)}
+.notification.danger{border-color:var(--red)}
+@keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+.progress-bar{background:rgba(255,255,255,.05);height:8px;border-radius:4px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;background:var(--jt);transition:width .5s}
+.progress-fill.warning{background:var(--you)}
+.progress-fill.danger{background:var(--red)}
+
+.goal-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px;transition:all .2s}
+.goal-card:hover{border-color:var(--you);transform:translateY(-2px)}
+.goal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.goal-name{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700}
+.goal-target{text-align:right}
+.goal-target-label{font-size:9px;color:var(--ink3);text-transform:uppercase}
+.goal-target-value{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--you)}
+.goal-funds{margin-top:10px;font-size:11px;color:var(--ink3)}
+
+.tab-container{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:16px}
+.tab{padding:10px 20px;cursor:pointer;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;color:var(--ink3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.tab.active{color:var(--you);border-bottom-color:var(--you)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+.cw{position:relative;height:300px;margin-bottom:20px}
+.cw-s{position:relative;height:220px}
+.cw-l{position:relative;height:400px;margin-bottom:20px}
+
+.fund-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px}
+
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);margin-bottom:13px}
+table{width:100%;border-collapse:collapse;font-size:11px}
+thead{background:var(--bg3)}
+th{padding:8px 11px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child{text-align:left}
+td{padding:7px 11px;text-align:right;border-bottom:1px solid rgba(255,255,255,.04);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink2);white-space:nowrap}
+td:first-child{text-align:left;font-family:'IBM Plex Sans',sans-serif;color:var(--ink)}
+tr:hover td{background:rgba(255,255,255,.015)}
+tr:last-child td{border-bottom:none}
+
+.badge{display:inline-block;padding:3px 8px;border-radius:3px;font-size:9px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:1px}
+.badge.green{background:var(--jt-s);color:var(--jt);border:1px solid rgba(48,200,122,.3)}
+.badge.red{background:var(--red-s);color:var(--red);border:1px solid rgba(232,80,64,.3)}
+.badge.yellow{background:var(--you-s);color:var(--you);border:1px solid rgba(240,180,41,.3)}
+.badge.blue{background:var(--blue-s);color:var(--blue);border:1px solid rgba(77,158,240,.3)}
+
+@media(max-width:768px){
+  .g2,.g3,.g4,.g5{grid-template-columns:1fr}
+  .content{padding:20px 16px}
+  .hdr{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="tn active" onclick="showPage(0)">💼 PORTFOLIO</div>
+  <div class="tn" onclick="showPage(1)">🎯 GOALS</div>
+  <div class="tn" onclick="showPage(2)">📊 HISTORICAL</div>
+  <div class="tn" onclick="showPage(3)">🔄 REBALANCE</div>
+  <div class="tn" onclick="showPage(4)">💰 SWP PLAN</div>
+  <div class="tn alert-badge" onclick="showPage(5)" data-badge="0" id="alertBadge">🔔 ALERTS</div>
+</div>
+
+<!-- PAGE 0: PORTFOLIO WITH GOALS -->
+<div class="page active">
+  <div class="hdr">
+    <div class="htag">GOAL-BASED PORTFOLIO</div>
+    <h1>Your Funds Linked to <span>Life Goals</span></h1>
+    <p>RETIREMENT · KIDS EDUCATION · HOUSE · CAR · EMERGENCY</p>
+  </div>
+
+  <div class="content">
+    <div class="sh">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="sh-n">01</span>
+        <h2>Your Financial Goals</h2>
+      </div>
+      <div class="sh-right">
+        <button class="edit-btn secondary" onclick="manageGoals()">⚙️ MANAGE GOALS</button>
+      </div>
+    </div>
+
+    <div id="goalsOverview"></div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Portfolio by Goal</h2>
+    </div>
+
+    <div id="portfolioByGoal"></div>
+  </div>
+</div>
+
+<!-- PAGE 1: GOALS DETAIL -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">GOAL TRACKING</div>
+    <h1>Track Progress Toward <span>Each Goal</span></h1>
+    <p>DEFINE TARGETS · LINK FUNDS · MONITOR PROGRESS</p>
+  </div>
+
+  <div class="content">
+    <div class="alert info">
+      💡 <strong>HOW IT WORKS:</strong> Define your financial goals, link mutual funds to each goal, and track progress automatically. System calculates if you're on track based on time horizon and target amount.
+    </div>
+
+    <div class="sh">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="sh-n">01</span>
+        <h2>Goal Configuration</h2>
+      </div>
+      <div class="sh-right">
+        <button class="edit-btn" onclick="addGoal()">➕ ADD NEW GOAL</button>
+      </div>
+    </div>
+
+    <div id="goalsList"></div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Goal Progress Chart</h2>
+    </div>
+    <div class="cw"><canvas id="goalsChart"></canvas></div>
+  </div>
+</div>
+
+<!-- PAGE 2: HISTORICAL NAV -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">HISTORICAL PERFORMANCE</div>
+    <h1>NAV Charts & <span>Fund Comparison</span></h1>
+    <p>1M · 3M · 6M · 1Y · 3Y · 5Y · ALL TIME</p>
+  </div>
+
+  <div class="content">
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Select Fund to Analyze</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card y">
+        <label style="font-size:10px;color:var(--ink3);text-transform:uppercase;margin-bottom:8px;display:block">Fund</label>
+        <select id="histFundSelect" class="edit-input" onchange="loadHistoricalData()">
+          <option value="">Select a fund...</option>
+        </select>
+      </div>
+      <div class="card y">
+        <label style="font-size:10px;color:var(--ink3);text-transform:uppercase;margin-bottom:8px;display:block">Time Period</label>
+        <select id="histPeriodSelect" class="edit-input" onchange="updateHistoricalChart()">
+          <option value="1m">1 Month</option>
+          <option value="3m">3 Months</option>
+          <option value="6m">6 Months</option>
+          <option value="1y" selected>1 Year</option>
+          <option value="3y">3 Years</option>
+          <option value="5y">5 Years</option>
+        </select>
+      </div>
+      <div class="card y">
+        <button class="edit-btn" onclick="loadHistoricalData()" style="margin:20px 0 0 0;width:100%">📊 LOAD CHART</button>
+      </div>
+    </div>
+
+    <div id="histStats"></div>
+
+    <div class="cw-l"><canvas id="historicalChart"></canvas></div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Performance Comparison</h2>
+    </div>
+
+    <div class="tw">
+      <table id="perfTable">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>1 Month</th>
+            <th>3 Months</th>
+            <th>6 Months</th>
+            <th>1 Year</th>
+            <th>3 Years</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Absolute Return</td>
+            <td id="ret-1m">--</td>
+            <td id="ret-3m">--</td>
+            <td id="ret-6m">--</td>
+            <td id="ret-1y">--</td>
+            <td id="ret-3y">--</td>
+          </tr>
+          <tr>
+            <td>CAGR</td>
+            <td id="cagr-1m">--</td>
+            <td id="cagr-3m">--</td>
+            <td id="cagr-6m">--</td>
+            <td id="cagr-1y">--</td>
+            <td id="cagr-3y">--</td>
+          </tr>
+          <tr>
+            <td>Volatility (Std Dev)</td>
+            <td id="vol-1m">--</td>
+            <td id="vol-3m">--</td>
+            <td id="vol-6m">--</td>
+            <td id="vol-1y">--</td>
+            <td id="vol-3y">--</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: REBALANCING -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">PORTFOLIO REBALANCING</div>
+    <h1>Asset Allocation <span>Optimizer</span></h1>
+    <p>TARGET vs ACTUAL · DRIFT ALERTS · REBALANCING ACTIONS</p>
+  </div>
+
+  <div class="content">
+    <div id="rebalanceAlert"></div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Current vs Target Allocation</h2>
+    </div>
+
+    <div class="g2">
+      <div class="card j">
+        <div class="ch3 j">TARGET ALLOCATION</div>
+        <div class="ml">
+          <div class="d">Large Cap Equity</div>
+          <div class="a"><input type="number" class="edit-input small" id="target-large" value="40" min="0" max="100"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Mid/Small Cap Equity</div>
+          <div class="a"><input type="number" class="edit-input small" id="target-mid" value="35" min="0" max="100"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Debt Funds</div>
+          <div class="a"><input type="number" class="edit-input small" id="target-debt" value="20" min="0" max="100"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Gold/Others</div>
+          <div class="a"><input type="number" class="edit-input small" id="target-other" value="5" min="0" max="100"> %</div>
+        </div>
+        <button class="edit-btn" onclick="calculateRebalancing()" style="margin-top:12px;width:100%">🔄 CALCULATE</button>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">CURRENT ALLOCATION</div>
+        <div id="currentAllocation"></div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Rebalancing Actions Required</h2>
+    </div>
+
+    <div id="rebalanceActions"></div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Allocation Comparison Chart</h2>
+    </div>
+    <div class="cw"><canvas id="rebalanceChart"></canvas></div>
+  </div>
+</div>
+
+<!-- PAGE 4: SWP CALCULATOR -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">RETIREMENT SWP PLANNER</div>
+    <h1>Systematic Withdrawal <span>Calculator</span></h1>
+    <p>HOW LONG WILL YOUR CORPUS LAST? · MONTHLY INCOME PLANNING</p>
+  </div>
+
+  <div class="content">
+    <div class="alert warning">
+      ⚠️ <strong>RETIREMENT INCOME PLANNING:</strong> Calculate how much you can withdraw monthly from your retirement corpus, considering returns and inflation, without running out of money.
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>SWP Configuration</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card p">
+        <div class="ch3 p">RETIREMENT CORPUS</div>
+        <label style="font-size:10px;color:var(--ink3);margin-bottom:5px;display:block">Total corpus at retirement</label>
+        <input type="number" class="edit-input" id="swp-corpus" value="50000000" step="100000">
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px">₹5 Crore</div>
+      </div>
+
+      <div class="card p">
+        <div class="ch3 p">MONTHLY WITHDRAWAL</div>
+        <label style="font-size:10px;color:var(--ink3);margin-bottom:5px;display:block">Required monthly income</label>
+        <input type="number" class="edit-input" id="swp-monthly" value="150000" step="5000">
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px">₹1.5 Lakh/month</div>
+      </div>
+
+      <div class="card p">
+        <div class="ch3 p">WITHDRAWAL STRATEGY</div>
+        <label style="font-size:10px;color:var(--ink3);margin-bottom:5px;display:block">Adjustment method</label>
+        <select class="edit-input" id="swp-strategy">
+          <option value="fixed">Fixed (no inflation adjustment)</option>
+          <option value="inflation" selected>Inflation-adjusted (6% p.a.)</option>
+          <option value="percent">Percentage (4% of corpus)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card p">
+        <div class="ch3 p">ASSUMPTIONS</div>
+        <div class="ml">
+          <div class="d">Expected Annual Return</div>
+          <div class="a"><input type="number" class="edit-input small" id="swp-return" value="8" step="0.5"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Inflation Rate</div>
+          <div class="a"><input type="number" class="edit-input small" id="swp-inflation" value="6" step="0.5"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Your Current Age</div>
+          <div class="a"><input type="number" class="edit-input small" id="swp-age" value="60" min="40" max="80"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Life Expectancy</div>
+          <div class="a"><input type="number" class="edit-input small" id="swp-life" value="85" min="60" max="100"></div>
+        </div>
+      </div>
+
+      <div class="card j" id="swpSummary">
+        <div class="ch3 j">QUICK SUMMARY</div>
+        <div style="text-align:center;padding:20px">
+          Click "Calculate SWP" to see results
+        </div>
+      </div>
+    </div>
+
+    <button class="edit-btn" onclick="calculateSWP()" style="width:100%;font-size:12px;padding:12px">💰 CALCULATE SWP PLAN</button>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Corpus Depletion Chart</h2>
+    </div>
+    <div class="cw-l"><canvas id="swpChart"></canvas></div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Year-by-Year Breakdown</h2>
+    </div>
+    <div class="tw">
+      <table id="swpTable">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Age</th>
+            <th>Starting Balance</th>
+            <th>Annual Withdrawal</th>
+            <th>Investment Returns</th>
+            <th>Ending Balance</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: ALERTS -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">PRICE ALERTS & NOTIFICATIONS</div>
+    <h1>NAV Drop/Rise <span>Alerts</span></h1>
+    <p>EMAIL · BROWSER · WEBHOOK · IFTTT INTEGRATION</p>
+  </div>
+
+  <div class="content">
+    <div class="alert info">
+      💡 <strong>BROWSER NOTIFICATIONS:</strong> Enable browser notifications to receive real-time alerts when NAV crosses your thresholds. For email alerts, configure webhook below.
+    </div>
+
+    <div class="sh">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="sh-n">01</span>
+        <h2>Alert Configuration</h2>
+      </div>
+      <div class="sh-right">
+        <button class="edit-btn" onclick="requestNotificationPermission()">🔔 ENABLE NOTIFICATIONS</button>
+        <button class="edit-btn secondary" onclick="testAlert()">🧪 TEST ALERT</button>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card y">
+        <div class="ch3 y">NOTIFICATION SETTINGS</div>
+        <div class="ml">
+          <div class="d">Browser Notifications</div>
+          <div class="a" id="notif-status">❌ Disabled</div>
+        </div>
+        <div class="ml">
+          <div class="d">Check Interval (minutes)</div>
+          <div class="a"><input type="number" class="edit-input small" id="alert-interval" value="30" min="5" max="1440"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Email/Webhook URL (optional)</div>
+          <div class="a" style="flex:1"><input type="text" class="edit-input" id="webhook-url" placeholder="https://maker.ifttt.com/trigger/..."></div>
+        </div>
+        <div style="margin-top:10px;font-size:10px;color:var(--ink3)">
+          Use IFTTT webhook to send emails/SMS. Create webhook at <a href="https://ifttt.com/maker_webhooks" target="_blank" style="color:var(--you)">ifttt.com/maker_webhooks</a>
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">ACTIVE ALERTS</div>
+        <div id="activeAlertsCount" style="text-align:center;padding:10px">
+          <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--you)">0</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:5px">Active price alerts</div>
+        </div>
+        <button class="edit-btn" onclick="addPriceAlert()" style="width:100%;margin-top:10px">➕ ADD PRICE ALERT</button>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Your Price Alerts</h2>
+    </div>
+
+    <div id="alertsList"></div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Alert History (Last 30 Days)</h2>
+    </div>
+
+    <div id="alertHistory"></div>
+  </div>
+</div>
+
+<script>
+// ============================================
+// GLOBAL STATE & DATA
+// ============================================
+let portfolio = [
+  {
+    id: 1,
+    name: 'Parag Parikh Flexi Cap Direct Growth',
+    category: 'Equity - Flexi Cap',
+    schemeCode: '122639',
+    type: 'large-cap',
+    goalId: 'retirement',
+    nav: null,
+    invested: 120000
+  },
+  {
+    id: 2,
+    name: 'UTI Nifty 50 Index Fund Direct Growth',
+    category: 'Equity - Index',
+    schemeCode: '120716',
+    type: 'large-cap',
+    goalId: 'retirement',
+    nav: null,
+    invested: 180000
+  },
+  {
+    id: 3,
+    name: 'Motilal Oswal Midcap Fund Direct Growth',
+    category: 'Equity - Mid Cap',
+    schemeCode: '135794',
+    type: 'mid-cap',
+    goalId: 'kids-education',
+    nav: null,
+    invested: 60000
+  }
+];
+
+let goals = [
+  {
+    id: 'retirement',
+    name: 'Retirement Corpus',
+    icon: '🏖️',
+    targetAmount: 50000000,
+    targetYear: 2054,
+    currentAmount: 0,
+    linkedFunds: ['1', '2']
+  },
+  {
+    id: 'kids-education',
+    name: 'Kids Education',
+    icon: '🎓',
+    targetAmount: 5000000,
+    targetYear: 2044,
+    currentAmount: 0,
+    linkedFunds: ['3']
+  },
+  {
+    id: 'house',
+    name: 'House Downpayment',
+    icon: '🏠',
+    targetAmount: 3000000,
+    targetYear: 2030,
+    currentAmount: 0,
+    linkedFunds: []
+  }
+];
+
+let priceAlerts = [];
+let alertHistory = [];
+let notificationsEnabled = false;
+
+// ============================================
+// FETCH NAV DATA
+// ============================================
+async function fetchNAV(schemeCode) {
+  try {
+    const response = await fetch(`https://api.mfapi.in/mf/${schemeCode}`);
+    const data = await response.json();
+    return {
+      nav: parseFloat(data.data[0].nav),
+      date: data.data[0].date
+    };
+  } catch (error) {
+    console.error('NAV fetch failed:', error);
+    const mockNAVs = {
+      '122639': 68.50,
+      '120716': 245.30,
+      '135794': 89.20
+    };
+    return {nav: mockNAVs[schemeCode] || 100, date: '04-03-2026'};
+  }
+}
+
+async function fetchHistoricalNAV(schemeCode, days = 365) {
+  try {
+    const response = await fetch(`https://api.mfapi.in/mf/${schemeCode}`);
+    const data = await response.json();
+
+    // MFApi returns all historical data, we filter by days
+    const filtered = data.data.slice(0, days).reverse();
+
+    return filtered.map(d => ({
+      date: d.date,
+      nav: parseFloat(d.nav)
+    }));
+  } catch (error) {
+    console.error('Historical NAV fetch failed:', error);
+    // Generate mock data
+    const mockData = [];
+    const today = new Date();
+    const baseNAV = 100;
+
+    for (let i = days - 1; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const randomGrowth = 1 + (Math.random() - 0.4) * 0.02;
+      const nav = baseNAV * Math.pow(randomGrowth, days - i);
+
+      mockData.push({
+        date: date.toLocaleDateString('en-GB'),
+        nav: nav
+      });
+    }
+
+    return mockData;
+  }
+}
+
+// ============================================
+// GOAL-BASED TRACKING
+// ============================================
+function renderGoalsOverview() {
+  const container = document.getElementById('goalsOverview');
+  let html = '<div class="g3">';
+
+  goals.forEach(goal => {
+    const linkedFunds = portfolio.filter(f => goal.linkedFunds.includes(String(f.id)));
+    const currentValue = linkedFunds.reduce((sum, f) => {
+      const units = f.invested / (f.nav || 100);
+      return sum + (units * (f.nav || 100));
+    }, 0);
+
+    const yearsRemaining = goal.targetYear - 2026;
+    const progress = (currentValue / goal.targetAmount * 100).toFixed(1);
+    const progressClass = progress >= 80 ? 'success' : progress >= 50 ? 'warning' : 'danger';
+
+    html += `
+      <div class="goal-card">
+        <div class="goal-header">
+          <div>
+            <div style="font-size:1.5rem;margin-bottom:5px">${goal.icon}</div>
+            <div class="goal-name">${goal.name}</div>
+            <div style="font-size:10px;color:var(--ink3);margin-top:3px">${yearsRemaining} years remaining</div>
+          </div>
+          <div class="goal-target">
+            <div class="goal-target-label">Target</div>
+            <div class="goal-target-value">₹${(goal.targetAmount/10000000).toFixed(1)} Cr</div>
+          </div>
+        </div>
+        <div class="ml">
+          <div class="d">Current Value</div>
+          <div class="a aj">₹${(currentValue/100000).toFixed(2)} L</div>
+        </div>
+        <div class="ml">
+          <div class="d">Still Needed</div>
+          <div class="a ar">₹${((goal.targetAmount - currentValue)/100000).toFixed(2)} L</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill ${progressClass === 'danger' ? 'danger' : progressClass === 'warning' ? 'warning' : ''}" style="width:${Math.min(progress, 100)}%"></div>
+        </div>
+        <div style="margin-top:5px;font-size:10px;color:var(--ink3);text-align:right">${progress}% achieved</div>
+        <div class="goal-funds">${linkedFunds.length} funds linked: ${linkedFunds.map(f => f.name.split(' ').slice(0, 2).join(' ')).join(', ') || 'None'}</div>
+      </div>
+    `;
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function renderGoalsList() {
+  const container = document.getElementById('goalsList');
+  let html = '';
+
+  goals.forEach(goal => {
+    const linkedFunds = portfolio.filter(f => goal.linkedFunds.includes(String(f.id)));
+
+    html += `
+      <div class="card j">
+        <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
+          <div>
+            <div style="font-size:1.8rem;margin-bottom:8px">${goal.icon}</div>
+            <div class="ch3 j">${goal.name}</div>
+            <div style="font-size:11px;color:var(--ink3)">Target: ₹${(goal.targetAmount/10000000).toFixed(1)} Cr by ${goal.targetYear}</div>
+          </div>
+          <button class="edit-btn secondary" onclick="linkFundsToGoal('${goal.id}')">🔗 LINK FUNDS</button>
+        </div>
+        <div style="font-size:12px;color:var(--ink2);margin-top:10px">
+          <strong>Linked Funds (${linkedFunds.length}):</strong><br>
+          ${linkedFunds.map(f => '• ' + f.name).join('<br>') || '<em style="color:var(--ink3)">No funds linked yet</em>'}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // Update chart
+  updateGoalsChart();
+}
+
+function updateGoalsChart() {
+  const ctx = document.getElementById('goalsChart');
+  if (ctx.chart) ctx.chart.destroy();
+
+  const labels = goals.map(g => g.name);
+  const currentValues = goals.map(g => {
+    const linkedFunds = portfolio.filter(f => g.linkedFunds.includes(String(f.id)));
+    return linkedFunds.reduce((sum, f) => {
+      const units = f.invested / (f.nav || 100);
+      return sum + (units * (f.nav || 100));
+    }, 0) / 100000; // Convert to lakhs
+  });
+  const targetValues = goals.map(g => g.targetAmount / 100000);
+
+  ctx.chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Current Value (₹L)',
+        data: currentValues,
+        backgroundColor: '#30c87a'
+      }, {
+        label: 'Target Value (₹L)',
+        data: targetValues,
+        backgroundColor: 'rgba(240,180,41,0.5)'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {labels: {color: '#eef0f4'}}
+      },
+      scales: {
+        y: {
+          ticks: {color: '#9aa2b0'},
+          grid: {color: '#1e2228'}
+        },
+        x: {
+          ticks: {color: '#9aa2b0'},
+          grid: {color: '#1e2228'}
+        }
+      }
+    }
+  });
+}
+
+// ============================================
+// HISTORICAL NAV CHARTS
+// ============================================
+let historicalData = null;
+
+async function loadHistoricalData() {
+  const fundSelect = document.getElementById('histFundSelect');
+  const schemeCode = fundSelect.value;
+
+  if (!schemeCode) {
+    alert('Please select a fund');
+    return;
+  }
+
+  const fund = portfolio.find(f => f.schemeCode === schemeCode);
+
+  document.getElementById('histStats').innerHTML = '<div class="alert">Loading historical data...</div>';
+
+  const period = document.getElementById('histPeriodSelect').value;
+  const days = {
+    '1m': 30,
+    '3m': 90,
+    '6m': 180,
+    '1y': 365,
+    '3y': 1095,
+    '5y': 1825
+  }[period];
+
+  historicalData = await fetchHistoricalNAV(schemeCode, days);
+
+  updateHistoricalChart();
+  updatePerformanceStats();
+}
+
+function updateHistoricalChart() {
+  if (!historicalData) return;
+
+  const ctx = document.getElementById('historicalChart');
+  if (ctx.chart) ctx.chart.destroy();
+
+  const labels = historicalData.map(d => d.date);
+  const navs = historicalData.map(d => d.nav);
+
+  ctx.chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'NAV',
+        data: navs,
+        borderColor: '#f0b429',
+        backgroundColor: 'rgba(240,180,41,0.1)',
+        fill: true,
+        tension: 0.1,
+        pointRadius: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {labels: {color: '#eef0f4'}},
+        tooltip: {
+          callbacks: {
+            label: (context) => 'NAV: ₹' + context.parsed.y.toFixed(2)
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: {color: '#9aa2b0', callback: v => '₹' + v.toFixed(0)},
+          grid: {color: '#1e2228'}
+        },
+        x: {
+          ticks: {color: '#9aa2b0', maxTicksLimit: 10},
+          grid: {color: '#1e2228'}
+        }
+      }
+    }
+  });
+
+  // Update stats card
+  const firstNAV = navs[0];
+  const lastNAV = navs[navs.length - 1];
+  const absReturn = ((lastNAV - firstNAV) / firstNAV * 100).toFixed(2);
+  const minNAV = Math.min(...navs).toFixed(2);
+  const maxNAV = Math.max(...navs).toFixed(2);
+
+  document.getElementById('histStats').innerHTML = `
+    <div class="g4">
+      <div class="card j">
+        <div class="ch3 j">CURRENT NAV</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--you)">₹${lastNAV.toFixed(2)}</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">PERIOD RETURN</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:${absReturn >= 0 ? 'var(--jt)' : 'var(--red)'}">${absReturn}%</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">MIN NAV</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--red)">₹${minNAV}</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">MAX NAV</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--jt)">₹${maxNAV}</div>
+      </div>
+    </div>
+  `;
+}
+
+function updatePerformanceStats() {
+  if (!historicalData) return;
+
+  const navs = historicalData.map(d => d.nav);
+
+  // Calculate returns for different periods
+  const periods = [30, 90, 180, 365, 1095];
+  periods.forEach(days => {
+    const key = days === 30 ? '1m' : days === 90 ? '3m' : days === 180 ? '6m' : days === 365 ? '1y' : '3y';
+
+    if (navs.length >= days) {
+      const oldNAV = navs[Math.max(0, navs.length - days)];
+      const newNAV = navs[navs.length - 1];
+
+      const absReturn = ((newNAV - oldNAV) / oldNAV * 100).toFixed(2);
+      const cagr = (Math.pow(newNAV / oldNAV, 365 / days) - 1) * 100;
+
+      // Calculate volatility (standard deviation of daily returns)
+      const returns = [];
+      for (let i = 1; i < Math.min(days, navs.length); i++) {
+        returns.push((navs[i] - navs[i-1]) / navs[i-1]);
+      }
+      const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+      const variance = returns.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / returns.length;
+      const volatility = (Math.sqrt(variance) * Math.sqrt(252) * 100).toFixed(2); // Annualized
+
+      document.getElementById('ret-' + key).textContent = absReturn + '%';
+      document.getElementById('cagr-' + key).textContent = cagr.toFixed(2) + '%';
+      document.getElementById('vol-' + key).textContent = volatility + '%';
+    }
+  });
+}
+
+// ============================================
+// REBALANCING
+// ============================================
+function calculateRebalancing() {
+  const targetLarge = parseFloat(document.getElementById('target-large').value);
+  const targetMid = parseFloat(document.getElementById('target-mid').value);
+  const targetDebt = parseFloat(document.getElementById('target-debt').value);
+  const targetOther = parseFloat(document.getElementById('target-other').value);
+
+  // Calculate current allocation
+  let totalValue = 0;
+  let largeCapValue = 0;
+  let midCapValue = 0;
+  let debtValue = 0;
+  let otherValue = 0;
+
+  portfolio.forEach(f => {
+    const units = f.invested / (f.nav || 100);
+    const value = units * (f.nav || 100);
+    totalValue += value;
+
+    if (f.type === 'large-cap') largeCapValue += value;
+    else if (f.type === 'mid-cap') midCapValue += value;
+    else if (f.type === 'debt') debtValue += value;
+    else otherValue += value;
+  });
+
+  const currentLarge = (largeCapValue / totalValue * 100).toFixed(1);
+  const currentMid = (midCapValue / totalValue * 100).toFixed(1);
+  const currentDebt = (debtValue / totalValue * 100).toFixed(1);
+  const currentOther = (otherValue / totalValue * 100).toFixed(1);
+
+  // Display current allocation
+  document.getElementById('currentAllocation').innerHTML = `
+    <div class="ml">
+      <div class="d">Large Cap Equity</div>
+      <div class="a ${Math.abs(currentLarge - targetLarge) > 10 ? 'ar' : 'aj'}">${currentLarge}%</div>
+    </div>
+    <div class="ml">
+      <div class="d">Mid/Small Cap Equity</div>
+      <div class="a ${Math.abs(currentMid - targetMid) > 10 ? 'ar' : 'aj'}">${currentMid}%</div>
+    </div>
+    <div class="ml">
+      <div class="d">Debt Funds</div>
+      <div class="a ${Math.abs(currentDebt - targetDebt) > 10 ? 'ar' : 'aj'}">${currentDebt}%</div>
+    </div>
+    <div class="ml">
+      <div class="d">Gold/Others</div>
+      <div class="a ${Math.abs(currentOther - targetOther) > 10 ? 'ar' : 'aj'}">${currentOther}%</div>
+    </div>
+  `;
+
+  // Calculate drift
+  const drifts = [
+    {cat: 'Large Cap', current: parseFloat(currentLarge), target: targetLarge},
+    {cat: 'Mid/Small Cap', current: parseFloat(currentMid), target: targetMid},
+    {cat: 'Debt', current: parseFloat(currentDebt), target: targetDebt},
+    {cat: 'Other', current: parseFloat(currentOther), target: targetOther}
+  ];
+
+  const needsRebalancing = drifts.some(d => Math.abs(d.current - d.target) > 10);
+
+  if (needsRebalancing) {
+    document.getElementById('rebalanceAlert').innerHTML = `
+      <div class="alert danger">
+        ⚠️ <strong>REBALANCING REQUIRED:</strong> Your portfolio has drifted >10% from target allocation. Consider rebalancing to maintain risk profile.
+      </div>
+    `;
+  } else {
+    document.getElementById('rebalanceAlert').innerHTML = `
+      <div class="alert success">
+        ✅ <strong>WELL BALANCED:</strong> Your portfolio allocation is within 10% of target. No immediate rebalancing needed.
+      </div>
+    `;
+  }
+
+  // Generate rebalancing actions
+  let actionsHTML = '<div class="g2">';
+
+  drifts.forEach(d => {
+    const diff = d.current - d.target;
+    const diffValue = totalValue * Math.abs(diff) / 100;
+
+    if (Math.abs(diff) > 10) {
+      actionsHTML += `
+        <div class="card ${diff > 0 ? 'd' : 'j'}">
+          <div class="ch3 ${diff > 0 ? 'd' : 'j'}">${d.cat}</div>
+          <div class="ml">
+            <div class="d">Current Allocation</div>
+            <div class="a ar">${d.current}%</div>
+          </div>
+          <div class="ml">
+            <div class="d">Target Allocation</div>
+            <div class="a aj">${d.target}%</div>
+          </div>
+          <div class="ml">
+            <div class="d">Deviation</div>
+            <div class="a ar">${diff > 0 ? '+' : ''}${diff.toFixed(1)}%</div>
+          </div>
+          <div style="margin-top:12px;padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+            <strong>${diff > 0 ? 'REDUCE' : 'INCREASE'}:</strong> ${diff > 0 ? 'Sell' : 'Buy'} ₹${(diffValue/1000).toFixed(0)}K worth of ${d.cat} funds
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  actionsHTML += '</div>';
+
+  if (!needsRebalancing) {
+    actionsHTML = '<div class="alert success">✅ No rebalancing actions required.</div>';
+  }
+
+  document.getElementById('rebalanceActions').innerHTML = actionsHTML;
+
+  // Update chart
+  const ctx = document.getElementById('rebalanceChart');
+  if (ctx.chart) ctx.chart.destroy();
+
+  ctx.chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Large Cap', 'Mid/Small Cap', 'Debt', 'Other'],
+      datasets: [{
+        label: 'Current %',
+        data: [currentLarge, currentMid, currentDebt, currentOther],
+        backgroundColor: '#e85040'
+      }, {
+        label: 'Target %',
+        data: [targetLarge, targetMid, targetDebt, targetOther],
+        backgroundColor: '#30c87a'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {labels: {color: '#eef0f4'}}
+      },
+      scales: {
+        y: {
+          max: 100,
+          ticks: {color: '#9aa2b0', callback: v => v + '%'},
+          grid: {color: '#1e2228'}
+        },
+        x: {
+          ticks: {color: '#9aa2b0'},
+          grid: {color: '#1e2228'}
+        }
+      }
+    }
+  });
+}
+
+// ============================================
+// SWP CALCULATOR
+// ============================================
+function calculateSWP() {
+  const corpus = parseFloat(document.getElementById('swp-corpus').value);
+  const monthlyWithdrawal = parseFloat(document.getElementById('swp-monthly').value);
+  const strategy = document.getElementById('swp-strategy').value;
+  const returnRate = parseFloat(document.getElementById('swp-return').value) / 100;
+  const inflationRate = parseFloat(document.getElementById('swp-inflation').value) / 100;
+  const currentAge = parseInt(document.getElementById('swp-age').value);
+  const lifeExpectancy = parseInt(document.getElementById('swp-life').value);
+
+  const years = lifeExpectancy - currentAge;
+  let balance = corpus;
+  let withdrawal = monthlyWithdrawal * 12;
+
+  const yearlyData = [];
+
+  for (let year = 1; year <= years; year++) {
+    const age = currentAge + year;
+    const startBalance = balance;
+
+    // Calculate withdrawal based on strategy
+    if (strategy === 'inflation') {
+      withdrawal = withdrawal * (1 + inflationRate);
+    } else if (strategy === 'percent') {
+      withdrawal = startBalance * 0.04; // 4% rule
+    }
+
+    const returns = startBalance * returnRate;
+    balance = startBalance + returns - withdrawal;
+
+    yearlyData.push({
+      year: 2026 + year,
+      age: age,
+      startBalance: startBalance,
+      withdrawal: withdrawal,
+      returns: returns,
+      endBalance: Math.max(0, balance)
+    });
+
+    if (balance <= 0) break;
+  }
+
+  // Update summary
+  const lastYear = yearlyData[yearlyData.length - 1];
+  const yearsLasted = yearlyData.length;
+  const totalWithdrawn = yearlyData.reduce((sum, d) => sum + d.withdrawal, 0);
+
+  let summaryHTML = `
+    <div class="ch3 j">RESULTS</div>
+    <div class="ml">
+      <div class="d">Corpus will last</div>
+      <div class="a ${yearsLasted >= years ? 'aj' : 'ar'}">${yearsLasted} years</div>
+    </div>
+    <div class="ml">
+      <div class="d">Until age</div>
+      <div class="a ${yearsLasted >= years ? 'aj' : 'ar'}">${currentAge + yearsLasted}</div>
+    </div>
+    <div class="ml">
+      <div class="d">Total withdrawn</div>
+      <div class="a aj">₹${(totalWithdrawn/10000000).toFixed(2)} Cr</div>
+    </div>
+    <div class="ml">
+      <div class="d">Final balance</div>
+      <div class="a ${lastYear.endBalance > 0 ? 'aj' : 'ar'}">₹${(lastYear.endBalance/100000).toFixed(2)} L</div>
+    </div>
+    <div style="margin-top:12px;padding:10px;background:${yearsLasted >= years ? 'rgba(48,200,122,.1)' : 'rgba(232,80,64,.1)'};border-radius:5px;font-size:11px">
+      ${yearsLasted >= years
+        ? `✅ <strong>SUCCESS:</strong> Your corpus will last your entire lifetime with ₹${(lastYear.endBalance/100000).toFixed(0)}L remaining!`
+        : `⚠️ <strong>WARNING:</strong> Your corpus will deplete ${years - yearsLasted} years before life expectancy. Consider reducing withdrawals or increasing returns.`
+      }
+    </div>
+  `;
+
+  document.getElementById('swpSummary').innerHTML = summaryHTML;
+
+  // Update chart
+  const ctx = document.getElementById('swpChart');
+  if (ctx.chart) ctx.chart.destroy();
+
+  ctx.chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: yearlyData.map(d => d.year),
+      datasets: [{
+        label: 'Corpus Balance (₹ Cr)',
+        data: yearlyData.map(d => d.endBalance / 10000000),
+        borderColor: '#f0b429',
+        backgroundColor: 'rgba(240,180,41,0.1)',
+        fill: true,
+        tension: 0.4
+      }, {
+        label: 'Annual Withdrawal (₹ Cr)',
+        data: yearlyData.map(d => d.withdrawal / 10000000),
+        borderColor: '#e85040',
+        fill: false,
+        borderDash: [5, 5]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {labels: {color: '#eef0f4'}}
+      },
+      scales: {
+        y: {
+          ticks: {color: '#9aa2b0', callback: v => '₹' + v.toFixed(1) + ' Cr'},
+          grid: {color: '#1e2228'}
+        },
+        x: {
+          ticks: {color: '#9aa2b0'},
+          grid: {color: '#1e2228'}
+        }
+      }
+    }
+  });
+
+  // Update table
+  const tbody = document.querySelector('#swpTable tbody');
+  tbody.innerHTML = yearlyData.filter((d, i) => i % 2 === 0 || i === yearlyData.length - 1).map(d => `
+    <tr>
+      <td>${d.year}</td>
+      <td>${d.age}</td>
+      <td>₹${(d.startBalance/100000).toFixed(2)}L</td>
+      <td>₹${(d.withdrawal/100000).toFixed(2)}L</td>
+      <td>₹${(d.returns/100000).toFixed(2)}L</td>
+      <td class="${d.endBalance > 0 ? 'aj' : 'ar'}">₹${(d.endBalance/100000).toFixed(2)}L</td>
+    </tr>
+  `).join('');
+}
+
+// ============================================
+// PRICE ALERTS
+// ============================================
+function requestNotificationPermission() {
+  if ('Notification' in window) {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        notificationsEnabled = true;
+        document.getElementById('notif-status').innerHTML = '✅ Enabled';
+        showNotification('Notifications Enabled', 'You will now receive price alerts!', 'success');
+      } else {
+        document.getElementById('notif-status').innerHTML = '❌ Disabled';
+      }
+    });
+  } else {
+    alert('Browser notifications not supported');
+  }
+}
+
+function showNotification(title, message, type = 'info') {
+  // Browser notification
+  if (notificationsEnabled && 'Notification' in window) {
+    new Notification(title, {
+      body: message,
+      icon: '📊'
+    });
+  }
+
+  // In-app notification
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  notification.innerHTML = `
+    <div style="font-weight:700;margin-bottom:5px">${title}</div>
+    <div style="font-size:11px">${message}</div>
+  `;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.remove();
+  }, 5000);
+}
+
+function addPriceAlert() {
+  const fund = prompt('Enter fund name (e.g., Parag Parikh):');
+  if (!fund) return;
+
+  const selectedFund = portfolio.find(f => f.name.toLowerCase().includes(fund.toLowerCase()));
+  if (!selectedFund) {
+    alert('Fund not found');
+    return;
+  }
+
+  const type = confirm('Click OK for RISE alert, Cancel for DROP alert') ? 'rise' : 'drop';
+  const threshold = parseFloat(prompt(`Enter ${type.toUpperCase()} threshold (NAV value):`));
+
+  if (!threshold) return;
+
+  const alert = {
+    id: Date.now(),
+    fundId: selectedFund.id,
+    fundName: selectedFund.name,
+    type: type,
+    threshold: threshold,
+    active: true,
+    createdAt: new Date().toISOString()
+  };
+
+  priceAlerts.push(alert);
+  localStorage.setItem('priceAlerts', JSON.stringify(priceAlerts));
+
+  renderAlertsList();
+  updateAlertBadge();
+}
+
+function renderAlertsList() {
+  const container = document.getElementById('alertsList');
+
+  if (priceAlerts.length === 0) {
+    container.innerHTML = '<div class="alert">No price alerts configured. Click "ADD PRICE ALERT" to create one.</div>';
+    return;
+  }
+
+  let html = '';
+  priceAlerts.forEach(alert => {
+    const fund = portfolio.find(f => f.id === alert.fundId);
+    const currentNAV = fund?.nav || 0;
+    const diff = alert.type === 'rise'
+      ? ((alert.threshold - currentNAV) / currentNAV * 100).toFixed(2)
+      : ((currentNAV - alert.threshold) / currentNAV * 100).toFixed(2);
+
+    html += `
+      <div class="card ${alert.active ? 'y' : 'd'}">
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div>
+            <div class="ch3 y">${alert.fundName.split(' ').slice(0, 3).join(' ')}</div>
+            <div style="font-size:11px;color:var(--ink3);margin-bottom:8px">
+              ${alert.type === 'rise' ? '📈 RISE' : '📉 DROP'} alert at NAV ₹${alert.threshold}
+            </div>
+            <div class="ml">
+              <div class="d">Current NAV</div>
+              <div class="a ay">₹${currentNAV.toFixed(2)}</div>
+            </div>
+            <div class="ml">
+              <div class="d">Distance to trigger</div>
+              <div class="a ${parseFloat(diff) < 5 ? 'ar' : 'ai'}">${diff}%</div>
+            </div>
+            <div class="ml">
+              <div class="d">Status</div>
+              <div class="a">${alert.active ? '<span class="badge green">ACTIVE</span>' : '<span class="badge red">TRIGGERED</span>'}</div>
+            </div>
+          </div>
+          <button class="edit-btn danger" onclick="deleteAlert(${alert.id})">🗑️</button>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  document.getElementById('activeAlertsCount').innerHTML = `
+    <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--you)">${priceAlerts.filter(a => a.active).length}</div>
+    <div style="font-size:10px;color:var(--ink3);margin-top:5px">Active price alerts</div>
+  `;
+}
+
+function deleteAlert(id) {
+  priceAlerts = priceAlerts.filter(a => a.id !== id);
+  localStorage.setItem('priceAlerts', JSON.stringify(priceAlerts));
+  renderAlertsList();
+  updateAlertBadge();
+}
+
+function updateAlertBadge() {
+  const badge = document.getElementById('alertBadge');
+  const activeCount = priceAlerts.filter(a => a.active).length;
+  badge.setAttribute('data-badge', activeCount);
+}
+
+function checkPriceAlerts() {
+  priceAlerts.forEach(alert => {
+    if (!alert.active) return;
+
+    const fund = portfolio.find(f => f.id === alert.fundId);
+    if (!fund || !fund.nav) return;
+
+    const triggered = alert.type === 'rise'
+      ? fund.nav >= alert.threshold
+      : fund.nav <= alert.threshold;
+
+    if (triggered) {
+      alert.active = false;
+      alertHistory.push({
+        ...alert,
+        triggeredAt: new Date().toISOString(),
+        nav: fund.nav
+      });
+
+      showNotification(
+        `🔔 Price Alert: ${fund.name}`,
+        `NAV ${alert.type === 'rise' ? 'rose to' : 'dropped to'} ₹${fund.nav} (threshold: ₹${alert.threshold})`,
+        alert.type === 'rise' ? 'success' : 'danger'
+      );
+
+      // Send webhook if configured
+      const webhookURL = document.getElementById('webhook-url').value;
+      if (webhookURL) {
+        fetch(webhookURL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            event: 'price_alert',
+            fund: fund.name,
+            type: alert.type,
+            threshold: alert.threshold,
+            currentNAV: fund.nav
+          })
+        }).catch(err => console.error('Webhook failed:', err));
+      }
+    }
+  });
+
+  localStorage.setItem('priceAlerts', JSON.stringify(priceAlerts));
+  localStorage.setItem('alertHistory', JSON.stringify(alertHistory));
+  renderAlertsList();
+  renderAlertHistory();
+}
+
+function renderAlertHistory() {
+  const container = document.getElementById('alertHistory');
+
+  if (alertHistory.length === 0) {
+    container.innerHTML = '<div class="alert">No alerts triggered yet.</div>';
+    return;
+  }
+
+  const html = '<div class="tw"><table>' +
+    '<thead><tr><th>Date</th><th>Fund</th><th>Type</th><th>Threshold</th><th>Triggered NAV</th></tr></thead>' +
+    '<tbody>' +
+    alertHistory.slice(-10).reverse().map(alert => `
+      <tr>
+        <td>${new Date(alert.triggeredAt).toLocaleString('en-IN')}</td>
+        <td>${alert.fundName.split(' ').slice(0, 3).join(' ')}</td>
+        <td><span class="badge ${alert.type === 'rise' ? 'green' : 'red'}">${alert.type}</span></td>
+        <td>₹${alert.threshold}</td>
+        <td class="${alert.type === 'rise' ? 'aj' : 'ar'}">₹${alert.nav.toFixed(2)}</td>
+      </tr>
+    `).join('') +
+    '</tbody></table></div>';
+
+  container.innerHTML = html;
+}
+
+function testAlert() {
+  showNotification('Test Alert', 'This is a test notification. Alerts are working!', 'success');
+}
+
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+function manageGoals() {
+  alert('Goal management feature - Coming soon!');
+}
+
+function addGoal() {
+  alert('Add goal feature - Coming soon!');
+}
+
+function linkFundsToGoal(goalId) {
+  alert(`Link funds to ${goalId} - Coming soon!`);
+}
+
+// ============================================
+// PAGE NAVIGATION
+// ============================================
+let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+const navs = document.querySelectorAll('.tn');
+
+function showPage(index) {
+  pages[currentPage].classList.remove('active');
+  navs[currentPage].classList.remove('active');
+  currentPage = index;
+  pages[currentPage].classList.add('active');
+  navs[currentPage].classList.active('active');
+  window.scrollTo(0, 0);
+
+  // Load page-specific content
+  if (index === 0) renderGoalsOverview();
+  if (index === 1) renderGoalsList();
+  if (index === 3) calculateRebalancing();
+  if (index === 5) renderAlertsList();
+}
+
+// ============================================
+// INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', async () => {
+  // Load saved data
+  const savedAlerts = localStorage.getItem('priceAlerts');
+  if (savedAlerts) priceAlerts = JSON.parse(savedAlerts);
+
+  const savedHistory = localStorage.getItem('alertHistory');
+  if (savedHistory) alertHistory = JSON.parse(savedHistory);
+
+  // Fetch NAVs
+  for (let fund of portfolio) {
+    const navData = await fetchNAV(fund.schemeCode);
+    fund.nav = navData.nav;
+  }
+
+  // Populate fund selects
+  const fundSelect = document.getElementById('histFundSelect');
+  portfolio.forEach(f => {
+    const option = document.createElement('option');
+    option.value = f.schemeCode;
+    option.textContent = f.name;
+    fundSelect.appendChild(option);
+  });
+
+  // Initial renders
+  renderGoalsOverview();
+  calculateRebalancing();
+  updateAlertBadge();
+  renderAlertHistory();
+
+  // Start alert checking (every 30 minutes)
+  setInterval(checkPriceAlerts, 30 * 60 * 1000);
+});
+</script>
+
+</body>
+</html>

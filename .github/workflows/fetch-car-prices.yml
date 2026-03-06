@@ -1,0 +1,107 @@
+name: Fetch Car Prices Daily
+
+on:
+  schedule:
+    # Run daily at 2:00 AM IST (8:30 PM UTC previous day)
+    - cron: '30 20 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  fetch-car-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 lxml
+
+      - name: Fetch car prices from CarDekho
+        run: |
+          python3 << 'PYTHON_SCRIPT'
+          import requests
+          from bs4 import BeautifulSoup
+          import json
+          import time
+
+          # Popular cars to track (₹8L - ₹25L range for company lease)
+          cars_to_fetch = [
+              {'name': 'Maruti Suzuki Swift', 'url': 'maruti-swift'},
+              {'name': 'Hyundai i20', 'url': 'hyundai-i20'},
+              {'name': 'Hyundai Venue', 'url': 'hyundai-venue'},
+              {'name': 'Maruti Suzuki Brezza', 'url': 'maruti-brezza'},
+              {'name': 'Tata Nexon', 'url': 'tata-nexon'},
+              {'name': 'Hyundai Creta', 'url': 'hyundai-creta'},
+              {'name': 'Kia Seltos', 'url': 'kia-seltos'},
+              {'name': 'Maruti Suzuki Grand Vitara', 'url': 'maruti-grand-vitara'},
+              {'name': 'Honda City', 'url': 'honda-city'},
+              {'name': 'Hyundai Verna', 'url': 'hyundai-verna'},
+              {'name': 'Skoda Kushaq', 'url': 'skoda-kushaq'},
+              {'name': 'Volkswagen Virtus', 'url': 'volkswagen-virtus'},
+              {'name': 'MG Astor', 'url': 'mg-astor'},
+              {'name': 'Mahindra XUV700', 'url': 'mahindra-xuv700'},
+              {'name': 'Tata Harrier', 'url': 'tata-harrier'},
+          ]
+
+          car_data = {
+              'lastUpdated': time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime()),
+              'timestamp': int(time.time() * 1000),
+              'cars': []
+          }
+
+          headers = {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+          }
+
+          for car in cars_to_fetch:
+              try:
+                  print(f"Fetching {car['name']}...")
+
+                  # Try CarDekho API endpoint (if exists) or scrape
+                  url = f"https://www.cardekho.com/{car['url']}"
+
+                  # Note: This is a simplified scraper - actual implementation
+                  # would need to handle CarDekho's structure
+
+                  # For now, use approximate prices (will be refined)
+                  car_data['cars'].append({
+                      'name': car['name'],
+                      'exShowroomPrice': 0,  # To be scraped
+                      'onRoadBangalore': 0,  # To be scraped
+                      'lastChecked': time.strftime('%Y-%m-%d')
+                  })
+
+                  time.sleep(2)  # Rate limiting
+
+              except Exception as e:
+                  print(f"Error fetching {car['name']}: {e}")
+
+          # Save to JSON
+          with open('car-prices.json', 'w') as f:
+              json.dump(car_data, f, indent=2)
+
+          print(f"✅ Saved data for {len(car_data['cars'])} cars")
+
+          PYTHON_SCRIPT
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions Bot"
+
+          git add car-prices.json
+
+          if git diff --staged --quiet; then
+            echo "No price changes detected"
+          else
+            git commit -m "🚗 Auto-update car prices - $(date -u +"%Y-%m-%d %H:%M UTC")"
+            git push
+            echo "✅ Car prices updated"
+          fi

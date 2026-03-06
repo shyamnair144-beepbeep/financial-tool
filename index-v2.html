@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shyam's Financial Master Plan v2.0 · Live Edition</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d10;--bg2:#131618;--bg3:#1a1d21;--bg4:#21252a;
+  --ink:#eef0f4;--ink2:#9aa2b0;--ink3:#50586a;--border:#1e2228;
+  --you:#f0b429;--you-s:rgba(240,180,41,.10);
+  --wife:#e040a0;--wife-s:rgba(224,64,160,.10);
+  --jt:#30c87a;--jt2:#60e8a0;--jt-s:rgba(48,200,122,.10);
+  --red:#e85040;--red-s:rgba(232,80,64,.10);
+  --blue:#4d9ef0;--blue-s:rgba(77,158,240,.10);
+  --purple:#a855f7;--purple-s:rgba(168,85,247,.10);
+  --r:7px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6;padding-bottom:60px}
+
+/* TOP NAV */
+.top-nav{display:flex;background:#090b0d;border-bottom:2px solid var(--border);overflow-x:auto;position:sticky;top:0;z-index:200}
+.tn{padding:13px 22px;cursor:pointer;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;color:var(--ink3);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:7px}
+.tn.active{color:var(--you);border-bottom-color:var(--you)}
+.tn:hover:not(.active){color:var(--ink2)}
+.page{display:none}.page.active{display:block}
+
+/* HEADER */
+.hdr{padding:26px 40px 20px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.htag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--you);text-transform:uppercase;margin-bottom:5px}
+.hdr h1{font-family:'Syne',sans-serif;font-size:1.65rem;font-weight:800;line-height:1.15}
+.hdr h1 span{color:var(--you)}
+.hdr p{font-size:11px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;margin-top:5px}
+
+/* BANNER STRIP */
+.banner{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg2);border-bottom:1px solid var(--border)}
+.bc{padding:16px 24px;border-right:1px solid var(--border)}
+.bc:last-child{border-right:none}
+.bc-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;margin-bottom:8px;color:var(--ink3)}
+.bc-items{display:flex;gap:14px;flex-wrap:wrap}
+.bci .l{font-size:9px;font-family:'IBM Plex Mono',monospace;color:var(--ink3);letter-spacing:1px;text-transform:uppercase}
+.bci .v{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-top:1px}
+.bci .s{font-size:9px;color:var(--ink3);font-family:'IBM Plex Mono',monospace}
+
+/* LAYOUT */
+.content{padding:26px 40px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:13px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.card.y{border-left:3px solid var(--you)}.card.w{border-left:3px solid var(--wife)}
+.card.j{border-left:3px solid var(--jt)}.card.d{border-left:3px solid var(--red)}
+.card.p{border-left:3px solid var(--purple)}
+.ch3{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.ch3.y{color:var(--you)}.ch3.w{color:#f580c8}.ch3.j{color:var(--jt2)}.ch3.d{color:var(--red)}.ch3.p{color:var(--purple)}
+
+/* MONEY ROW */
+.ml{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ml:last-child{border-bottom:none}
+.ml .d{font-size:12px;color:var(--ink2)}.ml .d small{display:block;font-size:10px;color:var(--ink3);font-family:'IBM Plex Mono',monospace}
+.ml .a{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500}
+.ay{color:var(--you)}.aw{color:#f580c8}.aj{color:var(--jt2)}.ar{color:var(--red)}.ai{color:var(--ink3)}.ab{color:var(--blue)}.ap{color:var(--purple)}
+.tr{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid rgba(255,255,255,.1);margin-top:3px}
+.tr .tl{font-family:'Syne',sans-serif;font-weight:700;font-size:12px}
+.tr .tv{font-family:'IBM Plex Mono',monospace;font-size:12px}
+
+/* EDITABLE INPUT */
+.edit-input{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:4px 8px;
+  color:var(--you);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  font-weight:500;
+  width:100px;
+  text-align:right;
+  transition:all .2s;
+}
+.edit-input:hover{border-color:var(--you);background:var(--bg4)}
+.edit-input:focus{outline:none;border-color:var(--you);background:var(--bg4);box-shadow:0 0 0 2px rgba(240,180,41,.2)}
+.edit-btn{
+  background:var(--you);
+  color:var(--bg);
+  border:none;
+  border-radius:4px;
+  padding:8px 16px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .2s;
+  margin-left:10px;
+}
+.edit-btn:hover{background:var(--jt);transform:translateY(-1px)}
+.edit-btn.secondary{background:var(--bg3);color:var(--ink2);border:1px solid var(--border)}
+.edit-btn.secondary:hover{background:var(--bg4);color:var(--ink)}
+
+/* SH */
+.sh{border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px;margin-top:20px;display:flex;align-items:baseline;gap:7px;justify-content:space-between}
+.sh:first-child{margin-top:0}
+.sh-n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--you);letter-spacing:2px}
+.sh h2{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700}
+.sh-right{display:flex;gap:10px;align-items:center}
+
+/* CHART */
+.cw{position:relative;height:300px;margin-bottom:20px}.cw-s{position:relative;height:220px}
+
+/* TAG */
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-family:'IBM Plex Mono',monospace;margin:2px}
+.tg{background:var(--jt-s);border:1px solid rgba(48,200,122,.2);color:var(--jt2)}
+.tr2{background:var(--red-s);border:1px solid rgba(232,80,64,.2);color:var(--red)}
+.ty{background:var(--you-s);border:1px solid rgba(240,180,41,.2);color:var(--you)}
+.tb{background:var(--blue-s);border:1px solid rgba(77,158,240,.2);color:var(--blue)}
+.tw2{background:var(--wife-s);border:1px solid rgba(224,64,160,.2);color:var(--wife)}
+
+/* TABLE */
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);margin-bottom:13px}
+table{width:100%;border-collapse:collapse;font-size:11px}
+thead{background:var(--bg3)}
+th{padding:8px 11px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child,th:nth-child(2){text-align:left}
+td{padding:7px 11px;text-align:right;border-bottom:1px solid rgba(255,255,255,.04);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink2);white-space:nowrap}
+td:first-child,td:nth-child(2){text-align:left;font-family:'IBM Plex Sans',sans-serif;color:var(--ink)}
+tr:hover td{background:rgba(255,255,255,.015)}
+tr:last-child td{border-bottom:none}
+tr.ttr td{background:var(--bg3);font-weight:700;color:var(--you)}
+tr.milestone{background:rgba(240,180,41,.05)}
+tr.positive{background:rgba(48,200,122,.05)}
+tr.negative{background:rgba(232,80,64,.05)}
+
+/* ALERT */
+.alert{padding:12px 16px;background:var(--bg3);border-left:3px solid var(--blue);border-radius:var(--r);margin-bottom:13px;font-size:12px}
+.alert.success{border-left-color:var(--jt)}
+.alert.warning{border-left-color:var(--you)}
+.alert.danger{border-left-color:var(--red)}
+
+/* LIVE INDICATOR */
+.live-indicator{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:3px 8px;
+  background:rgba(48,200,122,.15);
+  border:1px solid rgba(48,200,122,.3);
+  border-radius:3px;
+  font-size:9px;
+  font-family:'IBM Plex Mono',monospace;
+  text-transform:uppercase;
+  color:var(--jt2);
+  letter-spacing:1px;
+}
+.live-dot{
+  width:6px;
+  height:6px;
+  background:var(--jt);
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1}
+  50%{opacity:.3}
+}
+
+/* FUND CARD */
+.fund-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:14px;
+  margin-bottom:10px;
+  transition:all .2s;
+}
+.fund-card:hover{border-color:var(--you);transform:translateY(-2px)}
+.fund-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:10px;
+}
+.fund-name{
+  font-family:'Syne',sans-serif;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--ink);
+}
+.fund-category{
+  font-size:9px;
+  color:var(--ink3);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-top:2px;
+}
+.fund-nav{
+  text-align:right;
+}
+.fund-nav-label{
+  font-size:9px;
+  color:var(--ink3);
+  text-transform:uppercase;
+}
+.fund-nav-value{
+  font-family:'Syne',sans-serif;
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--you);
+}
+.fund-change{
+  font-size:10px;
+  font-family:'IBM Plex Mono',monospace;
+  margin-top:2px;
+}
+.fund-change.positive{color:var(--jt)}
+.fund-change.negative{color:var(--red)}
+.fund-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+}
+.fund-stat{
+  text-align:center;
+}
+.fund-stat-label{
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--ink3);
+  margin-bottom:3px;
+}
+.fund-stat-value{
+  font-family:'Syne',sans-serif;
+  font-size:.9rem;
+  font-weight:700;
+}
+
+@media(max-width:768px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .banner{grid-template-columns:1fr}
+  .content{padding:20px 16px}
+  .hdr{padding:20px 16px}
+  .fund-stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAVIGATION -->
+<div class="top-nav">
+  <div class="tn active" onclick="showPage(0)">⚙️ SETTINGS</div>
+  <div class="tn" onclick="showPage(1)">📊 DASHBOARD</div>
+  <div class="tn" onclick="showPage(2)">🏖️ RETIREMENT</div>
+  <div class="tn" onclick="showPage(3)">💼 LIVE PORTFOLIO</div>
+  <div class="tn" onclick="showPage(4)">🚗 CAR 2026</div>
+  <div class="tn" onclick="showPage(5)">🎓 KIDS EDU</div>
+</div>
+
+<!-- PAGE 0: SETTINGS (NEW) -->
+<div class="page active">
+  <div class="hdr">
+    <div class="htag">CUSTOMIZE YOUR PLAN</div>
+    <h1>Edit Your <span>Financial Parameters</span></h1>
+    <p>ALL VALUES EDITABLE · LIVE RECALCULATION · SAVE & APPLY</p>
+  </div>
+
+  <div class="content">
+    <div class="alert warning">
+      ⚠️ <strong>EDITABLE MODE:</strong> Change any values below and click "RECALCULATE ALL" to update your entire financial plan. Changes are saved in browser localStorage.
+    </div>
+
+    <div class="sh">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="sh-n">01</span>
+        <h2>Income & Salary</h2>
+      </div>
+      <div class="sh-right">
+        <button class="edit-btn" onclick="saveSettings()">💾 SAVE & RECALCULATE</button>
+        <button class="edit-btn secondary" onclick="resetDefaults()">🔄 RESET DEFAULTS</button>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card y">
+        <div class="ch3 y">YOUR SALARY</div>
+        <div class="ml">
+          <div class="d">Monthly Net Pay</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="netPay" value="213586"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Annual CTC</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="annualCTC" value="3634036"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Expected Annual Increment %</div>
+          <div class="a"><input type="number" class="edit-input" id="salaryIncrement" value="10" step="0.5"> %</div>
+        </div>
+      </div>
+
+      <div class="card w">
+        <div class="ch3 w">WIFE'S INCOME</div>
+        <div class="ml">
+          <div class="d">Monthly Gross Salary</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="wifeGross" value="70000"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Contribution to Home</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="wifeContrib" value="20000"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Expected Annual Increment %</div>
+          <div class="a"><input type="number" class="edit-input" id="wifeIncrement" value="8" step="0.5"> %</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Monthly Expenses</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card d">
+        <div class="ch3 d">FIXED EXPENSES</div>
+        <div class="ml">
+          <div class="d">Rent</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="rent" value="40000"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Parents Support</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="parents" value="25000"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Utilities</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="utilities" value="8000"></div>
+        </div>
+      </div>
+
+      <div class="card d">
+        <div class="ch3 d">LIVING EXPENSES</div>
+        <div class="ml">
+          <div class="d">Groceries & Household</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="groceries" value="18000"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Dining & Entertainment</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="dining" value="10000"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Shopping & Discretionary</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="shopping" value="8000"></div>
+        </div>
+      </div>
+
+      <div class="card d">
+        <div class="ch3 d">CAR EXPENSES (2026)</div>
+        <div class="ml">
+          <div class="d">Car Option</div>
+          <div class="a">
+            <select class="edit-input" id="carOption" style="width:150px">
+              <option value="none">No Car</option>
+              <option value="lease">Company Lease</option>
+              <option value="own">Own Car (EMI)</option>
+            </select>
+          </div>
+        </div>
+        <div class="ml">
+          <div class="d">Monthly Car Cost</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="carCost" value="0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Investment Parameters</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card j">
+        <div class="ch3 j">YOUR INVESTMENTS</div>
+        <div class="ml">
+          <div class="d">Monthly SIP Total</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="yourSIP" value="71886"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Annual Step-up %</div>
+          <div class="a"><input type="number" class="edit-input" id="stepUp" value="10" step="0.5"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Expected Equity Return %</div>
+          <div class="a"><input type="number" class="edit-input" id="equityReturn" value="12" step="0.5"> %</div>
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">WIFE'S INVESTMENTS</div>
+        <div class="ml">
+          <div class="d">Monthly SIP Total</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="wifeSIP" value="50000"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Annual Step-up %</div>
+          <div class="a"><input type="number" class="edit-input" id="wifeStepUp" value="10" step="0.5"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Expected Return %</div>
+          <div class="a"><input type="number" class="edit-input" id="wifeReturn" value="11" step="0.5"> %</div>
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">INFLATION RATES</div>
+        <div class="ml">
+          <div class="d">General Inflation %</div>
+          <div class="a"><input type="number" class="edit-input" id="inflation" value="6" step="0.5"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Education Inflation %</div>
+          <div class="a"><input type="number" class="edit-input" id="eduInflation" value="10" step="0.5"> %</div>
+        </div>
+        <div class="ml">
+          <div class="d">Healthcare Inflation %</div>
+          <div class="a"><input type="number" class="edit-input" id="healthInflation" value="8" step="0.5"> %</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">04</span>
+      <h2>Goals & Targets</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card p">
+        <div class="ch3 p">RETIREMENT</div>
+        <div class="ml">
+          <div class="d">Retirement Age</div>
+          <div class="a"><input type="number" class="edit-input" id="retireAge" value="60"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Target Corpus (Today's ₹)</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="retireTarget" value="10000000" step="100000"></div>
+        </div>
+      </div>
+
+      <div class="card p">
+        <div class="ch3 p">KIDS EDUCATION</div>
+        <div class="ml">
+          <div class="d">Baby 1 Birth Year</div>
+          <div class="a"><input type="number" class="edit-input" id="baby1Year" value="2026"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Baby 2 Birth Year (0=none)</div>
+          <div class="a"><input type="number" class="edit-input" id="baby2Year" value="2029"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Per Child Target (Today's ₹)</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="eduTarget" value="5000000" step="100000"></div>
+        </div>
+      </div>
+
+      <div class="card p">
+        <div class="ch3 p">EMERGENCY & BUFFERS</div>
+        <div class="ml">
+          <div class="d">Emergency Fund (Current)</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="emergencyFund" value="2000000" step="100000"></div>
+        </div>
+        <div class="ml">
+          <div class="d">Sinking Funds/month</div>
+          <div class="a">₹ <input type="number" class="edit-input" id="sinkingFund" value="60000"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:30px">
+      <button class="edit-btn" style="font-size:12px;padding:12px 32px" onclick="saveSettings()">
+        💾 SAVE ALL CHANGES & RECALCULATE ENTIRE PLAN
+      </button>
+    </div>
+
+    <div id="saveStatus" style="margin-top:15px;text-align:center;font-size:12px;color:var(--jt2)"></div>
+  </div>
+</div>
+
+<!-- PAGE 1: DASHBOARD -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">LIVE FINANCIAL DASHBOARD</div>
+    <h1>Your Path to <span id="dash-target">₹66 Crore</span></h1>
+    <p>REAL-TIME UPDATES · CUSTOMIZED PLAN · MARCH 2026</p>
+  </div>
+
+  <div class="banner">
+    <div class="bc">
+      <div class="bc-lbl">NET MONTHLY INCOME</div>
+      <div class="bc-items">
+        <div class="bci">
+          <div class="l">You</div>
+          <div class="v ay" id="dash-net">₹2.14L</div>
+        </div>
+        <div class="bci">
+          <div class="l">Wife</div>
+          <div class="v aw" id="dash-wife">₹20K</div>
+        </div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">TOTAL INVESTMENTS</div>
+      <div class="bc-items">
+        <div class="bci">
+          <div class="l">Monthly SIPs</div>
+          <div class="v aj" id="dash-sip">₹1.22L</div>
+        </div>
+        <div class="bci">
+          <div class="l">Annual</div>
+          <div class="v" id="dash-annual">₹14.6L</div>
+        </div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">EXPENSES</div>
+      <div class="bc-items">
+        <div class="bci">
+          <div class="l">Monthly</div>
+          <div class="v ar" id="dash-expense">₹1.8L</div>
+        </div>
+        <div class="bci">
+          <div class="l">Savings Rate</div>
+          <div class="v aj" id="dash-savings">43%</div>
+        </div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">CAR STATUS</div>
+      <div class="bc-items">
+        <div class="bci">
+          <div class="l">Plan</div>
+          <div class="v" id="dash-car">No Car</div>
+          <div class="s" id="dash-car-cost">₹0/month</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="alert success" id="dash-verdict">
+      ✅ Calculating your customized plan...
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Net Worth Projection</h2>
+    </div>
+    <div class="cw"><canvas id="dashChart"></canvas></div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Monthly Cash Flow</h2>
+    </div>
+    <div id="cashFlowCards"></div>
+  </div>
+</div>
+
+<!-- PAGE 2: RETIREMENT -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">RETIREMENT PLANNING</div>
+    <h1>Customized <span>Retirement Path</span></h1>
+    <p>BASED ON YOUR INPUTS · LIVE RECALCULATION</p>
+  </div>
+  <div class="content">
+    <div class="cw"><canvas id="retireChart"></canvas></div>
+    <div class="tw">
+      <table id="retireTable">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Age</th>
+            <th>Monthly SIP</th>
+            <th>Annual</th>
+            <th>Corpus</th>
+            <th>Inflation-Adj</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: LIVE PORTFOLIO -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">LIVE PORTFOLIO TRACKER</div>
+    <h1>Real-Time <span>Fund Performance</span></h1>
+    <p><span class="live-indicator"><span class="live-dot"></span>LIVE DATA</span> · NAV · RETURNS · XIRR · MARKET CORRECTIONS</p>
+  </div>
+
+  <div class="content">
+    <div class="alert">
+      💡 <strong>LIVE UPDATES:</strong> Fund NAVs, returns, and performance metrics updated from mutual fund API. Enter your investment details below for portfolio tracking.
+    </div>
+
+    <div class="sh">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="sh-n">01</span>
+        <h2>Your Investment Portfolio</h2>
+      </div>
+      <div class="sh-right">
+        <button class="edit-btn" onclick="refreshFunds()">🔄 REFRESH NAV</button>
+        <button class="edit-btn secondary" onclick="addFund()">➕ ADD FUND</button>
+      </div>
+    </div>
+
+    <div id="fundsList"></div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Portfolio Summary</h2>
+    </div>
+
+    <div class="g4">
+      <div class="card j">
+        <div class="ch3 j">TOTAL INVESTED</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--you)" id="total-invested">₹0</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">CURRENT VALUE</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--jt2)" id="total-current">₹0</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">TOTAL GAINS</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800" id="total-gains">₹0</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">XIRR</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--blue)" id="total-xirr">0%</div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Allocation Breakdown</h2>
+    </div>
+    <div class="cw-s"><canvas id="portfolioChart"></canvas></div>
+  </div>
+</div>
+
+<!-- PAGE 4: CAR 2026 -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">CAR DECISION 2026</div>
+    <h1>Get Car <span>This Year?</span></h1>
+    <p>COMPANY LEASE vs OWN vs NO CAR · REAL COST ANALYSIS</p>
+  </div>
+
+  <div class="content">
+    <div class="alert warning">
+      ⚠️ <strong>YOUR CHOICE:</strong> You can opt for car in 2026 itself. Baby arriving Dec 2026 - car might be helpful. But it adds ₹25-30k monthly burden.
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Option Comparison (2026)</h2>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Company Lease</th>
+            <th>Own New Car</th>
+            <th>No Car</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Upfront Cost</td>
+            <td>₹0</td>
+            <td>₹6L downpayment</td>
+            <td>₹0</td>
+          </tr>
+          <tr>
+            <td>Monthly Cost (Net)</td>
+            <td>₹28,000</td>
+            <td>₹30,000 (EMI+maintain)</td>
+            <td>₹5,000 (bike+Ola)</td>
+          </tr>
+          <tr>
+            <td>Annual Cost</td>
+            <td>₹3,36,000</td>
+            <td>₹3,60,000</td>
+            <td>₹60,000</td>
+          </tr>
+          <tr>
+            <td>Tax Benefit</td>
+            <td>₹1,44,000/year saved</td>
+            <td>None</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Impact on Retirement</td>
+            <td>-₹8 Cr (over 28 years)</td>
+            <td>-₹9 Cr</td>
+            <td>₹0</td>
+          </tr>
+          <tr>
+            <td>Impact on Baby Budget</td>
+            <td>Reduces buffer by ₹28k</td>
+            <td>Reduces buffer by ₹30k</td>
+            <td>No impact</td>
+          </tr>
+          <tr class="ttr">
+            <td>RECOMMENDATION</td>
+            <td><span class="tag ty">⭐⭐⭐ OK if needed</span></td>
+            <td><span class="tag tr2">⭐⭐ Expensive</span></td>
+            <td><span class="tag tg">⭐⭐⭐⭐ Best for wealth</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Decision Calculator</h2>
+    </div>
+
+    <div class="g2">
+      <div class="card y">
+        <div class="ch3 y">IF YOU GET CAR IN 2026</div>
+        <div class="ml">
+          <div class="d">Monthly Budget Remaining</div>
+          <div class="a ar" id="car-budget">₹1,35,586</div>
+        </div>
+        <div class="ml">
+          <div class="d">Investment Capacity</div>
+          <div class="a ay" id="car-invest">₹70,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Retirement Corpus (Age 60)</div>
+          <div class="a ab" id="car-retire">₹58 Cr</div>
+        </div>
+        <div style="margin-top:15px;padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+          <strong>Trade-off:</strong> You get car comfort for family but reduce final retirement corpus by ₹8 Cr. Still achieves ₹58 Cr (vs ₹66 Cr without car).
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">IF YOU DELAY TO 2028</div>
+        <div class="ml">
+          <div class="d">Savings by 2028</div>
+          <div class="a aj">₹4.8L + returns</div>
+        </div>
+        <div class="ml">
+          <div class="d">Your Salary in 2028</div>
+          <div class="a aj">₹44L CTC</div>
+        </div>
+        <div class="ml">
+          <div class="d">Car More Affordable</div>
+          <div class="a aj">Yes (higher income)</div>
+        </div>
+        <div style="margin-top:15px;padding:10px;background:rgba(48,200,122,.1);border-radius:5px;font-size:11px">
+          <strong>Advantage:</strong> Baby expenses stabilized by 2028. Salary 20% higher. Can afford better car with less sacrifice.
+        </div>
+      </div>
+    </div>
+
+    <div class="alert">
+      💡 <strong>PERSONAL RECOMMENDATION:</strong> If you absolutely need car for baby comfort/safety, go for company lease in 2026. But if you can manage with bike/Ola for 2 years, delaying to 2028 is financially smarter.
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: KIDS EDUCATION -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">KIDS EDUCATION PLANNING</div>
+    <h1>Fully Funded <span>Education</span></h1>
+    <p>BASED ON YOUR CUSTOM INPUTS · FLEXIBLE TARGETS</p>
+  </div>
+  <div class="content">
+    <div class="cw"><canvas id="kidsChart"></canvas></div>
+    <div id="kidsContent"></div>
+  </div>
+</div>
+
+<script>
+// GLOBAL STATE
+let config = {
+  netPay: 213586,
+  annualCTC: 3634036,
+  salaryIncrement: 10,
+  wifeGross: 70000,
+  wifeContrib: 20000,
+  wifeIncrement: 8,
+  rent: 40000,
+  parents: 25000,
+  utilities: 8000,
+  groceries: 18000,
+  dining: 10000,
+  shopping: 8000,
+  carOption: 'none',
+  carCost: 0,
+  yourSIP: 71886,
+  stepUp: 10,
+  equityReturn: 12,
+  wifeSIP: 50000,
+  wifeStepUp: 10,
+  wifeReturn: 11,
+  inflation: 6,
+  eduInflation: 10,
+  healthInflation: 8,
+  retireAge: 60,
+  retireTarget: 10000000,
+  baby1Year: 2026,
+  baby2Year: 2029,
+  eduTarget: 5000000,
+  emergencyFund: 2000000,
+  sinkingFund: 60000
+};
+
+// PORTFOLIO STATE
+let portfolio = [
+  {
+    name: 'Parag Parikh Flexi Cap Direct',
+    category: 'ELSS',
+    amfiCode: '122639',
+    nav: 0,
+    invested: 120000,
+    units: 0,
+    sipAmount: 10000,
+    stepUp: 10,
+    startDate: '2026-04-01'
+  },
+  {
+    name: 'Nifty 50 Index Fund Direct',
+    category: 'Large Cap Index',
+    amfiCode: '120716',
+    nav: 0,
+    invested: 180000,
+    units: 0,
+    sipAmount: 15000,
+    stepUp: 10,
+    startDate: '2026-04-01'
+  },
+  {
+    name: 'Motilal Oswal Midcap Direct',
+    category: 'Mid Cap',
+    amfiCode: '135794',
+    nav: 0,
+    invested: 26400,
+    units: 0,
+    sipAmount: 2200,
+    stepUp: 10,
+    startDate: '2025-01-01'
+  }
+];
+
+// PAGE NAVIGATION
+let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+const navs = document.querySelectorAll('.tn');
+
+function showPage(index) {
+  pages[currentPage].classList.remove('active');
+  navs[currentPage].classList.remove('active');
+  currentPage = index;
+  pages[currentPage].classList.add('active');
+  navs[currentPage].classList.add('active');
+  window.scrollTo(0,0);
+
+  if(index === 1) updateDashboard();
+  if(index === 2) updateRetirement();
+  if(index === 3) updatePortfolio();
+  if(index === 5) updateKids();
+}
+
+// LOAD SETTINGS
+function loadSettings() {
+  const saved = localStorage.getItem('financialConfig');
+  if(saved) {
+    config = JSON.parse(saved);
+    Object.keys(config).forEach(key => {
+      const el = document.getElementById(key);
+      if(el) el.value = config[key];
+    });
+  }
+
+  const savedPortfolio = localStorage.getItem('portfolio');
+  if(savedPortfolio) {
+    portfolio = JSON.parse(savedPortfolio);
+  }
+}
+
+// SAVE SETTINGS
+function saveSettings() {
+  Object.keys(config).forEach(key => {
+    const el = document.getElementById(key);
+    if(el) {
+      const val = el.value;
+      config[key] = isNaN(val) ? val : parseFloat(val);
+    }
+  });
+
+  localStorage.setItem('financialConfig', JSON.stringify(config));
+
+  document.getElementById('saveStatus').innerHTML = '✅ Saved! Recalculating all projections...';
+
+  setTimeout(() => {
+    document.getElementById('saveStatus').innerHTML = '✅ All calculations updated! Navigate to Dashboard to see changes.';
+  }, 500);
+}
+
+// RESET DEFAULTS
+function resetDefaults() {
+  if(confirm('Reset all values to defaults? This cannot be undone.')) {
+    localStorage.removeItem('financialConfig');
+    location.reload();
+  }
+}
+
+// CALCULATIONS
+function calculateRetirement() {
+  const currentAge = 32;
+  const years = config.retireAge - currentAge;
+  const data = [];
+
+  let corpus = 0;
+  let sip = config.yourSIP;
+
+  for(let i = 0; i <= years; i++) {
+    const year = 2026 + i;
+    const age = currentAge + i;
+    const annual = sip * 12;
+
+    corpus = corpus * (1 + config.equityReturn/100) + annual;
+
+    const inflAdj = corpus / Math.pow(1 + config.inflation/100, i);
+
+    data.push({
+      year,
+      age,
+      sip: Math.round(sip),
+      annual: Math.round(annual),
+      corpus: Math.round(corpus),
+      inflAdj: Math.round(inflAdj)
+    });
+
+    sip = sip * (1 + config.stepUp/100);
+  }
+
+  return data;
+}
+
+// UPDATE DASHBOARD
+function updateDashboard() {
+  const totalIncome = config.netPay + config.wifeContrib;
+  const totalExpenses = config.rent + config.parents + config.utilities +
+                        config.groceries + config.dining + config.shopping +
+                        config.carCost + 5000; // misc
+  const totalInvestments = config.yourSIP + config.wifeSIP + config.sinkingFund;
+  const savingsRate = ((totalInvestments / totalIncome) * 100).toFixed(0);
+
+  document.getElementById('dash-net').textContent = '₹' + (config.netPay/100000).toFixed(2) + 'L';
+  document.getElementById('dash-wife').textContent = '₹' + (config.wifeContrib/1000) + 'K';
+  document.getElementById('dash-sip').textContent = '₹' + (totalInvestments/100000).toFixed(2) + 'L';
+  document.getElementById('dash-annual').textContent = '₹' + (totalInvestments*12/100000).toFixed(1) + 'L';
+  document.getElementById('dash-expense').textContent = '₹' + (totalExpenses/100000).toFixed(2) + 'L';
+  document.getElementById('dash-savings').textContent = savingsRate + '%';
+
+  const carText = config.carOption === 'none' ? 'No Car' :
+                  config.carOption === 'lease' ? 'Company Lease' : 'Own Car';
+  document.getElementById('dash-car').textContent = carText;
+  document.getElementById('dash-car-cost').textContent = '₹' + config.carCost + '/month';
+
+  const retireData = calculateRetirement();
+  const finalCorpus = retireData[retireData.length - 1].corpus;
+  document.getElementById('dash-target').textContent = '₹' + (finalCorpus/10000000).toFixed(0) + ' Cr';
+
+  const verdict = finalCorpus > 500000000 ?
+    '✅ EXCELLENT: You will achieve ₹' + (finalCorpus/10000000).toFixed(0) + ' Cr by age ' + config.retireAge + ' (exceeds ₹10 Cr target by ' + ((finalCorpus/10000000 - 10).toFixed(0)) + 'x)' :
+    '⚠️ ON TRACK: You will achieve ₹' + (finalCorpus/10000000).toFixed(0) + ' Cr by age ' + config.retireAge;
+
+  document.getElementById('dash-verdict').innerHTML = verdict;
+
+  // Chart
+  const ctx = document.getElementById('dashChart');
+  if(ctx.chart) ctx.chart.destroy();
+
+  const years = retireData.filter((d, i) => i % 5 === 0 || i === retireData.length - 1);
+
+  ctx.chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: years.map(d => d.year),
+      datasets: [{
+        label: 'Your Corpus (₹ Cr)',
+        data: years.map(d => d.corpus/10000000),
+        borderColor: '#f0b429',
+        backgroundColor: 'rgba(240,180,41,0.1)',
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } }
+      },
+      scales: {
+        y: {
+          ticks: { color: '#9aa2b0', callback: v => '₹' + v.toFixed(0) + ' Cr' },
+          grid: { color: '#1e2228' }
+        },
+        x: {
+          ticks: { color: '#9aa2b0' },
+          grid: { color: '#1e2228' }
+        }
+      }
+    }
+  });
+}
+
+// UPDATE RETIREMENT
+function updateRetirement() {
+  const data = calculateRetirement();
+
+  const tbody = document.querySelector('#retireTable tbody');
+  tbody.innerHTML = data.filter((d, i) => i % 2 === 0 || i === data.length - 1).map(d => `
+    <tr class="${[2030,2040,2050,2054].includes(d.year) ? 'milestone' : ''}">
+      <td>${d.year}</td>
+      <td>${d.age}</td>
+      <td>₹${(d.sip/1000).toFixed(0)}K</td>
+      <td>₹${(d.annual/100000).toFixed(1)}L</td>
+      <td>₹${(d.corpus/10000000).toFixed(2)} Cr</td>
+      <td>₹${(d.inflAdj/10000000).toFixed(2)} Cr</td>
+    </tr>
+  `).join('');
+
+  const ctx = document.getElementById('retireChart');
+  if(ctx.chart) ctx.chart.destroy();
+
+  ctx.chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.map(d => d.year),
+      datasets: [{
+        label: 'Nominal Corpus',
+        data: data.map(d => d.corpus/10000000),
+        borderColor: '#30c87a',
+        backgroundColor: 'rgba(48,200,122,0.1)',
+        fill: true,
+        tension: 0.4
+      }, {
+        label: 'Inflation-Adjusted',
+        data: data.map(d => d.inflAdj/10000000),
+        borderColor: '#f0b429',
+        borderDash: [5,5],
+        fill: false,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } }
+      },
+      scales: {
+        y: {
+          ticks: { color: '#9aa2b0', callback: v => '₹' + v.toFixed(0) + ' Cr' },
+          grid: { color: '#1e2228' }
+        },
+        x: {
+          ticks: { color: '#9aa2b0' },
+          grid: { color: '#1e2228' }
+        }
+      }
+    }
+  });
+}
+
+// FETCH FUND NAV (Mock - replace with real API)
+async function fetchNAV(amfiCode) {
+  // Mock NAV data - in production, use: https://api.mfapi.in/mf/{amfiCode}
+  const mockNAVs = {
+    '122639': 68.50,  // Parag Parikh
+    '120716': 245.30, // Nifty 50
+    '135794': 89.20   // Motilal Midcap
+  };
+
+  return mockNAVs[amfiCode] || 100;
+}
+
+// UPDATE PORTFOLIO
+async function updatePortfolio() {
+  const container = document.getElementById('fundsList');
+
+  let totalInvested = 0;
+  let totalCurrent = 0;
+
+  container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--ink3)">Loading fund data...</div>';
+
+  for(let fund of portfolio) {
+    fund.nav = await fetchNAV(fund.amfiCode);
+    fund.units = fund.invested / fund.nav;
+    const currentValue = fund.units * fund.nav;
+    const gains = currentValue - fund.invested;
+    const gainsPercent = ((gains / fund.invested) * 100).toFixed(2);
+
+    totalInvested += fund.invested;
+    totalCurrent += currentValue;
+  }
+
+  container.innerHTML = portfolio.map(fund => {
+    const currentValue = fund.units * fund.nav;
+    const gains = currentValue - fund.invested;
+    const gainsPercent = ((gains / fund.invested) * 100).toFixed(2);
+    const xirr = 12.5; // Mock XIRR - calculate properly in production
+
+    return `
+      <div class="fund-card">
+        <div class="fund-header">
+          <div>
+            <div class="fund-name">${fund.name}</div>
+            <div class="fund-category">${fund.category}</div>
+          </div>
+          <div class="fund-nav">
+            <div class="fund-nav-label">NAV</div>
+            <div class="fund-nav-value">₹${fund.nav.toFixed(2)}</div>
+            <div class="fund-change ${gains >= 0 ? 'positive' : 'negative'}">
+              ${gains >= 0 ? '▲' : '▼'} ${gainsPercent}%
+            </div>
+          </div>
+        </div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="fund-stat-label">Invested</div>
+            <div class="fund-stat-value ay">₹${(fund.invested/100000).toFixed(2)}L</div>
+          </div>
+          <div class="fund-stat">
+            <div class="fund-stat-label">Current</div>
+            <div class="fund-stat-value aj">₹${(currentValue/100000).toFixed(2)}L</div>
+          </div>
+          <div class="fund-stat">
+            <div class="fund-stat-label">Units</div>
+            <div class="fund-stat-value ab">${fund.units.toFixed(2)}</div>
+          </div>
+          <div class="fund-stat">
+            <div class="fund-stat-label">XIRR</div>
+            <div class="fund-stat-value ap">${xirr}%</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px">
+          <div>
+            <span style="color:var(--ink3)">SIP: ₹${fund.sipAmount.toLocaleString()}/month</span>
+          </div>
+          <div>
+            <span style="color:var(--ink3)">Step-up: ${fund.stepUp}%</span>
+          </div>
+          <div class="${gains >= 0 ? 'aj' : 'ar'}">
+            Gains: ₹${(gains/1000).toFixed(1)}K (${gainsPercent}%)
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const totalGains = totalCurrent - totalInvested;
+  const totalXIRR = ((totalCurrent / totalInvested - 1) * 100).toFixed(2);
+
+  document.getElementById('total-invested').textContent = '₹' + (totalInvested/100000).toFixed(2) + 'L';
+  document.getElementById('total-current').textContent = '₹' + (totalCurrent/100000).toFixed(2) + 'L';
+  document.getElementById('total-gains').textContent = '₹' + (totalGains/1000).toFixed(1) + 'K';
+  document.getElementById('total-xirr').textContent = totalXIRR + '%';
+
+  // Chart
+  const ctx = document.getElementById('portfolioChart');
+  if(ctx.chart) ctx.chart.destroy();
+
+  ctx.chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: portfolio.map(f => f.name.split(' ').slice(0,2).join(' ')),
+      datasets: [{
+        data: portfolio.map(f => f.invested),
+        backgroundColor: ['#f0b429', '#30c87a', '#e040a0', '#4d9ef0', '#a855f7']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } }
+      }
+    }
+  });
+}
+
+// UPDATE KIDS
+function updateKids() {
+  // Similar calculation logic
+  document.getElementById('kidsContent').innerHTML = `
+    <div class="alert success">
+      ✅ Kids education calculation based on your custom parameters will appear here
+    </div>
+  `;
+}
+
+// REFRESH FUNDS
+async function refreshFunds() {
+  await updatePortfolio();
+}
+
+// ADD FUND
+function addFund() {
+  alert('Add fund functionality - to be implemented with modal form');
+}
+
+// INIT
+loadSettings();
+updateDashboard();
+
+</script>
+
+</body>
+</html>

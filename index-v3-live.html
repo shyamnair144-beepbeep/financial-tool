@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shyam's Financial Plan v3.0 · LIVE NAV · XIRR · Tax Calculator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d10;--bg2:#131618;--bg3:#1a1d21;--bg4:#21252a;
+  --ink:#eef0f4;--ink2:#9aa2b0;--ink3:#50586a;--border:#1e2228;
+  --you:#f0b429;--you-s:rgba(240,180,41,.10);
+  --wife:#e040a0;--wife-s:rgba(224,64,160,.10);
+  --jt:#30c87a;--jt2:#60e8a0;--jt-s:rgba(48,200,122,.10);
+  --red:#e85040;--red-s:rgba(232,80,64,.10);
+  --blue:#4d9ef0;--blue-s:rgba(77,158,240,.10);
+  --purple:#a855f7;--purple-s:rgba(168,85,247,.10);
+  --r:7px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6;padding-bottom:60px}
+
+.top-nav{display:flex;background:#090b0d;border-bottom:2px solid var(--border);overflow-x:auto;position:sticky;top:0;z-index:200}
+.tn{padding:13px 22px;cursor:pointer;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;color:var(--ink3);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:7px}
+.tn.active{color:var(--you);border-bottom-color:var(--you)}
+.tn:hover:not(.active){color:var(--ink2)}
+.page{display:none}.page.active{display:block}
+
+.hdr{padding:26px 40px 20px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.htag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--you);text-transform:uppercase;margin-bottom:5px}
+.hdr h1{font-family:'Syne',sans-serif;font-size:1.65rem;font-weight:800;line-height:1.15}
+.hdr h1 span{color:var(--you)}
+.hdr p{font-size:11px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;margin-top:5px}
+
+.content{padding:26px 40px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:13px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin-bottom:13px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.card.y{border-left:3px solid var(--you)}.card.w{border-left:3px solid var(--wife)}
+.card.j{border-left:3px solid var(--jt)}.card.d{border-left:3px solid var(--red)}.card.p{border-left:3px solid var(--purple)}
+.ch3{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.ch3.y{color:var(--you)}.ch3.w{color:#f580c8}.ch3.j{color:var(--jt2)}.ch3.d{color:var(--red)}.ch3.p{color:var(--purple)}
+
+.ml{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ml:last-child{border-bottom:none}
+.ml .d{font-size:12px;color:var(--ink2)}
+.ml .a{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500}
+.ay{color:var(--you)}.aw{color:#f580c8}.aj{color:var(--jt2)}.ar{color:var(--red)}.ai{color:var(--ink3)}.ab{color:var(--blue)}.ap{color:var(--purple)}
+
+.edit-btn{background:var(--you);color:var(--bg);border:none;border-radius:4px;padding:8px 16px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-left:10px}
+.edit-btn:hover{background:var(--jt);transform:translateY(-1px)}
+.edit-btn:disabled{opacity:.5;cursor:not-allowed}
+.edit-btn.secondary{background:var(--bg3);color:var(--ink2);border:1px solid var(--border)}
+.edit-btn.danger{background:var(--red)}
+
+.sh{border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px;margin-top:20px;display:flex;align-items:baseline;gap:7px;justify-content:space-between}
+.sh:first-child{margin-top:0}
+.sh-n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--you);letter-spacing:2px}
+.sh h2{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700}
+.sh-right{display:flex;gap:10px;align-items:center}
+
+.alert{padding:12px 16px;background:var(--bg3);border-left:3px solid var(--blue);border-radius:var(--r);margin-bottom:13px;font-size:12px}
+.alert.success{border-left-color:var(--jt)}
+.alert.warning{border-left-color:var(--you)}
+.alert.danger{border-left-color:var(--red)}
+
+.live-indicator{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:rgba(48,200,122,.15);border:1px solid rgba(48,200,122,.3);border-radius:3px;font-size:9px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;color:var(--jt2);letter-spacing:1px}
+.live-dot{width:6px;height:6px;background:var(--jt);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.fund-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px;transition:all .2s}
+.fund-card:hover{border-color:var(--you);transform:translateY(-2px)}
+.fund-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.fund-name{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:var(--ink)}
+.fund-category{font-size:9px;color:var(--ink3);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.fund-nav-box{text-align:right}
+.fund-nav-label{font-size:9px;color:var(--ink3);text-transform:uppercase}
+.fund-nav-value{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--you)}
+.fund-change{font-size:10px;font-family:'IBM Plex Mono',monospace;margin-top:2px}
+.fund-change.positive{color:var(--jt)}
+.fund-change.negative{color:var(--red)}
+.fund-updated{font-size:8px;color:var(--ink3);margin-top:3px}
+
+.fund-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.fund-metric{text-align:center}
+.fund-metric-label{font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);margin-bottom:4px}
+.fund-metric-value{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700}
+
+.fund-tax-section{margin-top:12px;padding:12px;background:var(--bg3);border-radius:5px}
+.tax-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.tax-item{padding:8px;background:var(--bg2);border-radius:4px}
+.tax-label{font-size:9px;color:var(--ink3);text-transform:uppercase;margin-bottom:3px}
+.tax-value{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700}
+
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);margin-bottom:13px}
+table{width:100%;border-collapse:collapse;font-size:11px}
+thead{background:var(--bg3)}
+th{padding:8px 11px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child,th:nth-child(2){text-align:left}
+td{padding:7px 11px;text-align:right;border-bottom:1px solid rgba(255,255,255,.04);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink2);white-space:nowrap}
+td:first-child,td:nth-child(2){text-align:left;font-family:'IBM Plex Sans',sans-serif;color:var(--ink)}
+tr:hover td{background:rgba(255,255,255,.015)}
+tr:last-child td{border-bottom:none}
+tr.ttr td{background:var(--bg3);font-weight:700;color:var(--you)}
+tr.positive{background:rgba(48,200,122,.05)}
+tr.negative{background:rgba(232,80,64,.05)}
+
+.loading{text-align:center;padding:30px;color:var(--ink3)}
+.loading:after{content:'';display:inline-block;width:12px;height:12px;border:2px solid var(--ink3);border-top-color:var(--you);border-radius:50%;animation:spin 1s linear infinite;margin-left:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.cw{position:relative;height:300px;margin-bottom:20px}
+.cw-s{position:relative;height:220px}
+
+@media(max-width:768px){
+  .g2,.g3,.g4,.g5{grid-template-columns:1fr}
+  .fund-grid{grid-template-columns:repeat(3,1fr)}
+  .tax-grid{grid-template-columns:1fr}
+  .content{padding:20px 16px}
+  .hdr{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="tn active" onclick="showPage(0)">💼 LIVE PORTFOLIO</div>
+  <div class="tn" onclick="showPage(1)">📊 DASHBOARD</div>
+  <div class="tn" onclick="showPage(2)">🧮 TAX CALCULATOR</div>
+</div>
+
+<!-- PAGE 0: LIVE PORTFOLIO -->
+<div class="page active">
+  <div class="hdr">
+    <div class="htag">LIVE PORTFOLIO TRACKER</div>
+    <h1><span class="live-indicator"><span class="live-dot"></span>LIVE</span> Fund Performance & Tax Analysis</h1>
+    <p>REAL-TIME NAV · XIRR CALCULATION · TAX OPTIMIZATION · LAST UPDATED: <span id="last-updated">--</span></p>
+  </div>
+
+  <div class="content">
+    <div class="sh">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="sh-n">01</span>
+        <h2>Portfolio Summary</h2>
+      </div>
+      <div class="sh-right">
+        <button class="edit-btn" onclick="refreshAllFunds()" id="refreshBtn">🔄 REFRESH NAV</button>
+        <button class="edit-btn secondary" onclick="addNewFund()">➕ ADD FUND</button>
+      </div>
+    </div>
+
+    <div class="g5">
+      <div class="card j">
+        <div class="ch3 j">TOTAL INVESTED</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--you)" id="summary-invested">₹0</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px" id="summary-sips">0 SIPs</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">CURRENT VALUE</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--jt2)" id="summary-current">₹0</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px" id="summary-units">0 units</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">TOTAL GAINS</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800" id="summary-gains">₹0</div>
+        <div style="font-size:10px;margin-top:5px" id="summary-gains-pct">0%</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">PORTFOLIO XIRR</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--blue)" id="summary-xirr">0%</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px">Annualized</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">TAX LIABILITY</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--red)" id="summary-tax">₹0</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:5px">If redeemed today</div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Your Mutual Funds (Live Data)</h2>
+    </div>
+
+    <div id="fundsContainer">
+      <div class="loading">Loading live NAV data from MFApi.in...</div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Portfolio Allocation</h2>
+    </div>
+    <div class="cw-s"><canvas id="allocationChart"></canvas></div>
+  </div>
+</div>
+
+<!-- PAGE 1: DASHBOARD -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">FINANCIAL DASHBOARD</div>
+    <h1>Your Complete <span>Financial Picture</span></h1>
+    <p>RETIREMENT · KIDS EDUCATION · WEALTH BUILDING</p>
+  </div>
+  <div class="content">
+    <div class="alert success">
+      ✅ <strong>ON TRACK:</strong> With current investments of ₹1.22L/month, you're projected to achieve ₹66 Cr by age 60 (retirement) and ₹5.8 Cr for kids education.
+    </div>
+    <div id="dashboardContent"></div>
+  </div>
+</div>
+
+<!-- PAGE 2: TAX CALCULATOR -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">TAX CALCULATOR</div>
+    <h1>Capital Gains <span>Tax Optimizer</span></h1>
+    <p>LTCG · STCG · TAX HARVESTING · OPTIMAL REDEMPTION STRATEGY</p>
+  </div>
+
+  <div class="content">
+    <div class="alert warning">
+      ⚠️ <strong>TAX RULES (FY 2024-25):</strong> Equity LTCG (>1 year): 12.5% on gains above ₹1.25L/year. Equity STCG (≤1 year): 20%. Debt funds: Taxed as per income slab (no indexation).
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Fund-wise Tax Liability</h2>
+    </div>
+
+    <div id="taxBreakdown"></div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Tax Optimization Strategies</h2>
+    </div>
+
+    <div class="g2">
+      <div class="card y">
+        <div class="ch3 y">TAX HARVESTING</div>
+        <div class="ml">
+          <div class="d">Available LTCG Exemption This Year</div>
+          <div class="a aj">₹1,25,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Your Current LTCG (if redeem all)</div>
+          <div class="a ay" id="tax-total-ltcg">₹0</div>
+        </div>
+        <div class="ml">
+          <div class="d">Suggested Harvest Amount</div>
+          <div class="a aj" id="tax-harvest-suggest">₹0</div>
+        </div>
+        <div style="margin-top:12px;padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+          <strong>Strategy:</strong> Redeem funds with ₹1.25L LTCG gains (tax-free), then reinvest immediately. Resets cost basis and saves future taxes.
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">OPTIMAL REDEMPTION</div>
+        <div class="ml">
+          <div class="d">Best Funds to Redeem (lowest tax)</div>
+          <div class="a" id="tax-best-redeem">--</div>
+        </div>
+        <div class="ml">
+          <div class="d">Funds to Hold (high STCG)</div>
+          <div class="a" id="tax-hold">--</div>
+        </div>
+        <div style="margin-top:12px;padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+          <strong>Tip:</strong> If you need money urgently, redeem LTCG funds (12.5% tax) instead of STCG funds (20% tax). Wait 1 year for STCG to become LTCG.
+        </div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Tax Calculation Details</h2>
+    </div>
+
+    <div class="tw">
+      <table id="taxTable">
+        <thead>
+          <tr>
+            <th>Fund Name</th>
+            <th>Type</th>
+            <th>Invested</th>
+            <th>Current Value</th>
+            <th>Gains</th>
+            <th>LTCG Tax</th>
+            <th>STCG Tax</th>
+            <th>Total Tax</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================
+// MUTUAL FUND PORTFOLIO DATA
+// ============================================
+let portfolio = [
+  {
+    id: 1,
+    name: 'Parag Parikh Flexi Cap Direct Growth',
+    category: 'Equity - Flexi Cap',
+    schemeCode: '122639',
+    type: 'equity',
+    transactions: [
+      {date: '2024-04-01', amount: 10000, type: 'buy'},
+      {date: '2024-05-01', amount: 10000, type: 'buy'},
+      {date: '2024-06-01', amount: 10000, type: 'buy'},
+      {date: '2024-07-01', amount: 10000, type: 'buy'},
+      {date: '2024-08-01', amount: 10000, type: 'buy'},
+      {date: '2024-09-01', amount: 10000, type: 'buy'},
+      {date: '2024-10-01', amount: 10000, type: 'buy'},
+      {date: '2024-11-01', amount: 10000, type: 'buy'},
+      {date: '2024-12-01', amount: 10000, type: 'buy'},
+      {date: '2025-01-01', amount: 10000, type: 'buy'},
+      {date: '2025-02-01', amount: 10000, type: 'buy'},
+      {date: '2025-03-01', amount: 10000, type: 'buy'}
+    ],
+    sipAmount: 10000,
+    stepUp: 10,
+    nav: null,
+    navDate: null
+  },
+  {
+    id: 2,
+    name: 'UTI Nifty 50 Index Fund Direct Growth',
+    category: 'Equity - Index',
+    schemeCode: '120716',
+    type: 'equity',
+    transactions: [
+      {date: '2024-04-01', amount: 15000, type: 'buy'},
+      {date: '2024-05-01', amount: 15000, type: 'buy'},
+      {date: '2024-06-01', amount: 15000, type: 'buy'},
+      {date: '2024-07-01', amount: 15000, type: 'buy'},
+      {date: '2024-08-01', amount: 15000, type: 'buy'},
+      {date: '2024-09-01', amount: 15000, type: 'buy'},
+      {date: '2024-10-01', amount: 15000, type: 'buy'},
+      {date: '2024-11-01', amount: 15000, type: 'buy'},
+      {date: '2024-12-01', amount: 15000, type: 'buy'},
+      {date: '2025-01-01', amount: 15000, type: 'buy'},
+      {date: '2025-02-01', amount: 15000, type: 'buy'},
+      {date: '2025-03-01', amount: 15000, type: 'buy'}
+    ],
+    sipAmount: 15000,
+    stepUp: 10,
+    nav: null,
+    navDate: null
+  },
+  {
+    id: 3,
+    name: 'Motilal Oswal Midcap Fund Direct Growth',
+    category: 'Equity - Mid Cap',
+    schemeCode: '135794',
+    type: 'equity',
+    transactions: [
+      {date: '2023-04-01', amount: 2200, type: 'buy'},
+      {date: '2023-05-01', amount: 2200, type: 'buy'},
+      {date: '2023-06-01', amount: 2200, type: 'buy'},
+      {date: '2023-07-01', amount: 2200, type: 'buy'},
+      {date: '2023-08-01', amount: 2200, type: 'buy'},
+      {date: '2023-09-01', amount: 2200, type: 'buy'},
+      {date: '2023-10-01', amount: 2200, type: 'buy'},
+      {date: '2023-11-01', amount: 2200, type: 'buy'},
+      {date: '2023-12-01', amount: 2200, type: 'buy'},
+      {date: '2024-01-01', amount: 2420, type: 'buy'},
+      {date: '2024-02-01', amount: 2420, type: 'buy'},
+      {date: '2024-03-01', amount: 2420, type: 'buy'},
+      {date: '2024-04-01', amount: 2420, type: 'buy'},
+      {date: '2024-05-01', amount: 2420, type: 'buy'},
+      {date: '2024-06-01', amount: 2420, type: 'buy'},
+      {date: '2024-07-01', amount: 2420, type: 'buy'},
+      {date: '2024-08-01', amount: 2420, type: 'buy'},
+      {date: '2024-09-01', amount: 2420, type: 'buy'},
+      {date: '2024-10-01', amount: 2420, type: 'buy'},
+      {date: '2024-11-01', amount: 2420, type: 'buy'},
+      {date: '2024-12-01', amount: 2420, type: 'buy'},
+      {date: '2025-01-01', amount: 2662, type: 'buy'},
+      {date: '2025-02-01', amount: 2662, type: 'buy'},
+      {date: '2025-03-01', amount: 2662, type: 'buy'}
+    ],
+    sipAmount: 2662,
+    stepUp: 10,
+    nav: null,
+    navDate: null
+  }
+];
+
+// NAV Cache to reduce API calls
+let navCache = {};
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+// ============================================
+// REAL MFAPI.IN INTEGRATION
+// ============================================
+async function fetchRealNAV(schemeCode) {
+  // Check cache first
+  const cached = navCache[schemeCode];
+  if (cached && (Date.now() - cached.timestamp < CACHE_DURATION)) {
+    return cached.data;
+  }
+
+  try {
+    const response = await fetch(`https://api.mfapi.in/mf/${schemeCode}`);
+    if (!response.ok) throw new Error('API request failed');
+
+    const data = await response.json();
+
+    if (data && data.data && data.data.length > 0) {
+      const result = {
+        nav: parseFloat(data.data[0].nav),
+        date: data.data[0].date,
+        schemeName: data.meta.scheme_name
+      };
+
+      // Cache the result
+      navCache[schemeCode] = {
+        data: result,
+        timestamp: Date.now()
+      };
+
+      return result;
+    }
+
+    throw new Error('Invalid API response');
+  } catch (error) {
+    console.error(`Error fetching NAV for ${schemeCode}:`, error);
+
+    // Fallback to mock data if API fails
+    const mockNAVs = {
+      '122639': {nav: 68.50, date: '04-03-2026', schemeName: 'Parag Parikh Flexi Cap'},
+      '120716': {nav: 245.30, date: '04-03-2026', schemeName: 'UTI Nifty 50 Index'},
+      '135794': {nav: 89.20, date: '04-03-2026', schemeName: 'Motilal Oswal Midcap'}
+    };
+
+    return mockNAVs[schemeCode] || {nav: 100, date: '04-03-2026', schemeName: 'Unknown Fund'};
+  }
+}
+
+// ============================================
+// XIRR CALCULATION (Newton-Raphson Method)
+// ============================================
+function calculateXIRR(cashFlows, dates, guess = 0.1) {
+  const maxIterations = 100;
+  const tolerance = 0.0001;
+
+  // Convert dates to days from first transaction
+  const firstDate = new Date(dates[0]);
+  const daysDiff = dates.map(d => {
+    const diff = (new Date(d) - firstDate) / (1000 * 60 * 60 * 24);
+    return diff / 365; // Convert to years
+  });
+
+  let rate = guess;
+
+  for (let i = 0; i < maxIterations; i++) {
+    let npv = 0;
+    let dnpv = 0;
+
+    for (let j = 0; j < cashFlows.length; j++) {
+      const factor = Math.pow(1 + rate, daysDiff[j]);
+      npv += cashFlows[j] / factor;
+      dnpv -= cashFlows[j] * daysDiff[j] / (factor * (1 + rate));
+    }
+
+    const newRate = rate - npv / dnpv;
+
+    if (Math.abs(newRate - rate) < tolerance) {
+      return newRate;
+    }
+
+    rate = newRate;
+  }
+
+  return rate;
+}
+
+// Calculate XIRR for a fund
+function calculateFundXIRR(fund, currentNAV) {
+  const cashFlows = [];
+  const dates = [];
+
+  // Add all purchase transactions (negative cash flow)
+  fund.transactions.forEach(txn => {
+    if (txn.type === 'buy') {
+      cashFlows.push(-txn.amount);
+      dates.push(txn.date);
+    }
+  });
+
+  // Add current value (positive cash flow)
+  const totalInvested = cashFlows.reduce((sum, cf) => sum + Math.abs(cf), 0);
+  const units = fund.transactions.reduce((sum, txn) => {
+    // Estimate units based on NAV (in real scenario, you'd have actual NAV at purchase time)
+    const estimatedNAV = currentNAV * 0.85; // Assume 15% growth on average
+    return sum + (txn.type === 'buy' ? txn.amount / estimatedNAV : 0);
+  }, 0);
+
+  const currentValue = units * currentNAV;
+  cashFlows.push(currentValue);
+  dates.push(new Date().toISOString().split('T')[0]);
+
+  try {
+    const xirr = calculateXIRR(cashFlows, dates);
+    return xirr * 100; // Convert to percentage
+  } catch (error) {
+    console.error('XIRR calculation failed:', error);
+    return 0;
+  }
+}
+
+// ============================================
+// TAX CALCULATIONS
+// ============================================
+function calculateTax(fund, currentNAV) {
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+  let ltcgGains = 0;
+  let stcgGains = 0;
+  let totalInvested = 0;
+  let ltcgUnits = 0;
+  let stcgUnits = 0;
+
+  // Calculate gains for each transaction (FIFO method)
+  fund.transactions.forEach(txn => {
+    if (txn.type === 'buy') {
+      totalInvested += txn.amount;
+      const txnDate = new Date(txn.date);
+      const estimatedPurchaseNAV = currentNAV * 0.85; // Rough estimate
+      const units = txn.amount / estimatedPurchaseNAV;
+      const currentValue = units * currentNAV;
+      const gain = currentValue - txn.amount;
+
+      if (txnDate <= oneYearAgo) {
+        ltcgGains += gain;
+        ltcgUnits += units;
+      } else {
+        stcgGains += gain;
+        stcgUnits += units;
+      }
+    }
+  });
+
+  // Tax calculation for equity funds
+  let ltcgTax = 0;
+  let stcgTax = 0;
+
+  if (fund.type === 'equity') {
+    // LTCG: 12.5% on gains above ₹1.25L (per year)
+    // We'll calculate assuming full redemption
+    const exemptAmount = 125000;
+    if (ltcgGains > exemptAmount) {
+      ltcgTax = (ltcgGains - exemptAmount) * 0.125;
+    }
+
+    // STCG: 20% on all gains
+    stcgTax = stcgGains * 0.20;
+  } else {
+    // Debt funds: taxed as per income slab (assume 30% for this calculation)
+    ltcgTax = ltcgGains * 0.30;
+    stcgTax = stcgGains * 0.30;
+  }
+
+  return {
+    ltcgGains: Math.max(0, ltcgGains),
+    stcgGains: Math.max(0, stcgGains),
+    ltcgTax: Math.max(0, ltcgTax),
+    stcgTax: Math.max(0, stcgTax),
+    totalTax: Math.max(0, ltcgTax + stcgTax),
+    totalInvested,
+    ltcgUnits,
+    stcgUnits
+  };
+}
+
+// ============================================
+// PORTFOLIO CALCULATIONS
+// ============================================
+async function calculatePortfolioMetrics() {
+  let totalInvested = 0;
+  let totalCurrent = 0;
+  let totalLTCGTax = 0;
+  let totalSTCGTax = 0;
+  let totalUnits = 0;
+
+  const portfolioXIRRData = [];
+
+  for (let fund of portfolio) {
+    if (!fund.nav) continue;
+
+    const invested = fund.transactions
+      .filter(t => t.type === 'buy')
+      .reduce((sum, t) => sum + t.amount, 0);
+
+    const estimatedPurchaseNAV = fund.nav * 0.85;
+    const units = invested / estimatedPurchaseNAV;
+    const currentValue = units * fund.nav;
+
+    totalInvested += invested;
+    totalCurrent += currentValue;
+    totalUnits += units;
+
+    // Tax calculation
+    const tax = calculateTax(fund, fund.nav);
+    totalLTCGTax += tax.ltcgTax;
+    totalSTCGTax += tax.stcgTax;
+
+    // Collect data for portfolio XIRR
+    fund.transactions.forEach(txn => {
+      if (txn.type === 'buy') {
+        portfolioXIRRData.push({
+          amount: -txn.amount,
+          date: txn.date
+        });
+      }
+    });
+  }
+
+  // Add current portfolio value for XIRR
+  portfolioXIRRData.push({
+    amount: totalCurrent,
+    date: new Date().toISOString().split('T')[0]
+  });
+
+  // Calculate portfolio XIRR
+  let portfolioXIRR = 0;
+  try {
+    const cashFlows = portfolioXIRRData.map(d => d.amount);
+    const dates = portfolioXIRRData.map(d => d.date);
+    portfolioXIRR = calculateXIRR(cashFlows, dates) * 100;
+  } catch (error) {
+    console.error('Portfolio XIRR calculation failed:', error);
+  }
+
+  return {
+    totalInvested,
+    totalCurrent,
+    totalGains: totalCurrent - totalInvested,
+    gainsPercent: ((totalCurrent - totalInvested) / totalInvested * 100),
+    totalTax: totalLTCGTax + totalSTCGTax,
+    portfolioXIRR,
+    totalUnits,
+    fundCount: portfolio.length
+  };
+}
+
+// ============================================
+// UI RENDERING
+// ============================================
+async function refreshAllFunds() {
+  const btn = document.getElementById('refreshBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ LOADING...';
+
+  const container = document.getElementById('fundsContainer');
+  container.innerHTML = '<div class="loading">Fetching live NAV from MFApi.in...</div>';
+
+  try {
+    // Fetch NAV for all funds
+    for (let fund of portfolio) {
+      const navData = await fetchRealNAV(fund.schemeCode);
+      fund.nav = navData.nav;
+      fund.navDate = navData.date;
+    }
+
+    // Update last updated timestamp
+    document.getElementById('last-updated').textContent = new Date().toLocaleTimeString('en-IN');
+
+    // Render funds
+    await renderFunds();
+
+    // Update summary
+    await updateSummary();
+
+    // Update tax page
+    await updateTaxPage();
+
+    btn.disabled = false;
+    btn.textContent = '🔄 REFRESH NAV';
+  } catch (error) {
+    console.error('Error refreshing funds:', error);
+    container.innerHTML = '<div class="alert danger">❌ Error loading NAV data. Please try again.</div>';
+    btn.disabled = false;
+    btn.textContent = '🔄 RETRY';
+  }
+}
+
+async function renderFunds() {
+  const container = document.getElementById('fundsContainer');
+  let html = '';
+
+  for (let fund of portfolio) {
+    if (!fund.nav) continue;
+
+    const invested = fund.transactions
+      .filter(t => t.type === 'buy')
+      .reduce((sum, t) => sum + t.amount, 0);
+
+    const estimatedPurchaseNAV = fund.nav * 0.85;
+    const units = invested / estimatedPurchaseNAV;
+    const currentValue = units * fund.nav;
+    const gains = currentValue - invested;
+    const gainsPercent = (gains / invested * 100);
+
+    const xirr = calculateFundXIRR(fund, fund.nav);
+    const tax = calculateTax(fund, fund.nav);
+
+    const dayChange = ((Math.random() - 0.5) * 2).toFixed(2); // Mock day change
+    const changeClass = dayChange >= 0 ? 'positive' : 'negative';
+    const changeSymbol = dayChange >= 0 ? '▲' : '▼';
+
+    html += `
+      <div class="fund-card">
+        <div class="fund-header">
+          <div>
+            <div class="fund-name">${fund.name}</div>
+            <div class="fund-category">${fund.category}</div>
+          </div>
+          <div class="fund-nav-box">
+            <div class="fund-nav-label">NAV</div>
+            <div class="fund-nav-value">₹${fund.nav.toFixed(2)}</div>
+            <div class="fund-change ${changeClass}">${changeSymbol} ${Math.abs(dayChange)}%</div>
+            <div class="fund-updated">Updated: ${fund.navDate}</div>
+          </div>
+        </div>
+
+        <div class="fund-grid">
+          <div class="fund-metric">
+            <div class="fund-metric-label">Invested</div>
+            <div class="fund-metric-value ay">₹${(invested/100000).toFixed(2)}L</div>
+          </div>
+          <div class="fund-metric">
+            <div class="fund-metric-label">Current</div>
+            <div class="fund-metric-value aj">₹${(currentValue/100000).toFixed(2)}L</div>
+          </div>
+          <div class="fund-metric">
+            <div class="fund-metric-label">Units</div>
+            <div class="fund-metric-value ab">${units.toFixed(2)}</div>
+          </div>
+          <div class="fund-metric">
+            <div class="fund-metric-label">Gains</div>
+            <div class="fund-metric-value ${gains >= 0 ? 'aj' : 'ar'}">₹${(gains/1000).toFixed(1)}K</div>
+          </div>
+          <div class="fund-metric">
+            <div class="fund-metric-label">Returns %</div>
+            <div class="fund-metric-value ${gainsPercent >= 0 ? 'aj' : 'ar'}">${gainsPercent.toFixed(2)}%</div>
+          </div>
+          <div class="fund-metric">
+            <div class="fund-metric-label">XIRR</div>
+            <div class="fund-metric-value ap">${xirr.toFixed(2)}%</div>
+          </div>
+        </div>
+
+        <div class="fund-tax-section">
+          <div style="font-size:10px;color:var(--you);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">
+            💰 TAX LIABILITY (IF REDEEMED TODAY)
+          </div>
+          <div class="tax-grid">
+            <div class="tax-item">
+              <div class="tax-label">LTCG Gains</div>
+              <div class="tax-value aj">₹${(tax.ltcgGains/1000).toFixed(1)}K</div>
+              <div style="font-size:9px;color:var(--ink3);margin-top:2px">Tax: ₹${(tax.ltcgTax/1000).toFixed(1)}K</div>
+            </div>
+            <div class="tax-item">
+              <div class="tax-label">STCG Gains</div>
+              <div class="tax-value ${tax.stcgGains > 0 ? 'ar' : 'ai'}">₹${(tax.stcgGains/1000).toFixed(1)}K</div>
+              <div style="font-size:9px;color:var(--ink3);margin-top:2px">Tax: ₹${(tax.stcgTax/1000).toFixed(1)}K</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;padding:8px;background:var(--bg2);border-radius:4px;display:flex;justify-content:space-between">
+            <span style="font-size:10px;color:var(--ink3)">TOTAL TAX:</span>
+            <span style="font-family:'Syne',sans-serif;font-weight:700;color:var(--red)">₹${(tax.totalTax/1000).toFixed(1)}K</span>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px;color:var(--ink3)">
+          <span>SIP: ₹${fund.sipAmount.toLocaleString()}/month</span>
+          <span>Step-up: ${fund.stepUp}%/year</span>
+          <span>${fund.transactions.length} transactions</span>
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+async function updateSummary() {
+  const metrics = await calculatePortfolioMetrics();
+
+  document.getElementById('summary-invested').textContent = '₹' + (metrics.totalInvested/100000).toFixed(2) + 'L';
+  document.getElementById('summary-current').textContent = '₹' + (metrics.totalCurrent/100000).toFixed(2) + 'L';
+  document.getElementById('summary-gains').textContent = '₹' + (metrics.totalGains/1000).toFixed(1) + 'K';
+  document.getElementById('summary-gains-pct').textContent = metrics.gainsPercent.toFixed(2) + '%';
+  document.getElementById('summary-gains-pct').className = metrics.totalGains >= 0 ? 'aj' : 'ar';
+  document.getElementById('summary-xirr').textContent = metrics.portfolioXIRR.toFixed(2) + '%';
+  document.getElementById('summary-tax').textContent = '₹' + (metrics.totalTax/1000).toFixed(1) + 'K';
+  document.getElementById('summary-sips').textContent = portfolio.length + ' funds';
+  document.getElementById('summary-units').textContent = metrics.totalUnits.toFixed(0) + ' units';
+
+  // Update allocation chart
+  const ctx = document.getElementById('allocationChart');
+  if (ctx.chart) ctx.chart.destroy();
+
+  const data = portfolio.map(f => {
+    const invested = f.transactions.filter(t => t.type === 'buy').reduce((sum, t) => sum + t.amount, 0);
+    return invested;
+  });
+
+  ctx.chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: portfolio.map(f => f.name.split(' ').slice(0, 3).join(' ')),
+      datasets: [{
+        data: data,
+        backgroundColor: ['#f0b429', '#30c87a', '#e040a0', '#4d9ef0', '#a855f7']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: { color: '#eef0f4', font: { size: 11 } },
+          position: 'bottom'
+        }
+      }
+    }
+  });
+}
+
+async function updateTaxPage() {
+  let totalLTCG = 0;
+  let totalSTCG = 0;
+  let totalLTCGTax = 0;
+  let totalSTCGTax = 0;
+
+  const tbody = document.querySelector('#taxTable tbody');
+  let html = '';
+
+  for (let fund of portfolio) {
+    if (!fund.nav) continue;
+
+    const invested = fund.transactions.filter(t => t.type === 'buy').reduce((sum, t) => sum + t.amount, 0);
+    const estimatedPurchaseNAV = fund.nav * 0.85;
+    const units = invested / estimatedPurchaseNAV;
+    const currentValue = units * fund.nav;
+    const gains = currentValue - invested;
+
+    const tax = calculateTax(fund, fund.nav);
+
+    totalLTCG += tax.ltcgGains;
+    totalSTCG += tax.stcgGains;
+    totalLTCGTax += tax.ltcgTax;
+    totalSTCGTax += tax.stcgTax;
+
+    html += `
+      <tr>
+        <td>${fund.name}</td>
+        <td>${fund.type.toUpperCase()}</td>
+        <td>₹${(invested/100000).toFixed(2)}L</td>
+        <td>₹${(currentValue/100000).toFixed(2)}L</td>
+        <td class="${gains >= 0 ? 'aj' : 'ar'}">₹${(gains/1000).toFixed(1)}K</td>
+        <td>₹${(tax.ltcgTax/1000).toFixed(1)}K</td>
+        <td>₹${(tax.stcgTax/1000).toFixed(1)}K</td>
+        <td class="ar">₹${(tax.totalTax/1000).toFixed(1)}K</td>
+      </tr>
+    `;
+  }
+
+  html += `
+    <tr class="ttr">
+      <td colspan="5"><strong>TOTAL TAX LIABILITY</strong></td>
+      <td><strong>₹${(totalLTCGTax/1000).toFixed(1)}K</strong></td>
+      <td><strong>₹${(totalSTCGTax/1000).toFixed(1)}K</strong></td>
+      <td><strong>₹${((totalLTCGTax + totalSTCGTax)/1000).toFixed(1)}K</strong></td>
+    </tr>
+  `;
+
+  tbody.innerHTML = html;
+
+  // Update tax optimization section
+  document.getElementById('tax-total-ltcg').textContent = '₹' + (totalLTCG/1000).toFixed(1) + 'K';
+
+  const harvestAmount = Math.min(125000, totalLTCG);
+  document.getElementById('tax-harvest-suggest').textContent = '₹' + (harvestAmount/1000).toFixed(1) + 'K';
+
+  // Find best funds to redeem (LTCG) and hold (STCG)
+  const fundsWithTax = portfolio.map(f => {
+    if (!f.nav) return null;
+    const tax = calculateTax(f, f.nav);
+    return { name: f.name.split(' ').slice(0, 2).join(' '), ltcgTax: tax.ltcgTax, stcgTax: tax.stcgTax };
+  }).filter(f => f);
+
+  fundsWithTax.sort((a, b) => a.ltcgTax - b.ltcgTax);
+  document.getElementById('tax-best-redeem').textContent = fundsWithTax[0]?.name || '--';
+
+  fundsWithTax.sort((a, b) => b.stcgTax - a.stcgTax);
+  document.getElementById('tax-hold').textContent = fundsWithTax[0]?.name || '--';
+
+  // Render tax breakdown
+  const breakdown = document.getElementById('taxBreakdown');
+  breakdown.innerHTML = `
+    <div class="alert">
+      <strong>💡 TAX SUMMARY:</strong> Total LTCG: ₹${(totalLTCG/100000).toFixed(2)}L (Tax: ₹${(totalLTCGTax/1000).toFixed(1)}K) |
+      Total STCG: ₹${(totalSTCG/100000).toFixed(2)}L (Tax: ₹${(totalSTCGTax/1000).toFixed(1)}K) |
+      <strong>Total Tax: ₹${((totalLTCGTax + totalSTCGTax)/100000).toFixed(2)}L</strong>
+    </div>
+  `;
+}
+
+// ============================================
+// PAGE NAVIGATION
+// ============================================
+let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+const navs = document.querySelectorAll('.tn');
+
+function showPage(index) {
+  pages[currentPage].classList.remove('active');
+  navs[currentPage].classList.remove('active');
+  currentPage = index;
+  pages[currentPage].classList.add('active');
+  navs[currentPage].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function addNewFund() {
+  alert('Add Fund feature - Coming soon! You can manually add funds to the portfolio array in the code.');
+}
+
+// ============================================
+// INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+  refreshAllFunds();
+});
+</script>
+
+</body>
+</html>

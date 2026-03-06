@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# This script will guide the merge
+echo "BUILDING COMPLETE MERGED VERSION..."
+echo "===================================="
+echo ""
+echo "Original has 8 pages (lines 136-144):"
+echo "  1. DASHBOARD"
+echo "  2. RETIREMENT" 
+echo "  3. KIDS EDUCATION"
+echo "  4. INVESTMENTS"
+echo "  5. TAX OPTIMIZER"
+echo "  6. CAR DECISION"
+echo "  7. SINKING FUNDS"
+echo "  8. WIFE'S PORTFOLIO"
+echo ""
+echo "Adding 5 NEW pages (will be 9-13):"
+echo "  9. LIVE PORTFOLIO (with NAV)"
+echo " 10. GOALS TRACKING"
+echo " 11. HISTORICAL CHARTS"
+echo " 12. REBALANCING"
+echo " 13. SWP CALCULATOR"
+echo " 14. EMAIL ALERTS"
+echo ""
+echo "This creates ONE file with 13 pages total!"
+echo ""
+echo "Starting merge process..."
+

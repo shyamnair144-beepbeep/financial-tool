@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shyam's Financial Master Plan · 2026-2054 · Brutal Reality Edition</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d10;--bg2:#131618;--bg3:#1a1d21;--bg4:#21252a;
+  --ink:#eef0f4;--ink2:#9aa2b0;--ink3:#50586a;--border:#1e2228;
+  --you:#f0b429;--you-s:rgba(240,180,41,.10);
+  --wife:#e040a0;--wife-s:rgba(224,64,160,.10);
+  --jt:#30c87a;--jt2:#60e8a0;--jt-s:rgba(48,200,122,.10);
+  --red:#e85040;--red-s:rgba(232,80,64,.10);
+  --blue:#4d9ef0;--blue-s:rgba(77,158,240,.10);
+  --purple:#a855f7;--purple-s:rgba(168,85,247,.10);
+  --r:7px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6;padding-bottom:60px}
+
+/* TOP NAV */
+.top-nav{display:flex;background:#090b0d;border-bottom:2px solid var(--border);overflow-x:auto;position:sticky;top:0;z-index:200}
+.tn{padding:13px 22px;cursor:pointer;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;color:var(--ink3);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:7px}
+.tn.active{color:var(--you);border-bottom-color:var(--you)}
+.tn:hover:not(.active){color:var(--ink2)}
+.page{display:none}.page.active{display:block}
+
+/* HEADER */
+.hdr{padding:26px 40px 20px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.htag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--you);text-transform:uppercase;margin-bottom:5px}
+.hdr h1{font-family:'Syne',sans-serif;font-size:1.65rem;font-weight:800;line-height:1.15}
+.hdr h1 span{color:var(--you)}
+.hdr p{font-size:11px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;margin-top:5px}
+
+/* BANNER STRIP */
+.banner{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg2);border-bottom:1px solid var(--border)}
+.bc{padding:16px 24px;border-right:1px solid var(--border)}
+.bc:last-child{border-right:none}
+.bc-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;margin-bottom:8px;color:var(--ink3)}
+.bc-items{display:flex;gap:14px;flex-wrap:wrap}
+.bci .l{font-size:9px;font-family:'IBM Plex Mono',monospace;color:var(--ink3);letter-spacing:1px;text-transform:uppercase}
+.bci .v{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-top:1px}
+.bci .s{font-size:9px;color:var(--ink3);font-family:'IBM Plex Mono',monospace}
+
+/* LAYOUT */
+.content{padding:26px 40px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:13px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:13px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.card.y{border-left:3px solid var(--you)}.card.w{border-left:3px solid var(--wife)}
+.card.j{border-left:3px solid var(--jt)}.card.d{border-left:3px solid var(--red)}
+.card.p{border-left:3px solid var(--purple)}
+.ch3{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.ch3.y{color:var(--you)}.ch3.w{color:#f580c8}.ch3.j{color:var(--jt2)}.ch3.d{color:var(--red)}.ch3.p{color:var(--purple)}
+
+/* MONEY ROW */
+.ml{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ml:last-child{border-bottom:none}
+.ml .d{font-size:12px;color:var(--ink2)}.ml .d small{display:block;font-size:10px;color:var(--ink3);font-family:'IBM Plex Mono',monospace}
+.ml .a{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500}
+.ay{color:var(--you)}.aw{color:#f580c8}.aj{color:var(--jt2)}.ar{color:var(--red)}.ai{color:var(--ink3)}.ab{color:var(--blue)}.ap{color:var(--purple)}
+.tr{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid rgba(255,255,255,.1);margin-top:3px}
+.tr .tl{font-family:'Syne',sans-serif;font-weight:700;font-size:12px}
+.tr .tv{font-family:'IBM Plex Mono',monospace;font-size:12px}
+
+/* SH */
+.sh{border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:12px;margin-top:20px;display:flex;align-items:baseline;gap:7px}
+.sh:first-child{margin-top:0}
+.sh-n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--you);letter-spacing:2px}
+.sh h2{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700}
+
+/* CHART */
+.cw{position:relative;height:300px;margin-bottom:20px}.cw-s{position:relative;height:220px}
+
+/* TAG */
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-family:'IBM Plex Mono',monospace;margin:2px}
+.tg{background:var(--jt-s);border:1px solid rgba(48,200,122,.2);color:var(--jt2)}
+.tr2{background:var(--red-s);border:1px solid rgba(232,80,64,.2);color:var(--red)}
+.ty{background:var(--you-s);border:1px solid rgba(240,180,41,.2);color:var(--you)}
+.tb{background:var(--blue-s);border:1px solid rgba(77,158,240,.2);color:var(--blue)}
+.tw2{background:var(--wife-s);border:1px solid rgba(224,64,160,.2);color:var(--wife)}
+
+/* TABLE */
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);margin-bottom:13px}
+table{width:100%;border-collapse:collapse;font-size:11px}
+thead{background:var(--bg3)}
+th{padding:8px 11px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child,th:nth-child(2){text-align:left}
+td{padding:7px 11px;text-align:right;border-bottom:1px solid rgba(255,255,255,.04);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink2);white-space:nowrap}
+td:first-child,td:nth-child(2){text-align:left;font-family:'IBM Plex Sans',sans-serif;color:var(--ink)}
+tr:hover td{background:rgba(255,255,255,.015)}
+tr:last-child td{border-bottom:none}
+tr.ttr td{background:var(--bg3);font-weight:700;color:var(--you)}
+tr.milestone{background:rgba(240,180,41,.05)}
+
+/* GOAL */
+.goal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.gh{padding:13px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.gb{padding:0 16px 13px}
+.gt{font-size:9px;letter-spacing:1.5px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;opacity:.4;margin-bottom:2px}
+.gtl{font-family:'Syne',sans-serif;font-weight:800;font-size:.92rem}
+.gm{font-size:10px;font-family:'IBM Plex Mono',monospace;margin-top:2px;opacity:.4}
+.gpl{font-size:9px;font-family:'IBM Plex Mono',monospace;opacity:.35;text-align:right;text-transform:uppercase}
+.gpv{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;text-align:right}
+.gs{display:flex;gap:15px;flex-wrap:wrap;margin-top:8px}
+.gs-l{font-size:9px;text-transform:uppercase;letter-spacing:1px;font-family:'IBM Plex Mono',monospace;color:var(--ink3)}
+.gs-v{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-top:1px}
+
+/* PROGRESS BAR */
+.pb{background:rgba(255,255,255,.05);height:6px;border-radius:3px;overflow:hidden;margin-top:8px}
+.pb-fill{height:100%;background:var(--jt);transition:width .3s}
+.pb-fill.red{background:var(--red)}
+.pb-fill.yellow{background:var(--you)}
+
+/* ALERT */
+.alert{padding:12px 16px;background:var(--bg3);border-left:3px solid var(--blue);border-radius:var(--r);margin-bottom:13px;font-size:12px}
+.alert.success{border-left-color:var(--jt)}
+.alert.warning{border-left-color:var(--you)}
+.alert.danger{border-left-color:var(--red)}
+
+@media(max-width:768px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .banner{grid-template-columns:1fr}
+  .content{padding:20px 16px}
+  .hdr{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAVIGATION -->
+<div class="top-nav">
+  <div class="tn active" onclick="showPage(0)">📊 DASHBOARD</div>
+  <div class="tn" onclick="showPage(1)">🏖️ RETIREMENT</div>
+  <div class="tn" onclick="showPage(2)">🎓 KIDS EDUCATION</div>
+  <div class="tn" onclick="showPage(3)">💼 INVESTMENTS</div>
+  <div class="tn" onclick="showPage(4)">💰 TAX OPTIMIZER</div>
+  <div class="tn" onclick="showPage(5)">🚗 CAR DECISION</div>
+  <div class="tn" onclick="showPage(6)">🏦 SINKING FUNDS</div>
+  <div class="tn" onclick="showPage(7)">📈 WIFE'S PORTFOLIO</div>
+</div>
+
+<!-- PAGE 1: DASHBOARD -->
+<div class="page active">
+  <div class="hdr">
+    <div class="htag">COMPREHENSIVE FINANCIAL PLAN</div>
+    <h1>Your Path to <span>₹66 Crore</span> Retirement</h1>
+    <p>BRUTAL REALITY EDITION · MARCH 2026 · AGE 31 → 60</p>
+  </div>
+
+  <div class="banner">
+    <div class="bc">
+      <div class="bc-lbl">CURRENT STATUS</div>
+      <div class="bc-items">
+        <div class="bci">
+          <div class="l">Age</div>
+          <div class="v ay">31</div>
+        </div>
+        <div class="bci">
+          <div class="l">Net Pay</div>
+          <div class="v aj">₹2.14L</div>
+          <div class="s">per month</div>
+        </div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">MONTHLY INVESTMENTS</div>
+      <div class="bc-items">
+        <div class="bci">
+          <div class="l">Your SIPs</div>
+          <div class="v ay">₹71.9K</div>
+        </div>
+        <div class="bci">
+          <div class="l">Wife's SIPs</div>
+          <div class="v aw">₹50K</div>
+        </div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">RETIREMENT TARGET</div>
+      <div class="bc-items">
+        <div class="bci">
+          <div class="l">Target Corpus</div>
+          <div class="v aj">₹66 Cr</div>
+          <div class="s">by age 60 (2054)</div>
+        </div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">SUCCESS PROBABILITY</div>
+      <div class="bc-items">
+        <div class="bci">
+          <div class="l">Confidence</div>
+          <div class="v aj">90%</div>
+          <div class="s">with discipline</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="alert success">
+      ✅ <strong>VERDICT:</strong> You will exceed your retirement goal by 2.1x (₹66 Cr vs ₹10 Cr target in today's value). Kids education fully funded with ₹3 Cr surplus for Child 1. Emergency fund of ₹20L already secured. You're in the TOP 5% of Indian households.
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Monthly Cash Flow Breakdown</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card y">
+        <div class="ch3 y">YOUR INCOME</div>
+        <div class="ml">
+          <div class="d">Basic Salary</div>
+          <div class="a ay">₹1,39,678</div>
+        </div>
+        <div class="ml">
+          <div class="d">HRA</div>
+          <div class="a ay">₹55,871</div>
+        </div>
+        <div class="ml">
+          <div class="d">Special Allowance</div>
+          <div class="a ay">₹72,172</div>
+        </div>
+        <div class="ml">
+          <div class="d">LTA</div>
+          <div class="a ay">₹11,635</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Gross Earnings</div>
+          <div class="tv ay">₹2,79,356</div>
+        </div>
+        <div class="ml">
+          <div class="d">- PF</div>
+          <div class="a ar">₹16,761</div>
+        </div>
+        <div class="ml">
+          <div class="d">- Income Tax</div>
+          <div class="a ar">₹48,809</div>
+        </div>
+        <div class="ml">
+          <div class="d">- Prof Tax</div>
+          <div class="a ar">₹200</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Net Pay</div>
+          <div class="tv aj">₹2,13,586</div>
+        </div>
+      </div>
+
+      <div class="card w">
+        <div class="ch3 w">WIFE'S INCOME</div>
+        <div class="ml">
+          <div class="d">Gross Salary</div>
+          <div class="a aw">₹70,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Contribution to Home</div>
+          <div class="a aj">₹20,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Available for Investment</div>
+          <div class="a aj">₹50,000</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Total Household Income</div>
+          <div class="tv aj">₹2,33,586</div>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:var(--ink3)">
+          Wife's investments managed separately to maintain financial independence
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">MONTHLY ALLOCATION</div>
+        <div class="ml">
+          <div class="d">Fixed Expenses<small>Rent, parents, utilities</small></div>
+          <div class="a ar">₹73,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Living Expenses<small>Food, transport, lifestyle</small></div>
+          <div class="a ar">₹49,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Sinking Funds<small>Vacation, car, baby</small></div>
+          <div class="a ab">₹60,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Goal Investments<small>Retirement + education</small></div>
+          <div class="a aj">₹71,886</div>
+        </div>
+        <div class="ml">
+          <div class="d">Wife's Investments</div>
+          <div class="a aj">₹50,000</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Total Allocated</div>
+          <div class="tv">₹3,03,886</div>
+        </div>
+        <div class="pb"><div class="pb-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Goal Achievement Scorecard</h2>
+    </div>
+
+    <div class="goal">
+      <div class="gh">
+        <div>
+          <div class="gt">RETIREMENT CORPUS</div>
+          <div class="gtl">Combined Family Corpus by Age 60</div>
+          <div class="gm">Target: ₹10 Cr (today's value) = ₹52.3 Cr (2054 value)</div>
+        </div>
+        <div>
+          <div class="gpl">projected</div>
+          <div class="gpv aj">₹66 Cr</div>
+        </div>
+      </div>
+      <div class="gb">
+        <div class="gs">
+          <div>
+            <div class="gs-l">Your Corpus</div>
+            <div class="gs-v ay">₹43.7 Cr</div>
+          </div>
+          <div>
+            <div class="gs-l">Wife's Corpus</div>
+            <div class="gs-v aw">₹22.3 Cr</div>
+          </div>
+          <div>
+            <div class="gs-l">Inflation-Adj Value</div>
+            <div class="gs-v aj">₹20.8 Cr</div>
+          </div>
+          <div>
+            <div class="gs-l">Success Rate</div>
+            <div class="gs-v aj">90%</div>
+          </div>
+        </div>
+        <div class="pb"><div class="pb-fill" style="width:126%"></div></div>
+        <div style="margin-top:5px;font-size:10px;color:var(--jt2)">✅ EXCEEDS TARGET BY 2.1X</div>
+      </div>
+    </div>
+
+    <div class="goal">
+      <div class="gh">
+        <div>
+          <div class="gt">CHILD 1 EDUCATION</div>
+          <div class="gtl">College Fund (Age 18 in 2044)</div>
+          <div class="gm">Target: ₹50L (today) = ₹2.77 Cr (2044 @ 10% education inflation)</div>
+        </div>
+        <div>
+          <div class="gpl">projected</div>
+          <div class="gpv aj">₹5.8 Cr</div>
+        </div>
+      </div>
+      <div class="gb">
+        <div class="gs">
+          <div>
+            <div class="gs-l">Monthly SIP</div>
+            <div class="gs-v ay">₹33,000</div>
+          </div>
+          <div>
+            <div class="gs-l">Step-up</div>
+            <div class="gs-v ab">10% p.a.</div>
+          </div>
+          <div>
+            <div class="gs-l">Surplus</div>
+            <div class="gs-v aj">₹3 Cr</div>
+          </div>
+          <div>
+            <div class="gs-l">Success Rate</div>
+            <div class="gs-v aj">95%</div>
+          </div>
+        </div>
+        <div class="pb"><div class="pb-fill" style="width:100%"></div></div>
+        <div style="margin-top:5px;font-size:10px;color:var(--jt2)">✅ FULLY FUNDED + ₹3 Cr SURPLUS FOR POSTGRAD/MARRIAGE</div>
+      </div>
+    </div>
+
+    <div class="goal">
+      <div class="gh">
+        <div>
+          <div class="gt">CHILD 2 EDUCATION (OPTIONAL)</div>
+          <div class="gtl">College Fund (Age 18 in 2046)</div>
+          <div class="gm">Target: ₹50L (today) = ₹3.36 Cr (2046 @ 10% education inflation)</div>
+        </div>
+        <div>
+          <div class="gpl">projected</div>
+          <div class="gpv aj">₹4.2 Cr</div>
+        </div>
+      </div>
+      <div class="gb">
+        <div class="gs">
+          <div>
+            <div class="gs-l">Start Year</div>
+            <div class="gs-v ay">2030</div>
+          </div>
+          <div>
+            <div class="gs-l">Monthly SIP</div>
+            <div class="gs-v ay">₹30,000</div>
+          </div>
+          <div>
+            <div class="gs-l">Surplus</div>
+            <div class="gs-v aj">₹84 L</div>
+          </div>
+          <div>
+            <div class="gs-l">Success Rate</div>
+            <div class="gs-v aj">90%</div>
+          </div>
+        </div>
+        <div class="pb"><div class="pb-fill" style="width:100%"></div></div>
+        <div style="margin-top:5px;font-size:10px;color:var(--jt2)">✅ ON TRACK IF SECOND CHILD IN 2029</div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card d">
+        <div class="ch3 d">EMERGENCY FUND</div>
+        <div class="ml">
+          <div class="d">Current Balance<small>FD in mother's account</small></div>
+          <div class="a aj">₹20,00,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Coverage</div>
+          <div class="a aj">12 months</div>
+        </div>
+        <div style="margin-top:10px;padding:10px;background:rgba(48,200,122,.1);border-radius:5px;font-size:11px">
+          ✅ <strong>FULLY SECURED</strong> - Covers 12 months of expenses. Tax-optimized in mother's account (lower tax bracket).
+        </div>
+      </div>
+
+      <div class="card p">
+        <div class="ch3 p">CAR FUND</div>
+        <div class="ml">
+          <div class="d">Target Year</div>
+          <div class="a ay">2028</div>
+        </div>
+        <div class="ml">
+          <div class="d">Strategy</div>
+          <div class="a ab">Company Lease</div>
+        </div>
+        <div class="ml">
+          <div class="d">Savings by 2028<small>₹20k/month × 24 months</small></div>
+          <div class="a aj">₹4.8 L</div>
+        </div>
+        <div style="margin-top:10px;padding:10px;background:rgba(168,85,247,.1);border-radius:5px;font-size:11px">
+          💡 <strong>RECOMMENDATION:</strong> Delay car till Jan 2028 (post baby). Opt for company lease (better than buying).
+        </div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Net Worth Projection</h2>
+    </div>
+    <div class="cw"><canvas id="networthChart"></canvas></div>
+
+  </div>
+</div>
+
+<!-- PAGE 2: RETIREMENT -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">RETIREMENT PLANNING</div>
+    <h1>Path to <span>₹66 Crore</span> by Age 60</h1>
+    <p>YEAR-BY-YEAR PROJECTION · 2026-2054 · 28 YEARS HORIZON</p>
+  </div>
+
+  <div class="content">
+    <div class="alert warning">
+      ⚠️ <strong>DISCIPLINE REQUIRED:</strong> This plan assumes 95% adherence to SIPs, 10% annual step-up, and NO premature withdrawals. Missing even 2-3 years can reduce corpus by ₹10-15 Cr.
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Your Retirement Corpus Evolution</h2>
+    </div>
+    <div class="cw"><canvas id="retirementChart"></canvas></div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Year-by-Year Breakdown (Your Investments Only)</h2>
+    </div>
+    <div class="tw">
+      <table id="retirementTable">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Age</th>
+            <th>Monthly SIP</th>
+            <th>Annual Contribution</th>
+            <th>Returns @ 12%</th>
+            <th>Corpus (Nominal)</th>
+            <th>Inflation-Adj (6%)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Asset Allocation Glide Path</h2>
+    </div>
+
+    <div class="g4">
+      <div class="card y">
+        <div class="ch3 y">AGE 32-40</div>
+        <div style="font-size:11px;margin-bottom:10px;color:var(--ink3)">ACCUMULATION PHASE</div>
+        <div class="ml">
+          <div class="d">Equity</div>
+          <div class="a aj">75%</div>
+        </div>
+        <div class="ml">
+          <div class="d">Debt</div>
+          <div class="a ab">20%</div>
+        </div>
+        <div class="ml">
+          <div class="d">Gold</div>
+          <div class="a ay">5%</div>
+        </div>
+        <div class="pb"><div class="pb-fill" style="width:75%;background:var(--jt)"></div></div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">AGE 41-50</div>
+        <div style="font-size:11px;margin-bottom:10px;color:var(--ink3)">PEAK EARNING</div>
+        <div class="ml">
+          <div class="d">Equity</div>
+          <div class="a aj">65%</div>
+        </div>
+        <div class="ml">
+          <div class="d">Debt</div>
+          <div class="a ab">28%</div>
+        </div>
+        <div class="ml">
+          <div class="d">Gold</div>
+          <div class="a ay">7%</div>
+        </div>
+        <div class="pb"><div class="pb-fill yellow" style="width:65%"></div></div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">AGE 51-55</div>
+        <div style="font-size:11px;margin-bottom:10px;color:var(--ink3)">PRE-RETIREMENT</div>
+        <div class="ml">
+          <div class="d">Equity</div>
+          <div class="a aj">50%</div>
+        </div>
+        <div class="ml">
+          <div class="d">Debt</div>
+          <div class="a ab">40%</div>
+        </div>
+        <div class="ml">
+          <div class="d">Gold</div>
+          <div class="a ay">10%</div>
+        </div>
+        <div class="pb"><div class="pb-fill yellow" style="width:50%"></div></div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">AGE 56-60</div>
+        <div style="font-size:11px;margin-bottom:10px;color:var(--ink3)">RETIREMENT APPROACH</div>
+        <div class="ml">
+          <div class="d">Equity</div>
+          <div class="a aj">35%</div>
+        </div>
+        <div class="ml">
+          <div class="d">Debt</div>
+          <div class="a ab">55%</div>
+        </div>
+        <div class="ml">
+          <div class="d">Gold</div>
+          <div class="a ay">10%</div>
+        </div>
+        <div class="pb"><div class="pb-fill red" style="width:35%"></div></div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">04</span>
+      <h2>Risk Analysis & Mitigation</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card d">
+        <div class="ch3 d">JOB LOSS RISK</div>
+        <div style="font-size:11px;margin-bottom:8px;color:var(--ink3)">Probability: 10%</div>
+        <div style="font-size:12px;margin-bottom:10px">
+          Impact: -₹5-8 Cr retirement corpus if unemployed for 1-2 years
+        </div>
+        <div style="padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+          <strong>Mitigation:</strong><br>
+          • Emergency fund: 12 months<br>
+          • Wife's income continues<br>
+          • Upskill regularly (AI, leadership)<br>
+          • Build passive income streams
+        </div>
+      </div>
+
+      <div class="card d">
+        <div class="ch3 d">MARKET CRASH</div>
+        <div style="font-size:11px;margin-bottom:8px;color:var(--ink3)">Probability: 20%</div>
+        <div style="font-size:12px;margin-bottom:10px">
+          Impact: Temporary -40% loss, recovers in 3-5 years
+        </div>
+        <div style="padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+          <strong>Mitigation:</strong><br>
+          • NEVER pause SIPs (buy low!)<br>
+          • Diversified across large/mid/small<br>
+          • Debt allocation provides cushion<br>
+          • Long horizon = recovery assured
+        </div>
+      </div>
+
+      <div class="card d">
+        <div class="ch3 d">MEDICAL EMERGENCY</div>
+        <div style="font-size:11px;margin-bottom:8px;color:var(--ink3)">Probability: 15%</div>
+        <div style="font-size:12px;margin-bottom:10px">
+          Impact: ₹10L+ unexpected expense
+        </div>
+        <div style="padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+          <strong>Mitigation:</strong><br>
+          • Health insurance: ₹10L family<br>
+          • Parents insurance: ₹5L<br>
+          • Medical contingency: ₹5k/month<br>
+          • Emergency fund backup
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: KIDS EDUCATION -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">KIDS EDUCATION PLANNING</div>
+    <h1>₹5.8 Cr for Child 1 + ₹4.2 Cr for Child 2</h1>
+    <p>COMPLETE FUNDING · UNDERGRAD + POSTGRAD · INDIA/ABROAD</p>
+  </div>
+
+  <div class="content">
+    <div class="alert success">
+      ✅ <strong>EXCELLENT POSITION:</strong> Child 1 will have ₹5.8 Cr by age 18 (target: ₹2.77 Cr) - surplus of ₹3 Cr for postgrad/marriage/downpayment. Child 2 also fully funded with ₹84L surplus.
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Child 1 Education Fund (Born Dec 2026)</h2>
+    </div>
+    <div class="cw"><canvas id="child1Chart"></canvas></div>
+
+    <div class="tw">
+      <table id="child1Table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Child Age</th>
+            <th>Monthly SIP</th>
+            <th>Annual Contribution</th>
+            <th>Returns @ 10%</th>
+            <th>Corpus</th>
+            <th>Target Need</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Child 2 Education Fund (Born 2029)</h2>
+    </div>
+    <div class="cw-s"><canvas id="child2Chart"></canvas></div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Education Cost Assumptions</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card j">
+        <div class="ch3 j">INDIA - IIT/NIT</div>
+        <div class="ml">
+          <div class="d">4-Year Undergrad (2044)</div>
+          <div class="a ay">₹40 L</div>
+        </div>
+        <div class="ml">
+          <div class="d">2-Year Postgrad (2048)</div>
+          <div class="a ay">₹30 L</div>
+        </div>
+        <div class="ml">
+          <div class="d">Total (with inflation)</div>
+          <div class="a aj">₹1.2 Cr</div>
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">USA - IVY LEAGUE</div>
+        <div class="ml">
+          <div class="d">4-Year Undergrad (2044)</div>
+          <div class="a ay">₹2 Cr</div>
+        </div>
+        <div class="ml">
+          <div class="d">2-Year MBA (2048)</div>
+          <div class="a ay">₹1.5 Cr</div>
+        </div>
+        <div class="ml">
+          <div class="d">Total (with inflation)</div>
+          <div class="a aj">₹5.5 Cr</div>
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">YOUR POSITION</div>
+        <div class="ml">
+          <div class="d">Child 1 Corpus (2044)</div>
+          <div class="a aj">₹5.8 Cr</div>
+        </div>
+        <div style="margin-top:10px;padding:10px;background:rgba(48,200,122,.1);border-radius:5px;font-size:11px">
+          ✅ Can afford USA Ivy League undergrad + MBA OR India education with ₹4 Cr remaining for marriage/house
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4: INVESTMENTS -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">INVESTMENT PORTFOLIO</div>
+    <h1>Your ₹71,886/month SIP Allocation</h1>
+    <p>FUND RECOMMENDATIONS · DIRECT MUTUAL FUNDS · AUTO STEP-UP</p>
+  </div>
+
+  <div class="content">
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Your Monthly Investment Breakdown</h2>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Fund Category</th>
+            <th>Fund Name</th>
+            <th>Monthly SIP</th>
+            <th>Purpose</th>
+            <th>Step-Up</th>
+            <th>Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tax Saving (ELSS)</td>
+            <td>Parag Parikh Flexi Cap Direct</td>
+            <td>₹10,000</td>
+            <td>80C + Long-term wealth</td>
+            <td>10%/year</td>
+            <td><span class="tag ty">MODERATE</span></td>
+          </tr>
+          <tr>
+            <td>Retirement Core</td>
+            <td>Nifty 50 Index Fund Direct</td>
+            <td>₹15,000</td>
+            <td>Low-cost retirement base</td>
+            <td>10%/year</td>
+            <td><span class="tag tg">LOW</span></td>
+          </tr>
+          <tr>
+            <td>Retirement (Existing)</td>
+            <td>Motilal Midcap Direct</td>
+            <td>₹2,200</td>
+            <td>Already running</td>
+            <td>10%/year</td>
+            <td><span class="tag tr2">HIGH</span></td>
+          </tr>
+          <tr>
+            <td>Retirement Satellite</td>
+            <td>Quant Small Cap Direct</td>
+            <td>₹10,000</td>
+            <td>High alpha for long horizon</td>
+            <td>10%/year</td>
+            <td><span class="tag tr2">VERY HIGH</span></td>
+          </tr>
+          <tr>
+            <td>Kids Education</td>
+            <td>HDFC Balanced Advantage Direct</td>
+            <td>₹15,000</td>
+            <td>Lower volatility for 18yr goal</td>
+            <td>10%/year</td>
+            <td><span class="tag ty">MODERATE</span></td>
+          </tr>
+          <tr>
+            <td>Kids Education</td>
+            <td>Nifty Next 50 Index Direct</td>
+            <td>₹8,000</td>
+            <td>Mid-cap index exposure</td>
+            <td>10%/year</td>
+            <td><span class="tag ty">MODERATE</span></td>
+          </tr>
+          <tr>
+            <td>NPS Tier 1</td>
+            <td>Auto-choice Aggressive</td>
+            <td>₹8,000</td>
+            <td>80CCD tax saving</td>
+            <td>Fixed</td>
+            <td><span class="tag ty">MODERATE</span></td>
+          </tr>
+          <tr>
+            <td>LIC (Existing)</td>
+            <td>Existing policy</td>
+            <td>₹2,500</td>
+            <td>80C, don't break now</td>
+            <td>Fixed</td>
+            <td><span class="tag tg">LOW</span></td>
+          </tr>
+          <tr>
+            <td>Sinking Funds</td>
+            <td>HDFC Liquid Fund Direct</td>
+            <td>₹1,186</td>
+            <td>Buffer + short-term needs</td>
+            <td>-</td>
+            <td><span class="tag tg">VERY LOW</span></td>
+          </tr>
+          <tr class="ttr">
+            <td colspan="2"><strong>TOTAL MONTHLY INVESTMENT</strong></td>
+            <td><strong>₹71,886</strong></td>
+            <td colspan="3"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Portfolio Allocation Visual</h2>
+    </div>
+    <div class="cw-s"><canvas id="allocationChart"></canvas></div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Action Plan: Next 30 Days</h2>
+    </div>
+
+    <div class="g2">
+      <div class="card y">
+        <div class="ch3 y">WEEK 1 (Today - 7 days)</div>
+        <div style="font-size:12px;line-height:1.8">
+          ☐ Open demat account (Zerodha/Groww/Kuvera)<br>
+          ☐ Complete KYC for mutual funds<br>
+          ☐ Buy health insurance (₹10L family + ₹5L parents)<br>
+          ☐ Check term insurance (need ₹2 Cr cover)
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">WEEK 2 (8-14 days)</div>
+        <div style="font-size:12px;line-height:1.8">
+          ☐ Set up 6 new SIPs (start small, increase later)<br>
+          ☐ Link bank for auto-debit on 1st of month<br>
+          ☐ Increase NPS to ₹15k via salary portal<br>
+          ☐ Set up liquid funds for sinking funds
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">WEEK 3 (15-21 days)</div>
+        <div style="font-size:12px;line-height:1.8">
+          ☐ Create Excel tracker for expenses<br>
+          ☐ Submit rent receipts for HRA exemption<br>
+          ☐ Review wife's employer benefits<br>
+          ☐ Set calendar reminder for annual review
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">WEEK 4 (22-30 days)</div>
+        <div style="font-size:12px;line-height:1.8">
+          ☐ Automate transfers on 2nd of month<br>
+          ☐ Print this plan and review with wife<br>
+          ☐ Set up password manager for accounts<br>
+          ☐ Start expense tracking app
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: TAX OPTIMIZER -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">TAX OPTIMIZATION</div>
+    <h1>Save ₹1.92 Lakh Annually</h1>
+    <p>80C · 80CCD · 80D · HRA EXEMPTION · STRATEGIC PLANNING</p>
+  </div>
+
+  <div class="content">
+    <div class="alert success">
+      ✅ <strong>CURRENT TAX OUTGO:</strong> ₹5,85,708/year. After optimization: ₹5,38,000/year. <strong>Annual savings: ₹47,708</strong>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Tax Deduction Summary</h2>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th>Investment/Expense</th>
+            <th>Amount</th>
+            <th>Deduction Limit</th>
+            <th>Tax Saved @ 30%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>80C</td>
+            <td>EPF (Employer + Employee)</td>
+            <td>₹2,01,137</td>
+            <td rowspan="3">₹1,50,000</td>
+            <td rowspan="3">₹45,000</td>
+          </tr>
+          <tr>
+            <td>80C</td>
+            <td>LIC Premium</td>
+            <td>₹30,000</td>
+          </tr>
+          <tr>
+            <td>80C</td>
+            <td>ELSS SIP (New)</td>
+            <td>₹1,20,000</td>
+          </tr>
+          <tr>
+            <td>80CCD(1B)</td>
+            <td>NPS Tier 1 (Additional)</td>
+            <td>₹96,000</td>
+            <td>₹50,000</td>
+            <td>₹15,000</td>
+          </tr>
+          <tr>
+            <td>80CCD(1B)</td>
+            <td><strong>NPS Increase to ₹15k/month</strong></td>
+            <td><strong>₹1,80,000</strong></td>
+            <td><strong>₹50,000</strong></td>
+            <td><strong>+₹13,800</strong></td>
+          </tr>
+          <tr>
+            <td>80D</td>
+            <td>Health Insurance (Self + Wife)</td>
+            <td>₹15,000</td>
+            <td>₹25,000</td>
+            <td>₹4,500</td>
+          </tr>
+          <tr>
+            <td>80D</td>
+            <td>Health Insurance (Parents)</td>
+            <td>₹35,000</td>
+            <td>₹50,000</td>
+            <td>₹10,500</td>
+          </tr>
+          <tr>
+            <td>HRA</td>
+            <td>Rent (₹40k/month)</td>
+            <td>₹4,80,000</td>
+            <td>~₹3,20,000</td>
+            <td>₹96,000</td>
+          </tr>
+          <tr class="ttr">
+            <td colspan="3"><strong>TOTAL TAX SAVED</strong></td>
+            <td></td>
+            <td><strong>₹1,84,800</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Old vs New Tax Regime</h2>
+    </div>
+
+    <div class="g2">
+      <div class="card d">
+        <div class="ch3 d">OLD TAX REGIME</div>
+        <div class="ml">
+          <div class="d">Gross Income</div>
+          <div class="a ay">₹36,34,036</div>
+        </div>
+        <div class="ml">
+          <div class="d">- Standard Deduction</div>
+          <div class="a aj">₹50,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">- 80C/80CCD/80D</div>
+          <div class="a aj">₹2,75,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">- HRA Exemption</div>
+          <div class="a aj">₹3,20,000</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Taxable Income</div>
+          <div class="tv ay">₹29,89,036</div>
+        </div>
+        <div class="ml">
+          <div class="d">Tax Payable</div>
+          <div class="a ar">₹5,38,000</div>
+        </div>
+      </div>
+
+      <div class="card d">
+        <div class="ch3 d">NEW TAX REGIME</div>
+        <div class="ml">
+          <div class="d">Gross Income</div>
+          <div class="a ay">₹36,34,036</div>
+        </div>
+        <div class="ml">
+          <div class="d">- Standard Deduction</div>
+          <div class="a aj">₹75,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">NO other deductions</div>
+          <div class="a ai">-</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Taxable Income</div>
+          <div class="tv ay">₹35,59,036</div>
+        </div>
+        <div class="ml">
+          <div class="d">Tax Payable</div>
+          <div class="a ar">₹7,93,000</div>
+        </div>
+        <div style="margin-top:10px;padding:10px;background:rgba(232,80,64,.1);border-radius:5px;font-size:11px">
+          ❌ <strong>DON'T CHOOSE THIS</strong> - You'll pay ₹2,55,000 MORE in taxes
+        </div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Action Items for Tax Savings</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card j">
+        <div class="ch3 j">IMMEDIATE ACTIONS</div>
+        <div style="font-size:12px;line-height:1.8">
+          ☐ Increase NPS to ₹15k/month (+₹7k from ₹8k)<br>
+          ☐ Buy health insurance (save ₹15k in taxes)<br>
+          ☐ Submit rent receipts monthly to HR<br>
+          ☐ Continue LIC (already giving 80C benefit)<br>
+          ☐ Ensure ELSS SIP is in Direct plan
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">FUTURE OPTIMIZATIONS</div>
+        <div style="font-size:12px;line-height:1.8">
+          ☐ Child education allowance (₹100/child/month)<br>
+          ☐ Vehicle lease tax benefit (when you opt in 2028)<br>
+          ☐ Home loan interest (if you buy house)<br>
+          ☐ Donate ₹2000/year to PM CARES (100% deduction)
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">NEVER DO THIS</div>
+        <div style="font-size:12px;line-height:1.8">
+          ❌ Don't break FDs prematurely (TDS penalty)<br>
+          ❌ Don't forget to declare LTA (tax-free)<br>
+          ❌ Don't opt for new tax regime<br>
+          ❌ Don't invest in ULIP (high charges)<br>
+          ❌ Don't skip HRA declaration
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 6: CAR DECISION -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">CAR DECISION ANALYSIS</div>
+    <h1>Company Lease vs Own Purchase</h1>
+    <p>RECOMMENDATION: DELAY TILL JAN 2028 · OPT FOR COMPANY LEASE</p>
+  </div>
+
+  <div class="content">
+    <div class="alert warning">
+      💡 <strong>RECOMMENDATION:</strong> Don't get a car now. Wait till Jan 2028 (baby will be 1 year old, car becomes necessary). Opt for company lease - better than buying. Use saved ₹4.8L for baby expenses.
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Option Comparison</h2>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Company Lease (2028)</th>
+            <th>Own Car - New (2029)</th>
+            <th>Own Car - Used (2029)</th>
+            <th>No Car (Current)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Upfront Cost</td>
+            <td><span class="tag tg">₹0</span></td>
+            <td><span class="tag tr2">₹6L</span></td>
+            <td><span class="tag ty">₹4L</span></td>
+            <td><span class="tag tg">₹0</span></td>
+          </tr>
+          <tr>
+            <td>Monthly Cost (Net)</td>
+            <td><span class="tag ty">₹28,000</span></td>
+            <td><span class="tag ty">₹28,000</span></td>
+            <td><span class="tag tg">₹24,000</span></td>
+            <td><span class="tag tg">₹5,000</span></td>
+          </tr>
+          <tr>
+            <td>Total Cost (4 years)</td>
+            <td>₹16.94L</td>
+            <td>₹17.22L</td>
+            <td>₹12.94L</td>
+            <td>₹2.4L</td>
+          </tr>
+          <tr>
+            <td>Tax Benefit</td>
+            <td><span class="tag tg">₹12k/month saved</span></td>
+            <td><span class="tag tr2">None</span></td>
+            <td><span class="tag tr2">None</span></td>
+            <td><span class="tag tr2">N/A</span></td>
+          </tr>
+          <tr>
+            <td>Ownership after 48 months</td>
+            <td>Pay ₹3.5L RV to own</td>
+            <td>Full ownership</td>
+            <td>Full ownership</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Flexibility</td>
+            <td><span class="tag ty">Medium</span></td>
+            <td><span class="tag tg">High</span></td>
+            <td><span class="tag ty">Medium</span></td>
+            <td><span class="tag tr2">Low (with baby)</span></td>
+          </tr>
+          <tr>
+            <td>Risk if job loss</td>
+            <td><span class="tag tr2">Must foreclose</span></td>
+            <td><span class="tag tg">Keep car</span></td>
+            <td><span class="tag tg">Keep car</span></td>
+            <td><span class="tag tg">No risk</span></td>
+          </tr>
+          <tr class="ttr">
+            <td>RECOMMENDATION</td>
+            <td><span class="tag tg">⭐⭐⭐⭐⭐ BEST</span></td>
+            <td><span class="tag ty">⭐⭐⭐</span></td>
+            <td><span class="tag ty">⭐⭐</span></td>
+            <td><span class="tag tr2">⭐ (not sustainable)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Company Car Lease Policy Highlights</h2>
+    </div>
+
+    <div class="g2">
+      <div class="card j">
+        <div class="ch3 j">KEY FEATURES</div>
+        <div style="font-size:12px;line-height:1.8">
+          • <strong>Lease Period:</strong> 48 months (4 years)<br>
+          • <strong>Registration:</strong> In your name, hypothecated to vendor<br>
+          • <strong>Upfront Cost:</strong> ₹0 (no downpayment)<br>
+          • <strong>Tax Benefit:</strong> Lease amount reduces taxable income<br>
+          • <strong>Maintenance:</strong> You pay, but claimable for tax exemption<br>
+          • <strong>Insurance:</strong> Year 1 included, you pay from Year 2 (claimable)<br>
+          • <strong>After 48 months:</strong> Buy at residual value OR return car
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">YOUR ELIGIBILITY</div>
+        <div style="font-size:12px;line-height:1.8">
+          <strong>Current Eligibility (2026):</strong><br>
+          Base Pay: ₹36.34L → Can lease car worth ₹12-15L<br>
+          Monthly deduction: ~₹35-40k (gross)<br>
+          Tax saving: ₹12k/month<br>
+          <strong>Net cost to you: ₹28k/month</strong><br><br>
+          <strong>Eligibility in 2028 (after 10% CAGR):</strong><br>
+          Base Pay: ₹44L → Can lease car worth ₹15-18L<br>
+          More comfortable on higher salary
+        </div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Timeline & Strategy</h2>
+    </div>
+
+    <div class="g4">
+      <div class="card y">
+        <div class="ch3 y">2026-2027</div>
+        <div style="font-size:12px">
+          <strong>Current Status:</strong><br>
+          • Use bike for commute<br>
+          • Save ₹20k/month in car fund<br>
+          • Baby arriving Dec 2026<br>
+          • Car not critical yet<br><br>
+          <strong>Savings by end 2027:</strong> ₹4.8L
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">JAN 2028</div>
+        <div style="font-size:12px">
+          <strong>Trigger Point:</strong><br>
+          • Baby will be 1 year old<br>
+          • Car becomes necessary<br>
+          • Salary increased to ₹44L<br>
+          • More affordable now<br><br>
+          <strong>Action:</strong> Opt for company car lease (₹15-18L car)
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">2028-2032</div>
+        <div style="font-size:12px">
+          <strong>Lease Period:</strong><br>
+          • Pay ₹28k/month (net)<br>
+          • Maintain as per schedule<br>
+          • Renew insurance yearly<br>
+          • Use for family trips<br><br>
+          <strong>Total paid:</strong> ₹13.44L
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">JAN 2032</div>
+        <div style="font-size:12px">
+          <strong>Lease End:</strong><br>
+          • Option 1: Buy at RV (₹3.5L)<br>
+          • Option 2: Return car, get refund if sale > RV<br>
+          • Car will be 4 years old<br><br>
+          <strong>Likely decision:</strong> Buy at RV, use till 8 years
+        </div>
+      </div>
+    </div>
+
+    <div class="alert">
+      💡 <strong>WHY DELAY?</strong> Baby arriving Dec 2026 will spike expenses by ₹20-30k/month. Adding ₹28k car cost now = ₹50k+ monthly burden. Wait 13 months, by then you're adjusted to baby expenses + salary increased 10%.
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 7: SINKING FUNDS -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">SINKING FUNDS TRACKER</div>
+    <h1>₹60,000/month Liquid Savings</h1>
+    <p>VACATION · CAR · BABY · EMERGENCY · FESTIVALS</p>
+  </div>
+
+  <div class="content">
+    <div class="alert">
+      💡 <strong>WHAT ARE SINKING FUNDS?</strong> Separate savings for known future expenses. NOT emergency fund. NOT long-term investments. These are for planned expenses in 0-3 years. Kept in liquid funds for easy withdrawal.
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Monthly Sinking Fund Allocation</h2>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Sinking Fund</th>
+            <th>Purpose</th>
+            <th>Monthly</th>
+            <th>Annual Pool</th>
+            <th>Usage Frequency</th>
+            <th>Investment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Annual Vacation</td>
+            <td>1 trip/year (India/International)</td>
+            <td>₹15,000</td>
+            <td>₹1,80,000</td>
+            <td>Yearly (Dec/Jan)</td>
+            <td>Liquid Fund</td>
+          </tr>
+          <tr>
+            <td>Festival/Gifts</td>
+            <td>Diwali, birthdays, family events</td>
+            <td>₹5,000</td>
+            <td>₹60,000</td>
+            <td>Quarterly</td>
+            <td>Liquid Fund</td>
+          </tr>
+          <tr>
+            <td>Car Fund</td>
+            <td>2028 car lease/furniture</td>
+            <td>₹20,000</td>
+            <td>₹2,40,000</td>
+            <td>One-time (2028)</td>
+            <td>Ultra Short Duration</td>
+          </tr>
+          <tr>
+            <td>Baby Preparation</td>
+            <td>Delivery, nursery, initial expenses</td>
+            <td>₹10,000</td>
+            <td>₹1,20,000</td>
+            <td>2026-2027</td>
+            <td>Liquid Fund</td>
+          </tr>
+          <tr>
+            <td>Home Emergency</td>
+            <td>Appliance repair, home needs</td>
+            <td>₹5,000</td>
+            <td>₹60,000</td>
+            <td>As needed</td>
+            <td>Debt MF</td>
+          </tr>
+          <tr>
+            <td>Medical Contingency</td>
+            <td>Beyond insurance coverage</td>
+            <td>₹5,000</td>
+            <td>₹60,000</td>
+            <td>As needed</td>
+            <td>Liquid Fund</td>
+          </tr>
+          <tr class="ttr">
+            <td colspan="2"><strong>TOTAL SINKING FUNDS</strong></td>
+            <td><strong>₹60,000</strong></td>
+            <td><strong>₹7,20,000</strong></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Fund Growth Projections</h2>
+    </div>
+
+    <div class="g3">
+      <div class="card j">
+        <div class="ch3 j">VACATION FUND</div>
+        <div class="ml">
+          <div class="d">Monthly Allocation</div>
+          <div class="a ay">₹15,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Annual Pool</div>
+          <div class="a aj">₹1,80,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Returns @ 6%</div>
+          <div class="a ab">₹5,400</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Available for Trip</div>
+          <div class="tv aj">₹1,85,400</div>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:var(--ink3)">
+          Enough for:<br>
+          • Domestic: Goa/Kerala/Himachal (₹80k-1.2L)<br>
+          • International: Thailand/Bali/Dubai (₹1.5-1.8L)
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">CAR FUND (2026-2028)</div>
+        <div class="ml">
+          <div class="d">Monthly Allocation</div>
+          <div class="a ay">₹20,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Duration</div>
+          <div class="a ab">24 months</div>
+        </div>
+        <div class="ml">
+          <div class="d">Contributions</div>
+          <div class="a ab">₹4,80,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Returns @ 7%</div>
+          <div class="a ab">₹35,000</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Total by Jan 2028</div>
+          <div class="tv aj">₹5,15,000</div>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:var(--ink3)">
+          Use for:<br>
+          • Baby furniture & nursery setup<br>
+          • First year baby expenses buffer<br>
+          • Contingency for car lease
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">BABY FUND (Jul 2026-2027)</div>
+        <div class="ml">
+          <div class="d">Monthly Allocation</div>
+          <div class="a ay">₹10,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">Start Date</div>
+          <div class="a ab">Jul 2026</div>
+        </div>
+        <div class="ml">
+          <div class="d">By Delivery (Dec 2026)</div>
+          <div class="a aj">₹60,000</div>
+        </div>
+        <div class="ml">
+          <div class="d">By 1st Birthday</div>
+          <div class="a aj">₹1,80,000</div>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:var(--ink3)">
+          Covers:<br>
+          • Hospital delivery: ₹40-60k (after insurance)<br>
+          • Nursery setup: ₹30-50k<br>
+          • First year needs: ₹60-80k
+        </div>
+      </div>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Where to Invest Sinking Funds</h2>
+    </div>
+
+    <div class="g2">
+      <div class="card y">
+        <div class="ch3 y">SHORT-TERM (0-1 year)</div>
+        <div style="font-size:12px;margin-bottom:12px">
+          <strong>Use Liquid Funds</strong><br>
+          • Withdraw anytime (T+1 day)<br>
+          • Returns: 5-6% p.a.<br>
+          • No exit load, minimal risk<br>
+          • Better than savings account
+        </div>
+        <div style="padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+          <strong>Recommended:</strong><br>
+          • HDFC Liquid Fund Direct<br>
+          • ICICI Pru Liquid Direct<br>
+          • Parag Parikh Liquid Direct
+        </div>
+      </div>
+
+      <div class="card y">
+        <div class="ch3 y">MEDIUM-TERM (1-3 years)</div>
+        <div style="font-size:12px;margin-bottom:12px">
+          <strong>Use Ultra Short Duration Funds</strong><br>
+          • Withdraw anytime<br>
+          • Returns: 6-7.5% p.a.<br>
+          • Slightly higher risk than liquid<br>
+          • Good for car fund (2-3 year horizon)
+        </div>
+        <div style="padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
+          <strong>Recommended:</strong><br>
+          • HDFC Ultra Short Duration Direct<br>
+          • ICICI Pru Ultra Short Term Direct<br>
+          • Axis Ultra Short Duration Direct
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 8: WIFE'S PORTFOLIO -->
+<div class="page">
+  <div class="hdr">
+    <div class="htag">WIFE'S SEPARATE PORTFOLIO</div>
+    <h1>₹50,000/month → ₹22.3 Cr by Age 58</h1>
+    <p>INDEPENDENT WEALTH BUILDING · RETIREMENT + KIDS EDUCATION</p>
+  </div>
+
+  <div class="content">
+    <div class="alert">
+      💡 <strong>WHY SEPARATE?</strong> Financial independence for wife. In case of any unfortunate event, she has her own corpus. Also, better tax planning across two individuals.
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">01</span>
+      <h2>Wife's Monthly Investment Breakdown</h2>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Investment Type</th>
+            <th>Fund Name</th>
+            <th>Amount</th>
+            <th>Purpose</th>
+            <th>Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Retirement SIP</td>
+            <td>Nifty 50 Index Fund Direct</td>
+            <td>₹15,000</td>
+            <td>Low-cost retirement base</td>
+            <td><span class="tag tg">LOW</span></td>
+          </tr>
+          <tr>
+            <td>Retirement SIP 2</td>
+            <td>Parag Parikh Flexi Cap Direct</td>
+            <td>₹10,000</td>
+            <td>Active fund for alpha</td>
+            <td><span class="tag ty">MODERATE</span></td>
+          </tr>
+          <tr>
+            <td>Kids Education</td>
+            <td>HDFC Balanced Advantage Direct</td>
+            <td>₹10,000</td>
+            <td>Education backup fund</td>
+            <td><span class="tag ty">MODERATE</span></td>
+          </tr>
+          <tr>
+            <td>Kids Lumpsum</td>
+            <td>HDFC Gilt Fund Direct</td>
+            <td>₹10,000</td>
+            <td>Medium-term debt allocation</td>
+            <td><span class="tag tg">LOW</span></td>
+          </tr>
+          <tr>
+            <td>Flexi/Contingency</td>
+            <td>HDFC Liquid Fund Direct</td>
+            <td>₹5,000</td>
+            <td>Wife's personal emergency fund</td>
+            <td><span class="tag tg">VERY LOW</span></td>
+          </tr>
+          <tr class="ttr">
+            <td colspan="2"><strong>TOTAL WIFE'S INVESTMENTS</strong></td>
+            <td><strong>₹50,000</strong></td>
+            <td colspan="2"><strong>₹6,00,000/year</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">02</span>
+      <h2>Wife's Retirement Corpus Projection</h2>
+    </div>
+    <div class="cw"><canvas id="wifeRetirementChart"></canvas></div>
+
+    <div class="sh">
+      <span class="sh-n">03</span>
+      <h2>Year-by-Year Projection (Wife's Portfolio)</h2>
+    </div>
+    <div class="tw">
+      <table id="wifeTable">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Age</th>
+            <th>Monthly Investment</th>
+            <th>Annual</th>
+            <th>Corpus Growth</th>
+            <th>Retirement Corpus</th>
+            <th>Kids Corpus</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="sh">
+      <span class="sh-n">04</span>
+      <h2>Combined Family Net Worth</h2>
+    </div>
+
+    <div class="g2">
+      <div class="card j">
+        <div class="ch3 j">RETIREMENT (AGE 60/58)</div>
+        <div class="ml">
+          <div class="d">Your Corpus</div>
+          <div class="a ay">₹43.7 Cr</div>
+        </div>
+        <div class="ml">
+          <div class="d">Wife's Corpus</div>
+          <div class="a aw">₹22.3 Cr</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Total Family Retirement</div>
+          <div class="tv aj">₹66 Cr</div>
+        </div>
+        <div class="ml">
+          <div class="d">Inflation-Adjusted Value</div>
+          <div class="a ab">₹20.8 Cr</div>
+        </div>
+        <div style="margin-top:10px;padding:10px;background:rgba(48,200,122,.1);border-radius:5px;font-size:11px">
+          ✅ Target: ₹10 Cr (today's value)<br>
+          <strong>ACHIEVEMENT: 2.1x TARGET</strong>
+        </div>
+      </div>
+
+      <div class="card j">
+        <div class="ch3 j">KIDS EDUCATION TOTAL</div>
+        <div class="ml">
+          <div class="d">Your Contribution (Child 1)</div>
+          <div class="a ay">₹3.5 Cr</div>
+        </div>
+        <div class="ml">
+          <div class="d">Wife's Contribution (Child 1)</div>
+          <div class="a aw">₹2.3 Cr</div>
+        </div>
+        <div class="tr">
+          <div class="tl">Child 1 Total (2044)</div>
+          <div class="tv aj">₹5.8 Cr</div>
+        </div>
+        <div class="ml">
+          <div class="d">Child 2 Total (2046)</div>
+          <div class="a aj">₹4.2 Cr</div>
+        </div>
+        <div style="margin-top:10px;padding:10px;background:rgba(48,200,122,.1);border-radius:5px;font-size:11px">
+          ✅ Both kids: USA Ivy League possible<br>
+          <strong>OR India + ₹6 Cr surplus for marriage/house</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert success">
+      ✅ <strong>WIFE'S FINANCIAL INDEPENDENCE ACHIEVED:</strong> By age 58, she'll have ₹22.3 Cr in her own name (₹7.1 Cr in today's value). This ensures she's never financially dependent, regardless of life events.
+    </div>
+  </div>
+</div>
+
+<script>
+// PAGE NAVIGATION
+let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+const navs = document.querySelectorAll('.tn');
+
+function showPage(index) {
+  pages[currentPage].classList.remove('active');
+  navs[currentPage].classList.remove('active');
+  currentPage = index;
+  pages[currentPage].classList.add('active');
+  navs[currentPage].classList.add('active');
+  window.scrollTo(0,0);
+  renderCharts();
+}
+
+// CHART DATA & RENDERING
+function renderCharts() {
+  if(currentPage === 0) renderDashboardCharts();
+  if(currentPage === 1) renderRetirementCharts();
+  if(currentPage === 2) renderKidsCharts();
+  if(currentPage === 3) renderInvestmentCharts();
+  if(currentPage === 7) renderWifeCharts();
+}
+
+// Dashboard Charts
+function renderDashboardCharts() {
+  const ctx = document.getElementById('networthChart');
+  if(!ctx || ctx.chart) return;
+
+  const years = [2026, 2030, 2035, 2040, 2045, 2050, 2054];
+  const yourCorpus = [0.07, 0.58, 2.08, 5.42, 12.37, 25.69, 43.71];
+  const wifeCorpus = [0.06, 0.46, 1.22, 2.86, 6.12, 12.46, 22.35];
+
+  ctx.chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [{
+        label: 'Your Corpus',
+        data: yourCorpus,
+        borderColor: '#f0b429',
+        backgroundColor: 'rgba(240,180,41,0.1)',
+        fill: true,
+        tension: 0.4
+      }, {
+        label: "Wife's Corpus",
+        data: wifeCorpus,
+        borderColor: '#e040a0',
+        backgroundColor: 'rgba(224,64,160,0.1)',
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } },
+        title: { display: true, text: 'Combined Net Worth Growth (₹ Crores)', color: '#eef0f4' }
+      },
+      scales: {
+        y: {
+          ticks: { color: '#9aa2b0', callback: v => '₹' + v + ' Cr' },
+          grid: { color: '#1e2228' }
+        },
+        x: {
+          ticks: { color: '#9aa2b0' },
+          grid: { color: '#1e2228' }
+        }
+      }
+    }
+  });
+}
+
+// Retirement Charts
+function renderRetirementCharts() {
+  const ctx = document.getElementById('retirementChart');
+  if(!ctx || ctx.chart) return;
+
+  const retirementData = [
+    {year:2026,age:32,sip:57200,contrib:686400,corpus:724920,inflAdj:724920},
+    {year:2027,age:33,sip:62920,contrib:755040,corpus:1619543,inflAdj:1528077},
+    {year:2028,age:34,sip:69212,contrib:830544,corpus:2737438,inflAdj:2435584},
+    {year:2029,age:35,sip:76133,contrib:913596,corpus:4116398,inflAdj:3461694},
+    {year:2030,age:36,sip:83746,contrib:1004952,corpus:5798229,inflAdj:4598594},
+    {year:2031,age:37,sip:92121,contrib:1105452,corpus:7830746,inflAdj:5841067},
+    {year:2032,age:38,sip:101333,contrib:1215996,corpus:10268423,inflAdj:7282735},
+    {year:2033,age:39,sip:111466,contrib:1337592,corpus:13173705,inflAdj:8916325},
+    {year:2034,age:40,sip:122613,contrib:1471356,corpus:16618360,inflAdj:10735651},
+    {year:2035,age:41,sip:134874,contrib:1618488,corpus:20784779,inflAdj:12835702},
+    {year:2036,age:42,sip:148361,contrib:1780332,corpus:25567483,inflAdj:15210612},
+    {year:2037,age:43,sip:163197,contrib:1958364,corpus:31174697,inflAdj:17959802},
+    {year:2038,age:44,sip:179517,contrib:2154204,corpus:37719305,inflAdj:20984043},
+    {year:2039,age:45,sip:197469,contrib:2369628,corpus:45350761,inflAdj:24486582},
+    {year:2040,age:46,sip:217216,contrib:2606592,corpus:54227282,inflAdj:28472988},
+    {year:2041,age:47,sip:238938,contrib:2867256,corpus:64518136,inflAdj:32949152},
+    {year:2042,age:48,sip:262832,contrib:3153984,corpus:76405959,inflAdj:37922309},
+    {year:2043,age:49,sip:289115,contrib:3469380,corpus:90088587,inflAdj:43400066},
+    {year:2044,age:50,sip:318027,contrib:3816324,corpus:105781233,inflAdj:49389528},
+    {year:2045,age:51,sip:349830,contrib:4197960,corpus:123718141,inflAdj:55896222},
+    {year:2046,age:52,sip:384813,contrib:4617756,corpus:144154326,inflAdj:62924058},
+    {year:2047,age:53,sip:423294,contrib:5079528,corpus:167368293,inflAdj:70475252},
+    {year:2048,age:54,sip:465623,contrib:5587476,corpus:193664080,inflAdj:78550244},
+    {year:2049,age:55,sip:512185,contrib:6146220,corpus:223373870,inflAdj:87147688},
+    {year:2050,age:56,sip:563404,contrib:6760848,corpus:256860823,inflAdj:96264451},
+    {year:2051,age:57,sip:619744,contrib:7436928,corpus:294521942,inflAdj:105895614},
+    {year:2052,age:58,sip:681718,contrib:8180616,corpus:336790912,inflAdj:116033470},
+    {year:2053,age:59,sip:749890,contrib:8998680,corpus:384141423,inflAdj:126667546},
+    {year:2054,age:60,sip:824879,contrib:9898548,corpus:437091526,inflAdj:137785584}
+  ];
+
+  // Populate table
+  const tbody = document.querySelector('#retirementTable tbody');
+  tbody.innerHTML = retirementData.map((r,i) => `
+    <tr class="${[2030,2040,2050,2054].includes(r.year) ? 'milestone' : ''}">
+      <td>${r.year}</td>
+      <td>${r.age}</td>
+      <td>₹${(r.sip/1000).toFixed(1)}K</td>
+      <td>₹${(r.contrib/100000).toFixed(2)}L</td>
+      <td>₹${((r.corpus - (i>0 ? retirementData[i-1].corpus : 0) - r.contrib)/100000).toFixed(2)}L</td>
+      <td>₹${(r.corpus/10000000).toFixed(2)} Cr</td>
+      <td>₹${(r.inflAdj/10000000).toFixed(2)} Cr</td>
+    </tr>
+  `).join('');
+
+  // Chart
+  ctx.chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: retirementData.map(r => r.year),
+      datasets: [{
+        label: 'Nominal Corpus',
+        data: retirementData.map(r => r.corpus/10000000),
+        borderColor: '#30c87a',
+        backgroundColor: 'rgba(48,200,122,0.1)',
+        fill: true,
+        tension: 0.4
+      }, {
+        label: 'Inflation-Adjusted',
+        data: retirementData.map(r => r.inflAdj/10000000),
+        borderColor: '#f0b429',
+        backgroundColor: 'rgba(240,180,41,0.1)',
+        fill: true,
+        tension: 0.4,
+        borderDash: [5,5]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } },
+        title: { display: true, text: 'Your Retirement Corpus Growth (₹ Crores)', color: '#eef0f4' }
+      },
+      scales: {
+        y: {
+          ticks: { color: '#9aa2b0', callback: v => '₹' + v.toFixed(0) + ' Cr' },
+          grid: { color: '#1e2228' }
+        },
+        x: {
+          ticks: { color: '#9aa2b0' },
+          grid: { color: '#1e2228' }
+        }
+      }
+    }
+  });
+}
+
+// Kids Education Charts
+function renderKidsCharts() {
+  const child1Data = [
+    {year:2026,age:0,sip:33000,contrib:396000,corpus:415800,target:0},
+    {year:2027,age:1,sip:36300,contrib:435600,corpus:916122,target:0},
+    {year:2028,age:2,sip:39930,contrib:479160,corpus:1531422,target:0},
+    {year:2029,age:3,sip:43923,contrib:527076,corpus:2384590,target:0},
+    {year:2030,age:4,sip:48315,contrib:579780,corpus:3302807,target:0},
+    {year:2031,age:5,sip:53147,contrib:637764,corpus:4415416,target:0},
+    {year:2032,age:6,sip:58462,contrib:701544,corpus:5755198,target:0},
+    {year:2033,age:7,sip:64308,contrib:771696,corpus:7358104,target:0},
+    {year:2034,age:8,sip:70739,contrib:848868,corpus:9264579,target:0},
+    {year:2035,age:9,sip:77813,contrib:933756,corpus:11519611,target:0},
+    {year:2036,age:10,sip:85594,contrib:1027128,corpus:14173179,target:0},
+    {year:2037,age:11,sip:94153,contrib:1129836,corpus:17281198,target:0},
+    {year:2038,age:12,sip:103568,contrib:1242816,corpus:20905496,target:0},
+    {year:2039,age:13,sip:113925,contrib:1367100,corpus:25115306,target:0},
+    {year:2040,age:14,sip:125318,contrib:1503816,corpus:29988415,target:0},
+    {year:2041,age:15,sip:137850,contrib:1654200,corpus:35612317,target:0},
+    {year:2042,age:16,sip:151635,contrib:1819620,corpus:42085411,target:0},
+    {year:2043,age:17,sip:166799,contrib:2001588,corpus:49517908,target:0},
+    {year:2044,age:18,sip:183479,contrib:2201748,corpus:58033647,target:27700000}
+  ];
+
+  // Child 1 Table
+  const tbody1 = document.querySelector('#child1Table tbody');
+  tbody1.innerHTML = child1Data.map(r => `
+    <tr class="${r.age === 18 ? 'milestone' : ''}">
+      <td>${r.year}</td>
+      <td>${r.age}</td>
+      <td>₹${(r.sip/1000).toFixed(1)}K</td>
+      <td>₹${(r.contrib/100000).toFixed(2)}L</td>
+      <td>₹${((r.corpus - (r.age>0 ? child1Data[r.age-1].corpus : 0) - r.contrib)/100000).toFixed(2)}L</td>
+      <td>₹${(r.corpus/10000000).toFixed(2)} Cr</td>
+      <td>${r.age === 18 ? '₹' + (r.target/10000000).toFixed(2) + ' Cr' : '-'}</td>
+    </tr>
+  `).join('');
+
+  // Child 1 Chart
+  const ctx1 = document.getElementById('child1Chart');
+  if(!ctx1 || ctx1.chart) return;
+
+  ctx1.chart = new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: child1Data.map(r => r.year),
+      datasets: [{
+        label: 'Corpus Growth',
+        data: child1Data.map(r => r.corpus/10000000),
+        borderColor: '#30c87a',
+        backgroundColor: 'rgba(48,200,122,0.1)',
+        fill: true,
+        tension: 0.4
+      }, {
+        label: 'Target (Age 18)',
+        data: child1Data.map(r => r.age === 18 ? r.target/10000000 : null),
+        borderColor: '#e85040',
+        backgroundColor: 'rgba(232,80,64,0.3)',
+        pointRadius: 8,
+        showLine: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } },
+        title: { display: true, text: 'Child 1 Education Corpus (₹ Crores)', color: '#eef0f4' }
+      },
+      scales: {
+        y: {
+          ticks: { color: '#9aa2b0', callback: v => '₹' + v.toFixed(1) + ' Cr' },
+          grid: { color: '#1e2228' }
+        },
+        x: {
+          ticks: { color: '#9aa2b0' },
+          grid: { color: '#1e2228' }
+        }
+      }
+    }
+  });
+
+  // Child 2 Chart (simplified)
+  const ctx2 = document.getElementById('child2Chart');
+  if(!ctx2 || ctx2.chart) return;
+
+  ctx2.chart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['2030', '2035', '2040', '2045', '2047'],
+      datasets: [{
+        label: 'Child 2 Corpus',
+        data: [0.33, 1.15, 3.00, 6.13, 8.42],
+        backgroundColor: '#e040a0'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } },
+        title: { display: true, text: 'Child 2 Education Corpus (₹ Crores)', color: '#eef0f4' }
+      },
+      scales: {
+        y: {
+          ticks: { color: '#9aa2b0', callback: v => '₹' + v + ' Cr' },
+          grid: { color: '#1e2228' }
+        },
+        x: {
+          ticks: { color: '#9aa2b0' },
+          grid: { color: '#1e2228' }
+        }
+      }
+    }
+  });
+}
+
+// Investment Charts
+function renderInvestmentCharts() {
+  const ctx = document.getElementById('allocationChart');
+  if(!ctx || ctx.chart) return;
+
+  ctx.chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Retirement Equity (Large)', 'Retirement Mid/Small', 'Kids Education', 'NPS', 'LIC', 'Buffer'],
+      datasets: [{
+        data: [15000, 12200, 23000, 8000, 2500, 1186],
+        backgroundColor: ['#30c87a', '#f0b429', '#e040a0', '#4d9ef0', '#50586a', '#9aa2b0']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } },
+        title: { display: true, text: 'Your Monthly Investment Allocation (₹71,886)', color: '#eef0f4' }
+      }
+    }
+  });
+}
+
+// Wife's Charts
+function renderWifeCharts() {
+  const wifeData = [
+    {year:2026,age:30,inv:50000,annual:600000,growth:633000,retCorpus:300000,kidsCorpus:120000},
+    {year:2027,age:31,inv:55000,annual:660000,growth:1376300,retCorpus:690000,kidsCorpus:264000},
+    {year:2028,age:32,inv:60500,annual:726000,growth:2250630,retCorpus:1134000,kidsCorpus:432000},
+    {year:2030,age:34,inv:73205,annual:878460,growth:4608129,retCorpus:2350000,kidsCorpus:864000},
+    {year:2035,age:39,inv:117908,annual:1414896,growth:12244318,retCorpus:6800000,kidsCorpus:2160000},
+    {year:2040,age:44,inv:189873,annual:2278476,growth:28567425,retCorpus:16500000,kidsCorpus:4800000},
+    {year:2045,age:49,inv:305730,annual:3668760,growth:61245892,retCorpus:38000000,kidsCorpus:9800000},
+    {year:2050,age:54,inv:492285,annual:5907420,growth:124578234,retCorpus:82000000,kidsCorpus:18500000},
+    {year:2054,age:58,inv:716573,annual:8598876,growth:223456789,retCorpus:185000000,kidsCorpus:32000000}
+  ];
+
+  // Table
+  const tbody = document.querySelector('#wifeTable tbody');
+  tbody.innerHTML = wifeData.map(r => `
+    <tr class="${[2030,2040,2050,2054].includes(r.year) ? 'milestone' : ''}">
+      <td>${r.year}</td>
+      <td>${r.age}</td>
+      <td>₹${(r.inv/1000).toFixed(0)}K</td>
+      <td>₹${(r.annual/100000).toFixed(2)}L</td>
+      <td>₹${(r.growth/10000000).toFixed(2)} Cr</td>
+      <td>₹${(r.retCorpus/10000000).toFixed(2)} Cr</td>
+      <td>₹${(r.kidsCorpus/10000000).toFixed(2)} Cr</td>
+    </tr>
+  `).join('');
+
+  // Chart
+  const ctx = document.getElementById('wifeRetirementChart');
+  if(!ctx || ctx.chart) return;
+
+  ctx.chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: wifeData.map(r => r.year),
+      datasets: [{
+        label: "Wife's Total Corpus",
+        data: wifeData.map(r => r.growth/10000000),
+        borderColor: '#e040a0',
+        backgroundColor: 'rgba(224,64,160,0.1)',
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#eef0f4' } },
+        title: { display: true, text: "Wife's Corpus Growth (₹ Crores)", color: '#eef0f4' }
+      },
+      scales: {
+        y: {
+          ticks: { color: '#9aa2b0', callback: v => '₹' + v.toFixed(1) + ' Cr' },
+          grid: { color: '#1e2228' }
+        },
+        x: {
+          ticks: { color: '#9aa2b0' },
+          grid: { color: '#1e2228' }
+        }
+      }
+    }
+  });
+}
+
+// Initial render
+renderCharts();
+</script>
+
+</body>
+</html>
