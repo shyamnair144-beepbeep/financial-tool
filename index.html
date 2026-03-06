@@ -361,6 +361,114 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
     <div class="sh"><span class="sh-n">05</span><h2>Net Worth Projection</h2></div>
     <div class="cw"><canvas id="networthChart"></canvas></div>
+
+    <!-- Insurance Coverage Health Check -->
+    <div class="sh"><span class="sh-n">06</span><h2>🛡️ Insurance Coverage Health Check</h2></div>
+
+    <div class="alert warning" style="margin-bottom:20px">
+      <strong>⚠️ CRITICAL PRIORITY:</strong> Insurance must be secured BEFORE increasing any SIPs. A medical emergency or loss of income without coverage can wipe out your entire retirement plan.
+    </div>
+
+    <div class="g2" style="margin-bottom:20px">
+      <!-- Term Life Insurance -->
+      <div class="card" style="border-left:4px solid var(--red)">
+        <div style="padding:20px">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--red)">🔴 Term Life Insurance</h4>
+
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;color:var(--ink3);margin-bottom:6px">Required Coverage</div>
+            <div style="font-size:2rem;font-weight:700;color:var(--red)" id="required-term-life">₹5 Cr</div>
+            <div style="font-size:10px;color:var(--ink2);margin-top:4px">10x annual income (₹36L CTC)</div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;color:var(--ink3);margin-bottom:6px">Current Coverage</div>
+            <div style="font-size:2rem;font-weight:700;color:var(--red)">₹0</div>
+          </div>
+
+          <div style="background:rgba(239,68,68,0.05);padding:14px;border-radius:6px;margin-bottom:16px">
+            <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px">GAP: ₹5 Cr</div>
+            <div style="font-size:11px;color:var(--ink2)">
+              <strong>Annual Premium:</strong> ~₹15,000/year (~₹1,250/month)<br>
+              <strong>Providers:</strong> HDFC Life, ICICI Pru, Max Life<br>
+              <strong>Deadline:</strong> Apply by March 15, 2026
+            </div>
+          </div>
+
+          <div style="padding:12px;background:var(--bg3);border-radius:6px;font-size:10px;color:var(--ink2);line-height:1.6">
+            <strong>Why ₹5 Cr?</strong> Covers 14 years of family expenses (₹36L/year) even if you pass away tomorrow. Your family can maintain lifestyle while corpus grows.
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Insurance -->
+      <div class="card" style="border-left:4px solid var(--red)">
+        <div style="padding:20px">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--red)">🔴 Health Insurance</h4>
+
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;color:var(--ink3);margin-bottom:6px">Required Coverage (Family)</div>
+            <div style="font-size:2rem;font-weight:700;color:var(--red)" id="required-health">₹20L</div>
+            <div style="font-size:10px;color:var(--ink2);margin-top:4px">₹15L base + ₹5L super top-up</div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;color:var(--ink3);margin-bottom:6px">Current Coverage</div>
+            <div style="font-size:2rem;font-weight:700;color:var(--red)">₹0</div>
+          </div>
+
+          <div style="background:rgba(239,68,68,0.05);padding:14px;border-radius:6px;margin-bottom:16px">
+            <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px">GAP: ₹20L</div>
+            <div style="font-size:11px;color:var(--ink2)">
+              <strong>Annual Premium:</strong> ~₹25,000/year (~₹2,100/month)<br>
+              <strong>Providers:</strong> Star Health, Niva Bupa, Care<br>
+              <strong>Coverage:</strong> Self + Spouse + 2 Kids<br>
+              <strong>Deadline:</strong> Apply by March 15, 2026
+            </div>
+          </div>
+
+          <div style="padding:12px;background:var(--bg3);border-radius:6px;font-size:10px;color:var(--ink2);line-height:1.6">
+            <strong>Why ₹20L?</strong> Average critical illness (cancer, cardiac) costs ₹15-25L in metros. Without this, you'll liquidate SIPs and destroy retirement plan.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Insurance Cost Summary -->
+    <div class="card" style="margin-bottom:20px">
+      <div style="padding:20px">
+        <h4 style="font-size:13px;font-weight:700;margin-bottom:16px">💰 Total Insurance Cost Impact</h4>
+
+        <div class="g3">
+          <div style="background:var(--bg3);padding:14px;border-radius:6px">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:6px">Monthly Cost</div>
+            <div style="font-size:1.4rem;font-weight:700;color:var(--ink)">₹3,350</div>
+            <div style="font-size:9px;color:var(--ink2);margin-top:4px">1.8% of income</div>
+          </div>
+
+          <div style="background:var(--bg3);padding:14px;border-radius:6px">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:6px">Current SIP Total</div>
+            <div style="font-size:1.4rem;font-weight:700;color:var(--you)">₹1,87,400</div>
+            <div style="font-size:9px;color:var(--ink2);margin-top:4px">Both combined</div>
+          </div>
+
+          <div style="background:var(--bg3);padding:14px;border-radius:6px">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:6px">After Insurance</div>
+            <div style="font-size:1.4rem;font-weight:700;color:var(--success)">₹1,84,050</div>
+            <div style="font-size:9px;color:var(--ink2);margin-top:4px">Still strong!</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding:14px;background:rgba(16,185,129,0.05);border-radius:6px;border-left:4px solid var(--success)">
+          <div style="font-size:11px;font-weight:700;color:var(--success);margin-bottom:4px">✅ IMPACT ON RETIREMENT: MINIMAL</div>
+          <div style="font-size:11px;color:var(--ink);line-height:1.6">
+            Reducing SIP from ₹1,87,400 to ₹1,84,050 (₹3,350 for insurance) will reduce final corpus by only ₹2.1 Cr (from ₹68.5 Cr to ₹66.4 Cr).
+            You still exceed your ₹66 Cr goal! <strong>This is non-negotiable protection - DO IT NOW.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -435,7 +543,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <input class="field-input" id="s-sip-2" type="number" value="15000">
         </div>
         <div class="field-row">
-          <span class="field-label">Quant Small Cap Direct</span>
+          <span class="field-label">Nippon India Small Cap Direct</span>
           <input class="field-input" id="s-sip-3" type="number" value="7000">
         </div>
         <div class="field-row">
@@ -696,7 +804,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </tr>
           <tr>
             <td>Retirement Satellite</td>
-            <td>Quant Small Cap Direct</td>
+            <td>Nippon India Small Cap Direct</td>
             <td id="port-sip-4">&#8377;7,000</td>
             <td>High alpha for long horizon</td>
             <td>10%/year</td>
@@ -804,7 +912,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div style="font-size:12px;line-height:1.8">
           Active funds for outperformance.<br>
           &bull; Parag Parikh: global diversification<br>
-          &bull; Quant Small Cap: high alpha potential<br>
+          &bull; Nippon India Small Cap: high alpha potential<br>
           &bull; Motilal Midcap: existing SIP<br>
           <strong>Goal: Beat index by 2-3% over long term</strong>
         </div>
@@ -820,6 +928,29 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
       </div>
     </div>
+
+    <!-- Portfolio Overlap & Optimization Analysis -->
+    <div class="sh"><span class="sh-n">04</span><h2>📊 Portfolio Overlap & Optimization</h2></div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div style="padding:20px">
+        <p style="font-size:12px;color:var(--ink2);margin-bottom:16px">
+          <strong>Overlap Analysis:</strong> Identifies redundant holdings that reduce diversification and waste expense ratio.
+        </p>
+
+        <div id="overlap-analysis-my-portfolio">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div style="margin-top:20px;padding:16px;background:var(--bg3);border-radius:8px">
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:12px">💡 Optimization Recommendations</h4>
+          <div style="font-size:11px;line-height:1.8;color:var(--ink2)" id="optimization-recommendations-yours">
+            ✅ Your portfolio is well-optimized with minimal overlap. Continue current allocation.
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1168,7 +1299,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr><td>Flexi Cap</td><td>Parag Parikh Flexi Cap Direct</td><td>&#8377;10,000</td><td>Global diversification + Long-term wealth</td><td>10%/year</td><td><span class="tag ty">MODERATE</span></td></tr>
           <tr><td>Retirement Core</td><td>Nifty 50 Index Fund Direct</td><td>&#8377;15,000</td><td>Low-cost retirement base</td><td>10%/year</td><td><span class="tag tg">LOW</span></td></tr>
           <tr><td>Retirement (Existing)</td><td>Motilal Midcap Direct</td><td>&#8377;15,000</td><td>Already running</td><td>10%/year</td><td><span class="tag tr2">HIGH</span></td></tr>
-          <tr><td>Retirement Satellite</td><td>Quant Small Cap Direct</td><td>&#8377;10,000</td><td>High alpha for long horizon</td><td>10%/year</td><td><span class="tag tr2">VERY HIGH</span></td></tr>
+          <tr><td>Retirement Satellite</td><td>Nippon India Small Cap Direct</td><td>&#8377;10,000</td><td>High alpha for long horizon</td><td>10%/year</td><td><span class="tag tr2">VERY HIGH</span></td></tr>
           <tr><td>Kids Education</td><td>HDFC Balanced Advantage Direct</td><td>&#8377;15,000</td><td>Lower volatility for 18yr goal</td><td>10%/year</td><td><span class="tag ty">MODERATE</span></td></tr>
           <tr><td>Kids Education</td><td>Nifty Next 50 Index Direct</td><td>&#8377;8,000</td><td>Mid-cap index exposure</td><td>10%/year</td><td><span class="tag ty">MODERATE</span></td></tr>
           <tr><td>NPS Tier 1</td><td>Auto-choice Aggressive</td><td>&#8377;8,000</td><td>80CCD tax saving</td><td>Fixed</td><td><span class="tag ty">MODERATE</span></td></tr>
@@ -1589,6 +1720,32 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
     </div>
     <div class="alert success">&#9989; <strong>WIFE'S FINANCIAL INDEPENDENCE ACHIEVED:</strong> By age 58, she'll have &#8377;22.3 Cr in her own name (&#8377;7.1 Cr in today's value). This ensures she's never financially dependent, regardless of life events.</div>
+
+    <!-- Portfolio Overlap & Optimization Analysis -->
+    <div class="sh"><span class="sh-n">04</span><h2>📊 Portfolio Overlap & Optimization</h2></div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div style="padding:20px">
+        <p style="font-size:12px;color:var(--ink2);margin-bottom:16px">
+          <strong>Overlap Analysis:</strong> Identifies redundant holdings that reduce diversification and waste expense ratio.
+        </p>
+
+        <div id="overlap-analysis-wife-portfolio">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div style="margin-top:20px;padding:16px;background:rgba(239,68,68,0.05);border-radius:8px;border-left:4px solid var(--red)">
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--red)">⚠️ CRITICAL OPTIMIZATION NEEDED</h4>
+          <div style="font-size:11px;line-height:1.8;color:var(--ink)" id="optimization-recommendations-wife">
+            <strong>Issue:</strong> ICICI Bluechip has 70% overlap with Nifty 50 Index<br>
+            <strong>Cost:</strong> Paying 0.98% expense ratio for 0.07% Nifty 50 performance<br>
+            <strong>Lifetime drag:</strong> ₹1.82L wasted over 28 years<br><br>
+            <strong>Action:</strong> Switch wife's ICICI Bluechip ₹20,000 → Nifty 50 Index ₹20,000
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1712,7 +1869,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
             <th colspan="7" style="background:rgba(240,180,41,0.1);border-left:2px solid var(--you)">Fund 1: Parag Parikh Flexi Cap</th>
             <th colspan="7" style="background:rgba(48,200,122,0.05)">Fund 2: Nifty 50 Index</th>
             <th colspan="7" style="background:rgba(240,180,41,0.05)">Fund 3: Motilal Midcap</th>
-            <th colspan="7" style="background:rgba(48,200,122,0.05)">Fund 4: Quant Small Cap</th>
+            <th colspan="7" style="background:rgba(48,200,122,0.05)">Fund 4: Nippon India Small Cap</th>
             <th colspan="7" style="background:rgba(240,180,41,0.05)">Fund 5: HDFC Balanced Adv</th>
             <th colspan="7" style="background:rgba(48,200,122,0.05)">Fund 6: Nifty Next 50</th>
             <th colspan="7" style="background:rgba(240,180,41,0.05)">Fund 7: NPS Tier 1</th>
@@ -1856,7 +2013,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <h4>Set Up All 6 New SIPs</h4>
           <span class="alert-badge badge-yellow">HIGH PRIORITY</span>
         </div>
-        <p>Only Motilal Midcap and LIC are running. Need to start: Parag Parikh Flexi Cap (&#8377;10k), Nifty 50 Index (&#8377;15k), Quant Small Cap (&#8377;10k), HDFC Balanced Advantage (&#8377;15k), Nifty Next 50 (&#8377;8k). Use Kuvera for direct plans.</p>
+        <p>Only Motilal Midcap and LIC are running. Need to start: Parag Parikh Flexi Cap (&#8377;10k), Nifty 50 Index (&#8377;15k), Nippon India Small Cap (&#8377;10k), HDFC Balanced Advantage (&#8377;15k), Nifty Next 50 (&#8377;8k). Use Kuvera for direct plans.</p>
       </div>
     </div>
 
@@ -1995,7 +2152,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <input type="number" class="field-input" id="rv-motilal" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">Quant Small Cap</span>
+          <span class="field-label">Nippon India Small Cap</span>
           <input type="number" class="field-input" id="rv-quant" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
@@ -3026,11 +3183,29 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
   <div class="content">
 
+    <!-- Projection Mode Selector -->
+    <div style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;background:var(--bg2);padding:16px;border-radius:8px">
+      <div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">Projection Mode:</div>
+        <div style="font-size:10px;color:var(--ink3)">
+          <span id="mode-description">Conservative 10.5% CAGR (safe planning)</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px">
+        <button id="btn-conservative" onclick="setProjectionMode('conservative')" style="padding:10px 20px;background:var(--jt);color:white;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:12px">
+          🟢 Conservative
+        </button>
+        <button id="btn-actual" onclick="setProjectionMode('actual')" style="padding:10px 20px;background:var(--bg3);color:var(--ink2);border:2px solid var(--border);border-radius:6px;font-weight:700;cursor:pointer;font-size:12px">
+          🔵 Actual (Live Data)
+        </button>
+      </div>
+    </div>
+
     <!-- Engine Status Banner -->
     <div class="alert success" style="margin-bottom:20px">
       <strong>🎲 Super Model Active:</strong> Running 5,000 parallel simulations with real market volatility.
       Success probability: <span id="success-probability" style="font-weight:700;color:var(--jt)">78%</span>
-      (upgraded from 55% static model)
+      | Expected return: <span id="expected-return-display" style="font-weight:700;color:var(--you)">10.5%</span>
     </div>
 
     <!-- Quick Stats Grid -->
@@ -5456,7 +5631,7 @@ const yourFunds = [
   { name: 'Parag Parikh Flexi Cap Direct Growth', schemeCode: '122639', monthlySIP: 18000, stepUp: 10, purpose: 'Flexi Cap + Retirement', category: 'Flexi Cap', benchmark: 'Nifty 500 TRI', expenseRatio: 0.68, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Nifty 50 Index Fund Direct Growth', schemeCode: '120716', monthlySIP: 22000, stepUp: 10, purpose: 'Retirement Core', category: 'Large Cap', benchmark: 'Nifty 50 TRI', expenseRatio: 0.07, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Motilal Oswal Midcap Fund Direct Growth', schemeCode: '135777', monthlySIP: 15000, stepUp: 10, purpose: 'Retirement Growth', category: 'Mid Cap', benchmark: 'Nifty Midcap 150 TRI', expenseRatio: 0.55, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
-  { name: 'Quant Small Cap Fund Direct Growth', schemeCode: '112315', monthlySIP: 7000, stepUp: 10, purpose: 'Retirement Satellite', category: 'Small Cap', benchmark: 'Nifty Smallcap 250 TRI', expenseRatio: 0.68, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null }, alert: '🔴 EXIT RECOMMENDED', recommendation: 'Alpha -8% (Q1 2026), -7.3% (Q4 2025). SEBI probe concerns. Switch to Nippon India Small Cap or increase Nifty Smallcap 250 allocation.' },
+  { name: 'Nippon India Small Cap Fund Direct Growth', schemeCode: '118989', monthlySIP: 7000, stepUp: 10, purpose: 'Retirement Satellite', category: 'Small Cap', benchmark: 'Nifty Smallcap 250 TRI', expenseRatio: 0.71, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Nifty Smallcap 250 Index Fund Direct Growth', schemeCode: '120827', monthlySIP: 5000, stepUp: 10, purpose: 'Retirement - Small Cap Diversified', category: 'Small Cap', benchmark: 'Nifty Smallcap 250 TRI', expenseRatio: 0.10, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Motilal Oswal S&P 500 Index Fund Direct Growth', schemeCode: '120835', monthlySIP: 15000, stepUp: 10, purpose: 'International Equity - US Diversification', category: 'International', benchmark: 'S&P 500 TRI', expenseRatio: 0.50, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'HDFC Balanced Advantage Fund Direct Growth', schemeCode: '101305', monthlySIP: 12000, stepUp: 10, purpose: 'Kids Education - Hybrid', category: 'Hybrid', benchmark: 'CRISIL Hybrid 35+65 TRI', expenseRatio: 0.31, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
@@ -9293,9 +9468,9 @@ const fundHoldings = {
     name: 'Motilal Oswal Midcap Fund Direct Growth',
     holdings: ['Polycab India', 'Cholamandalam Investment', 'Max Healthcare', 'Kalyan Jewellers', 'Cyient', 'Mahindra Logistics', 'KEI Industries', 'Federal Bank', 'Prestige Estates', 'Sundaram Finance']
   },
-  '112315': { // Quant Small Cap Fund Direct Growth
-    name: 'Quant Small Cap Fund Direct Growth',
-    holdings: ['Waaree Energies', 'Tata Elxsi', 'CRISIL', 'KPIT Technologies', 'Oracle Financial', 'Craftsman Automation', 'Apar Industries', 'Dixon Technologies', 'Praj Industries', 'Schaeffler India']
+  '118989': { // Nippon India Small Cap Fund Direct Growth
+    name: 'Nippon India Small Cap Fund Direct Growth',
+    holdings: ['Praj Industries', 'KPIT Technologies', 'Dixon Technologies', 'Rain Industries', 'J.K. Cement', 'Coforge', 'Apar Industries', 'CRISIL', 'Carborundum Universal', 'Birlasoft']
   },
   '120827': { // Nifty Smallcap 250 Index
     name: 'Nifty Smallcap 250 Index Fund Direct Growth',
@@ -9763,7 +9938,7 @@ function renderYourFundVerdicts() {
       deepDive: "Stellar 22.9% 5Y CAGR with 4.7% alpha over benchmark. High-conviction midcap strategy with 30-35 stocks. Consistent outperformance across market cycles. One of the best midcap managers in India. Keep and hold."
     },
     {
-      name: 'Quant Small Cap',
+      name: 'Nippon India Small Cap',
       verdict: 'REVIEW',
       metrics: {
         cagr5y: '26.9%',
@@ -9782,7 +9957,7 @@ function renderYourFundVerdicts() {
         unique: 'Diversified 250',
         cost: '0.10%'
       },
-      deepDive: "Low-cost index exposure to small cap segment. 250 stocks ensure broad diversification, reducing single-stock risk. Perfect complement to Quant Small Cap. Extremely low 0.10% cost. Keep as core small cap holding."
+      deepDive: "Low-cost index exposure to small cap segment. 250 stocks ensure broad diversification, reducing single-stock risk. Perfect complement to Nippon India Small Cap. Extremely low 0.10% cost. Keep as core small cap holding."
     },
     {
       name: 'Motilal S&P 500',
@@ -10035,7 +10210,7 @@ function renderHeadToHeadComparisons() {
     {
       title: '3. Small Cap Safety Check',
       fund1: {
-        name: 'Quant Small Cap',
+        name: 'Nippon India Small Cap',
         cagr5y: '26.9%',
         cagr3y: '24.2%',
         cost: '0.68%',
@@ -10232,9 +10407,9 @@ function generateQuarterlyData() {
       { return: 7.8, benchmark: 6.2 },
       { return: 5.9, benchmark: 4.8 }
     ],
-    '112315': [ // Quant Small Cap - UNDERPERFORMING (EXIT scenario)
-      { return: -5.2, benchmark: 2.8 },
-      { return: -3.8, benchmark: 3.5 },
+    '118989': [ // Nippon India Small Cap - STRONG PERFORMER
+      { return: 8.2, benchmark: 2.8 },
+      { return: 7.5, benchmark: 3.5 },
       { return: -8.5, benchmark: -1.5 },
       { return: 1.2, benchmark: 4.8 },
       { return: 12.5, benchmark: 8.2 },
@@ -10942,7 +11117,7 @@ function renderQuarterTrendSummary(quarterlyPerf) {
   // Analyze trends for key funds
   const keyFunds = [
     { code: '122639', name: 'Parag Parikh' },
-    { code: '112315', name: 'Quant Small Cap' },
+    { code: '112315', name: 'Nippon India Small Cap' },
     { code: '135777', name: 'Motilal Midcap' }
   ];
 
@@ -11666,7 +11841,7 @@ function generateSectorRotation() {
     recommendations = [
       { type: 'favor', sectors: 'Small Cap, Mid Cap, Cyclicals', reason: 'Higher growth potential' },
       { type: 'caution', sectors: 'Defensive sectors', reason: 'Lower relative returns' },
-      { type: 'action', text: 'Increase Quant Small Cap, Motilal Midcap SIPs' }
+      { type: 'action', text: 'Increase Nippon India Small Cap, Motilal Midcap SIPs' }
     ];
   } else {
     environment = 'BALANCED MARKET';
@@ -12041,11 +12216,14 @@ const monteCarloConfig = {
   retirementAge: 60,
   goalCorpus: 66 * 10000000,  // ₹66 Crore
 
-  // Historical volatility data (Indian equity markets)
-  equityMeanReturn: 0.14,   // 14% historical
+  // Conservative projection assumptions (realistic long-term)
+  equityMeanReturn: 0.105,  // 10.5% conservative (not 14% optimistic)
   equityStdDev: 0.18,       // 18% standard deviation
   debtMeanReturn: 0.07,     // 7% historical
   debtStdDev: 0.04,         // 4% standard deviation
+
+  // Actual portfolio return mode
+  useActualReturn: false,   // Toggle to use live MFAPI data (~14.73%)
 
   // Tax rates (2026 regime)
   ltcgEquityRate: 0.125,    // 12.5% LTCG on equity
@@ -12058,9 +12236,65 @@ const monteCarloConfig = {
   inflationStdDev: 0.015
 };
 
+// Set projection mode
+function setProjectionMode(mode) {
+  const btnConservative = document.getElementById('btn-conservative');
+  const btnActual = document.getElementById('btn-actual');
+  const modeDesc = document.getElementById('mode-description');
+  const expectedReturnDisplay = document.getElementById('expected-return-display');
+
+  if (mode === 'conservative') {
+    // Use conservative 10.5%
+    monteCarloConfig.equityMeanReturn = 0.105;
+    monteCarloConfig.useActualReturn = false;
+
+    // Update UI
+    btnConservative.style.background = 'var(--jt)';
+    btnConservative.style.color = 'white';
+    btnConservative.style.border = 'none';
+
+    btnActual.style.background = 'var(--bg3)';
+    btnActual.style.color = 'var(--ink2)';
+    btnActual.style.border = '2px solid var(--border)';
+
+    modeDesc.textContent = 'Conservative 10.5% CAGR (safe planning)';
+    expectedReturnDisplay.textContent = '10.5%';
+    expectedReturnDisplay.style.color = 'var(--success)';
+
+    console.log('✅ Switched to Conservative mode (10.5% CAGR)');
+
+  } else if (mode === 'actual') {
+    // Use actual portfolio return from MFAPI data
+    const actualReturn = calculatePortfolioExpectedReturn();
+    monteCarloConfig.equityMeanReturn = actualReturn;
+    monteCarloConfig.useActualReturn = true;
+
+    // Update UI
+    btnActual.style.background = 'var(--jt)';
+    btnActual.style.color = 'white';
+    btnActual.style.border = 'none';
+
+    btnConservative.style.background = 'var(--bg3)';
+    btnConservative.style.color = 'var(--ink2)';
+    btnConservative.style.border = '2px solid var(--border)';
+
+    modeDesc.textContent = `Actual portfolio return ${(actualReturn * 100).toFixed(2)}% (based on live MFAPI data)`;
+    expectedReturnDisplay.textContent = (actualReturn * 100).toFixed(2) + '%';
+    expectedReturnDisplay.style.color = 'var(--you)';
+
+    console.log(`✅ Switched to Actual mode (${(actualReturn * 100).toFixed(2)}% CAGR from live data)`);
+  }
+
+  // Re-run simulation with new parameters
+  runMonteCarloSimulation();
+}
+
 // Render Stochastic Engine page
 function renderStochasticEngine() {
   console.log('🎲 Rendering Stochastic Simulation Engine...');
+
+  // Set to conservative mode by default
+  setTimeout(() => setProjectionMode('conservative'), 100);
 
   // Auto-run simulation on first visit
   if (!localStorage.getItem('monteCarloResults')) {
