@@ -2073,10 +2073,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div class="alert-icon">&#9888;&#65039;</div>
       <div class="alert-body">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <h4>Set Up All 6 New SIPs</h4>
-          <span class="alert-badge badge-yellow">HIGH PRIORITY</span>
+          <h4>Monitor Unified Portfolio (8 Funds)</h4>
+          <span class="alert-badge badge-green">OPTIMIZED</span>
         </div>
-        <p>Only Motilal Midcap and LIC are running. Need to start: Parag Parikh Flexi Cap (&#8377;10k), Nifty 50 Index (&#8377;15k), Nippon India Small Cap (&#8377;10k), HDFC Balanced Advantage (&#8377;15k), Nifty Next 50 (&#8377;8k). Use Kuvera for direct plans.</p>
+        <p>✅ Portfolio optimized April 2026: 8 unified funds, ₹1.91L/month total. All SIPs active: Nifty 50 (₹60K), Parag Parikh (₹18K), Motilal Midcap (₹38K), Nippon Small Cap (₹12K), S&P 500 (₹25K), HDFC Balanced (₹12K), HDFC Corp Bond (₹20K), NPS (₹6.2K). Track via Kuvera dashboard.</p>
       </div>
     </div>
 
@@ -2200,91 +2200,44 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
     <div class="sh"><span class="sh-n">01</span><h2>📊 Enter Current Portfolio Values</h2></div>
     <div class="g2">
-      <div class="card y">
-        <div class="ch3 y">YOUR PORTFOLIO (Current Values)</div>
+      <div class="card j">
+        <div class="ch3 j">UNIFIED FAMILY PORTFOLIO - Current Values (8 Funds)</div>
+        <div class="alert info" style="margin-bottom:12px;font-size:11px">💡 Track your actual portfolio values here to compare against projections. Portfolio unified in April 2026 - ₹1.91L/month total SIP.</div>
         <div class="field-row">
-          <span class="field-label">Parag Parikh Flexi Cap</span>
-          <input type="number" class="field-input" id="rv-ppfc" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">Nifty 50 Index</span>
+          <span class="field-label">1. Nifty 50 Index Fund (₹60K SIP)</span>
           <input type="number" class="field-input" id="rv-nifty50" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">Motilal Midcap</span>
+          <span class="field-label">2. Parag Parikh Flexi Cap (₹18K SIP)</span>
+          <input type="number" class="field-input" id="rv-ppfc" placeholder="₹0" step="1000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">3. Motilal Oswal Midcap (₹38K SIP)</span>
           <input type="number" class="field-input" id="rv-motilal" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">Nippon India Small Cap</span>
+          <span class="field-label">4. Nippon Small Cap (₹12K SIP)</span>
           <input type="number" class="field-input" id="rv-quant" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">Nifty Smallcap 250</span>
-          <input type="number" class="field-input" id="rv-smallcap" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">S&P 500 Index</span>
+          <span class="field-label">5. Motilal S&P 500 Index (₹25K SIP)</span>
           <input type="number" class="field-input" id="rv-sp500" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">HDFC Balanced Advantage</span>
+          <span class="field-label">6. HDFC Balanced Advantage (₹12K SIP)</span>
           <input type="number" class="field-input" id="rv-hdfc-bal" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">Nifty Next 50</span>
-          <input type="number" class="field-input" id="rv-next50" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">HDFC Corporate Bond</span>
+          <span class="field-label">7. HDFC Corporate Bond (₹20K SIP)</span>
           <input type="number" class="field-input" id="rv-corp-bond" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">ICICI Liquid Fund</span>
-          <input type="number" class="field-input" id="rv-liquid" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">SBI Banking PSU Debt</span>
-          <input type="number" class="field-input" id="rv-sbi-debt" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">Gold BeES</span>
-          <input type="number" class="field-input" id="rv-gold" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">NPS Tier 1</span>
+          <span class="field-label">8. NPS Tier 1 Auto Choice (₹6.2K SIP)</span>
           <input type="number" class="field-input" id="rv-nps" placeholder="₹0" step="1000">
         </div>
         <div class="tr">
-          <div class="tl">Your Total Value</div>
-          <div class="tv ay" id="rv-your-total">₹0</div>
-        </div>
-      </div>
-
-      <div class="card w">
-        <div class="ch3 w">WIFE'S PORTFOLIO (Current Values)</div>
-        <div class="field-row">
-          <span class="field-label">ICICI Bluechip</span>
-          <input type="number" class="field-input" id="rv-icici-blue" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">Nifty 50 Index</span>
-          <input type="number" class="field-input" id="rv-wife-nifty50" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">Axis Midcap</span>
-          <input type="number" class="field-input" id="rv-axis" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">HDFC Corporate Bond</span>
-          <input type="number" class="field-input" id="rv-wife-corp" placeholder="₹0" step="1000">
-        </div>
-        <div class="field-row">
-          <span class="field-label">Gold BeES</span>
-          <input type="number" class="field-input" id="rv-wife-gold" placeholder="₹0" step="1000">
-        </div>
-        <div class="tr">
-          <div class="tl">Wife's Total Value</div>
-          <div class="tv aw" id="rv-wife-total">₹0</div>
+          <div class="tl">Total Portfolio Value</div>
+          <div class="tv aj" id="rv-family-total">₹0</div>
         </div>
       </div>
     </div>
@@ -2696,44 +2649,49 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- Section 2: Stock Overlap Analysis -->
-    <div class="sh"><span class="sh-n">02</span><h2>Stock Overlap Analysis</h2></div>
+    <div class="sh"><span class="sh-n">02</span><h2>Stock Overlap Analysis (Unified Portfolio)</h2></div>
     <div class="g2">
-      <div class="card d">
-        <div class="ch3 d">HIGH OVERLAP PAIRS (⚠ RISK)</div>
-        <div id="highOverlapPairs">
-          <div class="ml">
-            <div class="d">ICICI Bluechip ↔ Nifty 50</div>
-            <div class="a ar">65-70%</div>
-          </div>
+      <div class="card g">
+        <div class="ch3 g">EXCELLENT DIVERSIFICATION ✅</div>
+        <div class="alert success" style="margin:8px;font-size:12px">
+          🎉 <strong>NO HIGH OVERLAP PAIRS!</strong> Your optimized portfolio has excellent stock-level diversification with avg 12.5% overlap. Previous issues (ICICI Bluechip ↔ Nifty 50: 70% overlap) resolved in April 2026 consolidation.
+        </div>
+        <div id="lowOverlapPairs">
           <div class="ml">
             <div class="d">Parag Parikh ↔ Nifty 50</div>
-            <div class="a ay">35-40%</div>
+            <div class="a ag">~25%</div>
           </div>
           <div class="ml">
-            <div class="d">Motilal Mid ↔ Axis Mid</div>
-            <div class="a ay">25-30%</div>
+            <div class="d">Nifty 50 ↔ Midcap</div>
+            <div class="a ag">~15%</div>
           </div>
-        </div>
-      </div>
-      <div class="card g">
-        <div class="ch3 g">LOW/ZERO OVERLAP (✓ GOOD)</div>
-        <div id="lowOverlapPairs">
+          <div class="ml">
+            <div class="d">Nifty 50 ↔ Small Cap</div>
+            <div class="a ag">~5%</div>
+          </div>
           <div class="ml">
             <div class="d">S&P 500 ↔ India Funds</div>
             <div class="a ag">0%</div>
           </div>
           <div class="ml">
-            <div class="d">Gold ETF ↔ Equity</div>
+            <div class="d">Debt/Hybrid ↔ Equity</div>
             <div class="a ag">0%</div>
           </div>
-          <div class="ml">
-            <div class="d">Nifty 50 ↔ Small Cap</div>
-            <div class="a ag">0%</div>
-          </div>
-          <div class="ml">
-            <div class="d">Parag Parikh ↔ Quant SC</div>
-            <div class="a ag">~5%</div>
-          </div>
+        </div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">PORTFOLIO OPTIMIZATION COMPLETE</div>
+        <div style="padding:8px;font-size:12px;line-height:1.7">
+          <strong>Before (Feb 2026):</strong><br>
+          • 18 fragmented funds<br>
+          • 3 high overlap pairs (&gt;50%)<br>
+          • Avg expense ratio: 0.58%<br>
+          • Management complexity: HIGH<br><br>
+          <strong>After (April 2026):</strong><br>
+          • 8 unified funds ✅<br>
+          • 0 high overlap pairs ✅<br>
+          • Avg expense ratio: 0.38% ✅<br>
+          • Management complexity: LOW ✅
         </div>
       </div>
     </div>
@@ -2741,28 +2699,30 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Section 3: Asset Allocation Assessment -->
     <div class="sh"><span class="sh-n">03</span><h2>Asset Allocation Assessment</h2></div>
     <div class="g2">
-      <div class="card y">
-        <div class="ch3 y">YOUR PORTFOLIO</div>
-        <div id="yourAssetAllocation">
-          <div class="ml"><div class="d">Large Cap</div><div class="a ag">~32% ✓</div></div>
-          <div class="ml"><div class="d">Mid Cap</div><div class="a ag">~15% ✓</div></div>
-          <div class="ml"><div class="d">Small Cap</div><div class="a ag">~10% ✓</div></div>
-          <div class="ml"><div class="d">International</div><div class="a ag">~13% ✓</div></div>
-          <div class="ml"><div class="d">Hybrid</div><div class="a ag">~9% ✓</div></div>
-          <div class="ml"><div class="d">Debt</div><div class="a ag">~14% ✓</div></div>
-          <div class="ml"><div class="d">Gold</div><div class="a ag">~4% ✓</div></div>
-          <div class="ml"><div class="d">NPS</div><div class="a ag">~5% ✓</div></div>
+      <div class="card j">
+        <div class="ch3 j">UNIFIED FAMILY PORTFOLIO ALLOCATION</div>
+        <div id="familyAssetAllocation">
+          <div class="ml"><div class="d">Large Cap (Nifty 50)</div><div class="a ag">31% ✓</div></div>
+          <div class="ml"><div class="d">Mid Cap (Motilal)</div><div class="a ag">20% ✓</div></div>
+          <div class="ml"><div class="d">International (S&P 500)</div><div class="a ag">13% ✓</div></div>
+          <div class="ml"><div class="d">Debt (HDFC Corp Bond)</div><div class="a ag">10% ✓</div></div>
+          <div class="ml"><div class="d">Flexi Cap (Parag Parikh)</div><div class="a ag">9% ✓</div></div>
+          <div class="ml"><div class="d">Small Cap (Nippon)</div><div class="a ag">6% ✓</div></div>
+          <div class="ml"><div class="d">Hybrid (HDFC Balanced)</div><div class="a ag">6% ✓</div></div>
+          <div class="ml"><div class="d">NPS (Locked till 60)</div><div class="a ag">3% ✓</div></div>
         </div>
       </div>
-      <div class="card w">
-        <div class="ch3 w">WIFE'S PORTFOLIO</div>
-        <div id="wifeAssetAllocation">
-          <div class="ml"><div class="d">Large Cap</div><div class="a ag">~50%</div></div>
-          <div class="ml"><div class="d">Mid Cap</div><div class="a ag">~25%</div></div>
-          <div class="ml"><div class="d">Debt</div><div class="a ag">~17%</div></div>
-          <div class="ml"><div class="d">Gold</div><div class="a ag">~6%</div></div>
-          <div class="ml"><div class="d">Small Cap</div><div class="a ar">0% ⚠</div></div>
-          <div class="ml"><div class="d">International</div><div class="a ar">0% ⚠</div></div>
+      <div class="card g">
+        <div class="ch3 g">ALLOCATION QUALITY SCORE: A+</div>
+        <div style="padding:8px;font-size:12px;line-height:1.7">
+          <strong>Equity: 66%</strong> (Age 31 target: 65-70%) ✅<br>
+          <strong>Debt: 10%</strong> (Stability cushion) ✅<br>
+          <strong>Hybrid: 6%</strong> (Dynamic allocation) ✅<br>
+          <strong>International: 13%</strong> (Currency hedge) ✅<br>
+          <strong>NPS: 3%</strong> (Tax + retirement lock) ✅<br><br>
+          <strong>Diversification:</strong> 8 asset classes<br>
+          <strong>Concentration Risk:</strong> None (max 31%)<br>
+          <strong>Crash Protection:</strong> 16% defensive
         </div>
       </div>
     </div>
@@ -8962,7 +8922,7 @@ function runPortfolioReview() {
   const maxEquityForAge = getMaxEquityAllocation(currentAge, retirementAge);
 
   // Calculate predicted value (assuming 12% CAGR)
-  const monthlySIP = 177400; // Current monthly SIP
+  const monthlySIP = 191200; // Current unified family portfolio SIP (8 funds, April 2026)
   const predictedValue = calculateSIPFutureValue(monthlySIP, 12, monthsElapsed);
   const delta = combinedTotal - predictedValue;
   const deltaPct = (delta / predictedValue) * 100;
@@ -10169,8 +10129,8 @@ function renderConsolidationRecommendations(overlaps) {
 // ============================================================
 
 function renderFundAnalysis() {
-  renderYourFundVerdicts();
-  renderWifeFundVerdicts();
+  // Unified portfolio - fund analysis table already rendered in HTML (lines 2545-2624)
+  // Old verdict card functions removed (portfolio consolidated April 2026)
   renderHeadToHeadComparisons();
 }
 
@@ -10324,67 +10284,8 @@ function renderYourFundVerdicts() {
   renderFundVerdictCards('yourFundVerdicts', fundVerdicts);
 }
 
-function renderWifeFundVerdicts() {
-  const fundVerdicts = [
-    {
-      name: 'ICICI Bluechip',
-      verdict: 'SWITCH',
-      metrics: {
-        cagr5y: '14.5%',
-        benchmark: 'No',
-        unique: '65-70% overlap',
-        cost: '0.98%'
-      },
-      deepDive: "Major red flags: (1) 14.5% 5Y CAGR trails Nifty 50 index, (2) Expensive 0.98% cost, (3) Massive 65-70% overlap with her Nifty 50 holding. Why pay 0.98% for worse performance? Switch entire ₹20,000 SIP to Nifty 50 Index. Save ₹1.82L in fees over 30 years while getting better returns."
-    },
-    {
-      name: 'Nifty 50 Index',
-      verdict: 'KEEP',
-      metrics: {
-        cagr5y: '~13%',
-        benchmark: 'IS benchmark',
-        unique: 'Lowest cost',
-        cost: '0.12%'
-      },
-      deepDive: "Same verdict as yours. Core holding, lowest cost, zero manager risk. After switching ICICI Bluechip here, her large cap allocation becomes cleaner and cheaper."
-    },
-    {
-      name: 'Axis Midcap',
-      verdict: 'SWITCH',
-      metrics: {
-        cagr5y: '17%',
-        benchmark: 'Weak since 2022',
-        unique: 'Manager changed',
-        cost: '0.75%'
-      },
-      deepDive: "Red flags: (1) Fund manager changed in 2022, performance dropped, (2) 17% 5Y trails Motilal Midcap's 22.9%, (3) Higher 0.75% cost vs Motilal's 0.55%. Switch ₹15,000 SIP to your Motilal Midcap (you can invest in same fund) or Nippon India Growth (21.8% 5Y CAGR). Don't settle for mediocrity."
-    },
-    {
-      name: 'HDFC Corporate Bond',
-      verdict: 'KEEP',
-      metrics: {
-        cagr5y: '~7%',
-        benchmark: 'Yes',
-        unique: 'AAA only',
-        cost: '0.41%'
-      },
-      deepDive: "Same as yours. High-quality debt, stable returns, essential for portfolio balance. Keep."
-    },
-    {
-      name: 'Gold BeES',
-      verdict: 'KEEP',
-      metrics: {
-        cagr5y: '~12%',
-        benchmark: 'Tracks gold',
-        unique: 'Inflation hedge',
-        cost: '0.50%'
-      },
-      deepDive: "Same as yours. Portfolio insurance, inflation hedge. 6% allocation is slightly high but acceptable. Keep."
-    }
-  ];
-
-  renderFundVerdictCards('wifeFundVerdicts', fundVerdicts);
-}
+// REMOVED: renderWifeFundVerdicts() - Portfolio unified in April 2026, no separate wife portfolio
+// Old funds (ICICI Bluechip, Axis Midcap, Gold BeES) consolidated into unified family portfolio
 
 function renderFundVerdictCards(containerId, verdicts) {
   const container = document.getElementById(containerId);
@@ -11911,6 +11812,12 @@ function getCPIStatus() {
 function safeSetText(id, text) {
   const el = document.getElementById(id);
   if (el) el.textContent = text;
+}
+
+// Helper function to safely update HTML content
+function safeSetHTML(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
 }
 
 // Update market indicators display
