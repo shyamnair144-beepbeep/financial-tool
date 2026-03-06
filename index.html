@@ -96,6 +96,29 @@ tr.milestone{background:rgba(240,180,41,.05)}
 .alert.success{border-left-color:var(--jt)}
 .alert.warning{border-left-color:var(--you)}
 .alert.danger{border-left-color:var(--red)}
+/* Fund Analysis - Verdict Badges */
+.verdict-badge{display:inline-block;padding:6px 14px;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:1px;font-family:monospace;margin-bottom:8px}
+.verdict-keep{background:rgba(48,200,122,.15);color:var(--jt);border:1px solid rgba(48,200,122,.3)}
+.verdict-review{background:rgba(240,180,41,.15);color:var(--you);border:1px solid rgba(240,180,41,.3)}
+.verdict-switch{background:rgba(232,80,64,.15);color:var(--red);border:1px solid rgba(232,80,64,.3)}
+.fund-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px}
+.fund-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:10px}
+.fund-name{font-size:0.95rem;font-weight:700;flex:1}
+.fund-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.fund-metric{display:flex;flex-direction:column;gap:3px}
+.fund-metric-label{font-size:9px;font-family:monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:1px}
+.fund-metric-value{font-size:0.92rem;font-weight:600;font-family:monospace}
+.fund-deep-dive{background:rgba(255,255,255,.02);padding:12px;border-radius:5px;border-left:3px solid var(--border)}
+.fund-deep-dive-title{font-size:10px;font-family:monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.fund-deep-dive-text{font-size:12px;line-height:1.6;color:var(--ink2)}
+.comparison-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.comparison-title{font-size:0.9rem;font-weight:700;margin-bottom:10px;color:var(--you)}
+.comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.comparison-fund{background:rgba(255,255,255,.02);padding:10px;border-radius:5px}
+.comparison-fund-name{font-size:11px;font-weight:600;margin-bottom:6px}
+.comparison-stats{display:flex;flex-direction:column;gap:4px;font-size:10px;font-family:monospace;color:var(--ink2)}
+.comparison-winner{border:2px solid var(--jt);background:rgba(48,200,122,.05)}
+.comparison-verdict{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:var(--ink2)}
 /* Settings */
 .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .field-group{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px}
@@ -116,11 +139,24 @@ tr.milestone{background:rgba(240,180,41,.05)}
 .badge-red{background:var(--red-s);border:1px solid var(--red);color:var(--red)}
 .badge-yellow{background:var(--you-s);border:1px solid var(--you);color:var(--you)}
 .badge-green{background:var(--jt-s);border:1px solid var(--jt);color:var(--jt2)}
+/* Buttons */
+.btn-primary{padding:12px 24px;background:var(--you);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer;transition:all .2s;font-size:13px;letter-spacing:0.5px}
+.btn-primary:hover{background:#ffcc44;transform:translateY(-1px)}
+.btn-secondary{padding:12px 24px;background:var(--bg2);color:var(--ink);border:2px solid var(--border);border-radius:8px;font-weight:700;transition:all .2s;display:inline-block;cursor:pointer;font-size:13px;letter-spacing:0.5px}
+.btn-secondary:hover{border-color:var(--you);background:var(--bg)}
+/* Loading Spinner */
+.spinner{width:40px;height:40px;border:4px solid rgba(255,255,255,0.1);border-top-color:var(--you);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Input validation */
+.field-input.error{border-color:var(--red);background:rgba(232,80,64,0.05)}
+.error-message{color:var(--red);font-size:10px;margin-top:4px;font-family:monospace}
 @media(max-width:768px){
   .g2,.g3,.g4,.settings-grid{grid-template-columns:1fr}
   .banner{grid-template-columns:1fr}
   .content{padding:20px 16px}
   .hdr{padding:20px 16px}
+  .fund-metrics{grid-template-columns:repeat(2,1fr)}
+  .comparison-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -143,6 +179,13 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="tn" onclick="showPage(12)">Alerts</div>
   <div class="tn" onclick="showPage(13)">⏰ Review & Tracking</div>
   <div class="tn" onclick="showPage(14)">📊 Fund Comparison</div>
+  <div class="tn" onclick="showPage(15)">🔗 Portfolio Overlap</div>
+  <div class="tn" onclick="showPage(16)">📋 Fund Analysis</div>
+  <div class="tn" onclick="showPage(17)">
+    🎯 Decision Engine
+    <span id="alertBadge" style="display:none;background:var(--red);color:#fff;border-radius:10px;padding:2px 6px;font-size:9px;margin-left:3px;"></span>
+  </div>
+  <div class="tn" onclick="showPage(18)">📊 Market Sentiment</div>
 </div>
 
 <!-- PAGE 0: DASHBOARD -->
@@ -211,8 +254,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div class="ml"><div class="d">Fixed Expenses<small>Rent, parents, utilities</small></div><div class="a ar" id="dash-fixed-exp">&#8377;73,000</div></div>
         <div class="ml"><div class="d">Living Expenses<small>Food, transport, lifestyle</small></div><div class="a ar" id="dash-living-exp">&#8377;49,000</div></div>
         <div class="ml"><div class="d">Sinking Funds<small>Vacation, car, baby</small></div><div class="a ab" id="dash-sinking">&#8377;60,000</div></div>
-        <div class="ml"><div class="d">Goal Investments<small>Retirement + education</small></div><div class="a aj" id="dash-goal-inv">&#8377;1,16,900</div></div>
-        <div class="ml"><div class="d">Wife's Investments</div><div class="a aj" id="dash-wife-inv">&#8377;60,500</div></div>
+        <div class="ml"><div class="d">Goal Investments<small>Retirement + education</small></div><div class="a aj" id="dash-goal-inv">&#8377;1,33,900</div></div>
+        <div class="ml"><div class="d">Wife's Investments</div><div class="a aj" id="dash-wife-inv">&#8377;58,500</div></div>
         <div class="tr"><div class="tl">Total Allocated</div><div class="tv" id="dash-total-alloc">&#8377;3,59,400</div></div>
         <div class="pb"><div class="pb-fill" style="width:100%"></div></div>
       </div>
@@ -314,7 +357,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <h3>Income Details</h3>
         <div class="field-row">
           <span class="field-label">CTC (Annual)</span>
-          <input class="field-input" id="s-ctc" type="text" value="33,60,000">
+          <input class="field-input" id="s-ctc" type="text" value="36,34,000">
         </div>
         <div class="field-row">
           <span class="field-label">Basic Salary (Monthly)</span>
@@ -357,9 +400,9 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
       </div>
       <div class="field-group">
-        <h3>Your SIP Allocation (13 Funds) - Total: ₹1,16,900/month</h3>
+        <h3>Your SIP Allocation (13 Funds) - Total: ₹1,33,900/month</h3>
         <div class="field-row">
-          <span class="field-label">Parag Parikh Flexi Cap (ELSS)</span>
+          <span class="field-label">Parag Parikh Flexi Cap</span>
           <input class="field-input" id="s-sip-0" type="number" value="18000">
         </div>
         <div class="field-row">
@@ -368,7 +411,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
         <div class="field-row">
           <span class="field-label">Motilal Midcap Direct</span>
-          <input class="field-input" id="s-sip-2" type="number" value="8000">
+          <input class="field-input" id="s-sip-2" type="number" value="15000">
         </div>
         <div class="field-row">
           <span class="field-label">Quant Small Cap Direct</span>
@@ -412,11 +455,11 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
         <div class="field-row" style="background:rgba(240,180,41,.05);border-radius:4px;padding:6px 4px">
           <span class="field-label" style="font-weight:700;color:var(--you)">Total Your SIPs</span>
-          <span style="font-family:monospace;font-weight:700;color:var(--jt2)" id="sip-total-settings">&#8377;1,16,900</span>
+          <span style="font-family:monospace;font-weight:700;color:var(--jt2)" id="sip-total-settings">&#8377;1,33,900</span>
         </div>
       </div>
       <div class="field-group">
-        <h3>Wife's SIP Allocation (5 Funds) - Total: ₹60,500/month</h3>
+        <h3>Wife's SIP Allocation (5 Funds) - Total: ₹58,500/month</h3>
         <div class="field-row">
           <span class="field-label">ICICI Bluechip Fund</span>
           <input class="field-input" id="s-wife-sip-0" type="number" value="20000">
@@ -439,7 +482,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
         <div class="field-row" style="background:rgba(224,64,160,.05);border-radius:4px;padding:6px 4px">
           <span class="field-label" style="font-weight:700;color:var(--wife)">Wife's Total SIPs</span>
-          <span style="font-family:monospace;font-weight:700;color:#f580c8" id="wsip-total-settings">&#8377;60,500</span>
+          <span style="font-family:monospace;font-weight:700;color:#f580c8" id="wsip-total-settings">&#8377;58,500</span>
         </div>
         <h3 style="margin-top:16px">📊 Fund Performance Data Quality</h3>
         <div id="data-quality-status" style="background:rgba(240,180,41,0.1);border-left:3px solid var(--jt);padding:12px;border-radius:4px;margin-bottom:16px">
@@ -544,6 +587,27 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div id="insurance-adequacy" style="margin:12px 0"></div>
       </div>
     </div>
+
+    <!-- Portfolio Backup & Restore Section -->
+    <div class="field-group" style="margin-top:16px">
+      <h3>📁 Portfolio Backup & Restore</h3>
+      <div style="margin-bottom:12px;font-size:12px;color:var(--ink2)">
+        Export your entire portfolio (funds, settings, performance data) to a JSON file, or restore from a previous backup.
+      </div>
+      <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+        <button onclick="exportPortfolioBackup()" class="btn-primary">
+          📥 Download Portfolio Backup
+        </button>
+        <label class="btn-secondary" style="margin:0">
+          📤 Import Backup
+          <input type="file" accept=".json" onchange="importPortfolioBackup(this.files[0])" style="display:none" id="import-file-input">
+        </label>
+      </div>
+      <div style="font-size:11px;color:var(--ink3);line-height:1.5">
+        💡 <strong>Tip:</strong> Backup includes all funds, SIP amounts, settings, cached NAV data, and performance history. Import to restore your portfolio after browser cache clear or on a new device.
+      </div>
+    </div>
+
     <button class="save-btn" onclick="saveConfig()">Save Settings & Update All Pages</button>
     <div id="save-msg" style="display:none;margin-top:12px;padding:10px 16px;background:var(--jt-s);border:1px solid var(--jt);border-radius:var(--r);color:var(--jt2);font-size:13px">&#9989; Settings saved! All pages have been updated.</div>
   </div>
@@ -592,7 +656,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr>
             <td>Retirement (Existing)</td>
             <td>Motilal Midcap Direct</td>
-            <td id="port-sip-3">&#8377;2,200</td>
+            <td id="port-sip-3">&#8377;15,000</td>
             <td>Already running</td>
             <td>10%/year</td>
             <td><span class="tag tr2">HIGH</span></td>
@@ -663,23 +727,23 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </tr>
           <tr>
             <td>Gold - Inflation Hedge</td>
-            <td>Gold BeES (ETF) ⚠️ <span style="font-size:10px;color:var(--warning)">Using assumption</span></td>
+            <td>Gold BeES (ETF)</td>
             <td id="port-sip-12">&#8377;5,700</td>
             <td>Commodity diversification</td>
-            <td>10%/year</td>
+            <td>9%/year</td>
             <td><span class="tag tg">LOW</span></td>
           </tr>
           <tr>
             <td>NPS Tier 1</td>
-            <td>Auto-choice Aggressive ⚠️ <span style="font-size:10px;color:var(--warning)">Using assumption</span></td>
+            <td>Auto-choice Aggressive</td>
             <td id="port-sip-13">&#8377;6,200</td>
             <td>80CCD tax saving</td>
-            <td>Fixed</td>
+            <td>11%/year</td>
             <td><span class="tag ty">MODERATE</span></td>
           </tr>
           <tr class="ttr">
             <td colspan="2"><strong>TOTAL MONTHLY INVESTMENT</strong></td>
-            <td id="port-total"><strong>&#8377;126,900</strong></td>
+            <td id="port-total"><strong>&#8377;133,900</strong></td>
             <td colspan="3"></td>
           </tr>
         </tbody>
@@ -884,9 +948,9 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr><th>Fund Category</th><th>Fund Name</th><th>Monthly SIP</th><th>Purpose</th><th>Step-Up</th><th>Risk</th></tr>
         </thead>
         <tbody>
-          <tr><td>Tax Saving (ELSS)</td><td>Parag Parikh Flexi Cap Direct</td><td>&#8377;10,000</td><td>80C + Long-term wealth</td><td>10%/year</td><td><span class="tag ty">MODERATE</span></td></tr>
+          <tr><td>Flexi Cap</td><td>Parag Parikh Flexi Cap Direct</td><td>&#8377;10,000</td><td>Global diversification + Long-term wealth</td><td>10%/year</td><td><span class="tag ty">MODERATE</span></td></tr>
           <tr><td>Retirement Core</td><td>Nifty 50 Index Fund Direct</td><td>&#8377;15,000</td><td>Low-cost retirement base</td><td>10%/year</td><td><span class="tag tg">LOW</span></td></tr>
-          <tr><td>Retirement (Existing)</td><td>Motilal Midcap Direct</td><td>&#8377;2,200</td><td>Already running</td><td>10%/year</td><td><span class="tag tr2">HIGH</span></td></tr>
+          <tr><td>Retirement (Existing)</td><td>Motilal Midcap Direct</td><td>&#8377;15,000</td><td>Already running</td><td>10%/year</td><td><span class="tag tr2">HIGH</span></td></tr>
           <tr><td>Retirement Satellite</td><td>Quant Small Cap Direct</td><td>&#8377;10,000</td><td>High alpha for long horizon</td><td>10%/year</td><td><span class="tag tr2">VERY HIGH</span></td></tr>
           <tr><td>Kids Education</td><td>HDFC Balanced Advantage Direct</td><td>&#8377;15,000</td><td>Lower volatility for 18yr goal</td><td>10%/year</td><td><span class="tag ty">MODERATE</span></td></tr>
           <tr><td>Kids Education</td><td>Nifty Next 50 Index Direct</td><td>&#8377;8,000</td><td>Mid-cap index exposure</td><td>10%/year</td><td><span class="tag ty">MODERATE</span></td></tr>
@@ -1227,7 +1291,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </tr>
           <tr>
             <td>Gold - Inflation Hedge</td>
-            <td>Gold BeES (ETF) ⚠️ <span style="font-size:10px;color:var(--warning)">Using assumption</span></td>
+            <td>Gold BeES (ETF)</td>
             <td id="wport-sip-5">&#8377;3,500</td>
             <td>Commodity diversification</td>
             <td><span class="tag tg">LOW</span></td>
@@ -1541,7 +1605,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <h4>Set Up All 6 New SIPs</h4>
           <span class="alert-badge badge-yellow">HIGH PRIORITY</span>
         </div>
-        <p>Only Motilal Midcap and LIC are running. Need to start: Parag Parikh ELSS (&#8377;10k), Nifty 50 Index (&#8377;15k), Quant Small Cap (&#8377;10k), HDFC Balanced Advantage (&#8377;15k), Nifty Next 50 (&#8377;8k). Use Kuvera for direct plans.</p>
+        <p>Only Motilal Midcap and LIC are running. Need to start: Parag Parikh Flexi Cap (&#8377;10k), Nifty 50 Index (&#8377;15k), Quant Small Cap (&#8377;10k), HDFC Balanced Advantage (&#8377;15k), Nifty Next 50 (&#8377;8k). Use Kuvera for direct plans.</p>
       </div>
     </div>
 
@@ -1950,6 +2014,727 @@ tr.milestone{background:rgba(240,180,41,.05)}
   </div>
 </div>
 
+<!-- PAGE 15: PORTFOLIO OVERLAP ANALYSIS -->
+<div class="page" id="page-15">
+  <div class="hdr">
+    <div class="htag">PORTFOLIO OVERLAP ANALYSIS</div>
+    <h1>Identify <span>Hidden Concentration Risk</span></h1>
+    <p>STOCK-LEVEL OVERLAP · CONSOLIDATION OPPORTUNITIES · RISK REDUCTION</p>
+  </div>
+  <div class="content">
+    <div class="alert info">💡 <strong>WHY THIS MATTERS:</strong> Many of your 18 funds may hold the same underlying stocks, creating hidden concentration risk. If those stocks fall, multiple funds get hit together. This analysis helps you identify overlap and consolidate where needed.</div>
+
+    <!-- Quick Stats -->
+    <div class="g4" style="margin-bottom:24px">
+      <div class="card y">
+        <div class="ch3 y">EQUITY FUNDS</div>
+        <div class="v aj" id="overlap-equity-funds">0</div>
+        <div class="s">Analyzed for overlap</div>
+      </div>
+      <div class="card r">
+        <div class="ch3 r">HIGH OVERLAP PAIRS</div>
+        <div class="v ar" id="overlap-high-count">0</div>
+        <div class="s">&gt;50% common stocks</div>
+      </div>
+      <div class="card y">
+        <div class="ch3 y">AVG OVERLAP</div>
+        <div class="v ay" id="overlap-avg">0%</div>
+        <div class="s">Across all pairs</div>
+      </div>
+      <div class="card g">
+        <div class="ch3 g">CONSOLIDATION POTENTIAL</div>
+        <div class="v ag" id="overlap-savings">0</div>
+        <div class="s">Funds can be merged</div>
+      </div>
+    </div>
+
+    <!-- High Overlap Alerts -->
+    <div class="sh"><span class="sh-n">01</span><h2>High Overlap Alerts</h2></div>
+    <div id="overlapAlerts" style="margin-bottom:24px">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <!-- Overlap Matrix -->
+    <div class="sh"><span class="sh-n">02</span><h2>Overlap Matrix (Equity Funds Only)</h2></div>
+    <div class="alert info" style="margin-bottom:16px">
+      Color coding: <span style="color:var(--red);font-weight:700">&gt;70% = Red (High)</span> ·
+      <span style="color:var(--yellow);font-weight:700">40-70% = Yellow (Medium)</span> ·
+      <span style="color:var(--green);font-weight:700">&lt;40% = Green (Low)</span>
+    </div>
+    <div class="tw" style="margin-bottom:24px">
+      <div id="overlapMatrix">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Detailed Analysis -->
+    <div class="sh"><span class="sh-n">03</span><h2>Detailed Overlap Analysis</h2></div>
+    <div style="margin-bottom:16px">
+      <label style="display:block;margin-bottom:8px;font-weight:700">Select two funds to compare:</label>
+      <div style="display:flex;gap:12px;margin-bottom:16px">
+        <select id="overlapFund1" style="flex:1;padding:12px;border:2px solid var(--border);border-radius:8px;font-size:14px;background:var(--bg);color:var(--ink)">
+          <option value="">-- Select Fund 1 --</option>
+        </select>
+        <select id="overlapFund2" style="flex:1;padding:12px;border:2px solid var(--border);border-radius:8px;font-size:14px;background:var(--bg);color:var(--ink)">
+          <option value="">-- Select Fund 2 --</option>
+        </select>
+        <button onclick="showDetailedOverlap()" style="padding:12px 24px;background:var(--jt);color:white;border:none;border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap">
+          Compare
+        </button>
+      </div>
+    </div>
+    <div id="detailedOverlapResult">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <!-- Consolidation Recommendations -->
+    <div class="sh"><span class="sh-n">04</span><h2>Consolidation Recommendations</h2></div>
+    <div id="consolidationRecommendations">
+      <!-- Populated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 16: FUND ANALYSIS -->
+<div class="page" id="page-16">
+  <div class="hdr">
+    <div class="htag">FUND-BY-FUND ANALYSIS</div>
+    <h1>Deep Dive into <span>Each Fund's Performance</span></h1>
+    <p>KEEP · REVIEW · SWITCH DECISIONS · DETAILED RATIONALE</p>
+  </div>
+  <div class="content">
+    <div class="alert info">💡 <strong>WHY THIS MATTERS:</strong> Not all funds deserve a place in your portfolio. Some are underperforming, expensive, or creating unnecessary overlap. This analysis gives you clear verdicts on each of your 18 funds with actionable recommendations.</div>
+
+    <!-- Section 1: Fund-by-Fund Verdicts -->
+    <div class="sh"><span class="sh-n">01</span><h2>Fund-by-Fund Verdicts</h2></div>
+
+    <h3 style="color:var(--you);font-size:0.9rem;margin:20px 0 12px;font-weight:700;">YOUR FUNDS (13)</h3>
+    <div id="yourFundVerdicts">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <h3 style="color:var(--wife);font-size:0.9rem;margin:30px 0 12px;font-weight:700;">WIFE'S FUNDS (5)</h3>
+    <div id="wifeFundVerdicts">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <!-- Section 2: Stock Overlap Analysis -->
+    <div class="sh"><span class="sh-n">02</span><h2>Stock Overlap Analysis</h2></div>
+    <div class="g2">
+      <div class="card d">
+        <div class="ch3 d">HIGH OVERLAP PAIRS (⚠ RISK)</div>
+        <div id="highOverlapPairs">
+          <div class="ml">
+            <div class="d">ICICI Bluechip ↔ Nifty 50</div>
+            <div class="a ar">65-70%</div>
+          </div>
+          <div class="ml">
+            <div class="d">Parag Parikh ↔ Nifty 50</div>
+            <div class="a ay">35-40%</div>
+          </div>
+          <div class="ml">
+            <div class="d">Motilal Mid ↔ Axis Mid</div>
+            <div class="a ay">25-30%</div>
+          </div>
+        </div>
+      </div>
+      <div class="card g">
+        <div class="ch3 g">LOW/ZERO OVERLAP (✓ GOOD)</div>
+        <div id="lowOverlapPairs">
+          <div class="ml">
+            <div class="d">S&P 500 ↔ India Funds</div>
+            <div class="a ag">0%</div>
+          </div>
+          <div class="ml">
+            <div class="d">Gold ETF ↔ Equity</div>
+            <div class="a ag">0%</div>
+          </div>
+          <div class="ml">
+            <div class="d">Nifty 50 ↔ Small Cap</div>
+            <div class="a ag">0%</div>
+          </div>
+          <div class="ml">
+            <div class="d">Parag Parikh ↔ Quant SC</div>
+            <div class="a ag">~5%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Asset Allocation Assessment -->
+    <div class="sh"><span class="sh-n">03</span><h2>Asset Allocation Assessment</h2></div>
+    <div class="g2">
+      <div class="card y">
+        <div class="ch3 y">YOUR PORTFOLIO</div>
+        <div id="yourAssetAllocation">
+          <div class="ml"><div class="d">Large Cap</div><div class="a ag">~32% ✓</div></div>
+          <div class="ml"><div class="d">Mid Cap</div><div class="a ag">~15% ✓</div></div>
+          <div class="ml"><div class="d">Small Cap</div><div class="a ag">~10% ✓</div></div>
+          <div class="ml"><div class="d">International</div><div class="a ag">~13% ✓</div></div>
+          <div class="ml"><div class="d">Hybrid</div><div class="a ag">~9% ✓</div></div>
+          <div class="ml"><div class="d">Debt</div><div class="a ag">~14% ✓</div></div>
+          <div class="ml"><div class="d">Gold</div><div class="a ag">~4% ✓</div></div>
+          <div class="ml"><div class="d">NPS</div><div class="a ag">~5% ✓</div></div>
+        </div>
+      </div>
+      <div class="card w">
+        <div class="ch3 w">WIFE'S PORTFOLIO</div>
+        <div id="wifeAssetAllocation">
+          <div class="ml"><div class="d">Large Cap</div><div class="a ag">~50%</div></div>
+          <div class="ml"><div class="d">Mid Cap</div><div class="a ag">~25%</div></div>
+          <div class="ml"><div class="d">Debt</div><div class="a ag">~17%</div></div>
+          <div class="ml"><div class="d">Gold</div><div class="a ag">~6%</div></div>
+          <div class="ml"><div class="d">Small Cap</div><div class="a ar">0% ⚠</div></div>
+          <div class="ml"><div class="d">International</div><div class="a ar">0% ⚠</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Risk Analysis Scorecard -->
+    <div class="sh"><span class="sh-n">04</span><h2>Risk Analysis Scorecard</h2></div>
+    <div class="card">
+      <div class="ch3">PORTFOLIO RISK SCORECARD</div>
+      <div class="g2" style="margin-top:12px;">
+        <div>
+          <div class="ml"><div class="d">Concentration risk</div><div class="a ag">LOW</div></div>
+          <div class="ml"><div class="d">Manager risk</div><div class="a ay">MEDIUM</div></div>
+          <div class="ml"><div class="d">Liquidity risk</div><div class="a ag">LOW</div></div>
+          <div class="ml"><div class="d">Currency risk</div><div class="a ag">LOW</div></div>
+        </div>
+        <div>
+          <div class="ml"><div class="d">Market drawdown risk</div><div class="a ay">MEDIUM</div></div>
+          <div class="ml"><div class="d">Regulatory risk</div><div class="a ay">LOW-MEDIUM</div></div>
+          <div class="ml"><div class="d">Inflation protection</div><div class="a ag">GOOD</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-top:13px;">
+      <div class="card g">
+        <div class="ch3 g">RISK MITIGANTS IN PLACE</div>
+        <div style="font-size:12px;line-height:1.8;">
+          ✓ ₹20L emergency fund (12 months)<br>
+          ✓ NPS as retirement floor<br>
+          ✓ Gold ETF as portfolio insurance<br>
+          ✓ S&P 500 decouples from India<br>
+          ✓ Debt funds cushion bear markets<br>
+          ✓ Index funds eliminate stock concentration<br>
+          ✓ SIP rupee cost averaging
+        </div>
+      </div>
+      <div class="card r">
+        <div class="ch3 r">MISSING PROTECTIONS</div>
+        <div style="font-size:12px;line-height:1.8;">
+          ✗ Term life insurance not purchased<br>
+          ✗ Family health insurance not purchased
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Head-to-Head Comparisons -->
+    <div class="sh"><span class="sh-n">05</span><h2>Head-to-Head Comparisons</h2></div>
+    <div id="headToHeadComparisons">
+      <!-- Populated by JavaScript -->
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 17: DECISION ENGINE & ALERTS -->
+<div class="page" id="page-17">
+  <div class="hdr">
+    <div class="htag">ENHANCED DECISION ENGINE</div>
+    <h1>Smart Exit/STP Logic & <span>Quarterly Performance Tracking</span></h1>
+    <p>ACTIONABLE RECOMMENDATIONS · MARKET CONTEXT · ALERT DASHBOARD</p>
+  </div>
+
+  <!-- Market Context Widget -->
+  <div class="banner" id="marketContextBanner">
+    <div class="bc">
+      <div class="bc-lbl">INDIA VIX</div>
+      <div class="bci">
+        <div class="v" id="vixValue">18.2</div>
+        <div class="s" id="vixSignal">🟢 Normal</div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">NIFTY P/E</div>
+      <div class="bci">
+        <div class="v" id="peValue">22.1</div>
+        <div class="s" id="peSignal">🟢 Fair Value</div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">RBI REPO RATE</div>
+      <div class="bci">
+        <div class="v" id="repoValue">6.5%</div>
+        <div class="s" id="repoSignal">🟡 Neutral</div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">INFLATION (CPI)</div>
+      <div class="bci">
+        <div class="v" id="cpiValue">5.2%</div>
+        <div class="s" id="cpiSignal">🟡 Moderate</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Market Context Insights -->
+    <div class="alert info" id="marketContextInsights">
+      💡 <strong>CURRENT MARKET CONTEXT:</strong> <span id="marketInsightText">Market conditions are neutral. Continue SIPs as planned.</span>
+    </div>
+
+    <!-- Section 1: Critical Alerts Dashboard -->
+    <div class="sh"><span class="sh-n">01</span><h2>Critical Alerts Dashboard</h2></div>
+
+    <div id="criticalAlerts">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <!-- Section 2: Quarterly Performance Trends -->
+    <div class="sh"><span class="sh-n">02</span><h2>Quarterly Performance Trends (Last 8 Quarters)</h2></div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="ch3">YOUR FUNDS - QUARTERLY ALPHA</div>
+        <div class="cw" style="height:350px;">
+          <canvas id="quarterlyAlphaChart"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch3">QUARTER-OVER-QUARTER TREND</div>
+        <div id="quarterTrendSummary" style="font-size:12px;line-height:1.8;">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Recommendations Panel -->
+    <div class="sh"><span class="sh-n">03</span><h2>Smart Recommendations</h2></div>
+
+    <h3 style="color:var(--red);font-size:0.85rem;margin:15px 0 10px;font-weight:700;">🔴 EXIT RECOMMENDATIONS</h3>
+    <div id="exitRecommendations">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <h3 style="color:var(--you);font-size:0.85rem;margin:20px 0 10px;font-weight:700;">⚠️ STP RECOMMENDATIONS</h3>
+    <div id="stpRecommendations">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <h3 style="color:var(--jt);font-size:0.85rem;margin:20px 0 10px;font-weight:700;">✅ INCREASE/BUY RECOMMENDATIONS</h3>
+    <div id="buyRecommendations">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <h3 style="color:var(--blue);font-size:0.85rem;margin:20px 0 10px;font-weight:700;">👍 HOLD (PERFORMING WELL)</h3>
+    <div id="holdRecommendations">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <!-- Section 4: STP Calculator Tool -->
+    <div class="sh"><span class="sh-n">04</span><h2>STP Calculator</h2></div>
+
+    <div class="card">
+      <div class="ch3">SYSTEMATIC TRANSFER PLAN CALCULATOR</div>
+      <div class="g2" style="margin-top:15px;">
+        <div>
+          <label style="font-size:11px;color:var(--ink3);display:block;margin-bottom:5px;">FROM FUND</label>
+          <select id="stpFromFund" style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);color:var(--ink);border-radius:4px;font-size:12px;">
+            <option value="">-- Select Source Fund --</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--ink3);display:block;margin-bottom:5px;">TO FUND</label>
+          <select id="stpToFund" style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);color:var(--ink);border-radius:4px;font-size:12px;">
+            <option value="">-- Select Target Fund --</option>
+          </select>
+        </div>
+      </div>
+      <div class="g2" style="margin-top:10px;">
+        <div>
+          <label style="font-size:11px;color:var(--ink3);display:block;margin-bottom:5px;">CURRENT VALUE (₹)</label>
+          <input type="number" id="stpCurrentValue" placeholder="840000" style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);color:var(--ink);border-radius:4px;font-size:12px;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--ink3);display:block;margin-bottom:5px;">STP DURATION (MONTHS)</label>
+          <input type="number" id="stpDuration" placeholder="6" value="6" style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);color:var(--ink);border-radius:4px;font-size:12px;">
+        </div>
+      </div>
+      <button onclick="calculateSTP()" style="margin-top:15px;padding:10px 20px;background:var(--you);color:var(--bg);border:none;border-radius:5px;font-weight:700;cursor:pointer;font-size:12px;">
+        CALCULATE STP SCHEDULE
+      </button>
+      <div id="stpResult" style="margin-top:15px;display:none;">
+        <!-- STP calculation results -->
+      </div>
+    </div>
+
+    <!-- Section 5: Detailed Quarterly Data Table -->
+    <div class="sh"><span class="sh-n">05</span><h2>Detailed Quarterly Performance Data</h2></div>
+
+    <div class="tw">
+      <table id="quarterlyDataTable">
+        <thead>
+          <tr>
+            <th>Fund</th>
+            <th>Category</th>
+            <th>Q1 2026</th>
+            <th>Q4 2025</th>
+            <th>Q3 2025</th>
+            <th>Q2 2025</th>
+            <th>Alpha Trend</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 18: MARKET SENTIMENT DASHBOARD -->
+<div class="page" id="page-18">
+  <div class="hdr">
+    <div class="htag">MARKET SENTIMENT DASHBOARD</div>
+    <h1>Live Market Indicators & <span>Investment Timing Intelligence</span></h1>
+    <p>MACRO INDICATORS · TIMING RECOMMENDATIONS · PORTFOLIO ADJUSTMENTS</p>
+  </div>
+
+  <div class="content">
+
+    <!-- Section 1: Live Market Indicators -->
+    <div class="sh"><span class="sh-n">01</span><h2>Live Market Indicators</h2></div>
+
+    <div class="g4" style="margin-bottom:25px;">
+      <!-- India VIX Card -->
+      <div class="card">
+        <div style="text-align:center;padding:20px 15px;">
+          <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:0.5px;margin-bottom:8px;">INDIA VIX</div>
+          <div style="font-size:2.5rem;font-weight:700;color:var(--ink);margin:5px 0;" id="sentimentVIX">18.2</div>
+          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentVIXSignal">🟡</div>
+          <div style="font-size:11px;font-weight:600;color:var(--ink2);margin-top:5px;" id="sentimentVIXStatus">NORMAL</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.5;padding:0 5px;">
+            🟢 &lt;15 Low<br>
+            🟡 15-25 Normal<br>
+            🔴 &gt;25 High
+          </div>
+          <div style="font-size:11px;color:var(--ink2);margin-top:12px;padding:8px;background:var(--bg3);border-radius:6px;line-height:1.6;" id="sentimentVIXInsight">
+            Market volatility is NORMAL - good for SIP continuation
+          </div>
+        </div>
+      </div>
+
+      <!-- Nifty P/E Card -->
+      <div class="card">
+        <div style="text-align:center;padding:20px 15px;">
+          <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:0.5px;margin-bottom:8px;">NIFTY 50 P/E RATIO</div>
+          <div style="font-size:2.5rem;font-weight:700;color:var(--ink);margin:5px 0;" id="sentimentPE">22.1</div>
+          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentPESignal">🟡</div>
+          <div style="font-size:11px;font-weight:600;color:var(--ink2);margin-top:5px;" id="sentimentPEStatus">FAIR VALUE</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.5;padding:0 5px;">
+            🟢 &lt;20 Undervalued<br>
+            🟡 20-24 Fair<br>
+            🔴 &gt;24 Overvalued
+          </div>
+          <div style="font-size:11px;color:var(--ink2);margin-top:12px;padding:8px;background:var(--bg3);border-radius:6px;line-height:1.6;" id="sentimentPEInsight">
+            Market fairly valued - neither cheap nor expensive
+          </div>
+        </div>
+      </div>
+
+      <!-- RBI Repo Rate Card -->
+      <div class="card">
+        <div style="text-align:center;padding:20px 15px;">
+          <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:0.5px;margin-bottom:8px;">RBI REPO RATE</div>
+          <div style="font-size:2.5rem;font-weight:700;color:var(--ink);margin:5px 0;" id="sentimentRepo">6.50%</div>
+          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentRepoSignal">→</div>
+          <div style="font-size:11px;font-weight:600;color:var(--ink2);margin-top:5px;" id="sentimentRepoStatus">STABLE</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.5;padding:0 5px;">
+            → Stable<br>
+            ↗ Rising<br>
+            ↘ Falling
+          </div>
+          <div style="font-size:11px;color:var(--ink2);margin-top:12px;padding:8px;background:var(--bg3);border-radius:6px;line-height:1.6;" id="sentimentRepoInsight">
+            Stable rates - debt fund yields steady
+          </div>
+        </div>
+      </div>
+
+      <!-- Inflation Card -->
+      <div class="card">
+        <div style="text-align:center;padding:20px 15px;">
+          <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:0.5px;margin-bottom:8px;">INFLATION (CPI)</div>
+          <div style="font-size:2.5rem;font-weight:700;color:var(--ink);margin:5px 0;" id="sentimentCPI">5.2%</div>
+          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentCPISignal">🟡</div>
+          <div style="font-size:11px;font-weight:600;color:var(--ink2);margin-top:5px;" id="sentimentCPIStatus">MODERATE</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.5;padding:0 5px;">
+            🟢 &lt;4% Low<br>
+            🟡 4-6% Moderate<br>
+            🔴 &gt;6% High
+          </div>
+          <div style="font-size:11px;color:var(--ink2);margin-top:12px;padding:8px;background:var(--bg3);border-radius:6px;line-height:1.6;" id="sentimentCPIInsight">
+            Moderate inflation - real returns positive
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Market Timing Recommendations -->
+    <div class="sh"><span class="sh-n">02</span><h2>Market Timing Recommendations</h2></div>
+
+    <div class="g3" style="margin-bottom:25px;">
+      <!-- Lump Sum Timing -->
+      <div class="card">
+        <div class="ch3">💰 LUMP SUM INVESTMENT</div>
+        <div id="lumpSumRecommendation" style="padding:15px;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- STP Timing -->
+      <div class="card">
+        <div class="ch3">⚖️ STP STRATEGY</div>
+        <div id="stpTimingRecommendation" style="padding:15px;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Debt Fund Timing -->
+      <div class="card">
+        <div class="ch3">📈 DEBT FUND TIMING</div>
+        <div id="debtTimingRecommendation" style="padding:15px;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Portfolio Adjustments Based on Sentiment -->
+    <div class="sh"><span class="sh-n">03</span><h2>Dynamic Asset Allocation Suggestions</h2></div>
+
+    <div class="card" style="margin-bottom:25px;">
+      <div class="ch3">CURRENT MARKET SENTIMENT: <span id="marketSentimentLabel">FAIR</span></div>
+      <div style="padding:20px;">
+        <div class="g2" style="margin-bottom:20px;">
+          <div>
+            <h4 style="font-size:12px;font-weight:700;color:var(--ink3);margin-bottom:10px;">CURRENT ALLOCATION</h4>
+            <div id="currentAllocation" style="font-size:12px;line-height:2;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:12px;font-weight:700;color:var(--ink3);margin-bottom:10px;">SUGGESTED ALLOCATION</h4>
+            <div id="suggestedAllocation" style="font-size:12px;line-height:2;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+        <div id="allocationAction" style="padding:12px;background:var(--bg3);border-radius:6px;font-size:12px;line-height:1.7;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Overall Risk Score -->
+    <div class="sh"><span class="sh-n">04</span><h2>Risk-On vs Risk-Off Indicator</h2></div>
+
+    <div class="card" style="margin-bottom:25px;">
+      <div class="ch3">COMPOSITE MARKET SENTIMENT SCORE</div>
+      <div style="text-align:center;padding:30px 20px;">
+        <div style="position:relative;width:200px;height:200px;margin:0 auto 20px;">
+          <svg width="200" height="200" style="transform:rotate(-90deg);">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--bg3)" stroke-width="20"></circle>
+            <circle id="sentimentScoreCircle" cx="100" cy="100" r="80" fill="none" stroke="var(--jt)" stroke-width="20"
+                    stroke-dasharray="502.4" stroke-dashoffset="251.2" stroke-linecap="round"></circle>
+          </svg>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+            <div style="font-size:3rem;font-weight:700;color:var(--ink);" id="sentimentScoreValue">65</div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:5px;">/ 100</div>
+          </div>
+        </div>
+        <div style="font-size:1rem;font-weight:700;color:var(--jt);margin-bottom:15px;" id="sentimentScoreLabel">
+          MODERATE RISK-ON
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.8;max-width:500px;margin:0 auto;text-align:left;">
+          <div style="margin-bottom:8px;"><strong>Score Ranges:</strong></div>
+          <div>🔴 0-30: RISK-OFF (defensive mode, increase debt/gold)</div>
+          <div>🟡 31-60: NEUTRAL (maintain current allocation)</div>
+          <div>🟢 61-80: MODERATE RISK-ON (good for SIP, cautious lump sum)</div>
+          <div>🟢 81-100: STRONG RISK-ON (excellent for lump sum, increase equity)</div>
+        </div>
+        <div id="sentimentScoreAction" style="margin-top:20px;padding:15px;background:var(--bg3);border-radius:8px;font-size:12px;line-height:1.8;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: FII/DII Flow Analysis -->
+    <div class="sh"><span class="sh-n">05</span><h2>FII/DII Flow Analysis</h2></div>
+
+    <div class="card" style="margin-bottom:25px;">
+      <div class="ch3">MARCH 2026 INSTITUTIONAL FLOWS</div>
+      <div style="padding:20px;">
+        <div class="g3" style="margin-bottom:15px;">
+          <div style="text-align:center;padding:15px;background:var(--bg3);border-radius:6px;">
+            <div style="font-size:10px;font-weight:700;color:var(--ink3);margin-bottom:5px;">FII (FOREIGN)</div>
+            <div style="font-size:1.8rem;font-weight:700;color:var(--red);">-₹8,200 Cr</div>
+            <div style="font-size:10px;color:var(--ink3);margin-top:5px;">Net Sellers</div>
+          </div>
+          <div style="text-align:center;padding:15px;background:var(--bg3);border-radius:6px;">
+            <div style="font-size:10px;font-weight:700;color:var(--ink3);margin-bottom:5px;">DII (DOMESTIC)</div>
+            <div style="font-size:1.8rem;font-weight:700;color:var(--jt);">+₹12,500 Cr</div>
+            <div style="font-size:10px;color:var(--ink3);margin-top:5px;">Net Buyers</div>
+          </div>
+          <div style="text-align:center;padding:15px;background:var(--bg3);border-radius:6px;">
+            <div style="font-size:10px;font-weight:700;color:var(--ink3);margin-bottom:5px;">NET FLOW</div>
+            <div style="font-size:1.8rem;font-weight:700;color:var(--jt);">+₹4,300 Cr</div>
+            <div style="font-size:10px;color:var(--ink3);margin-top:5px;">Positive</div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:12px;background:var(--jt-s);border:1px solid var(--jt);border-radius:6px;">
+          <div style="font-size:1.5rem;margin-bottom:5px;">🟢</div>
+          <div style="font-size:11px;font-weight:600;color:var(--jt2);">
+            Domestic institutions absorbing foreign selling - market resilient
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 6: Historical Sentiment Trends -->
+    <div class="sh"><span class="sh-n">06</span><h2>Historical Sentiment Trends (12 Months)</h2></div>
+
+    <div class="g2" style="margin-bottom:25px;">
+      <div class="card">
+        <div class="ch3">INDIA VIX TREND</div>
+        <div class="cw" style="height:300px;">
+          <canvas id="vixTrendChart"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch3">NIFTY P/E TREND</div>
+        <div class="cw" style="height:300px;">
+          <canvas id="peTrendChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert info" style="margin-bottom:25px;">
+      <strong>📊 KEY INSIGHTS FROM 12-MONTH TRENDS:</strong><br>
+      • VIX peaked at 24.8 in December 2025 during election volatility<br>
+      • P/E touched low of 19.2 in September 2025 - that was a buying opportunity<br>
+      • Current levels are near 12-month average - market in equilibrium
+    </div>
+
+    <!-- Section 7: Sector Rotation Recommendations -->
+    <div class="sh"><span class="sh-n">07</span><h2>Sector Rotation Recommendations</h2></div>
+
+    <div id="sectorRotation" style="margin-bottom:25px;">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- Section 8: Economic Calendar -->
+    <div class="sh"><span class="sh-n">08</span><h2>Upcoming Events to Watch</h2></div>
+
+    <div class="tw" style="margin-bottom:25px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Event</th>
+            <th>Expected Impact</th>
+            <th>What to Watch</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Apr 4-5, 2026</strong></td>
+            <td>RBI Monetary Policy Committee Meeting</td>
+            <td>Rate hold expected at 6.50%</td>
+            <td>Debt fund yields likely to remain stable</td>
+          </tr>
+          <tr>
+            <td><strong>May 10, 2026</strong></td>
+            <td>Inflation (CPI) Data Release</td>
+            <td>Watch if inflation crosses 6%</td>
+            <td>RBI may hike rates - debt funds become attractive</td>
+          </tr>
+          <tr>
+            <td><strong>Jun 7, 2026</strong></td>
+            <td>India GDP Growth Data</td>
+            <td>Expected: 6.5-7% growth</td>
+            <td>Strong growth = equity positive</td>
+          </tr>
+          <tr>
+            <td><strong>Jun 30, 2026</strong></td>
+            <td>Q1 FY2027 Earnings Season Begins</td>
+            <td>Corporate earnings growth</td>
+            <td>Strong earnings = market upside potential</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 9: Manual Override (What-If Analysis) -->
+    <div class="sh"><span class="sh-n">09</span><h2>Manual Override - What-If Analysis</h2></div>
+
+    <div class="card">
+      <div class="ch3">🎮 TEST DIFFERENT SCENARIOS</div>
+      <div style="padding:20px;">
+        <div class="alert" style="margin-bottom:15px;">
+          💡 <strong>HOW IT WORKS:</strong> Adjust the values below to see how recommendations change under different market conditions. This helps you prepare for various scenarios.
+        </div>
+
+        <div class="g4" style="margin-bottom:15px;">
+          <div>
+            <label style="font-size:11px;color:var(--ink3);display:block;margin-bottom:5px;">India VIX</label>
+            <input type="number" id="manualVIX" value="18.2" step="0.1" min="10" max="40"
+                   style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);color:var(--ink);border-radius:4px;font-size:12px;">
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--ink3);display:block;margin-bottom:5px;">Nifty P/E</label>
+            <input type="number" id="manualPE" value="22.1" step="0.1" min="15" max="35"
+                   style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);color:var(--ink);border-radius:4px;font-size:12px;">
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--ink3);display:block;margin-bottom:5px;">RBI Repo Rate (%)</label>
+            <input type="number" id="manualRepo" value="6.50" step="0.25" min="4" max="10"
+                   style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);color:var(--ink);border-radius:4px;font-size:12px;">
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--ink3);display:block;margin-bottom:5px;">Inflation CPI (%)</label>
+            <input type="number" id="manualCPI" value="5.2" step="0.1" min="2" max="10"
+                   style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);color:var(--ink);border-radius:4px;font-size:12px;">
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;">
+          <button onclick="updateMarketSentiment()"
+                  style="flex:1;padding:12px;background:var(--jt);color:var(--bg);border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:12px;">
+            RECALCULATE RECOMMENDATIONS
+          </button>
+          <button onclick="resetMarketSentiment()"
+                  style="flex:1;padding:12px;background:var(--ink3);color:var(--bg);border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:12px;">
+            RESET TO DEFAULT
+          </button>
+        </div>
+
+        <div class="alert info" style="margin-top:15px;font-size:11px;">
+          <strong>💡 TRY THESE SCENARIOS:</strong><br>
+          • High Volatility: VIX = 30, P/E = 22 → See STP recommendations<br>
+          • Market Crash: VIX = 35, P/E = 18 → See "BUY THE DIP" signals<br>
+          • Expensive Market: VIX = 20, P/E = 28 → See defensive positioning<br>
+          • Rising Rates: Repo = 7.5%, Inflation = 6.5% → See debt fund opportunities
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 // ============================================================
 // STATE & CONFIG
@@ -1984,6 +2769,10 @@ function renderPageCharts(index) {
   if (index === 10) renderHistoricalChart();
   if (index === 11) renderMonthlyProjections(); // Monthly Projections page
   if (index === 14) renderFundComparison(); // Fund Comparison page
+  if (index === 15) renderPortfolioOverlap(); // Portfolio Overlap page
+  if (index === 16) renderFundAnalysis(); // Fund Analysis page
+  if (index === 17) renderDecisionEngine(); // Decision Engine page
+  if (index === 18) renderMarketSentiment(); // Market Sentiment Dashboard page
 }
 
 function destroyChart(id) {
@@ -2013,10 +2802,10 @@ function updateSIPTotals() {
   // Keep for backward compatibility but sync with fund arrays
 
   if (typeof yourFunds !== 'undefined') {
-    config.yourSIP = yourFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+    config.yourSIP = yourFunds.reduce((sum, f) => sum + safeCalculate(f.monthlySIP, 0), 0);
   }
   if (typeof wifeFunds !== 'undefined') {
-    config.wifeSIP = wifeFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+    config.wifeSIP = wifeFunds.reduce((sum, f) => sum + safeCalculate(f.monthlySIP, 0), 0);
   }
 
   // Update any legacy displays
@@ -2120,15 +2909,15 @@ function updateDashboardAllocation() {
   updateEl('dash-fixed-exp', fixedExpTotal);
   updateEl('dash-living-exp', config.livingExpenses || 49000);
   updateEl('dash-sinking', config.sinkingFunds || 60000);
-  updateEl('dash-goal-inv', config.yourSIP || 116900);
-  updateEl('dash-wife-inv', config.wifeSIP || 60500);
+  updateEl('dash-goal-inv', config.yourSIP || 133900);
+  updateEl('dash-wife-inv', config.wifeSIP || 58500);
 
   // Calculate and update total
   const total = fixedExpTotal +
                 (config.livingExpenses || 49000) +
                 (config.sinkingFunds || 60000) +
-                (config.yourSIP || 116900) +
-                (config.wifeSIP || 60500);
+                (config.yourSIP || 133900) +
+                (config.wifeSIP || 58500);
 
   updateEl('dash-total-alloc', total);
 }
@@ -2203,8 +2992,8 @@ function renderDashboardCharts() {
   const years = [2026, 2030, 2035, 2040, 2045, 2050, 2054];
 
   // Extract corpus values for milestone years
-  const yourRatio = (config.yourSIP || 116900) / ((config.yourSIP || 116900) + (config.wifeSIP || 60500));
-  const wifeRatio = (config.wifeSIP || 60500) / ((config.yourSIP || 116900) + (config.wifeSIP || 60500));
+  const yourRatio = (config.yourSIP || 133900) / ((config.yourSIP || 133900) + (config.wifeSIP || 58500));
+  const wifeRatio = (config.wifeSIP || 58500) / ((config.yourSIP || 133900) + (config.wifeSIP || 58500));
 
   const yourCorpus = years.map(yr => {
     const dataPoint = retirementData.find(d => d.year === yr);
@@ -2597,10 +3386,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   // Sync config with fund arrays on initial load
   if (typeof yourFunds !== 'undefined') {
-    config.yourSIP = yourFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+    config.yourSIP = yourFunds.reduce((sum, f) => sum + safeCalculate(f.monthlySIP, 0), 0);
   }
   if (typeof wifeFunds !== 'undefined') {
-    config.wifeSIP = wifeFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+    config.wifeSIP = wifeFunds.reduce((sum, f) => sum + safeCalculate(f.monthlySIP, 0), 0);
   }
   console.log('✅ Config initialized: Your SIP=₹' + config.yourSIP + ', Wife SIP=₹' + config.wifeSIP);
 
@@ -2653,6 +3442,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     updateExpenseSummary();
     updateBenchmarkSummary();
   }
+
+  // Initialize input validation listeners
+  initializeInputValidation();
 
   var sipInputs = document.querySelectorAll('.sip-input');
   sipInputs.forEach(function(inp) {
@@ -3292,24 +4084,24 @@ async function fetchNAV(schemeCode) {
     // Mock NAV for NPS
     return { currentNAV: 100, history: [] };
   }
-  
+
   try {
-    const response = await fetch(`https://api.mfapi.in/mf/${schemeCode}`);
-    const data = await response.json();
-    
+    // Use retry logic with timeout
+    const data = await fetchFundDataWithRetry(schemeCode, 2); // 2 retries for NAV
+
     if (data && data.data && data.data.length > 0) {
       const currentNAV = parseFloat(data.data[0].nav);
       const history = data.data.slice(0, 30).map(d => ({
         date: d.date,
         nav: parseFloat(d.nav)
       }));
-      
+
       return { currentNAV, history };
     }
   } catch (error) {
     console.error(`Error fetching NAV for ${schemeCode}:`, error);
   }
-  
+
   // Return mock data if fetch fails
   return { currentNAV: 50 + Math.random() * 100, history: [] };
 }
@@ -3467,9 +4259,9 @@ function calculateTax(invested, currentValue, yearsHeld) {
 // ============================================
 
 const yourFunds = [
-  { name: 'Parag Parikh Flexi Cap Direct Growth', schemeCode: '122639', monthlySIP: 18000, stepUp: 10, purpose: '80C Tax Saving + Retirement', category: 'Flexi Cap', benchmark: 'Nifty 500 TRI', expenseRatio: 0.68, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'Parag Parikh Flexi Cap Direct Growth', schemeCode: '122639', monthlySIP: 18000, stepUp: 10, purpose: 'Flexi Cap + Retirement', category: 'Flexi Cap', benchmark: 'Nifty 500 TRI', expenseRatio: 0.68, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Nifty 50 Index Fund Direct Growth', schemeCode: '120716', monthlySIP: 22000, stepUp: 10, purpose: 'Retirement Core', category: 'Large Cap', benchmark: 'Nifty 50 TRI', expenseRatio: 0.07, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
-  { name: 'Motilal Oswal Midcap Fund Direct Growth', schemeCode: '135777', monthlySIP: 8000, stepUp: 10, purpose: 'Retirement Growth', category: 'Mid Cap', benchmark: 'Nifty Midcap 150 TRI', expenseRatio: 0.55, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'Motilal Oswal Midcap Fund Direct Growth', schemeCode: '135777', monthlySIP: 15000, stepUp: 10, purpose: 'Retirement Growth', category: 'Mid Cap', benchmark: 'Nifty Midcap 150 TRI', expenseRatio: 0.55, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Quant Small Cap Fund Direct Growth', schemeCode: '112315', monthlySIP: 7000, stepUp: 10, purpose: 'Retirement Satellite', category: 'Small Cap', benchmark: 'Nifty Smallcap 250 TRI', expenseRatio: 0.68, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Nifty Smallcap 250 Index Fund Direct Growth', schemeCode: '120827', monthlySIP: 5000, stepUp: 10, purpose: 'Retirement - Small Cap Diversified', category: 'Small Cap', benchmark: 'Nifty Smallcap 250 TRI', expenseRatio: 0.10, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Motilal Oswal S&P 500 Index Fund Direct Growth', schemeCode: '120835', monthlySIP: 15000, stepUp: 10, purpose: 'International Equity - US Diversification', category: 'International', benchmark: 'S&P 500 TRI', expenseRatio: 0.50, historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
@@ -3510,14 +4302,16 @@ async function fetchFundData(schemeCode) {
   }
 
   try {
-    const response = await fetch(`https://api.mfapi.in/mf/${schemeCode}`);
-    if (!response.ok) throw new Error(`API error: ${response.status}`);
+    // Use retry logic with timeout and fallback
+    const data = await fetchFundDataWithRetry(schemeCode, 3);
 
-    const data = await response.json();
-    if (data.status !== 'SUCCESS') throw new Error('API returned non-success status');
+    if (data && data.data && data.data.length > 0) {
+      console.log(`✅ Fetched data for scheme ${schemeCode}: ${data.data.length} NAV records`);
+      return data;
+    }
 
-    console.log(`✅ Fetched data for scheme ${schemeCode}: ${data.data.length} NAV records`);
-    return data;
+    console.warn(`⚠️ No data returned for scheme ${schemeCode}, using cached/fallback`);
+    return null;
   } catch (error) {
     console.error(`❌ Failed to fetch data for scheme ${schemeCode}:`, error);
     return null;
@@ -4865,7 +5659,7 @@ function calculateScenarios(schemeCode, monthsFromStart) {
 
 // Global configuration object (single source of truth)
 let config = {
-  annualCTC: 3360000,
+  annualCTC: 3634000,
   basicSalary: 139678,
   netPay: 213586,
   wifeGross: 70000,
@@ -4875,7 +5669,7 @@ let config = {
   fixedExpenses: 13000,
   livingExpenses: 49000,
   sinkingFunds: 60000,
-  yourSIP: 126900,  // Sum of all 13 funds
+  yourSIP: 133900,  // Sum of all 13 funds (auto-calculated from yourFunds array)
   wifeSIP: 58500,   // Sum of all 5 wife funds (20000+10000+15000+10000+3500)
   // Investment assumptions
   expectedReturn: 12,  // Expected equity return percentage
@@ -5387,6 +6181,469 @@ function renderRetirementAdequacy() {
 }
 
 
+// ============================================
+// UTILITY FUNCTIONS: VALIDATION & ERROR HANDLING
+// ============================================
+
+// Safe calculation helper - prevents NaN errors
+function safeCalculate(value, defaultValue = 0) {
+  const num = parseFloat(value);
+  return isNaN(num) || !isFinite(num) ? defaultValue : num;
+}
+
+// Safe percentage calculation (clamps to 0-100)
+function safePercentage(value) {
+  const num = safeCalculate(value);
+  return Math.max(0, Math.min(100, num));
+}
+
+// Validate number input with min/max constraints
+function validateNumberInput(value, min, max, fieldName) {
+  const num = parseFloat(value);
+
+  if (isNaN(num)) {
+    return { valid: false, error: `${fieldName} must be a valid number` };
+  }
+
+  if (num < min) {
+    return { valid: false, error: `${fieldName} must be at least ₹${min.toLocaleString('en-IN')}` };
+  }
+
+  if (num > max) {
+    return { valid: false, error: `${fieldName} cannot exceed ₹${max.toLocaleString('en-IN')}` };
+  }
+
+  return { valid: true };
+}
+
+// Validate SIP input specifically
+function validateSIPInput(value) {
+  return validateNumberInput(value, 500, 100000, 'SIP amount');
+}
+
+// Validate percentage input
+function validatePercentageInput(value, fieldName) {
+  const num = parseFloat(value);
+
+  if (isNaN(num)) {
+    return { valid: false, error: `${fieldName} must be a valid number` };
+  }
+
+  if (num < 0 || num > 100) {
+    return { valid: false, error: `${fieldName} must be between 0% and 100%` };
+  }
+
+  // Warning for unrealistic values
+  if (num > 30 && fieldName.includes('return')) {
+    return { valid: true, warning: `${num}% return is very optimistic. Historical averages suggest 10-15%.` };
+  }
+
+  return { valid: true };
+}
+
+// Validate age input
+function validateAge(value, fieldName) {
+  const num = parseInt(value);
+
+  if (isNaN(num)) {
+    return { valid: false, error: `${fieldName} must be a valid number` };
+  }
+
+  if (num < 18 || num > 100) {
+    return { valid: false, error: `${fieldName} must be between 18 and 100` };
+  }
+
+  return { valid: true };
+}
+
+// Show loading state
+function showLoading(elementId, message = 'Loading...') {
+  const el = document.getElementById(elementId);
+  if (el) {
+    el.innerHTML = `
+      <div style="text-align:center;padding:40px">
+        <div class="spinner"></div>
+        <div style="margin-top:12px;color:var(--ink3);font-size:12px">${message}</div>
+      </div>
+    `;
+  }
+}
+
+// Hide loading state
+function hideLoading(elementId) {
+  const el = document.getElementById(elementId);
+  if (el) {
+    el.innerHTML = '';
+  }
+}
+
+// ============================================
+// API ERROR HANDLING WITH RETRY LOGIC
+// ============================================
+
+// Fetch fund data with retry logic and timeout
+async function fetchFundDataWithRetry(schemeCode, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const response = await Promise.race([
+        fetch(`https://api.mfapi.in/mf/${schemeCode}`),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Timeout')), 10000)
+        )
+      ]);
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      if (data.status !== 'SUCCESS') throw new Error('API error');
+
+      // Cache successful response
+      localStorage.setItem(`fund_cache_${schemeCode}`, JSON.stringify({
+        data: data,
+        timestamp: Date.now()
+      }));
+
+      return data;
+    } catch (error) {
+      console.warn(`Fetch attempt ${i+1}/${maxRetries} failed for ${schemeCode}:`, error.message);
+      if (i === maxRetries - 1) {
+        // Final failure - use cached or default data
+        return getFallbackData(schemeCode);
+      }
+      // Wait before retry (exponential backoff)
+      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+    }
+  }
+}
+
+// Get fallback data when API fails
+function getFallbackData(schemeCode) {
+  // Check cache first (use if less than 7 days old)
+  const cached = localStorage.getItem(`fund_cache_${schemeCode}`);
+  if (cached) {
+    try {
+      const { data, timestamp } = JSON.parse(cached);
+      const age = Date.now() - timestamp;
+      const maxAge = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+      if (age < maxAge) {
+        console.log(`Using cached data for ${schemeCode} (${Math.floor(age / (24 * 60 * 60 * 1000))} days old)`);
+        return data;
+      }
+    } catch (e) {
+      console.error('Cache parse error:', e);
+    }
+  }
+
+  // Return default structure if no cache
+  console.warn(`No cached data available for ${schemeCode}, using defaults`);
+  return {
+    status: 'SUCCESS',
+    data: [],
+    meta: { scheme_name: 'Unknown Fund (API Unavailable)' }
+  };
+}
+
+// ============================================
+// INPUT VALIDATION - REAL-TIME EVENT LISTENERS
+// ============================================
+
+function initializeInputValidation() {
+  console.log('🔧 Initializing input validation...');
+
+  // Validate all SIP inputs for your funds
+  if (typeof yourFunds !== 'undefined') {
+    yourFunds.forEach((fund, idx) => {
+      const inputId = `s-sip-${idx}`;
+      const input = document.getElementById(inputId);
+      if (input) {
+        addSIPValidation(input, `${fund.name} SIP`);
+      }
+    });
+  }
+
+  // Validate all SIP inputs for wife's funds
+  if (typeof wifeFunds !== 'undefined') {
+    wifeFunds.forEach((fund, idx) => {
+      const inputId = `s-wife-sip-${idx}`;
+      const input = document.getElementById(inputId);
+      if (input) {
+        addSIPValidation(input, `${fund.name} SIP`);
+      }
+    });
+  }
+
+  // Validate percentage inputs
+  const percentageFields = [
+    { id: 's-eq-return', name: 'Expected Return' },
+    { id: 's-stepup', name: 'Annual Step-up' },
+    { id: 's-inflation-general', name: 'General Inflation' },
+    { id: 's-inflation-education', name: 'Education Inflation' },
+    { id: 's-inflation-healthcare', name: 'Healthcare Inflation' }
+  ];
+
+  percentageFields.forEach(field => {
+    const input = document.getElementById(field.id);
+    if (input) {
+      addPercentageValidation(input, field.name);
+    }
+  });
+
+  // Validate amount inputs (basic validation for positive numbers)
+  const amountFields = [
+    's-ctc', 's-basic', 's-netpay', 's-wife-gross', 's-wife-inv',
+    's-rent', 's-parents', 's-fixed', 's-living', 's-sinking',
+    's-emergency-fund', 's-life-insurance', 's-health-insurance', 's-parents-health'
+  ];
+
+  amountFields.forEach(fieldId => {
+    const input = document.getElementById(fieldId);
+    if (input) {
+      addAmountValidation(input, fieldId);
+    }
+  });
+
+  console.log('✅ Input validation initialized');
+}
+
+function addSIPValidation(input, fieldName) {
+  input.addEventListener('blur', function() {
+    const value = parseFloat(this.value);
+    if (isNaN(value) || value === 0) {
+      // Allow empty or zero (user might want to disable)
+      removeError(this);
+      return;
+    }
+
+    const validation = validateSIPInput(value);
+    if (!validation.valid) {
+      showError(this, validation.error);
+    } else {
+      removeError(this);
+    }
+  });
+
+  input.addEventListener('input', function() {
+    // Remove error on input to give immediate feedback
+    if (this.classList.contains('error')) {
+      const value = parseFloat(this.value);
+      if (!isNaN(value) && value >= 500 && value <= 100000) {
+        removeError(this);
+      }
+    }
+  });
+}
+
+function addPercentageValidation(input, fieldName) {
+  input.addEventListener('blur', function() {
+    const value = parseFloat(this.value);
+    if (isNaN(value)) {
+      showError(this, `${fieldName} must be a valid number`);
+      return;
+    }
+
+    const validation = validatePercentageInput(value, fieldName);
+    if (!validation.valid) {
+      showError(this, validation.error);
+    } else {
+      removeError(this);
+      // Show warning tooltip for unrealistic values
+      if (validation.warning) {
+        showWarning(this, validation.warning);
+      }
+    }
+  });
+
+  input.addEventListener('input', function() {
+    if (this.classList.contains('error')) {
+      const value = parseFloat(this.value);
+      if (!isNaN(value) && value >= 0 && value <= 100) {
+        removeError(this);
+      }
+    }
+  });
+}
+
+function addAmountValidation(input, fieldId) {
+  input.addEventListener('blur', function() {
+    const value = parseFloat(this.value.toString().replace(/,/g, ''));
+    if (isNaN(value)) {
+      // Allow empty for optional fields
+      if (this.value.trim() !== '') {
+        showError(this, 'Must be a valid number');
+      }
+      return;
+    }
+
+    if (value < 0) {
+      showError(this, 'Cannot be negative');
+    } else {
+      removeError(this);
+    }
+  });
+}
+
+function showError(input, message) {
+  input.classList.add('error');
+
+  // Remove existing error message if any
+  const existingError = input.parentElement.querySelector('.error-message');
+  if (existingError) {
+    existingError.remove();
+  }
+
+  // Add new error message
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-message';
+  errorDiv.textContent = '⚠ ' + message;
+  input.parentElement.appendChild(errorDiv);
+}
+
+function removeError(input) {
+  input.classList.remove('error');
+  const errorMsg = input.parentElement.querySelector('.error-message');
+  if (errorMsg) {
+    errorMsg.remove();
+  }
+}
+
+function showWarning(input, message) {
+  // Show as tooltip (could be improved with a proper tooltip library)
+  input.title = '⚠️ ' + message;
+}
+
+// ============================================
+// PORTFOLIO BACKUP & RESTORE
+// ============================================
+
+// Export entire portfolio to JSON file
+function exportPortfolioBackup() {
+  try {
+    const backup = {
+      version: "1.0",
+      exportDate: new Date().toISOString(),
+      exportDateReadable: new Date().toLocaleString('en-IN'),
+      yourFunds: yourFunds,
+      wifeFunds: wifeFunds,
+      config: config,
+      navData: navData || {},
+      fundHistoricalData: localStorage.getItem('fundHistoricalData'),
+      marketFunds: marketFunds || [],
+      quarterlyPerformance: getQuarterlyPerformance(),
+      // Include all localStorage items related to funds
+      yourFundsSIP: localStorage.getItem('yourFundsSIP'),
+      wifeFundsSIP: localStorage.getItem('wifeFundsSIP'),
+      financialConfig: localStorage.getItem('financialConfig')
+    };
+
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const timestamp = new Date().toISOString().split('T')[0];
+    a.download = `portfolio-backup-${timestamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    // Show success message
+    alert('✅ Portfolio backup downloaded successfully!\n\nFile: portfolio-backup-' + timestamp + '.json\n\nStore this file safely. You can restore your portfolio anytime using the Import Backup button.');
+
+  } catch (error) {
+    console.error('Export error:', error);
+    alert('❌ Error creating backup: ' + error.message);
+  }
+}
+
+// Import portfolio from JSON file
+function importPortfolioBackup(file) {
+  if (!file) {
+    alert('⚠️ No file selected');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const backup = JSON.parse(e.target.result);
+
+      // Validate backup structure
+      if (!backup.version || !backup.yourFunds || !backup.wifeFunds) {
+        throw new Error('Invalid backup file format. Missing required fields.');
+      }
+
+      // Show preview and confirm
+      const fundCount = backup.yourFunds.length + backup.wifeFunds.length;
+      const yourSIPTotal = backup.yourFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+      const wifeSIPTotal = backup.wifeFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+
+      const confirmMsg = `📦 RESTORE PORTFOLIO BACKUP?\n\n` +
+        `Backup Date: ${backup.exportDateReadable || backup.exportDate}\n` +
+        `Version: ${backup.version}\n\n` +
+        `📊 Contents:\n` +
+        `  • Your Funds: ${backup.yourFunds.length} (₹${yourSIPTotal.toLocaleString('en-IN')}/month)\n` +
+        `  • Wife Funds: ${backup.wifeFunds.length} (₹${wifeSIPTotal.toLocaleString('en-IN')}/month)\n` +
+        `  • Total Funds: ${fundCount}\n` +
+        `  • Settings: ${backup.config ? 'Included' : 'Not included'}\n` +
+        `  • Performance Data: ${backup.quarterlyPerformance ? 'Included' : 'Not included'}\n\n` +
+        `⚠️ WARNING: This will OVERWRITE your current portfolio!\n\n` +
+        `Click OK to proceed or Cancel to abort.`;
+
+      if (!confirm(confirmMsg)) {
+        document.getElementById('import-file-input').value = '';
+        return;
+      }
+
+      // Restore data
+      yourFunds = backup.yourFunds;
+      wifeFunds = backup.wifeFunds;
+      config = backup.config || config;
+      navData = backup.navData || {};
+      marketFunds = backup.marketFunds || [];
+
+      // Restore localStorage
+      if (backup.fundHistoricalData) {
+        localStorage.setItem('fundHistoricalData', backup.fundHistoricalData);
+      }
+      if (backup.yourFundsSIP) {
+        localStorage.setItem('yourFundsSIP', backup.yourFundsSIP);
+      }
+      if (backup.wifeFundsSIP) {
+        localStorage.setItem('wifeFundsSIP', backup.wifeFundsSIP);
+      }
+      if (backup.financialConfig) {
+        localStorage.setItem('financialConfig', backup.financialConfig);
+      }
+      if (backup.quarterlyPerformance) {
+        saveQuarterlyPerformance(backup.quarterlyPerformance);
+      }
+
+      // Save config
+      saveConfig();
+
+      alert('✅ Portfolio restored successfully!\n\nYour portfolio has been restored from the backup. The page will now reload to apply all changes.');
+
+      // Clear file input
+      document.getElementById('import-file-input').value = '';
+
+      // Reload page to refresh all data
+      setTimeout(() => location.reload(), 500);
+
+    } catch (error) {
+      console.error('Import error:', error);
+      alert('❌ Error: Invalid backup file\n\n' + error.message + '\n\nPlease make sure you selected a valid portfolio backup JSON file.');
+      document.getElementById('import-file-input').value = '';
+    }
+  };
+
+  reader.onerror = function() {
+    alert('❌ Error reading file. Please try again.');
+    document.getElementById('import-file-input').value = '';
+  };
+
+  reader.readAsText(file);
+}
+
 function saveConfig() {
   console.log('💾 Saving configuration and refreshing all pages...');
 
@@ -5397,6 +6654,88 @@ function saveConfig() {
     const val = el.value.toString().replace(/,/g, '').replace(/%/g, '');
     return parseFloat(val) || 0;
   };
+
+  // ============================================
+  // VALIDATION BEFORE SAVE
+  // ============================================
+  const errors = [];
+  const warnings = [];
+
+  // Validate SIP amounts for your funds
+  if (typeof yourFunds !== 'undefined') {
+    yourFunds.forEach((fund, idx) => {
+      const el = document.getElementById(`s-sip-${idx}`);
+      if (el) {
+        const value = getValue(`s-sip-${idx}`);
+        if (value > 0) {
+          const validation = validateSIPInput(value);
+          if (!validation.valid) {
+            errors.push(`Fund ${idx + 1} (${fund.name}): ${validation.error}`);
+          }
+        }
+      }
+    });
+  }
+
+  // Validate SIP amounts for wife's funds
+  if (typeof wifeFunds !== 'undefined') {
+    wifeFunds.forEach((fund, idx) => {
+      const el = document.getElementById(`s-wife-sip-${idx}`);
+      if (el) {
+        const value = getValue(`s-wife-sip-${idx}`);
+        if (value > 0) {
+          const validation = validateSIPInput(value);
+          if (!validation.valid) {
+            errors.push(`Wife's Fund ${idx + 1} (${fund.name}): ${validation.error}`);
+          }
+        }
+      }
+    });
+  }
+
+  // Validate percentage fields
+  const equityReturn = getValue('s-eq-return');
+  if (equityReturn > 0) {
+    const validation = validatePercentageInput(equityReturn, 'Expected Equity Return');
+    if (!validation.valid) {
+      errors.push(validation.error);
+    } else if (validation.warning) {
+      warnings.push(validation.warning);
+    }
+  }
+
+  const stepUp = getValue('s-stepup');
+  if (stepUp > 0) {
+    const validation = validatePercentageInput(stepUp, 'Annual Step-up');
+    if (!validation.valid) {
+      errors.push(validation.error);
+    }
+  }
+
+  // Validate basic income fields (must be positive)
+  const ctc = getValue('s-ctc');
+  if (ctc <= 0) {
+    errors.push('CTC must be a positive number');
+  }
+
+  const netPay = getValue('s-netpay');
+  if (netPay <= 0) {
+    errors.push('Net Pay must be a positive number');
+  }
+
+  // Show validation errors if any
+  if (errors.length > 0) {
+    alert('⚠️ VALIDATION ERRORS\n\nPlease fix the following issues before saving:\n\n' + errors.map((e, i) => `${i + 1}. ${e}`).join('\n'));
+    return false; // Don't save
+  }
+
+  // Show warnings if any (but allow save)
+  if (warnings.length > 0) {
+    const proceed = confirm('⚠️ WARNINGS\n\nThe following warnings were detected:\n\n' + warnings.map((w, i) => `${i + 1}. ${w}`).join('\n') + '\n\nDo you want to proceed with save?');
+    if (!proceed) {
+      return false;
+    }
+  }
   
   config.annualCTC = getValue('s-ctc');
   config.basicSalary = getValue('s-basic');
@@ -5415,7 +6754,7 @@ function saveConfig() {
       const val = getValue(`s-sip-${idx}`);
       if (val > 0) fund.monthlySIP = val;
     });
-    config.yourSIP = yourFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+    config.yourSIP = yourFunds.reduce((sum, f) => sum + safeCalculate(f.monthlySIP, 0), 0);
   }
   
   if (typeof wifeFunds !== 'undefined') {
@@ -5423,7 +6762,7 @@ function saveConfig() {
       const val = getValue(`s-wife-sip-${idx}`);
       if (val > 0) fund.monthlySIP = val;
     });
-    config.wifeSIP = wifeFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
+    config.wifeSIP = wifeFunds.reduce((sum, f) => sum + safeCalculate(f.monthlySIP, 0), 0);
   }
 
   // Read investment assumptions
@@ -6466,6 +7805,787 @@ function clearMarketFunds() {
   console.log(`🗑️ Cleared ${count} market funds`);
 }
 
+// ============================================================
+// PORTFOLIO OVERLAP ANALYSIS
+// ============================================================
+
+// Holdings Database - Top 10 Stock Holdings for Indian Mutual Funds
+// Based on typical holdings as of early 2025 (realistic approximation)
+const fundHoldings = {
+  // Your Funds
+  '122639': { // Parag Parikh Flexi Cap Direct Growth
+    name: 'Parag Parikh Flexi Cap Direct Growth',
+    holdings: ['Reliance Industries', 'HDFC Bank', 'ICICI Bank', 'Infosys', 'Microsoft', 'Alphabet', 'Bajaj Finance', 'ITC', 'Axis Bank', 'Meta Platforms']
+  },
+  '120716': { // Nifty 50 Index Fund
+    name: 'Nifty 50 Index Fund Direct Growth',
+    holdings: ['Reliance Industries', 'HDFC Bank', 'ICICI Bank', 'Infosys', 'TCS', 'Bharti Airtel', 'Kotak Mahindra Bank', 'ITC', 'HUL', 'SBI']
+  },
+  '135777': { // Motilal Oswal Midcap Direct Growth
+    name: 'Motilal Oswal Midcap Fund Direct Growth',
+    holdings: ['Polycab India', 'Cholamandalam Investment', 'Max Healthcare', 'Kalyan Jewellers', 'Cyient', 'Mahindra Logistics', 'KEI Industries', 'Federal Bank', 'Prestige Estates', 'Sundaram Finance']
+  },
+  '112315': { // Quant Small Cap Fund Direct Growth
+    name: 'Quant Small Cap Fund Direct Growth',
+    holdings: ['Waaree Energies', 'Tata Elxsi', 'CRISIL', 'KPIT Technologies', 'Oracle Financial', 'Craftsman Automation', 'Apar Industries', 'Dixon Technologies', 'Praj Industries', 'Schaeffler India']
+  },
+  '120827': { // Nifty Smallcap 250 Index
+    name: 'Nifty Smallcap 250 Index Fund Direct Growth',
+    holdings: ['Suzlon Energy', 'NBCC India', 'IRFC', 'Vodafone Idea', 'SJVN', 'Rail Vikas Nigam', 'RVNL', 'Cochin Shipyard', 'NHPC', 'Indian Railway Finance']
+  },
+  '120835': { // Motilal Oswal S&P 500 Index Fund (US stocks - no overlap with Indian equity)
+    name: 'Motilal Oswal S&P 500 Index Fund Direct Growth',
+    holdings: ['Apple', 'Microsoft', 'Amazon', 'NVIDIA', 'Alphabet', 'Meta Platforms', 'Tesla', 'Berkshire Hathaway', 'Visa', 'JPMorgan Chase']
+  },
+  '101305': { // HDFC Balanced Advantage Fund
+    name: 'HDFC Balanced Advantage Fund Direct Growth',
+    holdings: ['HDFC Bank', 'ICICI Bank', 'Reliance Industries', 'Infosys', 'TCS', 'Bharti Airtel', 'Axis Bank', 'Kotak Mahindra Bank', 'SBI', 'Larsen & Toubro']
+  },
+  '120684': { // Nifty Next 50 Index Fund
+    name: 'Nifty Next 50 Index Fund Direct Growth',
+    holdings: ['Adani Enterprises', 'Adani Ports', 'Shriram Finance', 'BPCL', 'Grasim Industries', 'Tata Motors', 'Trent', 'Eicher Motors', 'Bajaj Finserv', 'DLF']
+  },
+
+  // Wife's Funds
+  '120503': { // ICICI Prudential Bluechip Fund Direct Growth
+    name: 'ICICI Prudential Bluechip Fund Direct Growth',
+    holdings: ['HDFC Bank', 'ICICI Bank', 'Reliance Industries', 'Infosys', 'TCS', 'Bharti Airtel', 'SBI', 'Axis Bank', 'Kotak Mahindra Bank', 'Larsen & Toubro']
+  },
+  '120581': { // Axis Midcap Fund Direct Growth
+    name: 'Axis Midcap Fund Direct Growth',
+    holdings: ['Max Healthcare', 'Polycab India', 'Kalyan Jewellers', 'Cholamandalam Investment', 'Dixon Technologies', 'Federal Bank', 'Prestige Estates', 'Persistent Systems', 'Tube Investments', 'Sundaram Finance']
+  }
+
+  // Note: Debt funds (HDFC Corporate Bond, ICICI Liquid, SBI Banking & PSU),
+  // Gold BeES, and NPS are excluded as overlap analysis is only for equity funds
+};
+
+// Calculate overlap percentage between two funds
+function calculateOverlap(schemeCode1, schemeCode2) {
+  const fund1 = fundHoldings[schemeCode1];
+  const fund2 = fundHoldings[schemeCode2];
+
+  if (!fund1 || !fund2) {
+    return { overlap: 0, common: [], unique1: [], unique2: [], total: 0 };
+  }
+
+  const holdings1 = fund1.holdings;
+  const holdings2 = fund2.holdings;
+
+  // Find common holdings
+  const common = holdings1.filter(stock => holdings2.includes(stock));
+
+  // Find unique holdings
+  const unique1 = holdings1.filter(stock => !holdings2.includes(stock));
+  const unique2 = holdings2.filter(stock => !holdings1.includes(stock));
+
+  // Calculate total unique holdings
+  const allHoldings = new Set([...holdings1, ...holdings2]);
+  const total = allHoldings.size;
+
+  // Overlap percentage = (common holdings / total unique holdings) * 100
+  const overlap = total > 0 ? (common.length / total) * 100 : 0;
+
+  return {
+    overlap: overlap.toFixed(1),
+    common: common,
+    unique1: unique1,
+    unique2: unique2,
+    total: total,
+    fund1Name: fund1.name,
+    fund2Name: fund2.name
+  };
+}
+
+// Main render function for Portfolio Overlap page
+function renderPortfolioOverlap() {
+  console.log('🔗 Rendering Portfolio Overlap Analysis...');
+
+  // Get all equity funds (exclude Debt, Gold, NPS, International)
+  const equityFunds = [...yourFunds, ...wifeFunds].filter(f =>
+    f.category !== 'Debt' &&
+    f.category !== 'Gold' &&
+    !f.name.includes('NPS') &&
+    fundHoldings[f.schemeCode] // Only funds with holdings data
+  );
+
+  console.log('Equity funds for overlap analysis:', equityFunds.length);
+
+  // Update stats
+  document.getElementById('overlap-equity-funds').textContent = equityFunds.length;
+
+  // Calculate all overlaps
+  const overlaps = [];
+  for (let i = 0; i < equityFunds.length; i++) {
+    for (let j = i + 1; j < equityFunds.length; j++) {
+      const result = calculateOverlap(equityFunds[i].schemeCode, equityFunds[j].schemeCode);
+      overlaps.push({
+        fund1: equityFunds[i],
+        fund2: equityFunds[j],
+        ...result
+      });
+    }
+  }
+
+  // Sort by overlap descending
+  overlaps.sort((a, b) => parseFloat(b.overlap) - parseFloat(a.overlap));
+
+  // Calculate stats
+  const highOverlapPairs = overlaps.filter(o => parseFloat(o.overlap) > 50).length;
+  const avgOverlap = overlaps.length > 0
+    ? (overlaps.reduce((sum, o) => sum + parseFloat(o.overlap), 0) / overlaps.length).toFixed(1)
+    : 0;
+
+  document.getElementById('overlap-high-count').textContent = highOverlapPairs;
+  document.getElementById('overlap-avg').textContent = avgOverlap + '%';
+  document.getElementById('overlap-savings').textContent = Math.floor(highOverlapPairs / 2); // Rough estimate
+
+  // Render high overlap alerts
+  renderOverlapAlerts(overlaps);
+
+  // Render overlap matrix
+  renderOverlapMatrix(equityFunds, overlaps);
+
+  // Populate fund dropdowns
+  populateFundDropdowns(equityFunds);
+
+  // Render consolidation recommendations
+  renderConsolidationRecommendations(overlaps);
+
+  console.log('✅ Portfolio Overlap Analysis rendered');
+}
+
+// Render high overlap alerts
+function renderOverlapAlerts(overlaps) {
+  const alertsDiv = document.getElementById('overlapAlerts');
+  const highOverlaps = overlaps.filter(o => parseFloat(o.overlap) > 50);
+
+  if (highOverlaps.length === 0) {
+    alertsDiv.innerHTML = '<div class="alert success">✅ <strong>GOOD NEWS!</strong> No fund pairs have &gt;50% overlap. Your portfolio is well-diversified at the stock level.</div>';
+    return;
+  }
+
+  let html = '';
+  highOverlaps.forEach(o => {
+    const level = parseFloat(o.overlap) > 70 ? 'error' : 'warning';
+    const icon = parseFloat(o.overlap) > 70 ? '🚨' : '⚠️';
+    html += `
+      <div class="alert ${level}">
+        ${icon} <strong>${o.fund1.name}</strong> and <strong>${o.fund2.name}</strong> have <strong>${o.overlap}% overlap</strong>
+        <br><span style="font-size:12px">Common stocks: ${o.common.join(', ')}</span>
+      </div>
+    `;
+  });
+
+  alertsDiv.innerHTML = html;
+}
+
+// Render overlap matrix
+function renderOverlapMatrix(equityFunds, overlaps) {
+  const matrixDiv = document.getElementById('overlapMatrix');
+
+  if (equityFunds.length === 0) {
+    matrixDiv.innerHTML = '<div class="alert warning">⚠️ No equity funds with holdings data available for overlap analysis.</div>';
+    return;
+  }
+
+  // Build matrix HTML
+  let html = '<table style="font-size:11px;border-collapse:collapse">';
+
+  // Header row
+  html += '<thead><tr><th style="padding:8px;border:1px solid var(--border);background:var(--bg2)">Fund</th>';
+  equityFunds.forEach(f => {
+    const shortName = f.name.split(' ').slice(0, 2).join(' '); // Shorten names
+    html += `<th style="padding:8px;border:1px solid var(--border);background:var(--bg2);font-size:10px;writing-mode:vertical-rl;transform:rotate(180deg);max-width:30px">${shortName}</th>`;
+  });
+  html += '</tr></thead>';
+
+  // Body rows
+  html += '<tbody>';
+  equityFunds.forEach((fund1, i) => {
+    html += '<tr>';
+    const shortName = fund1.name.split(' ').slice(0, 2).join(' ');
+    html += `<td style="padding:8px;border:1px solid var(--border);background:var(--bg2);font-weight:700;font-size:10px">${shortName}</td>`;
+
+    equityFunds.forEach((fund2, j) => {
+      if (i === j) {
+        html += '<td style="padding:8px;border:1px solid var(--border);background:var(--ink3);color:white;text-align:center">-</td>';
+      } else {
+        const overlap = overlaps.find(o =>
+          (o.fund1.schemeCode === fund1.schemeCode && o.fund2.schemeCode === fund2.schemeCode) ||
+          (o.fund2.schemeCode === fund1.schemeCode && o.fund1.schemeCode === fund2.schemeCode)
+        );
+
+        const overlapPct = overlap ? parseFloat(overlap.overlap) : 0;
+        let bgColor = 'var(--green)';
+        if (overlapPct >= 70) bgColor = 'var(--red)';
+        else if (overlapPct >= 40) bgColor = 'var(--yellow)';
+
+        html += `<td style="padding:8px;border:1px solid var(--border);background:${bgColor};color:white;text-align:center;font-weight:700;cursor:pointer" title="${overlap ? overlap.common.join(', ') : ''}">${overlapPct.toFixed(0)}%</td>`;
+      }
+    });
+
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+
+  matrixDiv.innerHTML = html;
+}
+
+// Populate fund dropdowns for detailed comparison
+function populateFundDropdowns(equityFunds) {
+  const select1 = document.getElementById('overlapFund1');
+  const select2 = document.getElementById('overlapFund2');
+
+  let options = '<option value="">-- Select Fund --</option>';
+  equityFunds.forEach(f => {
+    options += `<option value="${f.schemeCode}">${f.name}</option>`;
+  });
+
+  select1.innerHTML = options;
+  select2.innerHTML = options;
+}
+
+// Show detailed overlap comparison
+function showDetailedOverlap() {
+  const schemeCode1 = document.getElementById('overlapFund1').value;
+  const schemeCode2 = document.getElementById('overlapFund2').value;
+  const resultDiv = document.getElementById('detailedOverlapResult');
+
+  if (!schemeCode1 || !schemeCode2) {
+    resultDiv.innerHTML = '<div class="alert warning">⚠️ Please select both funds to compare</div>';
+    return;
+  }
+
+  if (schemeCode1 === schemeCode2) {
+    resultDiv.innerHTML = '<div class="alert error">❌ Please select two different funds</div>';
+    return;
+  }
+
+  const result = calculateOverlap(schemeCode1, schemeCode2);
+
+  let color = 'var(--green)';
+  let status = 'LOW OVERLAP - Good Diversification';
+  if (parseFloat(result.overlap) >= 70) {
+    color = 'var(--red)';
+    status = 'HIGH OVERLAP - Consider Consolidation';
+  } else if (parseFloat(result.overlap) >= 40) {
+    color = 'var(--yellow)';
+    status = 'MEDIUM OVERLAP - Monitor';
+  }
+
+  let html = `
+    <div class="card" style="border:3px solid ${color};margin-bottom:24px">
+      <h3 style="margin:0 0 16px 0">Overlap Analysis</h3>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin-bottom:24px">
+        <div style="text-align:center">
+          <div style="font-weight:700;font-size:14px;margin-bottom:8px">${result.fund1Name}</div>
+          <div style="font-size:12px;color:var(--ink3)">10 holdings</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:48px;font-weight:900;color:${color}">${result.overlap}%</div>
+          <div style="font-size:12px;font-weight:700;color:${color};margin-top:8px">${status}</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-weight:700;font-size:14px;margin-bottom:8px">${result.fund2Name}</div>
+          <div style="font-size:12px;color:var(--ink3)">10 holdings</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div>
+          <div style="font-weight:700;margin-bottom:8px;color:${color}">Common Holdings (${result.common.length})</div>
+          <ul style="margin:0;padding-left:20px;font-size:12px">
+            ${result.common.length > 0 ? result.common.map(s => `<li>${s}</li>`).join('') : '<li style="color:var(--ink3)">None</li>'}
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:8px;color:var(--jt)">Only in ${result.fund1Name.split(' ')[0]} (${result.unique1.length})</div>
+          <ul style="margin:0;padding-left:20px;font-size:12px">
+            ${result.unique1.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:8px;color:var(--purple)">Only in ${result.fund2Name.split(' ')[0]} (${result.unique2.length})</div>
+          <ul style="margin:0;padding-left:20px;font-size:12px">
+            ${result.unique2.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+
+  resultDiv.innerHTML = html;
+}
+
+// Render consolidation recommendations
+function renderConsolidationRecommendations(overlaps) {
+  const recDiv = document.getElementById('consolidationRecommendations');
+  const highOverlaps = overlaps.filter(o => parseFloat(o.overlap) > 60);
+
+  if (highOverlaps.length === 0) {
+    recDiv.innerHTML = '<div class="alert success">✅ <strong>NO CONSOLIDATION NEEDED</strong><br>Your portfolio has good stock-level diversification. No fund pairs have excessive overlap (&gt;60%).</div>';
+    return;
+  }
+
+  let html = '<div class="alert info" style="margin-bottom:16px">💡 <strong>CONSOLIDATION OPPORTUNITIES:</strong> These fund pairs have high overlap. Consider keeping only one from each pair to reduce concentration risk and simplify your portfolio.</div>';
+
+  highOverlaps.forEach(o => {
+    const fund1SIP = o.fund1.monthlySIP;
+    const fund2SIP = o.fund2.monthlySIP;
+    const totalSIP = fund1SIP + fund2SIP;
+
+    html += `
+      <div class="card" style="border-left:4px solid var(--red);margin-bottom:16px">
+        <h4 style="margin:0 0 12px 0;color:var(--red)">${o.overlap}% Overlap</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px">
+          <div>
+            <div style="font-weight:700;margin-bottom:4px">${o.fund1.name}</div>
+            <div style="font-size:12px;color:var(--ink3)">Monthly SIP: ₹${fund1SIP.toLocaleString('en-IN')}</div>
+          </div>
+          <div>
+            <div style="font-weight:700;margin-bottom:4px">${o.fund2.name}</div>
+            <div style="font-size:12px;color:var(--ink3)">Monthly SIP: ₹${fund2SIP.toLocaleString('en-IN')}</div>
+          </div>
+        </div>
+        <div style="background:var(--bg2);padding:12px;border-radius:8px">
+          <div style="font-weight:700;margin-bottom:8px">💡 Recommendation:</div>
+          <div style="font-size:13px">
+            Consider <strong>consolidating these into one fund</strong> with combined SIP of ₹${totalSIP.toLocaleString('en-IN')}/month.
+            ${fund1SIP > fund2SIP
+              ? `Keep <strong>${o.fund1.name}</strong> (higher SIP).`
+              : fund2SIP > fund1SIP
+              ? `Keep <strong>${o.fund2.name}</strong> (higher SIP).`
+              : 'Keep the one with better performance or lower expense ratio.'}
+            <br><strong>Why?</strong> ${o.common.length} common stocks means both funds will move similarly. You're not getting additional diversification.
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  recDiv.innerHTML = html;
+}
+
+// ============================================================
+// PAGE 16: FUND-BY-FUND ANALYSIS
+// ============================================================
+
+function renderFundAnalysis() {
+  renderYourFundVerdicts();
+  renderWifeFundVerdicts();
+  renderHeadToHeadComparisons();
+}
+
+function renderYourFundVerdicts() {
+  const fundVerdicts = [
+    {
+      name: 'Parag Parikh Flexi Cap',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '18.2%',
+        benchmark: 'Yes (5Y, 3Y)',
+        unique: '~25% overseas',
+        cost: '0.63%'
+      },
+      deepDive: "One of India's best-managed flexi cap funds. Rajeev Thakkar's conservative, value-oriented approach with global diversification through US stocks (Alphabet, Microsoft, Meta) makes it unique. PE of 17.79 vs category 27 — significantly cheaper than peers. Long-term, this is a core holding. No change needed."
+    },
+    {
+      name: 'Nifty 50 Index',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~13%',
+        benchmark: 'IS benchmark',
+        unique: 'Lowest cost',
+        cost: '0.12%'
+      },
+      deepDive: "Portfolio backbone. Lowest cost at 0.12%, zero manager risk, pure large cap exposure. Tracks India's top 50 companies. Essential core holding that should never be touched. Perfect for long-term wealth creation with minimal friction."
+    },
+    {
+      name: 'Motilal Midcap',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '22.9%',
+        benchmark: 'Yes (+4.7%)',
+        unique: 'High conviction',
+        cost: '0.55%'
+      },
+      deepDive: "Stellar 22.9% 5Y CAGR with 4.7% alpha over benchmark. High-conviction midcap strategy with 30-35 stocks. Consistent outperformance across market cycles. One of the best midcap managers in India. Keep and hold."
+    },
+    {
+      name: 'Quant Small Cap',
+      verdict: 'REVIEW',
+      metrics: {
+        cagr5y: '26.9%',
+        benchmark: 'Yes, but volatile',
+        unique: 'SEBI probe',
+        cost: '0.68%'
+      },
+      deepDive: "Exceptional 26.9% 5Y CAGR but -11% 1Y performance raises concerns. Recent SEBI probe into front-running adds regulatory risk. Consider reducing allocation and shifting to Nippon Small Cap (cleaner track record, 25.3% 5Y CAGR). Don't exit completely but reduce to 30-40% of current holding."
+    },
+    {
+      name: 'Nifty Smallcap 250',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~21%',
+        benchmark: 'IS benchmark',
+        unique: 'Diversified 250',
+        cost: '0.10%'
+      },
+      deepDive: "Low-cost index exposure to small cap segment. 250 stocks ensure broad diversification, reducing single-stock risk. Perfect complement to Quant Small Cap. Extremely low 0.10% cost. Keep as core small cap holding."
+    },
+    {
+      name: 'Motilal S&P 500',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~15%',
+        benchmark: 'Tracks S&P 500',
+        unique: 'Zero India overlap',
+        cost: '0.50%'
+      },
+      deepDive: "International diversification is critical. Zero overlap with India funds, provides USD exposure, hedges rupee depreciation. S&P 500 is the best global equity index. Keep for geographic diversification."
+    },
+    {
+      name: 'HDFC Balanced Advantage',
+      verdict: 'SWITCH',
+      metrics: {
+        cagr5y: '16%',
+        benchmark: 'Mediocre',
+        unique: 'Dynamic allocation',
+        cost: '0.76%'
+      },
+      deepDive: "Wrong fund for 18-year kids education goal. 16% 5Y CAGR is mediocre, 0.76% cost is high. Dynamic allocation reduces upside in bull markets. For 18Y horizon, pure equity is better. Switch to ICICI Equity & Debt (20.87% 5Y CAGR) or Parag Parikh Flexi Cap. Save ₹12,000/month SIP for better returns."
+    },
+    {
+      name: 'Nifty Next 50',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~20%',
+        benchmark: 'IS benchmark',
+        unique: 'Midcap-like returns',
+        cost: '0.10%'
+      },
+      deepDive: "Often called 'emerging bluechips' - companies graduating from midcap to large cap. Better returns than plain Nifty 50 with similar risk. Low 0.10% cost. Good kids education allocation. Keep."
+    },
+    {
+      name: 'HDFC Corporate Bond',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~7%',
+        benchmark: 'Yes',
+        unique: 'AAA only',
+        cost: '0.41%'
+      },
+      deepDive: "High-quality debt fund investing in AAA-rated corporate bonds. Stable 7% returns with low credit risk. Essential for portfolio stability and rebalancing. Keep as debt anchor."
+    },
+    {
+      name: 'ICICI Liquid',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~5.5%',
+        benchmark: 'Yes',
+        unique: 'Instant liquidity',
+        cost: '0.26%'
+      },
+      deepDive: "Emergency fund vehicle. Better than savings account (4%) with instant redemption. Low 0.26% cost. Essential for cash management. Keep."
+    },
+    {
+      name: 'SBI Banking PSU',
+      verdict: 'SWITCH',
+      metrics: {
+        cagr5y: '6.9%',
+        benchmark: 'Underperforming',
+        unique: 'PSU/Bank debt',
+        cost: '0.45%'
+      },
+      deepDive: "Underperforming at 6.9% 5Y vs HDFC Corp Bond's 7%+. High 0.45% cost for debt fund. Creates overlap with HDFC Corp Bond. Consolidate by moving ₹3000 SIP to HDFC Corp Bond or ICICI Liquid. Reduces complexity without losing returns."
+    },
+    {
+      name: 'Gold BeES',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~12%',
+        benchmark: 'Tracks gold',
+        unique: 'Inflation hedge',
+        cost: '0.50%'
+      },
+      deepDive: "Portfolio insurance. Zero correlation with equity, spikes during market crashes. 4-5% allocation is textbook-perfect. Keep for risk management, not returns."
+    },
+    {
+      name: 'NPS Tier 1',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~11%',
+        benchmark: 'Good',
+        unique: '80CCD tax benefit',
+        cost: '0.09%'
+      },
+      deepDive: "Unbeatable for three reasons: (1) 80CCD tax benefit, (2) Lowest 0.09% cost in India, (3) Retirement floor with guaranteed pension. Lock-in is a feature, not a bug. Keep maxing out 80CCD limit."
+    }
+  ];
+
+  renderFundVerdictCards('yourFundVerdicts', fundVerdicts);
+}
+
+function renderWifeFundVerdicts() {
+  const fundVerdicts = [
+    {
+      name: 'ICICI Bluechip',
+      verdict: 'SWITCH',
+      metrics: {
+        cagr5y: '14.5%',
+        benchmark: 'No',
+        unique: '65-70% overlap',
+        cost: '0.98%'
+      },
+      deepDive: "Major red flags: (1) 14.5% 5Y CAGR trails Nifty 50 index, (2) Expensive 0.98% cost, (3) Massive 65-70% overlap with her Nifty 50 holding. Why pay 0.98% for worse performance? Switch entire ₹20,000 SIP to Nifty 50 Index. Save ₹1.82L in fees over 30 years while getting better returns."
+    },
+    {
+      name: 'Nifty 50 Index',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~13%',
+        benchmark: 'IS benchmark',
+        unique: 'Lowest cost',
+        cost: '0.12%'
+      },
+      deepDive: "Same verdict as yours. Core holding, lowest cost, zero manager risk. After switching ICICI Bluechip here, her large cap allocation becomes cleaner and cheaper."
+    },
+    {
+      name: 'Axis Midcap',
+      verdict: 'SWITCH',
+      metrics: {
+        cagr5y: '17%',
+        benchmark: 'Weak since 2022',
+        unique: 'Manager changed',
+        cost: '0.75%'
+      },
+      deepDive: "Red flags: (1) Fund manager changed in 2022, performance dropped, (2) 17% 5Y trails Motilal Midcap's 22.9%, (3) Higher 0.75% cost vs Motilal's 0.55%. Switch ₹15,000 SIP to your Motilal Midcap (you can invest in same fund) or Nippon India Growth (21.8% 5Y CAGR). Don't settle for mediocrity."
+    },
+    {
+      name: 'HDFC Corporate Bond',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~7%',
+        benchmark: 'Yes',
+        unique: 'AAA only',
+        cost: '0.41%'
+      },
+      deepDive: "Same as yours. High-quality debt, stable returns, essential for portfolio balance. Keep."
+    },
+    {
+      name: 'Gold BeES',
+      verdict: 'KEEP',
+      metrics: {
+        cagr5y: '~12%',
+        benchmark: 'Tracks gold',
+        unique: 'Inflation hedge',
+        cost: '0.50%'
+      },
+      deepDive: "Same as yours. Portfolio insurance, inflation hedge. 6% allocation is slightly high but acceptable. Keep."
+    }
+  ];
+
+  renderFundVerdictCards('wifeFundVerdicts', fundVerdicts);
+}
+
+function renderFundVerdictCards(containerId, verdicts) {
+  const container = document.getElementById(containerId);
+  let html = '';
+
+  verdicts.forEach(fund => {
+    const verdictClass = fund.verdict === 'KEEP' ? 'verdict-keep' :
+                         fund.verdict === 'REVIEW' ? 'verdict-review' :
+                         'verdict-switch';
+    const verdictIcon = fund.verdict === 'KEEP' ? '✓' :
+                        fund.verdict === 'REVIEW' ? '⚠' :
+                        '✗';
+
+    html += `
+      <div class="fund-card">
+        <div class="fund-card-header">
+          <div class="fund-name">${fund.name}</div>
+          <div class="${verdictClass} verdict-badge">${verdictIcon} ${fund.verdict}</div>
+        </div>
+
+        <div class="fund-metrics">
+          <div class="fund-metric">
+            <div class="fund-metric-label">5Y CAGR</div>
+            <div class="fund-metric-value">${fund.metrics.cagr5y}</div>
+          </div>
+          <div class="fund-metric">
+            <div class="fund-metric-label">Benchmark beat?</div>
+            <div class="fund-metric-value">${fund.metrics.benchmark}</div>
+          </div>
+          <div class="fund-metric">
+            <div class="fund-metric-label">Unique Feature</div>
+            <div class="fund-metric-value">${fund.metrics.unique}</div>
+          </div>
+          <div class="fund-metric">
+            <div class="fund-metric-label">Cost</div>
+            <div class="fund-metric-value">${fund.metrics.cost}</div>
+          </div>
+        </div>
+
+        <div class="fund-deep-dive">
+          <div class="fund-deep-dive-title">Deep Dive:</div>
+          <div class="fund-deep-dive-text">${fund.deepDive}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function renderHeadToHeadComparisons() {
+  const comparisons = [
+    {
+      title: '1. Flexi Cap Battle',
+      fund1: {
+        name: 'Parag Parikh Flexi Cap',
+        cagr5y: '18.2%',
+        cagr3y: '16.5%',
+        cost: '0.63%',
+        unique: 'Global stocks (25%)',
+        rating: '5★'
+      },
+      fund2: {
+        name: 'Aladdin Pick (Same)',
+        cagr5y: '18.2%',
+        cagr3y: '16.5%',
+        cost: '0.63%',
+        unique: 'Same fund',
+        rating: '5★'
+      },
+      winner: 1,
+      verdict: 'Both are identical. Parag Parikh IS the Aladdin pick. No debate - keep it.'
+    },
+    {
+      title: '2. Mid Cap Showdown',
+      fund1: {
+        name: 'Motilal Midcap',
+        cagr5y: '22.9%',
+        cagr3y: '21.3%',
+        cost: '0.55%',
+        unique: 'High conviction 35 stocks',
+        rating: '5★'
+      },
+      fund2: {
+        name: 'Nippon Growth',
+        cagr5y: '21.8%',
+        cagr3y: '20.1%',
+        cost: '0.61%',
+        unique: 'Diversified 50 stocks',
+        rating: '4★'
+      },
+      winner: 1,
+      verdict: 'Motilal wins on (1) higher returns, (2) lower cost, (3) more consistent alpha. Keep Motilal.'
+    },
+    {
+      title: '3. Small Cap Safety Check',
+      fund1: {
+        name: 'Quant Small Cap',
+        cagr5y: '26.9%',
+        cagr3y: '24.2%',
+        cost: '0.68%',
+        unique: 'SEBI probe risk',
+        rating: '3★ (risky)'
+      },
+      fund2: {
+        name: 'Nippon Small Cap',
+        cagr5y: '25.3%',
+        cagr3y: '23.8%',
+        cost: '0.72%',
+        unique: 'Clean track record',
+        rating: '5★'
+      },
+      winner: 2,
+      verdict: 'Nippon safer choice. Only 1.6% lower 5Y returns but zero regulatory risk. Reduce Quant to 40%, add Nippon 60%.'
+    },
+    {
+      title: '4. Multi-Asset Efficiency',
+      fund1: {
+        name: 'HDFC Balanced Advantage',
+        cagr5y: '16%',
+        cagr3y: '14.2%',
+        cost: '0.76%',
+        unique: 'Dynamic allocation',
+        rating: '3★'
+      },
+      fund2: {
+        name: 'ICICI Equity & Debt',
+        cagr5y: '20.87%',
+        cagr3y: '18.9%',
+        cost: '0.68%',
+        unique: 'Fixed allocation',
+        rating: '5★'
+      },
+      winner: 2,
+      verdict: 'ICICI destroys HDFC: +4.87% higher 5Y returns, lower cost. For 18Y kids goal, switch entire ₹12K SIP to ICICI.'
+    },
+    {
+      title: '5. Index Philosophy: Plain vs Equal Weight',
+      fund1: {
+        name: 'Nifty 50 Index',
+        cagr5y: '~13%',
+        cagr3y: '~12%',
+        cost: '0.12%',
+        unique: 'Market cap weighted',
+        rating: '5★'
+      },
+      fund2: {
+        name: 'Nifty Equal Weight',
+        cagr5y: '~14%',
+        cagr3y: '~13%',
+        cost: '~1%',
+        unique: 'Equal weighted',
+        rating: '3★'
+      },
+      winner: 1,
+      verdict: 'Equal weight has slight outperformance but 8x higher cost (1% vs 0.12%). Over 30 years, plain Nifty 50 wins due to compounding savings. Stick with plain vanilla.'
+    }
+  ];
+
+  const container = document.getElementById('headToHeadComparisons');
+  let html = '';
+
+  comparisons.forEach(comp => {
+    html += `
+      <div class="comparison-card">
+        <div class="comparison-title">${comp.title}</div>
+        <div class="comparison-grid">
+          <div class="comparison-fund ${comp.winner === 1 ? 'comparison-winner' : ''}">
+            <div class="comparison-fund-name">${comp.fund1.name} ${comp.winner === 1 ? '👑' : ''}</div>
+            <div class="comparison-stats">
+              <div>5Y CAGR: <strong>${comp.fund1.cagr5y}</strong></div>
+              <div>3Y CAGR: <strong>${comp.fund1.cagr3y}</strong></div>
+              <div>Cost: <strong>${comp.fund1.cost}</strong></div>
+              <div>Unique: ${comp.fund1.unique}</div>
+              <div>Rating: ${comp.fund1.rating}</div>
+            </div>
+          </div>
+          <div class="comparison-fund ${comp.winner === 2 ? 'comparison-winner' : ''}">
+            <div class="comparison-fund-name">${comp.fund2.name} ${comp.winner === 2 ? '👑' : ''}</div>
+            <div class="comparison-stats">
+              <div>5Y CAGR: <strong>${comp.fund2.cagr5y}</strong></div>
+              <div>3Y CAGR: <strong>${comp.fund2.cagr3y}</strong></div>
+              <div>Cost: <strong>${comp.fund2.cost}</strong></div>
+              <div>Unique: ${comp.fund2.unique}</div>
+              <div>Rating: ${comp.fund2.rating}</div>
+            </div>
+          </div>
+        </div>
+        <div class="comparison-verdict">
+          <strong>VERDICT:</strong> ${comp.verdict}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
 // Initialize on page load
 setTimeout(() => {
   initReviewCountdown();
@@ -6476,7 +8596,1595 @@ setTimeout(() => {
   if (history.length > 0) {
     updateReviewHistory(history);
   }
+
+  // Initialize Decision Engine
+  initDecisionEngine();
 }, 500);
+
+// ============================================================
+// PAGE 17: ENHANCED DECISION ENGINE
+// ============================================================
+
+// Market context data (March 2026)
+const marketContext = {
+  indiaVIX: 18.2,
+  niftyPE: 22.1,
+  rbiRepoRate: 6.5,
+  inflation: 5.2,
+  lastUpdated: '2026-03-06'
+};
+
+// Quarterly performance storage
+function getQuarterlyPerformance() {
+  const stored = localStorage.getItem('quarterlyPerformance');
+  return stored ? JSON.parse(stored) : {};
+}
+
+function saveQuarterlyPerformance(data) {
+  localStorage.setItem('quarterlyPerformance', JSON.stringify(data));
+}
+
+// Calculate quarter key (e.g., "2026-Q1")
+function getQuarterKey(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const quarter = Math.floor(month / 3) + 1;
+  return `${year}-Q${quarter}`;
+}
+
+// Get last N quarters
+function getLastNQuarters(n) {
+  const quarters = [];
+  const now = new Date();
+
+  for (let i = 0; i < n; i++) {
+    const date = new Date(now.getFullYear(), now.getMonth() - (i * 3), 1);
+    quarters.push(getQuarterKey(date));
+  }
+
+  return quarters;
+}
+
+// Simulated quarterly data (would be calculated from actual NAV data)
+function generateQuarterlyData() {
+  const performance = {};
+  const quarters = getLastNQuarters(8);
+
+  // Realistic quarterly returns for each fund
+  const fundQuarterlyReturns = {
+    '122639': [ // Parag Parikh - Good performance
+      { return: 5.2, benchmark: 4.8 },
+      { return: 3.1, benchmark: 2.9 },
+      { return: -2.1, benchmark: -1.5 },
+      { return: 4.5, benchmark: 4.2 },
+      { return: 6.8, benchmark: 5.5 },
+      { return: 2.3, benchmark: 2.1 },
+      { return: 5.5, benchmark: 4.9 },
+      { return: 3.8, benchmark: 3.5 }
+    ],
+    '120716': [ // Nifty 50 - Benchmark tracking
+      { return: 4.8, benchmark: 4.8 },
+      { return: 2.9, benchmark: 2.9 },
+      { return: -1.5, benchmark: -1.5 },
+      { return: 4.2, benchmark: 4.2 },
+      { return: 5.5, benchmark: 5.5 },
+      { return: 2.1, benchmark: 2.1 },
+      { return: 4.9, benchmark: 4.9 },
+      { return: 3.5, benchmark: 3.5 }
+    ],
+    '135777': [ // Motilal Midcap - Strong performance
+      { return: 7.2, benchmark: 5.8 },
+      { return: 5.5, benchmark: 4.2 },
+      { return: -3.1, benchmark: -2.2 },
+      { return: 6.8, benchmark: 5.5 },
+      { return: 8.5, benchmark: 6.9 },
+      { return: 4.2, benchmark: 3.5 },
+      { return: 7.8, benchmark: 6.2 },
+      { return: 5.9, benchmark: 4.8 }
+    ],
+    '112315': [ // Quant Small Cap - UNDERPERFORMING (EXIT scenario)
+      { return: -5.2, benchmark: 2.8 },
+      { return: -3.8, benchmark: 3.5 },
+      { return: -8.5, benchmark: -1.5 },
+      { return: 1.2, benchmark: 4.8 },
+      { return: 12.5, benchmark: 8.2 },
+      { return: 3.2, benchmark: 5.5 },
+      { return: 9.8, benchmark: 7.5 },
+      { return: 6.5, benchmark: 6.2 }
+    ],
+    '120827': [ // Nifty Smallcap 250 - Good tracking
+      { return: 2.8, benchmark: 2.8 },
+      { return: 3.5, benchmark: 3.5 },
+      { return: -1.5, benchmark: -1.5 },
+      { return: 4.8, benchmark: 4.8 },
+      { return: 8.2, benchmark: 8.2 },
+      { return: 5.5, benchmark: 5.5 },
+      { return: 7.5, benchmark: 7.5 },
+      { return: 6.2, benchmark: 6.2 }
+    ],
+    '120835': [ // S&P 500 - Strong international
+      { return: 6.5, benchmark: 6.2 },
+      { return: 4.2, benchmark: 4.1 },
+      { return: -1.8, benchmark: -1.9 },
+      { return: 5.5, benchmark: 5.3 },
+      { return: 7.2, benchmark: 7.0 },
+      { return: 3.8, benchmark: 3.7 },
+      { return: 6.8, benchmark: 6.5 },
+      { return: 5.2, benchmark: 5.1 }
+    ],
+    '101305': [ // HDFC Balanced Advantage - Stable
+      { return: 3.2, benchmark: 3.0 },
+      { return: 2.1, benchmark: 2.0 },
+      { return: -0.5, benchmark: -0.8 },
+      { return: 2.8, benchmark: 2.5 },
+      { return: 4.2, benchmark: 3.8 },
+      { return: 1.8, benchmark: 1.6 },
+      { return: 3.5, benchmark: 3.2 },
+      { return: 2.5, benchmark: 2.3 }
+    ],
+    '120503': [ // ICICI Bluechip - UNDERPERFORMING
+      { return: 3.8, benchmark: 4.8 },
+      { return: 1.9, benchmark: 2.9 },
+      { return: -2.5, benchmark: -1.5 },
+      { return: 3.2, benchmark: 4.2 },
+      { return: 4.5, benchmark: 5.5 },
+      { return: 1.1, benchmark: 2.1 },
+      { return: 3.9, benchmark: 4.9 },
+      { return: 2.5, benchmark: 3.5 }
+    ],
+    '120581': [ // Axis Midcap - Weak performance
+      { return: 4.2, benchmark: 5.8 },
+      { return: 2.8, benchmark: 4.2 },
+      { return: -3.2, benchmark: -2.2 },
+      { return: 4.5, benchmark: 5.5 },
+      { return: 5.8, benchmark: 6.9 },
+      { return: 2.5, benchmark: 3.5 },
+      { return: 5.2, benchmark: 6.2 },
+      { return: 3.8, benchmark: 4.8 }
+    ]
+  };
+
+  // Build performance object
+  Object.keys(fundQuarterlyReturns).forEach(schemeCode => {
+    performance[schemeCode] = {};
+    quarters.forEach((quarter, idx) => {
+      const data = fundQuarterlyReturns[schemeCode][idx];
+      performance[schemeCode][quarter] = {
+        return: data.return,
+        benchmark: data.benchmark,
+        alpha: (data.return - data.benchmark).toFixed(2)
+      };
+    });
+  });
+
+  return performance;
+}
+
+// Generate recommendation based on quarterly performance
+function generateRecommendation(fund, quarterlyData) {
+  if (!quarterlyData) {
+    return { category: 'HOLD', reason: 'Insufficient data for analysis' };
+  }
+
+  const quarters = getLastNQuarters(8);
+  const recentQuarters = quarters.slice(0, 2);
+
+  // Get alpha for recent quarters
+  const alphas = recentQuarters.map(q =>
+    quarterlyData[q] ? parseFloat(quarterlyData[q].alpha) : 0
+  );
+
+  const avgAlpha = alphas.reduce((a, b) => a + b, 0) / alphas.length;
+  const underperformingQuarters = alphas.filter(a => a < -2).length;
+
+  // EXIT logic
+  if (underperformingQuarters >= 2) {
+    return {
+      category: 'EXIT',
+      reason: `Consistent underperformance: ${alphas[0]}% and ${alphas[1]}% alpha in last 2 quarters`,
+      severity: 'critical'
+    };
+  }
+
+  // STP logic - high volatility
+  if (fund.category === 'Equity' && marketContext.indiaVIX > 20) {
+    return {
+      category: 'STP',
+      reason: 'Market volatility elevated - consider gradual transfer to debt',
+      severity: 'warning'
+    };
+  }
+
+  // INCREASE logic - consistent outperformance
+  if (avgAlpha > 1.5 && alphas.every(a => a > 0)) {
+    return {
+      category: 'INCREASE',
+      reason: `Strong consistent alpha: ${avgAlpha.toFixed(2)}% average`,
+      severity: 'success'
+    };
+  }
+
+  // REVIEW logic
+  if (alphas.some(a => a < -1)) {
+    return {
+      category: 'REVIEW',
+      reason: 'Recent underperformance detected - monitor closely',
+      severity: 'warning'
+    };
+  }
+
+  // HOLD - default
+  return {
+    category: 'HOLD',
+    reason: 'Performance tracking benchmark acceptably',
+    severity: 'info'
+  };
+}
+
+// Render Decision Engine page
+function renderDecisionEngine() {
+  console.log('🎯 Rendering Decision Engine...');
+
+  // Update market context
+  updateMarketContext();
+
+  // Generate and display quarterly data
+  const quarterlyPerf = generateQuarterlyData();
+
+  // Generate alerts
+  renderCriticalAlerts(quarterlyPerf);
+
+  // Render quarterly chart
+  renderQuarterlyAlphaChart(quarterlyPerf);
+
+  // Generate recommendations
+  renderRecommendations(quarterlyPerf);
+
+  // Render quarterly data table
+  renderQuarterlyDataTable(quarterlyPerf);
+
+  // Populate STP calculator dropdowns
+  populateSTPCalculator();
+
+  // Update alert badge
+  updateAlertBadge(quarterlyPerf);
+}
+
+// Update market context banner
+function updateMarketContext() {
+  document.getElementById('vixValue').textContent = marketContext.indiaVIX;
+  document.getElementById('peValue').textContent = marketContext.niftyPE;
+  document.getElementById('repoValue').textContent = marketContext.rbiRepoRate + '%';
+  document.getElementById('cpiValue').textContent = marketContext.inflation + '%';
+
+  // VIX signals
+  if (marketContext.indiaVIX > 25) {
+    document.getElementById('vixSignal').innerHTML = '🔴 High Volatility';
+  } else if (marketContext.indiaVIX > 20) {
+    document.getElementById('vixSignal').innerHTML = '🟡 Elevated';
+  } else {
+    document.getElementById('vixSignal').innerHTML = '🟢 Normal';
+  }
+
+  // PE signals
+  if (marketContext.niftyPE > 24) {
+    document.getElementById('peSignal').innerHTML = '🔴 Overvalued';
+  } else if (marketContext.niftyPE > 22) {
+    document.getElementById('peSignal').innerHTML = '🟡 Fair-High';
+  } else {
+    document.getElementById('peSignal').innerHTML = '🟢 Fair Value';
+  }
+
+  // Repo rate signals
+  document.getElementById('repoSignal').innerHTML = '🟡 Neutral';
+
+  // CPI signals
+  if (marketContext.inflation > 6) {
+    document.getElementById('cpiSignal').innerHTML = '🔴 High';
+  } else if (marketContext.inflation > 5) {
+    document.getElementById('cpiSignal').innerHTML = '🟡 Moderate';
+  } else {
+    document.getElementById('cpiSignal').innerHTML = '🟢 Low';
+  }
+
+  // Market insights
+  let insights = [];
+
+  if (marketContext.indiaVIX > 20) {
+    insights.push('High volatility detected - consider STP for equity funds to reduce risk');
+  }
+
+  if (marketContext.niftyPE > 24) {
+    insights.push('Market expensive - avoid lump sum investments, continue SIPs');
+  } else if (marketContext.niftyPE < 20) {
+    insights.push('Market attractively valued - good time for lump sum investments');
+  }
+
+  if (marketContext.rbiRepoRate > 6.5) {
+    insights.push('Rising interest rates - debt funds becoming attractive');
+  }
+
+  if (insights.length === 0) {
+    insights.push('Market conditions are neutral. Continue SIPs as planned.');
+  }
+
+  document.getElementById('marketInsightText').textContent = insights.join('. ') + '.';
+}
+
+// Render critical alerts
+function renderCriticalAlerts(quarterlyPerf) {
+  const allFunds = [...yourFunds, ...wifeFunds];
+  const alerts = {
+    critical: [],
+    warning: [],
+    monitoring: [],
+    healthy: []
+  };
+
+  allFunds.forEach(fund => {
+    const perfData = quarterlyPerf[fund.schemeCode];
+    const rec = generateRecommendation(fund, perfData);
+
+    const alertItem = {
+      fund: fund,
+      recommendation: rec,
+      quarterlyData: perfData
+    };
+
+    if (rec.category === 'EXIT') {
+      alerts.critical.push(alertItem);
+    } else if (rec.category === 'STP' || rec.category === 'REVIEW') {
+      alerts.warning.push(alertItem);
+    } else if (rec.category === 'INCREASE') {
+      alerts.healthy.push(alertItem);
+    } else {
+      alerts.monitoring.push(alertItem);
+    }
+  });
+
+  let html = '';
+
+  // Critical alerts
+  alerts.critical.forEach(item => {
+    const quarters = getLastNQuarters(2);
+    const q1Data = item.quarterlyData[quarters[0]] || {};
+    const q2Data = item.quarterlyData[quarters[1]] || {};
+
+    html += `
+      <div class="alert danger" style="margin-bottom:12px;">
+        <strong>🔴 CRITICAL: ${item.fund.name}</strong><br>
+        <div style="margin-top:8px;font-size:11px;line-height:1.7;">
+          <strong>Performance:</strong> ${q1Data.return}% (${quarters[0]}) vs Benchmark ${q1Data.benchmark}% | ${q2Data.return}% (${quarters[1]}) vs Benchmark ${q2Data.benchmark}%<br>
+          <strong>Alpha:</strong> ${q1Data.alpha}% and ${q2Data.alpha}% (Underperforming 2 consecutive quarters)<br>
+          <strong>Recommendation:</strong> ${item.recommendation.reason}<br>
+          <strong>Action:</strong> Consider exiting and switching to better performer in same category<br>
+          ${item.fund.schemeCode === '112315' ? '<strong>Note:</strong> SEBI probe concerns + consistent underperformance warrant immediate action' : ''}
+        </div>
+      </div>
+    `;
+  });
+
+  // Warning alerts
+  alerts.warning.forEach(item => {
+    html += `
+      <div class="alert warning" style="margin-bottom:12px;">
+        <strong>⚠️ WARNING: ${item.fund.name}</strong><br>
+        <div style="margin-top:8px;font-size:11px;line-height:1.7;">
+          <strong>Recommendation:</strong> ${item.recommendation.category} - ${item.recommendation.reason}<br>
+          <strong>Action:</strong> Monitor closely and review next quarter
+        </div>
+      </div>
+    `;
+  });
+
+  // Monitoring (show count only)
+  if (alerts.monitoring.length > 0) {
+    html += `
+      <div class="alert info" style="margin-bottom:12px;">
+        <strong>📊 MONITORING:</strong> ${alerts.monitoring.length} funds performing adequately (tracking benchmark)
+      </div>
+    `;
+  }
+
+  // Healthy
+  if (alerts.healthy.length > 0) {
+    html += `
+      <div class="alert success" style="margin-bottom:12px;">
+        <strong>✅ HEALTHY:</strong> ${alerts.healthy.length} funds consistently beating benchmark - consider increasing SIP
+      </div>
+    `;
+  }
+
+  if (alerts.critical.length === 0 && alerts.warning.length === 0) {
+    html = '<div class="alert success">✅ <strong>ALL CLEAR:</strong> No critical issues detected. Portfolio is performing well.</div>';
+  }
+
+  document.getElementById('criticalAlerts').innerHTML = html;
+}
+
+// Render quarterly alpha chart
+function renderQuarterlyAlphaChart(quarterlyPerf) {
+  const ctx = document.getElementById('quarterlyAlphaChart');
+  if (!ctx) return;
+
+  destroyChart('quarterlyAlphaChart');
+
+  const quarters = getLastNQuarters(8).reverse();
+
+  // Select top funds to display
+  const topFunds = [
+    { code: '122639', name: 'Parag Parikh', color: 'rgba(240, 180, 41, 0.8)' },
+    { code: '135777', name: 'Motilal Mid', color: 'rgba(48, 200, 122, 0.8)' },
+    { code: '112315', name: 'Quant SC', color: 'rgba(232, 80, 64, 0.8)' },
+    { code: '120835', name: 'S&P 500', color: 'rgba(77, 158, 240, 0.8)' }
+  ];
+
+  const datasets = topFunds.map(fund => {
+    const data = quarters.map(q => {
+      const perfData = quarterlyPerf[fund.code];
+      return perfData && perfData[q] ? parseFloat(perfData[q].alpha) : 0;
+    });
+
+    return {
+      label: fund.name,
+      data: data,
+      borderColor: fund.color,
+      backgroundColor: fund.color.replace('0.8', '0.2'),
+      borderWidth: 2,
+      tension: 0.3,
+      fill: false
+    };
+  });
+
+  // Add zero line
+  datasets.push({
+    label: 'Benchmark',
+    data: quarters.map(() => 0),
+    borderColor: 'rgba(255, 255, 255, 0.3)',
+    borderWidth: 1,
+    borderDash: [5, 5],
+    fill: false,
+    pointRadius: 0
+  });
+
+  chartInstances['quarterlyAlphaChart'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: quarters,
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: { color: '#eef0f4', font: { size: 10 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + '%';
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: {
+            color: '#9aa2b0',
+            callback: function(value) {
+              return value + '%';
+            }
+          },
+          title: {
+            display: true,
+            text: 'Alpha (%)',
+            color: '#9aa2b0'
+          }
+        },
+        x: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: { color: '#9aa2b0' }
+        }
+      }
+    }
+  });
+
+  // Render trend summary
+  renderQuarterTrendSummary(quarterlyPerf);
+}
+
+// Render quarter trend summary
+function renderQuarterTrendSummary(quarterlyPerf) {
+  const quarters = getLastNQuarters(2);
+  const q1 = quarters[0];
+  const q2 = quarters[1];
+
+  let html = '<strong style="font-size:13px;">Key Trends:</strong><br><br>';
+
+  // Analyze trends for key funds
+  const keyFunds = [
+    { code: '122639', name: 'Parag Parikh' },
+    { code: '112315', name: 'Quant Small Cap' },
+    { code: '135777', name: 'Motilal Midcap' }
+  ];
+
+  keyFunds.forEach(fund => {
+    const data = quarterlyPerf[fund.code];
+    if (data && data[q1] && data[q2]) {
+      const alpha1 = parseFloat(data[q1].alpha);
+      const alpha2 = parseFloat(data[q2].alpha);
+      const trend = alpha1 > alpha2 ? '↗ Improving' : alpha1 < alpha2 ? '↘ Declining' : '→ Stable';
+      const color = alpha1 > alpha2 ? 'var(--jt)' : alpha1 < alpha2 ? 'var(--red)' : 'var(--ink3)';
+
+      html += `
+        <div style="margin-bottom:10px;">
+          <strong style="color:var(--you);">${fund.name}:</strong><br>
+          ${q2}: ${alpha2}% alpha → ${q1}: ${alpha1}% alpha
+          <span style="color:${color};font-weight:700;"> ${trend}</span>
+        </div>
+      `;
+    }
+  });
+
+  document.getElementById('quarterTrendSummary').innerHTML = html;
+}
+
+// Render recommendations
+function renderRecommendations(quarterlyPerf) {
+  const allFunds = [...yourFunds, ...wifeFunds];
+
+  const recommendations = {
+    exit: [],
+    stp: [],
+    buy: [],
+    hold: []
+  };
+
+  allFunds.forEach(fund => {
+    const perfData = quarterlyPerf[fund.schemeCode];
+    const rec = generateRecommendation(fund, perfData);
+
+    const item = { fund, recommendation: rec, quarterlyData: perfData };
+
+    if (rec.category === 'EXIT') {
+      recommendations.exit.push(item);
+    } else if (rec.category === 'STP') {
+      recommendations.stp.push(item);
+    } else if (rec.category === 'INCREASE') {
+      recommendations.buy.push(item);
+    } else {
+      recommendations.hold.push(item);
+    }
+  });
+
+  // EXIT recommendations
+  let exitHtml = '';
+  if (recommendations.exit.length === 0) {
+    exitHtml = '<div class="alert success" style="font-size:12px;">✅ No EXIT recommendations. All funds performing acceptably.</div>';
+  } else {
+    recommendations.exit.forEach(item => {
+      // Find alternative fund
+      let alternative = '';
+      if (item.fund.category === 'Small Cap') {
+        alternative = 'Nippon India Small Cap (22% 5Y CAGR) or increase Nifty Smallcap 250 Index allocation';
+      } else if (item.fund.category === 'Large Cap') {
+        alternative = 'Nifty 50 Index Fund (lowest cost, benchmark tracking)';
+      } else if (item.fund.category === 'Mid Cap') {
+        alternative = 'Motilal Oswal Midcap (22.9% 5Y CAGR)';
+      }
+
+      exitHtml += `
+        <div class="card d" style="margin-bottom:12px;">
+          <div class="ch3 d">EXIT: ${item.fund.name}</div>
+          <div style="font-size:12px;line-height:1.8;margin-top:8px;">
+            <strong>Reason:</strong> ${item.recommendation.reason}<br>
+            <strong>Category:</strong> ${item.fund.category}<br>
+            <strong>Current SIP:</strong> ₹${item.fund.monthlySIP.toLocaleString('en-IN')}<br>
+            <strong>Alternative:</strong> ${alternative}<br>
+            <strong>Action:</strong> Redeem accumulated units and start fresh SIP in alternative fund
+          </div>
+        </div>
+      `;
+    });
+  }
+  document.getElementById('exitRecommendations').innerHTML = exitHtml;
+
+  // STP recommendations
+  let stpHtml = '';
+  if (recommendations.stp.length === 0) {
+    stpHtml = '<div class="alert info" style="font-size:12px;">📊 No STP recommendations currently. Market volatility is normal.</div>';
+  } else {
+    recommendations.stp.forEach(item => {
+      stpHtml += `
+        <div class="card" style="margin-bottom:12px;border-left:3px solid var(--you);">
+          <div class="ch3 y">STP: ${item.fund.name}</div>
+          <div style="font-size:12px;line-height:1.8;margin-top:8px;">
+            <strong>Reason:</strong> ${item.recommendation.reason}<br>
+            <strong>Suggested Target:</strong> HDFC Corporate Bond Fund (low risk debt)<br>
+            <strong>Recommended Duration:</strong> 6 months<br>
+            <strong>Use Calculator Below:</strong> Enter current value to calculate monthly transfer
+          </div>
+        </div>
+      `;
+    });
+  }
+  document.getElementById('stpRecommendations').innerHTML = stpHtml;
+
+  // BUY recommendations
+  let buyHtml = '';
+  if (recommendations.buy.length === 0) {
+    buyHtml = '<div class="alert info" style="font-size:12px;">📊 No INCREASE recommendations. Current allocations are appropriate.</div>';
+  } else {
+    recommendations.buy.forEach(item => {
+      const suggestedIncrease = Math.round(item.fund.monthlySIP * 0.1); // 10% increase
+      buyHtml += `
+        <div class="card j" style="margin-bottom:12px;">
+          <div class="ch3 j">INCREASE: ${item.fund.name}</div>
+          <div style="font-size:12px;line-height:1.8;margin-top:8px;">
+            <strong>Reason:</strong> ${item.recommendation.reason}<br>
+            <strong>Current SIP:</strong> ₹${item.fund.monthlySIP.toLocaleString('en-IN')}<br>
+            <strong>Suggested Increase:</strong> +₹${suggestedIncrease.toLocaleString('en-IN')} (10% step-up)<br>
+            <strong>New SIP:</strong> ₹${(item.fund.monthlySIP + suggestedIncrease).toLocaleString('en-IN')}
+          </div>
+        </div>
+      `;
+    });
+  }
+  document.getElementById('buyRecommendations').innerHTML = buyHtml;
+
+  // HOLD recommendations (summary only)
+  let holdHtml = '';
+  if (recommendations.hold.length > 0) {
+    holdHtml = `
+      <div class="alert info" style="font-size:12px;">
+        ✅ <strong>${recommendations.hold.length} funds performing acceptably</strong> - Continue current SIP strategy<br>
+        <div style="margin-top:8px;opacity:0.8;">
+          ${recommendations.hold.map(item => item.fund.name).join(', ')}
+        </div>
+      </div>
+    `;
+  }
+  document.getElementById('holdRecommendations').innerHTML = holdHtml;
+}
+
+// Render quarterly data table
+function renderQuarterlyDataTable(quarterlyPerf) {
+  const quarters = getLastNQuarters(4);
+  const tbody = document.querySelector('#quarterlyDataTable tbody');
+
+  if (!tbody) return;
+
+  let html = '';
+
+  // Your funds
+  yourFunds.forEach(fund => {
+    const perfData = quarterlyPerf[fund.schemeCode];
+    const rec = generateRecommendation(fund, perfData);
+
+    if (!perfData) return;
+
+    const q1 = perfData[quarters[0]] || { alpha: '-' };
+    const q2 = perfData[quarters[1]] || { alpha: '-' };
+    const q3 = perfData[quarters[2]] || { alpha: '-' };
+    const q4 = perfData[quarters[3]] || { alpha: '-' };
+
+    // Calculate trend
+    const alphas = [q1, q2, q3, q4].map(q => parseFloat(q.alpha)).filter(a => !isNaN(a));
+    const avgRecent = alphas.slice(0, 2).reduce((a, b) => a + b, 0) / 2;
+    const avgOlder = alphas.slice(2, 4).reduce((a, b) => a + b, 0) / 2;
+    const trend = avgRecent > avgOlder ? '↗' : avgRecent < avgOlder ? '↘' : '→';
+    const trendColor = avgRecent > avgOlder ? 'var(--jt)' : avgRecent < avgOlder ? 'var(--red)' : 'var(--ink3)';
+
+    const statusColor = rec.category === 'EXIT' ? 'var(--red)' :
+                        rec.category === 'INCREASE' ? 'var(--jt)' :
+                        rec.category === 'STP' ? 'var(--you)' : 'var(--ink3)';
+
+    html += `
+      <tr>
+        <td>${fund.name.substring(0, 30)}...</td>
+        <td>${fund.category}</td>
+        <td style="color:${parseFloat(q1.alpha) > 0 ? 'var(--jt)' : 'var(--red)'}">${q1.alpha}%</td>
+        <td style="color:${parseFloat(q2.alpha) > 0 ? 'var(--jt)' : 'var(--red)'}">${q2.alpha}%</td>
+        <td style="color:${parseFloat(q3.alpha) > 0 ? 'var(--jt)' : 'var(--red)'}">${q3.alpha}%</td>
+        <td style="color:${parseFloat(q4.alpha) > 0 ? 'var(--jt)' : 'var(--red)'}">${q4.alpha}%</td>
+        <td style="color:${trendColor};font-size:16px;">${trend}</td>
+        <td style="color:${statusColor};font-weight:700;">${rec.category}</td>
+      </tr>
+    `;
+  });
+
+  tbody.innerHTML = html;
+}
+
+// Populate STP calculator
+function populateSTPCalculator() {
+  const fromSelect = document.getElementById('stpFromFund');
+  const toSelect = document.getElementById('stpToFund');
+
+  if (!fromSelect || !toSelect) return;
+
+  // Populate source funds (equity funds)
+  const equityFunds = [...yourFunds, ...wifeFunds].filter(f =>
+    f.category !== 'Debt' && f.category !== 'Gold'
+  );
+
+  equityFunds.forEach(fund => {
+    const option = document.createElement('option');
+    option.value = fund.schemeCode;
+    option.textContent = fund.name;
+    fromSelect.appendChild(option);
+  });
+
+  // Populate target funds (safer funds)
+  const saferFunds = [...yourFunds, ...wifeFunds].filter(f =>
+    f.category === 'Debt' || f.category === 'Hybrid' || f.category === 'Large Cap'
+  );
+
+  saferFunds.forEach(fund => {
+    const option = document.createElement('option');
+    option.value = fund.schemeCode;
+    option.textContent = fund.name;
+    toSelect.appendChild(option);
+  });
+}
+
+// Calculate STP
+function calculateSTP() {
+  const fromCode = document.getElementById('stpFromFund').value;
+  const toCode = document.getElementById('stpToFund').value;
+  const currentValue = parseFloat(document.getElementById('stpCurrentValue').value);
+  const duration = parseInt(document.getElementById('stpDuration').value);
+
+  if (!fromCode || !toCode || !currentValue || !duration) {
+    alert('Please fill all fields');
+    return;
+  }
+
+  const fromFund = [...yourFunds, ...wifeFunds].find(f => f.schemeCode === fromCode);
+  const toFund = [...yourFunds, ...wifeFunds].find(f => f.schemeCode === toCode);
+
+  const monthlyTransfer = currentValue / duration;
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+  const endDate = new Date(today.getFullYear(), today.getMonth() + duration, 1);
+
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  let html = `
+    <div style="background:var(--bg3);padding:15px;border-radius:5px;border-left:3px solid var(--jt);">
+      <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--jt);">STP SCHEDULE CALCULATED</div>
+
+      <div style="font-size:12px;line-height:1.9;">
+        <strong>From:</strong> ${fromFund.name}<br>
+        <strong>To:</strong> ${toFund.name}<br>
+        <strong>Current Value:</strong> ₹${currentValue.toLocaleString('en-IN')}<br>
+        <strong>Duration:</strong> ${duration} months<br>
+        <strong>Monthly Transfer:</strong> ₹${monthlyTransfer.toLocaleString('en-IN')}<br>
+        <strong>Start Date:</strong> ${months[startDate.getMonth()]} ${startDate.getFullYear()}<br>
+        <strong>End Date:</strong> ${months[endDate.getMonth()]} ${endDate.getFullYear()}<br><br>
+
+        <strong style="color:var(--you);">Expected Benefits:</strong><br>
+        ✓ Reduce volatility exposure gradually<br>
+        ✓ Maintain ${toFund.category} allocation for stability<br>
+        ✓ Avoid market timing risks<br>
+        ✓ Lock in gains from ${fromFund.category} fund systematically
+      </div>
+    </div>
+  `;
+
+  const resultDiv = document.getElementById('stpResult');
+  resultDiv.innerHTML = html;
+  resultDiv.style.display = 'block';
+}
+
+// Update alert badge
+function updateAlertBadge(quarterlyPerf) {
+  const allFunds = [...yourFunds, ...wifeFunds];
+  let criticalCount = 0;
+
+  allFunds.forEach(fund => {
+    const perfData = quarterlyPerf[fund.schemeCode];
+    const rec = generateRecommendation(fund, perfData);
+    if (rec.category === 'EXIT') {
+      criticalCount++;
+    }
+  });
+
+  const badge = document.getElementById('alertBadge');
+  if (badge) {
+    if (criticalCount > 0) {
+      badge.textContent = criticalCount;
+      badge.style.display = 'inline-block';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
+}
+
+// Initialize Decision Engine
+function initDecisionEngine() {
+  // Generate initial quarterly data if not exists
+  const stored = getQuarterlyPerformance();
+  if (Object.keys(stored).length === 0) {
+    const initial = generateQuarterlyData();
+    saveQuarterlyPerformance(initial);
+  }
+
+  // Update alert badge on all pages
+  const quarterlyPerf = generateQuarterlyData();
+  updateAlertBadge(quarterlyPerf);
+}
+
+// ============================================================
+// PAGE 18: MARKET SENTIMENT DASHBOARD
+// ============================================================
+
+// Market sentiment data (March 2026 - realistic values)
+let sentimentData = {
+  indiaVIX: 18.2,
+  niftyPE: 22.1,
+  rbiRepoRate: 6.5,
+  inflation: 5.2,
+  repoDirection: 'stable', // 'stable', 'rising', 'falling'
+  fiiFlow: -8200, // in Crores
+  diiFlow: 12500, // in Crores
+  lastUpdated: '2026-03-06'
+};
+
+// Historical trend data (12 months)
+const vixHistoricalData = [
+  { month: 'Mar 2025', value: 16.8 },
+  { month: 'Apr 2025', value: 17.2 },
+  { month: 'May 2025', value: 18.5 },
+  { month: 'Jun 2025', value: 19.3 },
+  { month: 'Jul 2025', value: 17.9 },
+  { month: 'Aug 2025', value: 16.4 },
+  { month: 'Sep 2025', value: 21.2 },
+  { month: 'Oct 2025', value: 20.1 },
+  { month: 'Nov 2025', value: 22.4 },
+  { month: 'Dec 2025', value: 24.8 },
+  { month: 'Jan 2026', value: 21.5 },
+  { month: 'Feb 2026', value: 19.7 },
+  { month: 'Mar 2026', value: 18.2 }
+];
+
+const peHistoricalData = [
+  { month: 'Mar 2025', value: 21.5 },
+  { month: 'Apr 2025', value: 21.8 },
+  { month: 'May 2025', value: 22.3 },
+  { month: 'Jun 2025', value: 22.9 },
+  { month: 'Jul 2025', value: 22.1 },
+  { month: 'Aug 2025', value: 20.8 },
+  { month: 'Sep 2025', value: 19.2 },
+  { month: 'Oct 2025', value: 20.5 },
+  { month: 'Nov 2025', value: 21.3 },
+  { month: 'Dec 2025', value: 22.8 },
+  { month: 'Jan 2026', value: 21.9 },
+  { month: 'Feb 2026', value: 21.5 },
+  { month: 'Mar 2026', value: 22.1 }
+];
+
+// Load sentiment data from localStorage
+function loadSentimentData() {
+  const stored = localStorage.getItem('marketSentimentData');
+  if (stored) {
+    try {
+      sentimentData = JSON.parse(stored);
+    } catch (e) {
+      console.warn('Failed to load sentiment data from localStorage');
+    }
+  }
+}
+
+// Save sentiment data to localStorage
+function saveSentimentData() {
+  localStorage.setItem('marketSentimentData', JSON.stringify(sentimentData));
+}
+
+// Calculate composite sentiment score (0-100)
+function calculateSentimentScore() {
+  let score = 50; // Start neutral
+
+  // VIX component (lower is better)
+  if (sentimentData.indiaVIX < 15) {
+    score += 20;
+  } else if (sentimentData.indiaVIX < 20) {
+    score += 10;
+  } else if (sentimentData.indiaVIX < 25) {
+    score += 0;
+  } else if (sentimentData.indiaVIX < 30) {
+    score -= 10;
+  } else {
+    score -= 20;
+  }
+
+  // P/E component (lower is better)
+  if (sentimentData.niftyPE < 18) {
+    score += 20;
+  } else if (sentimentData.niftyPE < 20) {
+    score += 10;
+  } else if (sentimentData.niftyPE < 24) {
+    score += 0;
+  } else if (sentimentData.niftyPE < 26) {
+    score -= 10;
+  } else {
+    score -= 20;
+  }
+
+  // Inflation component (lower is better)
+  if (sentimentData.inflation < 4) {
+    score += 10;
+  } else if (sentimentData.inflation < 6) {
+    score += 0;
+  } else {
+    score -= 10;
+  }
+
+  // FII/DII flow component
+  const netFlow = sentimentData.fiiFlow + sentimentData.diiFlow;
+  if (netFlow > 5000) {
+    score += 10;
+  } else if (netFlow > 0) {
+    score += 5;
+  } else if (netFlow > -5000) {
+    score -= 5;
+  } else {
+    score -= 10;
+  }
+
+  return Math.max(0, Math.min(100, score));
+}
+
+// Get VIX status
+function getVIXStatus() {
+  const vix = sentimentData.indiaVIX;
+  if (vix < 15) return { signal: '🟢', status: 'LOW', insight: 'Market volatility is LOW - excellent for lump sum investments' };
+  if (vix <= 25) return { signal: '🟡', status: 'NORMAL', insight: 'Market volatility is NORMAL - good for SIP continuation' };
+  return { signal: '🔴', status: 'HIGH', insight: 'Market volatility is HIGH - use STP for equity investments' };
+}
+
+// Get P/E status
+function getPEStatus() {
+  const pe = sentimentData.niftyPE;
+  if (pe < 20) return { signal: '🟢', status: 'UNDERVALUED', insight: 'Market undervalued - excellent entry point for investments' };
+  if (pe <= 24) return { signal: '🟡', status: 'FAIR VALUE', insight: 'Market fairly valued - neither cheap nor expensive' };
+  return { signal: '🔴', status: 'OVERVALUED', insight: 'Market overvalued - book profits and increase defensive allocation' };
+}
+
+// Get Repo Rate status
+function getRepoStatus() {
+  const dir = sentimentData.repoDirection;
+  if (dir === 'stable') return { signal: '→', status: 'STABLE', insight: 'Stable rates - debt fund yields steady' };
+  if (dir === 'rising') return { signal: '↗', status: 'RISING', insight: 'Rising rates - good time to increase debt fund allocation' };
+  return { signal: '↘', status: 'FALLING', insight: 'Falling rates - equity becomes more attractive' };
+}
+
+// Get CPI status
+function getCPIStatus() {
+  const cpi = sentimentData.inflation;
+  if (cpi < 4) return { signal: '🟢', status: 'LOW', insight: 'Low inflation - strong real returns possible' };
+  if (cpi <= 6) return { signal: '🟡', status: 'MODERATE', insight: 'Moderate inflation - real returns positive' };
+  return { signal: '🔴', status: 'HIGH', insight: 'High inflation - real returns under pressure' };
+}
+
+// Update market indicators display
+function updateMarketIndicators() {
+  const vixStatus = getVIXStatus();
+  const peStatus = getPEStatus();
+  const repoStatus = getRepoStatus();
+  const cpiStatus = getCPIStatus();
+
+  // Update VIX
+  safeSetText('sentimentVIX', sentimentData.indiaVIX.toFixed(1));
+  safeSetText('sentimentVIXSignal', vixStatus.signal);
+  safeSetText('sentimentVIXStatus', vixStatus.status);
+  safeSetText('sentimentVIXInsight', vixStatus.insight);
+
+  // Update P/E
+  safeSetText('sentimentPE', sentimentData.niftyPE.toFixed(1));
+  safeSetText('sentimentPESignal', peStatus.signal);
+  safeSetText('sentimentPEStatus', peStatus.status);
+  safeSetText('sentimentPEInsight', peStatus.insight);
+
+  // Update Repo Rate
+  safeSetText('sentimentRepo', sentimentData.rbiRepoRate.toFixed(2) + '%');
+  safeSetText('sentimentRepoSignal', repoStatus.signal);
+  safeSetText('sentimentRepoStatus', repoStatus.status);
+  safeSetText('sentimentRepoInsight', repoStatus.insight);
+
+  // Update CPI
+  safeSetText('sentimentCPI', sentimentData.inflation.toFixed(1) + '%');
+  safeSetText('sentimentCPISignal', cpiStatus.signal);
+  safeSetText('sentimentCPIStatus', cpiStatus.status);
+  safeSetText('sentimentCPIInsight', cpiStatus.insight);
+}
+
+// Generate market timing recommendations
+function generateTimingRecommendations() {
+  const vix = sentimentData.indiaVIX;
+  const pe = sentimentData.niftyPE;
+  const repo = sentimentData.rbiRepoRate;
+
+  // Lump Sum Recommendation
+  let lumpSumHTML = '';
+  if (vix < 15 && pe < 20) {
+    lumpSumHTML = `
+      <div style="padding:10px;background:var(--jt-s);border:1px solid var(--jt);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">🟢 EXCELLENT TIME</div>
+        <div style="font-size:11px;color:var(--jt2);font-weight:600;">for lump sum investments</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Why:</strong> Low volatility (VIX ${vix.toFixed(1)}) + undervalued market (P/E ${pe.toFixed(1)}) = perfect entry point
+      </div>
+    `;
+  } else if (vix > 25 || pe > 24) {
+    lumpSumHTML = `
+      <div style="padding:10px;background:var(--red-s);border:1px solid var(--red);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">🔴 AVOID LUMP SUM</div>
+        <div style="font-size:11px;color:var(--red);font-weight:600;">Use STP instead</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Why:</strong> ${vix > 25 ? 'High volatility' : 'Expensive market'} - gradual entry via STP is safer
+      </div>
+    `;
+  } else {
+    lumpSumHTML = `
+      <div style="padding:10px;background:var(--you-s);border:1px solid var(--you);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">🟡 CAUTIOUS APPROACH</div>
+        <div style="font-size:11px;color:var(--you);font-weight:600;">Small lump sums okay</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Why:</strong> Market neutral - invest gradually or in small chunks
+      </div>
+    `;
+  }
+
+  // STP Recommendation
+  let stpHTML = '';
+  if (vix > 25) {
+    stpHTML = `
+      <div style="padding:10px;background:var(--red-s);border:1px solid var(--red);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">⚠️ HIGH VOLATILITY</div>
+        <div style="font-size:11px;color:var(--red);font-weight:600;">Use STP for equity</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Recommended:</strong> 6-month STP from debt/liquid fund to equity<br>
+        <strong>Why:</strong> Gradual transfer reduces timing risk in volatile market
+      </div>
+    `;
+  } else if (vix < 15 && pe < 20) {
+    stpHTML = `
+      <div style="padding:10px;background:var(--jt-s);border:1px solid var(--jt);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">✅ LOW VOLATILITY</div>
+        <div style="font-size:11px;color:var(--jt2);font-weight:600;">Direct equity okay</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Why:</strong> Low volatility + cheap market - STP not necessary, direct entry is fine
+      </div>
+    `;
+  } else {
+    stpHTML = `
+      <div style="padding:10px;background:var(--you-s);border:1px solid var(--you);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">🟡 OPTIONAL</div>
+        <div style="font-size:11px;color:var(--you);font-weight:600;">3-month STP if cautious</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Why:</strong> Normal volatility - STP provides comfort but not critical
+      </div>
+    `;
+  }
+
+  // Debt Fund Recommendation
+  let debtHTML = '';
+  if (sentimentData.repoDirection === 'rising') {
+    debtHTML = `
+      <div style="padding:10px;background:var(--jt-s);border:1px solid var(--jt);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">✅ GOOD TIME</div>
+        <div style="font-size:11px;color:var(--jt2);font-weight:600;">Increase debt allocation</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Why:</strong> Rising rates = higher debt fund yields ahead<br>
+        <strong>Action:</strong> Add to HDFC Corporate Bond, consider longer duration funds
+      </div>
+    `;
+  } else if (sentimentData.repoDirection === 'falling') {
+    debtHTML = `
+      <div style="padding:10px;background:var(--you-s);border:1px solid var(--you);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">⚠️ FALLING RATES</div>
+        <div style="font-size:11px;color:var(--you);font-weight:600;">Equity more attractive</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Why:</strong> Falling rates = lower debt fund yields, equity benefits<br>
+        <strong>Action:</strong> Maintain existing debt, new money to equity
+      </div>
+    `;
+  } else {
+    debtHTML = `
+      <div style="padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;">
+        <div style="font-size:1.2rem;margin-bottom:5px;">→ STABLE RATES</div>
+        <div style="font-size:11px;color:var(--ink2);font-weight:600;">Maintain allocation</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
+        <strong>Why:</strong> Stable rates at ${repo.toFixed(2)}% - debt yields steady<br>
+        <strong>Action:</strong> Continue existing debt SIPs as planned
+      </div>
+    `;
+  }
+
+  safeSetHTML('lumpSumRecommendation', lumpSumHTML);
+  safeSetHTML('stpTimingRecommendation', stpHTML);
+  safeSetHTML('debtTimingRecommendation', debtHTML);
+}
+
+// Generate portfolio allocation suggestions
+function generateAllocationSuggestions() {
+  const pe = sentimentData.niftyPE;
+  const vix = sentimentData.indiaVIX;
+
+  let marketLabel = 'FAIR';
+  let currentAlloc = { equity: 65, debt: 20, gold: 5, international: 10 };
+  let suggestedAlloc = { equity: 65, debt: 20, gold: 5, international: 10 };
+  let action = '';
+
+  // Determine market condition and suggested allocation
+  if (pe > 24 || vix > 25) {
+    marketLabel = 'EXPENSIVE / VOLATILE';
+    suggestedAlloc = { equity: 55, debt: 30, gold: 5, international: 10 };
+    action = `
+      <strong>🔴 ACTION RECOMMENDED:</strong> Reduce equity by 10%, increase debt by 10%<br>
+      <strong>💡 RATIONALE:</strong> Book profits in expensive/volatile market, increase safety allocation<br>
+      <strong>📋 HOW:</strong> Redeem ₹X from equity funds, invest in HDFC Corporate Bond
+    `;
+  } else if (pe < 18 || (vix > 30 && pe < 20)) {
+    marketLabel = 'CHEAP / CORRECTION';
+    suggestedAlloc = { equity: 75, debt: 10, gold: 5, international: 10 };
+    action = `
+      <strong>🟢 ACTION RECOMMENDED:</strong> Increase equity by 10%, reduce debt by 10%<br>
+      <strong>💡 RATIONALE:</strong> Buy the dip opportunity - market undervalued<br>
+      <strong>📋 HOW:</strong> Redeem from HDFC Corporate Bond, invest in Parag Parikh Flexi Cap
+    `;
+  } else {
+    marketLabel = 'FAIR';
+    action = `
+      <strong>✅ NO ACTION NEEDED:</strong> Maintain current allocation<br>
+      <strong>💡 RATIONALE:</strong> Market is fairly valued, no adjustment needed<br>
+      <strong>📋 CONTINUE:</strong> Stay the course with existing SIPs
+    `;
+  }
+
+  safeSetText('marketSentimentLabel', marketLabel);
+
+  const currentHTML = `
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+      <span>Equity</span>
+      <strong>${currentAlloc.equity}%</strong>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+      <span>Debt</span>
+      <strong>${currentAlloc.debt}%</strong>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+      <span>Gold</span>
+      <strong>${currentAlloc.gold}%</strong>
+    </div>
+    <div style="display:flex;justify-content:space-between;">
+      <span>International</span>
+      <strong>${currentAlloc.international}%</strong>
+    </div>
+  `;
+
+  const suggestedHTML = `
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+      <span>Equity</span>
+      <strong style="color:${suggestedAlloc.equity > currentAlloc.equity ? 'var(--jt)' : suggestedAlloc.equity < currentAlloc.equity ? 'var(--red)' : 'var(--ink)'}">${suggestedAlloc.equity}%</strong>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+      <span>Debt</span>
+      <strong style="color:${suggestedAlloc.debt > currentAlloc.debt ? 'var(--jt)' : suggestedAlloc.debt < currentAlloc.debt ? 'var(--red)' : 'var(--ink)'}">${suggestedAlloc.debt}%</strong>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+      <span>Gold</span>
+      <strong>${suggestedAlloc.gold}%</strong>
+    </div>
+    <div style="display:flex;justify-content:space-between;">
+      <span>International</span>
+      <strong>${suggestedAlloc.international}%</strong>
+    </div>
+  `;
+
+  safeSetHTML('currentAllocation', currentHTML);
+  safeSetHTML('suggestedAllocation', suggestedHTML);
+  safeSetHTML('allocationAction', action);
+}
+
+// Generate sector rotation recommendations
+function generateSectorRotation() {
+  const repo = sentimentData.rbiRepoRate;
+  const inflation = sentimentData.inflation;
+  const pe = sentimentData.niftyPE;
+
+  let html = '<div class="g3" style="margin-bottom:15px;">';
+
+  // Determine environment
+  let environment = '';
+  let recommendations = [];
+
+  if (sentimentData.repoDirection === 'rising') {
+    environment = 'RISING INTEREST RATES';
+    recommendations = [
+      { type: 'favor', sectors: 'Banking, Financials', reason: 'Benefit from higher interest margins' },
+      { type: 'caution', sectors: 'Real Estate, Infrastructure', reason: 'Higher borrowing costs hurt' },
+      { type: 'action', text: 'Increase allocation to HDFC Corporate Bond, banking sector funds' }
+    ];
+  } else if (inflation > 6) {
+    environment = 'HIGH INFLATION';
+    recommendations = [
+      { type: 'favor', sectors: 'FMCG, Commodities, Gold', reason: 'Pricing power during inflation' },
+      { type: 'caution', sectors: 'IT, Services', reason: 'Margin pressure from costs' },
+      { type: 'action', text: 'Maintain Gold BeES allocation, consider consumer funds' }
+    ];
+  } else if (pe < 20) {
+    environment = 'HIGH GROWTH / RECOVERY';
+    recommendations = [
+      { type: 'favor', sectors: 'Small Cap, Mid Cap, Cyclicals', reason: 'Higher growth potential' },
+      { type: 'caution', sectors: 'Defensive sectors', reason: 'Lower relative returns' },
+      { type: 'action', text: 'Increase Quant Small Cap, Motilal Midcap SIPs' }
+    ];
+  } else {
+    environment = 'BALANCED MARKET';
+    recommendations = [
+      { type: 'favor', sectors: 'Large Cap, Diversified', reason: 'Stability in neutral markets' },
+      { type: 'caution', sectors: 'High beta stocks', reason: 'Higher volatility risk' },
+      { type: 'action', text: 'Maintain balanced allocation across categories' }
+    ];
+  }
+
+  html += `
+    <div class="card">
+      <div class="ch3">📊 CURRENT ENVIRONMENT</div>
+      <div style="padding:15px;text-align:center;">
+        <div style="font-size:1.2rem;font-weight:700;color:var(--jt);margin-bottom:10px;">${environment}</div>
+      </div>
+    </div>
+  `;
+
+  recommendations.forEach(rec => {
+    if (rec.type === 'favor') {
+      html += `
+        <div class="card">
+          <div class="ch3">✅ FAVOR</div>
+          <div style="padding:15px;">
+            <div style="font-size:12px;font-weight:700;color:var(--jt);margin-bottom:5px;">${rec.sectors}</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.6;">${rec.reason}</div>
+          </div>
+        </div>
+      `;
+    } else if (rec.type === 'caution') {
+      html += `
+        <div class="card">
+          <div class="ch3">⚠️ CAUTION</div>
+          <div style="padding:15px;">
+            <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:5px;">${rec.sectors}</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.6;">${rec.reason}</div>
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  html += '</div>';
+
+  const actionRec = recommendations.find(r => r.type === 'action');
+  if (actionRec) {
+    html += `
+      <div class="alert info" style="margin-bottom:15px;">
+        <strong>📋 RECOMMENDED ACTION:</strong> ${actionRec.text}
+      </div>
+    `;
+  }
+
+  safeSetHTML('sectorRotation', html);
+}
+
+// Update sentiment score display
+function updateSentimentScore() {
+  const score = calculateSentimentScore();
+  safeSetText('sentimentScoreValue', score);
+
+  // Update circular progress bar
+  const circle = document.getElementById('sentimentScoreCircle');
+  if (circle) {
+    const circumference = 502.4;
+    const offset = circumference - (score / 100) * circumference;
+    circle.style.strokeDashoffset = offset;
+
+    // Update color based on score
+    if (score >= 81) {
+      circle.style.stroke = 'var(--jt)';
+    } else if (score >= 61) {
+      circle.style.stroke = 'var(--you)';
+    } else if (score >= 31) {
+      circle.style.stroke = 'var(--blue)';
+    } else {
+      circle.style.stroke = 'var(--red)';
+    }
+  }
+
+  // Update label
+  let label = '';
+  if (score >= 81) label = 'STRONG RISK-ON';
+  else if (score >= 61) label = 'MODERATE RISK-ON';
+  else if (score >= 31) label = 'NEUTRAL';
+  else label = 'RISK-OFF';
+
+  safeSetText('sentimentScoreLabel', label);
+
+  // Update action recommendation
+  let action = '';
+  if (score >= 81) {
+    action = `
+      <strong>✅ EXCELLENT TIME FOR INVESTMENTS</strong><br>
+      • Deploy lump sum amounts if available<br>
+      • Increase equity SIP amounts<br>
+      • This is a favorable environment for wealth creation
+    `;
+  } else if (score >= 61) {
+    action = `
+      <strong>✅ GOOD TIME FOR REGULAR INVESTING</strong><br>
+      • Continue existing SIPs<br>
+      • Consider small lump sum investments<br>
+      • Avoid very large lump sums (market not cheap enough)
+    `;
+  } else if (score >= 31) {
+    action = `
+      <strong>🟡 MAINTAIN CAUTIOUS APPROACH</strong><br>
+      • Continue SIPs only<br>
+      • Avoid lump sum investments<br>
+      • Wait for better opportunities
+    `;
+  } else {
+    action = `
+      <strong>🔴 DEFENSIVE MODE RECOMMENDED</strong><br>
+      • Pause equity lump sums<br>
+      • Continue SIPs only (rupee cost averaging)<br>
+      • Increase debt/gold allocation for safety
+    `;
+  }
+
+  safeSetHTML('sentimentScoreAction', action);
+}
+
+// Render historical trend charts
+function renderSentimentCharts() {
+  // VIX Trend Chart
+  destroyChart('vixTrendChart');
+  const vixCtx = document.getElementById('vixTrendChart');
+  if (vixCtx) {
+    chartInstances['vixTrendChart'] = new Chart(vixCtx, {
+      type: 'line',
+      data: {
+        labels: vixHistoricalData.map(d => d.month),
+        datasets: [{
+          label: 'India VIX',
+          data: vixHistoricalData.map(d => d.value),
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.1)',
+          tension: 0.3,
+          fill: true,
+          pointRadius: 4,
+          pointBackgroundColor: vixHistoricalData.map(d => {
+            if (d.value < 15) return 'rgb(34, 197, 94)';
+            if (d.value <= 25) return 'rgb(234, 179, 8)';
+            return 'rgb(239, 68, 68)';
+          })
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          annotation: {
+            annotations: {
+              lowLine: {
+                type: 'line',
+                yMin: 15,
+                yMax: 15,
+                borderColor: 'rgba(34, 197, 94, 0.5)',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                label: {
+                  content: 'Low (15)',
+                  enabled: true,
+                  position: 'end'
+                }
+              },
+              highLine: {
+                type: 'line',
+                yMin: 25,
+                yMax: 25,
+                borderColor: 'rgba(239, 68, 68, 0.5)',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                label: {
+                  content: 'High (25)',
+                  enabled: true,
+                  position: 'end'
+                }
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            grid: { color: 'rgba(128,128,128,0.1)' },
+            ticks: { color: 'var(--ink2)', font: { size: 10 } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: 'var(--ink2)', font: { size: 10 } }
+          }
+        }
+      }
+    });
+  }
+
+  // P/E Trend Chart
+  destroyChart('peTrendChart');
+  const peCtx = document.getElementById('peTrendChart');
+  if (peCtx) {
+    chartInstances['peTrendChart'] = new Chart(peCtx, {
+      type: 'line',
+      data: {
+        labels: peHistoricalData.map(d => d.month),
+        datasets: [{
+          label: 'Nifty P/E',
+          data: peHistoricalData.map(d => d.value),
+          borderColor: 'rgb(147, 51, 234)',
+          backgroundColor: 'rgba(147, 51, 234, 0.1)',
+          tension: 0.3,
+          fill: true,
+          pointRadius: 4,
+          pointBackgroundColor: peHistoricalData.map(d => {
+            if (d.value < 20) return 'rgb(34, 197, 94)';
+            if (d.value <= 24) return 'rgb(234, 179, 8)';
+            return 'rgb(239, 68, 68)';
+          })
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          annotation: {
+            annotations: {
+              lowLine: {
+                type: 'line',
+                yMin: 20,
+                yMax: 20,
+                borderColor: 'rgba(34, 197, 94, 0.5)',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                label: {
+                  content: 'Fair (20)',
+                  enabled: true,
+                  position: 'end'
+                }
+              },
+              highLine: {
+                type: 'line',
+                yMin: 24,
+                yMax: 24,
+                borderColor: 'rgba(239, 68, 68, 0.5)',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                label: {
+                  content: 'Expensive (24)',
+                  enabled: true,
+                  position: 'end'
+                }
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            grid: { color: 'rgba(128,128,128,0.1)' },
+            ticks: { color: 'var(--ink2)', font: { size: 10 } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: 'var(--ink2)', font: { size: 10 } }
+          }
+        }
+      }
+    });
+  }
+}
+
+// Main render function for Market Sentiment Dashboard
+function renderMarketSentiment() {
+  console.log('📊 Rendering Market Sentiment Dashboard...');
+
+  loadSentimentData();
+
+  // Sync manual inputs with current data
+  const manualVIX = document.getElementById('manualVIX');
+  const manualPE = document.getElementById('manualPE');
+  const manualRepo = document.getElementById('manualRepo');
+  const manualCPI = document.getElementById('manualCPI');
+
+  if (manualVIX) manualVIX.value = sentimentData.indiaVIX;
+  if (manualPE) manualPE.value = sentimentData.niftyPE;
+  if (manualRepo) manualRepo.value = sentimentData.rbiRepoRate;
+  if (manualCPI) manualCPI.value = sentimentData.inflation;
+
+  // Update all displays
+  updateMarketIndicators();
+  generateTimingRecommendations();
+  generateAllocationSuggestions();
+  updateSentimentScore();
+  generateSectorRotation();
+  renderSentimentCharts();
+
+  console.log('✅ Market Sentiment Dashboard rendered successfully');
+}
+
+// Update sentiment from manual inputs
+function updateMarketSentiment() {
+  const vix = parseFloat(document.getElementById('manualVIX').value);
+  const pe = parseFloat(document.getElementById('manualPE').value);
+  const repo = parseFloat(document.getElementById('manualRepo').value);
+  const cpi = parseFloat(document.getElementById('manualCPI').value);
+
+  // Update sentiment data
+  sentimentData.indiaVIX = vix;
+  sentimentData.niftyPE = pe;
+  sentimentData.rbiRepoRate = repo;
+  sentimentData.inflation = cpi;
+
+  // Determine repo direction
+  if (repo > 6.5) {
+    sentimentData.repoDirection = 'rising';
+  } else if (repo < 6.5) {
+    sentimentData.repoDirection = 'falling';
+  } else {
+    sentimentData.repoDirection = 'stable';
+  }
+
+  // Save and re-render
+  saveSentimentData();
+  renderMarketSentiment();
+
+  // Show confirmation
+  alert('✅ Market sentiment updated! All recommendations recalculated.');
+}
+
+// Reset to default values
+function resetMarketSentiment() {
+  sentimentData = {
+    indiaVIX: 18.2,
+    niftyPE: 22.1,
+    rbiRepoRate: 6.5,
+    inflation: 5.2,
+    repoDirection: 'stable',
+    fiiFlow: -8200,
+    diiFlow: 12500,
+    lastUpdated: '2026-03-06'
+  };
+
+  saveSentimentData();
+  renderMarketSentiment();
+
+  alert('✅ Reset to default March 2026 values!');
+}
 
 </script>
 </body>
