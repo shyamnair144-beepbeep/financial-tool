@@ -19,7 +19,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;padding-bottom:60px}
-.top-nav{display:flex;background:#090b0d;border-bottom:2px solid var(--border);overflow-x:auto;position:sticky;top:0;z-index:200}
+.top-nav{display:flex;background:#090b0d;border-bottom:2px solid var(--border);overflow-x:auto;position:sticky;top:0;z-index:200;position:relative}
+.top-nav::after{content:'';position:absolute;right:0;top:0;width:40px;height:100%;background:linear-gradient(to right, transparent, var(--bg));pointer-events:none;z-index:1}
 .tn{padding:13px 18px;cursor:pointer;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;font-family:monospace;color:var(--ink3);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:5px}
 .tn.active{color:var(--you);border-bottom-color:var(--you)}
 .tn:hover:not(.active){color:var(--ink2)}
@@ -150,6 +151,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
 /* Input validation */
 .field-input.error{border-color:var(--red);background:rgba(232,80,64,0.05)}
 .error-message{color:var(--red);font-size:10px;margin-top:4px;font-family:monospace}
+/* Assumption mode indicators */
+.using-assumptions{background:rgba(232,80,64,0.05);border-left:4px solid var(--red)}
+.using-assumptions .v{color:var(--red)!important}
+.assumption-badge{background:var(--red);color:white;padding:2px 6px;border-radius:4px;font-size:9px;margin-left:6px;font-weight:700;letter-spacing:0.5px}
 @media(max-width:768px){
   .g2,.g3,.g4,.settings-grid{grid-template-columns:1fr}
   .banner{grid-template-columns:1fr}
@@ -195,6 +200,17 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <h1>Your Path to <span id="dash-retirement-goal">&#8377;66 Crore</span> Retirement</h1>
     <p>BRUTAL REALITY EDITION &middot; MARCH 2026 &middot; AGE 31 &rarr; 60</p>
   </div>
+
+  <!-- API Fallback Warning Banner -->
+  <div id="api-fallback-warning" class="alert danger" style="display:none;margin:24px 40px 0;align-items:center;gap:12px">
+    <span style="flex-shrink:0">⚠️</span>
+    <div style="flex:1">
+      <strong>USING ASSUMPTIONS</strong> - Unable to fetch live fund data.
+      All projections use assumed 12% returns. Last successful data fetch: <span id="last-api-fetch">Never</span>
+    </div>
+    <button onclick="fetchAllFundHistoricalData()" style="background:var(--red);color:white;border:none;padding:8px 16px;border-radius:5px;font-weight:700;font-size:11px;cursor:pointer;white-space:nowrap">🔄 Retry Now</button>
+  </div>
+
   <div class="banner">
     <div class="bc">
       <div class="bc-lbl">CURRENT STATUS</div>
@@ -225,7 +241,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
   </div>
   <div class="content">
     <div class="alert success">
-      &#9989; <strong>VERDICT:</strong> You will exceed your retirement goal by 2.1x (&#8377;66 Cr vs &#8377;10 Cr target in today's value). Kids education fully funded with &#8377;3 Cr surplus for Child 1. Emergency fund of &#8377;20L already secured. You're in the TOP 5% of Indian households.
+      &#9989; <strong>VERDICT:</strong> You will exceed your inflation-adjusted retirement goal by 1.26x (&#8377;66 Cr vs &#8377;52.3 Cr target in 2054 rupees). Kids education fully funded with &#8377;3 Cr surplus for Child 1. Emergency fund of &#8377;20L already secured. You're in the TOP 5% of Indian households.
     </div>
     <div class="sh"><span class="sh-n">01</span><h2>Monthly Cash Flow Breakdown</h2></div>
     <div class="g3">
@@ -254,6 +270,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div class="ml"><div class="d">Fixed Expenses<small>Rent, parents, utilities</small></div><div class="a ar" id="dash-fixed-exp">&#8377;73,000</div></div>
         <div class="ml"><div class="d">Living Expenses<small>Food, transport, lifestyle</small></div><div class="a ar" id="dash-living-exp">&#8377;49,000</div></div>
         <div class="ml"><div class="d">Sinking Funds<small>Vacation, car, baby</small></div><div class="a ab" id="dash-sinking">&#8377;60,000</div></div>
+        <div class="ml"><div class="d">Insurance Premiums<small>Life, health, parents health</small></div><div class="a ar" id="dash-insurance">&#8377;0</div></div>
         <div class="ml"><div class="d">Goal Investments<small>Retirement + education</small></div><div class="a aj" id="dash-goal-inv">&#8377;1,33,900</div></div>
         <div class="ml"><div class="d">Wife's Investments</div><div class="a aj" id="dash-wife-inv">&#8377;58,500</div></div>
         <div class="tr"><div class="tl">Total Allocated</div><div class="tv" id="dash-total-alloc">&#8377;3,59,400</div></div>
@@ -577,12 +594,24 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <input class="field-input" id="s-life-insurance" type="text" value="0">
         </div>
         <div class="field-row">
+          <span class="field-label">Life Insurance Premium <small style="opacity:0.6">(Monthly cost, e.g., 1250)</small></span>
+          <input class="field-input" id="s-life-premium" type="text" value="0">
+        </div>
+        <div class="field-row">
           <span class="field-label">Health Insurance (Family) <small style="opacity:0.6">(e.g., 20,00,000 for ₹20L)</small></span>
           <input class="field-input" id="s-health-insurance" type="text" value="0">
         </div>
         <div class="field-row">
+          <span class="field-label">Health Insurance Premium <small style="opacity:0.6">(Monthly cost, e.g., 2100)</small></span>
+          <input class="field-input" id="s-health-premium" type="text" value="0">
+        </div>
+        <div class="field-row">
           <span class="field-label">Parents Health Insurance <small style="opacity:0.6">(e.g., 10,00,000 for ₹10L)</small></span>
           <input class="field-input" id="s-parents-health" type="text" value="0">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Parents Health Premium <small style="opacity:0.6">(Monthly cost, e.g., 1650)</small></span>
+          <input class="field-input" id="s-parents-premium" type="text" value="0">
         </div>
         <div id="insurance-adequacy" style="margin:12px 0"></div>
       </div>
@@ -1326,7 +1355,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div class="ml"><div class="d">Wife's Corpus</div><div class="a aw" id="retirement-wife-corpus">&#8377;22.3 Cr</div></div>
         <div class="tr"><div class="tl">Total Family Retirement</div><div class="tv aj" id="retirement-total-corpus">&#8377;66 Cr</div></div>
         <div class="ml"><div class="d">Inflation-Adjusted Value</div><div class="a ab" id="retirement-infladj-corpus">&#8377;20.8 Cr</div></div>
-        <div style="margin-top:10px;padding:10px;background:rgba(48,200,122,.1);border-radius:5px;font-size:11px">&#9989; Target: &#8377;10 Cr (today's value)<br><strong>ACHIEVEMENT: 2.1x TARGET</strong></div>
+        <div style="margin-top:10px;padding:10px;background:rgba(48,200,122,.1);border-radius:5px;font-size:11px">&#9989; Target: &#8377;10 Cr (today's value) = &#8377;52.3 Cr (2054)<br><strong>ACHIEVEMENT: 1.26x INFLATION-ADJUSTED TARGET</strong></div>
       </div>
       <div class="card j">
         <div class="ch3 j">KIDS EDUCATION TOTAL</div>
@@ -2747,6 +2776,9 @@ tr.milestone{background:rgba(240,180,41,.05)}
 var currentPage = 0;
 var chartInstances = {};
 
+// Track which pages have been initialized to avoid re-rendering
+const initializedPages = new Set();
+
 function showPage(index) {
   var pages = document.querySelectorAll('.page');
   var navs = document.querySelectorAll('.tn');
@@ -2756,7 +2788,12 @@ function showPage(index) {
   pages[currentPage].classList.add('active');
   navs[currentPage].classList.add('active');
   window.scrollTo(0, 0);
-  setTimeout(function() { renderPageCharts(index); }, 50);
+
+  // LAZY LOADING: Only render page charts on first visit
+  if (!initializedPages.has(index)) {
+    setTimeout(function() { renderPageCharts(index); }, 50);
+    initializedPages.add(index);
+  }
 }
 
 function renderPageCharts(index) {
@@ -2900,6 +2937,11 @@ function updateDashboardAllocation() {
   // Calculate fixed expenses total
   const fixedExpTotal = (config.rent || 40000) + (config.parents || 20000) + (config.fixedExpenses || 13000);
 
+  // Calculate total insurance premiums (monthly)
+  const totalInsurance = (config.lifeInsurancePremium || 0) +
+                         (config.healthInsurancePremium || 0) +
+                         (config.parentsHealthPremium || 0);
+
   // Update each allocation item
   const updateEl = (id, value) => {
     const el = document.getElementById(id);
@@ -2909,17 +2951,24 @@ function updateDashboardAllocation() {
   updateEl('dash-fixed-exp', fixedExpTotal);
   updateEl('dash-living-exp', config.livingExpenses || 49000);
   updateEl('dash-sinking', config.sinkingFunds || 60000);
+  updateEl('dash-insurance', totalInsurance);
   updateEl('dash-goal-inv', config.yourSIP || 133900);
   updateEl('dash-wife-inv', config.wifeSIP || 58500);
 
-  // Calculate and update total
+  // Calculate and update total (now includes insurance)
   const total = fixedExpTotal +
                 (config.livingExpenses || 49000) +
                 (config.sinkingFunds || 60000) +
                 (config.yourSIP || 133900) +
-                (config.wifeSIP || 58500);
+                (config.wifeSIP || 58500) +
+                totalInsurance;
 
   updateEl('dash-total-alloc', total);
+
+  // Log warning if insurance costs are not being tracked
+  if (totalInsurance > 0) {
+    console.log('✅ Insurance premiums included in allocation: ₹' + totalInsurance.toLocaleString('en-IN') + '/month');
+  }
 }
 
 // ============================================================
@@ -3443,6 +3492,25 @@ document.addEventListener('DOMContentLoaded', async function() {
     updateBenchmarkSummary();
   }
 
+  // Check API data age and show warning if stale
+  const lastFetch = localStorage.getItem('lastAPIFetch');
+  if (lastFetch) {
+    lastAPIFetchTime = new Date(lastFetch);
+    const age = (Date.now() - new Date(lastFetch)) / (1000 * 60 * 60 * 24); // days
+    if (age > 7) {
+      console.warn(`⚠️ API data is ${age.toFixed(1)} days old - consider refreshing`);
+      usingAssumptions = true;
+      showAPIWarning();
+    }
+  } else {
+    // No API fetch recorded, assume we're using assumptions
+    usingAssumptions = true;
+    showAPIWarning();
+  }
+
+  // Initialize income auto-calculations
+  initializeIncomeCalculations();
+
   // Initialize input validation listeners
   initializeInputValidation();
 
@@ -3461,8 +3529,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Initialize Review & Tracking page
   if (typeof initReviewCountdown === 'function') initReviewCountdown();
   if (typeof setupReviewInputs === 'function') setupReviewInputs();
-  // Render first page charts
+  // Render first page charts (Dashboard - index 0)
   renderDashboardCharts();
+  initializedPages.add(0); // Mark dashboard as initialized
 });
 
 // ============================================
@@ -4415,7 +4484,58 @@ async function fetchAllFundHistoricalData() {
   // Save to localStorage
   saveFundHistoricalData();
 
+  // Update API status tracking
+  if (successCount > 0) {
+    lastAPIFetchTime = new Date();
+    usingAssumptions = false;
+    hideAPIWarning();
+    // Store timestamp
+    localStorage.setItem('lastAPIFetch', lastAPIFetchTime.toISOString());
+  } else {
+    usingAssumptions = true;
+    showAPIWarning();
+  }
+
   return { successCount, failCount };
+}
+
+// Show API fallback warning banner
+function showAPIWarning() {
+  const warning = document.getElementById('api-fallback-warning');
+  if (warning) {
+    warning.style.display = 'flex';
+    const lastFetch = localStorage.getItem('lastAPIFetch');
+    const lastFetchEl = document.getElementById('last-api-fetch');
+    if (lastFetchEl) {
+      lastFetchEl.textContent = lastFetch
+        ? new Date(lastFetch).toLocaleString('en-IN')
+        : 'Never';
+    }
+  }
+
+  // Add badges to all calculated values
+  showAssumptionBadge('dash-projected-corpus');
+  showAssumptionBadge('dash-retirement-goal');
+}
+
+// Hide API fallback warning banner
+function hideAPIWarning() {
+  const warning = document.getElementById('api-fallback-warning');
+  if (warning) warning.style.display = 'none';
+
+  // Remove all assumption badges
+  document.querySelectorAll('.assumption-badge').forEach(b => b.remove());
+}
+
+// Add assumption badge next to calculated value
+function showAssumptionBadge(elementId) {
+  const el = document.getElementById(elementId);
+  if (el && !el.querySelector('.assumption-badge')) {
+    const badge = document.createElement('span');
+    badge.className = 'assumption-badge';
+    badge.textContent = 'ASSUMPTION';
+    el.appendChild(badge);
+  }
 }
 
 // Calculate portfolio-weighted expected return based on actual historical performance
@@ -5684,8 +5804,16 @@ let config = {
   // Insurance
   lifeInsuranceCurrent: 0,
   healthInsuranceCurrent: 0,
-  parentsHealthInsurance: 0
+  parentsHealthInsurance: 0,
+  // Insurance Premiums (monthly cost)
+  lifeInsurancePremium: 0,     // Monthly term insurance premium
+  healthInsurancePremium: 0,   // Monthly health insurance premium
+  parentsHealthPremium: 0      // Monthly parents health insurance premium
 };
+
+// API tracking variables for fallback handling
+let lastAPIFetchTime = null;
+let usingAssumptions = false;
 
 // Save configuration and update ALL pages
 
@@ -5991,6 +6119,27 @@ function calculateInsuranceAdequacy() {
   };
 }
 
+// ============== EQUITY GLIDE PATH (AGE-BASED ALLOCATION) ==============
+
+function getMaxEquityAllocation(currentAge, retirementAge) {
+  // Conservative formula: 110 - current age
+  // At age 31: 79% max equity
+  // At age 45: 65% max equity
+  // At age 55: 55% max equity
+  // At age 60: 50% max equity
+
+  const maxEquity = Math.min(85, Math.max(30, 110 - currentAge));
+
+  // Further reduce if within 5 years of retirement
+  const yearsToRetirement = retirementAge - currentAge;
+  if (yearsToRetirement <= 5) {
+    // Reduce by 2% per year in final 5 years
+    return Math.max(30, maxEquity - ((5 - yearsToRetirement) * 2));
+  }
+
+  return maxEquity;
+}
+
 // ============== RETIREMENT CORPUS WITH 4% SAFE WITHDRAWAL RATE ==============
 
 function calculateRetirementRequirement() {
@@ -6122,8 +6271,18 @@ function renderAllocationHealth() {
 
   if (!alertEl) return;
 
-  // Generate rebalancing alerts
+  // Generate rebalancing alerts with age-based equity limits
   let alert = '';
+
+  // Calculate age-appropriate equity allocation
+  const currentAge = 31; // Will be dynamic in future updates
+  const retirementAge = 60;
+  const maxEquityForAge = getMaxEquityAllocation(currentAge, retirementAge);
+  const currentEquity = parseFloat(allocation.equity.percent);
+
+  if (currentEquity > maxEquityForAge) {
+    alert += `<div class="alert danger" style="margin-top:10px">🔴 <strong>Rebalance Needed:</strong> Your equity allocation (${allocation.equity.percent}%) exceeds the age-appropriate maximum of ${maxEquityForAge}% for age ${currentAge}. Consider reducing equity and increasing debt to manage risk as you approach retirement.</div>`;
+  }
 
   if (parseFloat(allocation.debt.percent) < 15) {
     alert += `<div class="alert danger" style="margin-top:10px">🔴 <strong>Critical Risk:</strong> You have only ${allocation.debt.percent}% in debt. Recommended minimum: 20%. Add debt funds to reduce portfolio risk.</div>`;
@@ -6347,6 +6506,124 @@ function getFallbackData(schemeCode) {
 // INPUT VALIDATION - REAL-TIME EVENT LISTENERS
 // ============================================
 
+// ============================================================
+// INCOME FIELD AUTO-CALCULATIONS
+// ============================================================
+
+function initializeIncomeCalculations() {
+  console.log('🔧 Initializing income auto-calculations...');
+
+  const ctcInput = document.getElementById('s-ctc');
+  const basicInput = document.getElementById('s-basic');
+  const netPayInput = document.getElementById('s-netpay');
+  const wifeGrossInput = document.getElementById('s-wife-gross');
+  const wifeInvInput = document.getElementById('s-wife-inv');
+
+  // Helper to parse comma-formatted numbers
+  function parseAmount(value) {
+    if (typeof value === 'string') {
+      return parseFloat(value.replace(/,/g, '')) || 0;
+    }
+    return parseFloat(value) || 0;
+  }
+
+  // Helper to format with commas
+  function formatAmount(value) {
+    return Math.round(value).toLocaleString('en-IN');
+  }
+
+  // CTC changed → Update Basic (42% of CTC/12) and Net Pay (estimate)
+  if (ctcInput) {
+    ctcInput.addEventListener('blur', function() {
+      const ctc = parseAmount(this.value);
+      if (ctc > 0) {
+        // Basic Salary = ~42% of CTC, monthly
+        const basic = Math.round((ctc / 12) * 0.42);
+        if (basicInput) {
+          basicInput.value = formatAmount(basic);
+        }
+
+        // Net Pay = Basic + Allowances - Tax (rough estimate: ~64% of CTC/12)
+        const netPay = Math.round((ctc / 12) * 0.64);
+        if (netPayInput) {
+          netPayInput.value = formatAmount(netPay);
+        }
+
+        console.log(`💰 CTC updated: ₹${formatAmount(ctc)} → Basic: ₹${formatAmount(basic)}, Net: ₹${formatAmount(netPay)}`);
+      }
+    });
+  }
+
+  // Basic Salary changed → Update CTC (reverse calculation)
+  if (basicInput) {
+    basicInput.addEventListener('blur', function() {
+      const basic = parseAmount(this.value);
+      if (basic > 0) {
+        // CTC = Basic * 12 / 0.42
+        const ctc = Math.round((basic * 12) / 0.42);
+        if (ctcInput) {
+          ctcInput.value = formatAmount(ctc);
+        }
+
+        console.log(`💰 Basic updated: ₹${formatAmount(basic)} → CTC: ₹${formatAmount(ctc)}`);
+      }
+    });
+  }
+
+  // Net Pay changed → Update CTC (reverse calculation)
+  if (netPayInput) {
+    netPayInput.addEventListener('blur', function() {
+      const netPay = parseAmount(this.value);
+      if (netPay > 0) {
+        // CTC = Net Pay * 12 / 0.64
+        const ctc = Math.round((netPay * 12) / 0.64);
+        if (ctcInput) {
+          ctcInput.value = formatAmount(ctc);
+        }
+
+        // Also update Basic
+        const basic = Math.round((ctc / 12) * 0.42);
+        if (basicInput) {
+          basicInput.value = formatAmount(basic);
+        }
+
+        console.log(`💰 Net Pay updated: ₹${formatAmount(netPay)} → CTC: ₹${formatAmount(ctc)}, Basic: ₹${formatAmount(basic)}`);
+      }
+    });
+  }
+
+  // Wife Investment validation against Wife Gross
+  if (wifeInvInput && wifeGrossInput) {
+    wifeInvInput.addEventListener('blur', function() {
+      const wifeInv = parseAmount(this.value);
+      const wifeGross = parseAmount(wifeGrossInput.value);
+
+      if (wifeInv > wifeGross) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = `⚠️ Wife's Investment (₹${formatAmount(wifeInv)}) exceeds her Gross Salary (₹${formatAmount(wifeGross)})`;
+        errorDiv.style.color = 'var(--red)';
+        errorDiv.style.fontSize = '11px';
+        errorDiv.style.marginTop = '4px';
+
+        // Remove old error if exists
+        const oldError = this.parentElement.querySelector('.error-message');
+        if (oldError) oldError.remove();
+
+        this.parentElement.appendChild(errorDiv);
+        this.style.borderColor = 'var(--red)';
+      } else {
+        // Clear error
+        const oldError = this.parentElement.querySelector('.error-message');
+        if (oldError) oldError.remove();
+        this.style.borderColor = '';
+      }
+    });
+  }
+
+  console.log('✅ Income auto-calculations initialized');
+}
+
 function initializeInputValidation() {
   console.log('🔧 Initializing input validation...');
 
@@ -6392,7 +6669,8 @@ function initializeInputValidation() {
   const amountFields = [
     's-ctc', 's-basic', 's-netpay', 's-wife-gross', 's-wife-inv',
     's-rent', 's-parents', 's-fixed', 's-living', 's-sinking',
-    's-emergency-fund', 's-life-insurance', 's-health-insurance', 's-parents-health'
+    's-emergency-fund', 's-life-insurance', 's-health-insurance', 's-parents-health',
+    's-life-premium', 's-health-premium', 's-parents-premium'
   ];
 
   amountFields.forEach(fieldId => {
@@ -6647,12 +6925,16 @@ function importPortfolioBackup(file) {
 function saveConfig() {
   console.log('💾 Saving configuration and refreshing all pages...');
 
-  // Helper to parse number from formatted string (removes commas)
+  // Helper to parse number from formatted string (removes commas, currency symbols, etc.)
   const getValue = (id) => {
     const el = document.getElementById(id);
     if (!el) return 0;
-    const val = el.value.toString().replace(/,/g, '').replace(/%/g, '');
-    return parseFloat(val) || 0;
+
+    // Remove all non-numeric characters except digits, minus, and decimal point
+    const cleaned = el.value.toString().replace(/[^0-9.-]+/g, '');
+    const num = parseFloat(cleaned);
+
+    return isNaN(num) ? 0 : num;
   };
 
   // ============================================
@@ -6723,6 +7005,50 @@ function saveConfig() {
     errors.push('Net Pay must be a positive number');
   }
 
+  // Validate that total allocation doesn't exceed available income (including insurance premiums)
+  const wifeGross = getValue('s-wife-gross');
+  const rent = getValue('s-rent');
+  const parents = getValue('s-parents');
+  const fixed = getValue('s-fixed');
+  const living = getValue('s-living');
+  const sinking = getValue('s-sinking');
+  const lifeInsurancePremium = getValue('s-life-premium');
+  const healthInsurancePremium = getValue('s-health-premium');
+  const parentsHealthPremium = getValue('s-parents-premium');
+
+  const totalIncome = netPay + wifeGross;
+  const totalExpenses = rent + parents + fixed + living + sinking;
+  const totalInsurance = lifeInsurancePremium + healthInsurancePremium + parentsHealthPremium;
+
+  // Calculate total SIP from all funds
+  let totalYourSIP = 0;
+  if (typeof yourFunds !== 'undefined') {
+    totalYourSIP = yourFunds.reduce((sum, fund, idx) => {
+      const sipValue = getValue(`s-sip-${idx}`);
+      return sum + (sipValue > 0 ? sipValue : fund.monthlySIP || 0);
+    }, 0);
+  }
+
+  let totalWifeSIP = 0;
+  if (typeof wifeFunds !== 'undefined') {
+    totalWifeSIP = wifeFunds.reduce((sum, fund, idx) => {
+      const sipValue = getValue(`s-wife-sip-${idx}`);
+      return sum + (sipValue > 0 ? sipValue : fund.monthlySIP || 0);
+    }, 0);
+  }
+
+  const totalSIP = totalYourSIP + totalWifeSIP;
+  const totalAllocation = totalExpenses + totalInsurance + totalSIP;
+  const availableForInvestment = totalIncome - totalExpenses - totalInsurance;
+
+  if (totalAllocation > totalIncome) {
+    const shortfall = totalAllocation - totalIncome;
+    errors.push(`Total monthly allocation (₹${totalAllocation.toLocaleString('en-IN')}) exceeds total income (₹${totalIncome.toLocaleString('en-IN')}) by ₹${shortfall.toLocaleString('en-IN')}. Please reduce expenses, insurance, or SIP amounts.`);
+  } else if (totalSIP > availableForInvestment) {
+    const excess = totalSIP - availableForInvestment;
+    warnings.push(`Total SIP (₹${totalSIP.toLocaleString('en-IN')}) exceeds available amount after expenses and insurance (₹${availableForInvestment.toLocaleString('en-IN')}) by ₹${excess.toLocaleString('en-IN')}. Consider reducing SIP or insurance costs.`);
+  }
+
   // Show validation errors if any
   if (errors.length > 0) {
     alert('⚠️ VALIDATION ERRORS\n\nPlease fix the following issues before saving:\n\n' + errors.map((e, i) => `${i + 1}. ${e}`).join('\n'));
@@ -6783,6 +7109,11 @@ function saveConfig() {
   config.lifeInsuranceCurrent = getValue('s-life-insurance');
   config.healthInsuranceCurrent = getValue('s-health-insurance');
   config.parentsHealthInsurance = getValue('s-parents-health');
+
+  // Read insurance premiums (monthly costs)
+  config.lifeInsurancePremium = getValue('s-life-premium');
+  config.healthInsurancePremium = getValue('s-health-premium');
+  config.parentsHealthPremium = getValue('s-parents-premium');
 
   // Save to localStorage
   localStorage.setItem('financialConfig', JSON.stringify(config));
@@ -6910,6 +7241,11 @@ function populateSettingsInputs() {
   setValue('s-life-insurance', config.lifeInsuranceCurrent || 0);
   setValue('s-health-insurance', config.healthInsuranceCurrent || 0);
   setValue('s-parents-health', config.parentsHealthInsurance || 0);
+
+  // Insurance Premiums
+  setValue('s-life-premium', config.lifeInsurancePremium || 0);
+  setValue('s-health-premium', config.healthInsurancePremium || 0);
+  setValue('s-parents-premium', config.parentsHealthPremium || 0);
 }
 
 // ============================================
@@ -6939,15 +7275,17 @@ function updateSettingsTotals() {
 
 // Attach listeners when Settings page loads
 function initializeSettingsListeners() {
-  for (let i = 0; i < 13; i++) {
-    const el = document.getElementById(`s-sip-${i}`);
-    if (el) el.addEventListener('input', updateSettingsTotals);
-  }
-  for (let i = 0; i < 5; i++) {
-    const el = document.getElementById(`s-wife-sip-${i}`);
-    if (el) el.addEventListener('input', updateSettingsTotals);
-  }
-  console.log('✅ Settings page real-time totals initialized');
+  // Use event delegation on parent container (1 listener instead of 18)
+  const settingsContainer = document.querySelector('.page#page-1') || document.body;
+
+  settingsContainer.addEventListener('input', function(e) {
+    // Check if input is a SIP field
+    if (e.target.id && (e.target.id.startsWith('s-sip-') || e.target.id.startsWith('s-wife-sip-'))) {
+      updateSettingsTotals();
+    }
+  });
+
+  console.log('✅ Settings page real-time totals initialized (event delegation)');
 }
 
 // Call when page loads
@@ -7076,6 +7414,11 @@ function runPortfolioReview() {
   const debtPct = (debt / combinedTotal) * 100;
   const goldPct = (gold / combinedTotal) * 100;
 
+  // Calculate age-appropriate equity allocation
+  const currentAge = 31; // Will be dynamic in future updates
+  const retirementAge = 60;
+  const maxEquityForAge = getMaxEquityAllocation(currentAge, retirementAge);
+
   // Calculate predicted value (assuming 12% CAGR)
   const monthlySIP = 177400; // Current monthly SIP
   const predictedValue = calculateSIPFutureValue(monthlySIP, 12, monthsElapsed);
@@ -7111,11 +7454,14 @@ function runPortfolioReview() {
 
   document.getElementById('performance-analysis').innerHTML = perfHTML;
 
-  // Generate allocation analysis
+  // Generate allocation analysis with age-based glide path
   const allocHTML = `
+    <div class="alert info" style="margin-bottom:10px;font-size:11px;">
+      ℹ️ Your age: ${currentAge} | Recommended max equity: ${maxEquityForAge}% | Your current: ${equityPct.toFixed(1)}% ${equityPct <= maxEquityForAge ? '✅ Within safe range' : '⚠️ Exceeds age-appropriate limit'}
+    </div>
     <div class="ml">
-      <div class="d">Equity <small>Target: 75%</small></div>
-      <div class="a ${Math.abs(equityPct - 75) <= 5 ? 'aj' : 'ay'}">${equityPct.toFixed(1)}%</div>
+      <div class="d">Equity <small>Target: 75%, Max for Age ${currentAge}: ${maxEquityForAge}%</small></div>
+      <div class="a ${equityPct <= maxEquityForAge && Math.abs(equityPct - 75) <= 5 ? 'aj' : 'ay'}">${equityPct.toFixed(1)}%</div>
     </div>
     <div class="ml">
       <div class="d">Debt <small>Target: 20%</small></div>
@@ -7125,22 +7471,22 @@ function runPortfolioReview() {
       <div class="d">Gold <small>Target: 5%</small></div>
       <div class="a ${Math.abs(goldPct - 5) <= 2 ? 'aj' : 'ay'}">${goldPct.toFixed(1)}%</div>
     </div>
-    ${equityPct > 85 ? '<div class="alert danger" style="margin-top:10px">🔴 REBALANCE NEEDED: Equity >85%. Sell ₹' + ((equityPct - 75) * combinedTotal / 100 / 100000).toFixed(1) + 'L equity, buy debt.</div>' : ''}
+    ${equityPct > maxEquityForAge ? '<div class="alert danger" style="margin-top:10px">🔴 REBALANCE NEEDED: Equity at ' + equityPct.toFixed(1) + '% exceeds age-appropriate ' + maxEquityForAge + '%. Sell ₹' + ((equityPct - 75) * combinedTotal / 100 / 100000).toFixed(1) + 'L equity, buy debt.</div>' : ''}
     ${equityPct < 65 ? '<div class="alert danger" style="margin-top:10px">🔴 REBALANCE NEEDED: Equity <65%. Sell ₹' + ((75 - equityPct) * combinedTotal / 100 / 100000).toFixed(1) + 'L debt, buy equity.</div>' : ''}
-    ${equityPct >= 65 && equityPct <= 85 ? '<div class="alert success" style="margin-top:10px">✅ ALLOCATION HEALTHY: Within target range. No rebalancing needed.</div>' : ''}
+    ${equityPct >= 65 && equityPct <= maxEquityForAge ? '<div class="alert success" style="margin-top:10px">✅ ALLOCATION HEALTHY: Within target range and age-appropriate. No rebalancing needed.</div>' : ''}
   `;
 
   document.getElementById('allocation-analysis').innerHTML = allocHTML;
 
-  // Generate recommendations
+  // Generate recommendations with age-based equity limits
   const recommendations = [];
   let criticalCount = 0;
 
-  if (equityPct > 85) {
+  if (equityPct > maxEquityForAge) {
     recommendations.push({
       type: 'danger',
-      title: 'REBALANCE: Equity Too High (>85%)',
-      desc: `Sell ₹${((equityPct - 75) * combinedTotal / 100 / 100000).toFixed(1)}L from equity funds and buy debt. This protects you from crashes.`,
+      title: `REBALANCE: Equity Too High (>${maxEquityForAge}% for Age ${currentAge})`,
+      desc: `Your equity at ${equityPct.toFixed(1)}% exceeds the age-appropriate maximum of ${maxEquityForAge}%. Sell ₹${((equityPct - 75) * combinedTotal / 100 / 100000).toFixed(1)}L from equity funds and buy debt. This protects you from market crashes as you approach retirement.`,
       critical: true
     });
     criticalCount++;
@@ -7248,7 +7594,7 @@ function runPortfolioReview() {
         • Bull market momentum (enjoy but don't get overconfident)<br>
         • Excellent fund selection (active funds beating benchmarks)<br>
         • Timing: Entered during low valuations<br>
-        <strong>Action:</strong> Consider rebalancing if equity >85%. Lock in gains by moving to debt.
+        <strong>Action:</strong> Consider rebalancing if equity >${maxEquityForAge}% (age-appropriate limit). Lock in gains by moving to debt.
       </div>
     ` : ''}
   `;
@@ -7261,9 +7607,9 @@ function runPortfolioReview() {
       <div class="card j">
         <div class="ch3 j">IMMEDIATE ACTIONS (This Month)</div>
         <div style="font-size:12px;line-height:1.8">
-          ${equityPct > 85 ? '☐ Rebalance: Sell equity, buy debt<br>' : ''}
+          ${equityPct > maxEquityForAge ? '☐ Rebalance: Sell equity, buy debt (exceeds age-appropriate ' + maxEquityForAge + '%)<br>' : ''}
           ${actualReturn < 10 && monthsElapsed >= 12 ? '☐ Review underperforming funds<br>' : ''}
-          ${equityPct >= 65 && equityPct <= 85 && actualReturn >= 10 ? '☐ No action needed - portfolio healthy<br>' : ''}
+          ${equityPct >= 65 && equityPct <= maxEquityForAge && actualReturn >= 10 ? '☐ No action needed - portfolio healthy<br>' : ''}
           ☐ Save this review to history<br>
           ☐ Set reminder for next review (Jan ${new Date().getFullYear() + 1})
         </div>
@@ -7283,11 +7629,11 @@ function runPortfolioReview() {
 
   document.getElementById('action-plan').innerHTML = actionHTML;
 
-  // Calculate overall health score
+  // Calculate overall health score with age-based equity limits
   let healthScore = 100;
   if (Math.abs(equityPct - 75) > 5) healthScore -= 10;
   if (Math.abs(equityPct - 75) > 10) healthScore -= 10;
-  if (equityPct > 85 || equityPct < 65) healthScore -= 20;
+  if (equityPct > maxEquityForAge || equityPct < 65) healthScore -= 20;
   if (actualReturn < 10 && monthsElapsed >= 12) healthScore -= 30;
   if (actualReturn < 12 && monthsElapsed >= 12) healthScore -= 10;
   if (deltaPct < -15) healthScore -= 15;
