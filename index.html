@@ -1073,6 +1073,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
   </div>
+</div>
+
 <div class="page" id="page-3">
   <div class="hdr">
     <div class="htag">RETIREMENT PLANNING</div>
@@ -13141,9 +13143,9 @@ function renderFamilyProjectionTable() {
     row.innerHTML = `
       <td>${yearData.year}</td>
       <td>${yourAge}/${wifeAge}</td>
-      <td>₹${(yearData.monthlySIP / 1000).toFixed(0)}K</td>
-      <td>₹${(yearData.annualInv / 100000).toFixed(1)}L</td>
-      <td>₹${(yearData.returns / 100000).toFixed(1)}L</td>
+      <td>₹${(yearData.sip / 1000).toFixed(0)}K</td>
+      <td>₹${(yearData.contrib / 100000).toFixed(1)}L</td>
+      <td>₹${((yearData.corpus - (yearData.contrib || 0)) / 100000).toFixed(1)}L</td>
       <td>₹${(yearData.corpus / 10000000).toFixed(1)} Cr</td>
       <td>${milestone}</td>
     `;
