@@ -18,43 +18,31 @@ jobs:
         run: |
           echo "📡 Fetching live Indian market data..."
 
-          # Fetch Nifty 50 data from Yahoo Finance
-          YAHOO_DATA=$(curl -s 'https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI' || echo "")
+          # Set defaults first
+          NIFTY_PRICE=22000
+          NIFTY_CHANGE=0.5
+          NSE_PE=22.5
+          NSE_PB=4.2
 
-          # Extract values from Yahoo Finance response
-          if [ ! -z "$YAHOO_DATA" ]; then
-            NIFTY_PRICE=$(echo "$YAHOO_DATA" | jq -r '.chart.result[0].meta.regularMarketPrice // 22000')
-            PREV_CLOSE=$(echo "$YAHOO_DATA" | jq -r '.chart.result[0].meta.previousClose // 22000')
-            NIFTY_CHANGE=$(echo "scale=2; (($NIFTY_PRICE - $PREV_CLOSE) / $PREV_CLOSE) * 100" | bc)
-            echo "✅ Yahoo Finance data fetched: Nifty $NIFTY_PRICE"
+          # Try fetching Yahoo Finance data (may fail, that's OK)
+          YAHOO_DATA=$(curl -s 'https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI' 2>/dev/null || echo "")
+
+          # Extract values from Yahoo Finance response if successful
+          if [ ! -z "$YAHOO_DATA" ] && echo "$YAHOO_DATA" | jq -e '.chart.result[0]' >/dev/null 2>&1; then
+            TEMP_PRICE=$(echo "$YAHOO_DATA" | jq -r '.chart.result[0].meta.regularMarketPrice // 22000' 2>/dev/null || echo "22000")
+            PREV_CLOSE=$(echo "$YAHOO_DATA" | jq -r '.chart.result[0].meta.previousClose // 22000' 2>/dev/null || echo "22000")
+
+            # Only use if valid numbers
+            if [[ "$TEMP_PRICE" =~ ^[0-9]+\.?[0-9]*$ ]]; then
+              NIFTY_PRICE=$TEMP_PRICE
+              NIFTY_CHANGE=$(echo "scale=2; (($NIFTY_PRICE - $PREV_CLOSE) / $PREV_CLOSE) * 100" | bc 2>/dev/null || echo "0.5")
+              echo "✅ Yahoo Finance data fetched: Nifty $NIFTY_PRICE"
+            fi
           else
-            # Fallback values
-            NIFTY_PRICE=22000
-            NIFTY_CHANGE=0
             echo "⚠️ Yahoo Finance failed, using defaults"
           fi
 
-          # Try NSE API as backup
-          NSE_DATA=$(curl -s -H "Accept: application/json" -H "User-Agent: Mozilla/5.0" \
-            'https://www.nseindia.com/api/allIndices' || echo "")
-
-          if [ ! -z "$NSE_DATA" ]; then
-            NSE_NIFTY=$(echo "$NSE_DATA" | jq -r '.data[] | select(.index=="NIFTY 50") | .last // 22000')
-            NSE_PE=$(echo "$NSE_DATA" | jq -r '.data[] | select(.index=="NIFTY 50") | .pe // 22.5')
-            NSE_PB=$(echo "$NSE_DATA" | jq -r '.data[] | select(.index=="NIFTY 50") | .pb // 4.2')
-
-            # Use NSE data if available
-            if [ "$NSE_NIFTY" != "22000" ]; then
-              NIFTY_PRICE=$NSE_NIFTY
-              echo "✅ NSE data fetched: Nifty $NIFTY_PRICE, PE $NSE_PE"
-            fi
-          else
-            NSE_PE=22.5
-            NSE_PB=4.2
-            echo "⚠️ NSE API failed, using default PE/PB"
-          fi
-
-          # Create market-data.json
+          # Create market-data.json with whatever data we have
           cat > market-data.json << EOF
           {
             "source": "GitHub Actions (Daily Update)",
@@ -74,7 +62,7 @@ jobs:
           }
           EOF
 
-          echo "✅ market-data.json created with live data"
+          echo "✅ market-data.json created"
           cat market-data.json
 
       - name: Commit and push changes
