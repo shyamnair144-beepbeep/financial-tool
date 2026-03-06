@@ -1,0 +1,16 @@
+{
+  "source": "GitHub Actions (Daily Update)",
+  "timestamp": 1772827461000,
+  "lastUpdated": "2026-03-06 20:04:21 UTC",
+  "niftyPrice": 22000,
+  "niftyChange": 0.5,
+  "niftyPE": 22.5,
+  "niftyPB": 4.2,
+  "indiaVIX": 15.5,
+  "repoRate": 6.5,
+  "cpiInflation": 5.1,
+  "usdInr": 83.2,
+  "crudeOil": 75.0,
+  "goldPrice": 62500,
+  "note": "Auto-updated daily by GitHub Actions at market close"
+}
