@@ -11011,25 +11011,58 @@ function stopTimestampUpdater() {
 }
 
 async function fetchFromMultipleSources() {
-  // Strategy: Try multiple sources, use first successful one
+  // PRODUCTION: Fetch real market data (GitHub Pages hosting)
+  console.log('📡 Fetching live Indian market data from NSE...');
 
   try {
-    // Source 1: Try NSE API (may have CORS issues in browser)
-    // const vixResponse = await fetch('https://www.nseindia.com/api/volatility-index');
-    // const vixData = await vixResponse.json();
+    // Strategy 1: Use CORS proxy to access NSE India API
+    const corsProxy = 'https://api.allorigins.win/raw?url=';
+    const nseUrl = encodeURIComponent('https://www.nseindia.com/api/allIndices');
 
-    // Source 2: Try public financial APIs
-    // const peResponse = await fetch('https://some-api.com/nifty-pe');
+    const response = await fetch(corsProxy + nseUrl, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    });
 
-    // For now, return null to use cached/default values
-    // In production, implement actual API calls here
+    if (response.ok) {
+      const data = await response.json();
+      const nifty50 = data.data?.find(idx => idx.index === 'NIFTY 50');
 
-    return null; // Will use default values
+      if (nifty50) {
+        console.log('✅ Live NSE data fetched successfully');
+        return {
+          source: 'NSE India (Live)',
+          niftyPrice: parseFloat(nifty50.last) || 22000,
+          niftyChange: parseFloat(nifty50.percentChange) || 0,
+          niftyPE: parseFloat(nifty50.pe) || 22.5,
+          niftyPB: parseFloat(nifty50.pb) || 4.2,
+          timestamp: Date.now()
+        };
+      }
+    }
+
+    // Fallback: Try Yahoo Finance directly
+    console.log('⚠️ NSE failed, trying Yahoo Finance...');
+    const yahooResp = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI');
+    if (yahooResp.ok) {
+      const yahooData = await yahooResp.json();
+      const quote = yahooData.chart?.result?.[0]?.meta;
+      if (quote) {
+        console.log('✅ Yahoo Finance data fetched');
+        return {
+          source: 'Yahoo Finance (Live)',
+          niftyPrice: quote.regularMarketPrice || 22000,
+          timestamp: Date.now()
+        };
+      }
+    }
 
   } catch (error) {
-    console.error('Fetch error:', error);
-    return null;
+    console.error('❌ All API sources failed:', error.message);
   }
+
+  console.log('📊 Using cached/default values');
+  return null;
 }
 
 function manualRefreshMarketData() {
