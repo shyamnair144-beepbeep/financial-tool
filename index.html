@@ -4448,6 +4448,9 @@ function updateCarPrices() {
 }
 
 // Render car cards
+// Store selected variants for each car
+const selectedCarVariants = {};
+
 function renderCarCards() {
   if (!carDatabase || !carDatabase.cars) {
     console.warn('Car database not loaded yet');
@@ -4463,12 +4466,15 @@ function renderCarCards() {
 
   let filteredCars = carDatabase.cars;
 
-  // Filter by budget
+  // Filter by budget (using variant range)
   if (budget !== 'all') {
     const [min, max] = budget.split('-').map(n => parseInt(n) * 100000);
     filteredCars = filteredCars.filter(car => {
-      const onRoad = calculateOnRoadPrice(car.exShowroom, city);
-      return onRoad >= min && onRoad <= max;
+      // Check if ANY variant falls in budget
+      return car.variants.some(v => {
+        const onRoad = calculateOnRoadPrice(v.price, city);
+        return onRoad >= min && onRoad <= max;
+      });
     });
   }
 
@@ -4484,13 +4490,20 @@ function renderCarCards() {
 
   let html = '';
   filteredCars.forEach(car => {
-    const onRoad = calculateOnRoadPrice(car.exShowroom, city);
+    // Get selected variant or default to mid-range variant
+    const currentVariant = selectedCarVariants[car.id] || car.variants[Math.floor(car.variants.length / 2)].name;
+    const variant = car.variants.find(v => v.name === currentVariant) || car.variants[0];
+    const onRoad = calculateOnRoadPrice(variant.price, city);
     const isSelected = selectedCarsForComparison.has(car.id);
+
+    // Get price range
+    const minPrice = calculateOnRoadPrice(car.variants[0].price, city);
+    const maxPrice = calculateOnRoadPrice(car.variants[car.variants.length - 1].price, city);
 
     html += `
       <div class="card ${isSelected ? 'j' : ''}" style="padding:16px;cursor:pointer;border:2px solid ${isSelected ? 'var(--jt)' : 'var(--border)'}">
         <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-          <div>
+          <div style="flex:1">
             <h4 style="margin:0 0 4px 0;font-size:14px">${car.name}</h4>
             <div style="font-size:11px;color:var(--ink3)">${car.segment}</div>
           </div>
@@ -4501,10 +4514,24 @@ function renderCarCards() {
                  style="width:18px;height:18px;cursor:pointer">
         </div>
 
+        <div style="background:var(--bg3);padding:8px;border-radius:6px;margin-bottom:10px">
+          <label style="font-size:10px;color:var(--ink3);display:block;margin-bottom:4px">Select Variant:</label>
+          <select id="variant-${car.id}"
+                  onchange="updateCarVariant('${car.id}', this.value)"
+                  style="width:100%;padding:6px;background:var(--bg);color:var(--ink);border:1px solid var(--border);border-radius:4px;font-size:11px">
+            ${car.variants.map(v => `
+              <option value="${v.name}" ${v.name === currentVariant ? 'selected' : ''}>
+                ${v.name} - ₹${(v.price/100000).toFixed(2)}L
+              </option>
+            `).join('')}
+          </select>
+        </div>
+
         <div style="background:var(--bg2);padding:10px;border-radius:6px;margin-bottom:10px">
           <div style="font-size:18px;font-weight:700;color:var(--jt);margin-bottom:2px">₹${(onRoad/100000).toFixed(2)}L</div>
-          <div style="font-size:10px;color:var(--ink3)">On-road ${city.charAt(0).toUpperCase() + city.slice(1)}</div>
-          <div style="font-size:9px;color:var(--ink3);margin-top:4px">Ex-showroom: ₹${(car.exShowroom/100000).toFixed(2)}L</div>
+          <div style="font-size:10px;color:var(--ink3)">On-road ${city.charAt(0).toUpperCase() + city.slice(1)} (${currentVariant})</div>
+          <div style="font-size:9px;color:var(--ink3);margin-top:4px">Ex-showroom: ₹${(variant.price/100000).toFixed(2)}L</div>
+          <div style="font-size:9px;color:var(--ink2);margin-top:4px">Range: ₹${(minPrice/100000).toFixed(2)}L - ₹${(maxPrice/100000).toFixed(2)}L</div>
         </div>
 
         <div style="font-size:11px;line-height:1.5;margin-bottom:10px">
@@ -4535,6 +4562,13 @@ function renderCarCards() {
   });
 
   container.innerHTML = html;
+}
+
+// Update selected variant for a car
+function updateCarVariant(carId, variantName) {
+  selectedCarVariants[carId] = variantName;
+  renderCarCards();
+  console.log(`Updated ${carId} to variant: ${variantName}`);
 }
 
 // Toggle car selection
@@ -4613,10 +4647,29 @@ function showCarComparison() {
   });
   html += '</tr></thead><tbody>';
 
-  // Add comparison rows
+  // Add comparison rows - use selected variant for each car
   const rows = [
-    { label: 'On-Road Price', getValue: (car) => `₹${(calculateOnRoadPrice(car.exShowroom, city)/100000).toFixed(2)}L` },
-    { label: 'Ex-Showroom', getValue: (car) => `₹${(car.exShowroom/100000).toFixed(2)}L` },
+    { label: 'Selected Variant', getValue: (car) => {
+      const variantName = selectedCarVariants[car.id] || car.variants[Math.floor(car.variants.length / 2)].name;
+      return `<strong style="color:var(--jt)">${variantName}</strong>`;
+    }},
+    { label: 'On-Road Price', getValue: (car) => {
+      const variantName = selectedCarVariants[car.id] || car.variants[Math.floor(car.variants.length / 2)].name;
+      const variant = car.variants.find(v => v.name === variantName) || car.variants[0];
+      return `<strong style="color:var(--jt)">₹${(calculateOnRoadPrice(variant.price, city)/100000).toFixed(2)}L</strong>`;
+    }},
+    { label: 'Ex-Showroom', getValue: (car) => {
+      const variantName = selectedCarVariants[car.id] || car.variants[Math.floor(car.variants.length / 2)].name;
+      const variant = car.variants.find(v => v.name === variantName) || car.variants[0];
+      return `₹${(variant.price/100000).toFixed(2)}L`;
+    }},
+    { label: 'RTO + Insurance', getValue: (car) => {
+      const variantName = selectedCarVariants[car.id] || car.variants[Math.floor(car.variants.length / 2)].name;
+      const variant = car.variants.find(v => v.name === variantName) || car.variants[0];
+      const onRoad = calculateOnRoadPrice(variant.price, city);
+      const charges = onRoad - variant.price;
+      return `₹${(charges/100000).toFixed(2)}L`;
+    }},
     { label: 'Segment', getValue: (car) => car.segment },
     { label: 'Mileage', getValue: (car) => car.mileage },
     { label: 'Safety Rating', getValue: (car) => car.safety },
@@ -4625,8 +4678,12 @@ function showCarComparison() {
     { label: 'Seating', getValue: (car) => car.seating + ' Seater' },
     { label: 'Boot Space', getValue: (car) => car.bootSpace },
     { label: 'Fuel Type', getValue: (car) => car.fuelType },
-    { label: 'Variants', getValue: (car) => car.variants.length + ' variants' },
-    { label: 'Price Range', getValue: (car) => `₹${(car.variants[0].price/100000).toFixed(1)}L - ₹${(car.variants[car.variants.length-1].price/100000).toFixed(1)}L` },
+    { label: 'Total Variants', getValue: (car) => car.variants.length + ' variants' },
+    { label: 'Price Range', getValue: (car) => {
+      const minOnRoad = calculateOnRoadPrice(car.variants[0].price, city);
+      const maxOnRoad = calculateOnRoadPrice(car.variants[car.variants.length-1].price, city);
+      return `₹${(minOnRoad/100000).toFixed(1)}L - ₹${(maxOnRoad/100000).toFixed(1)}L`;
+    }},
   ];
 
   rows.forEach(row => {
