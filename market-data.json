@@ -1,7 +1,7 @@
 {
   "source": "GitHub Actions (Daily Update)",
-  "timestamp": 1772827461000,
-  "lastUpdated": "2026-03-06 20:04:21 UTC",
+  "timestamp": 1772891888000,
+  "lastUpdated": "2026-03-07 13:58:08 UTC",
   "niftyPrice": 22000,
   "niftyChange": 0.5,
   "niftyPE": 22.5,
@@ -12,5 +12,5 @@
   "usdInr": 83.2,
   "crudeOil": 75.0,
   "goldPrice": 62500,
-  "note": "Auto-updated daily by GitHub Actions at market close"
+  "note": "Default market values - Update manually if needed"
 }
