@@ -4516,11 +4516,11 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <tbody>
           <tr><td>Nifty 50 Index Fund</td><td>Large Cap</td><td>₹60,000</td><td>120503 (UTI) / 120716 (MO)</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
           <tr><td>Parag Parikh Flexi Cap</td><td>Flexi Cap + Intl</td><td>₹18,000</td><td>122639</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
-          <tr><td>Motilal Oswal Midcap</td><td>Mid Cap</td><td>₹38,000</td><td>135809</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
-          <tr><td>Nippon Small Cap</td><td>Small Cap</td><td>₹12,000</td><td>118778</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
-          <tr><td>Motilal Oswal S&amp;P 500</td><td>International</td><td>₹25,000</td><td>130503</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
-          <tr><td>HDFC Balanced Advantage</td><td>Balanced / Hybrid</td><td>₹12,000</td><td>100033</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
-          <tr><td>HDFC Corporate Bond</td><td>Debt</td><td>₹20,000</td><td>100022</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>Motilal Oswal Midcap</td><td>Mid Cap</td><td>₹38,000</td><td>135777</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>Nippon Small Cap</td><td>Small Cap</td><td>₹12,000</td><td>118989</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>Motilal Oswal S&amp;P 500</td><td>International</td><td>₹25,000</td><td>120835</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
+          <tr><td>HDFC Balanced Advantage</td><td>Balanced / Hybrid</td><td>₹12,000</td><td>101305</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>HDFC Corporate Bond</td><td>Debt</td><td>₹20,000</td><td>119931</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
           <tr><td>NPS Tier 1 (via salary)</td><td>Pension / Debt/Eq</td><td>₹6,200</td><td>Auto-debit via employer</td><td><span class="ty">NPS</span></td><td>Salary day</td></tr>
           <tr class="ttr"><td>Total</td><td></td><td>₹1,91,200</td><td></td><td></td><td></td></tr>
         </tbody>
@@ -4691,6 +4691,10 @@ function showPage(index) {
   if (!initializedPages.has(index)) {
     setTimeout(function() { renderPageCharts(index); }, 50);
     initializedPages.add(index);
+  } else if (index === 21) {
+    // Page-21 reads from localStorage — always re-init on revisit so
+    // checklist and insurance status reflect any changes made since last visit
+    setTimeout(function() { initAprilLaunch(); }, 50);
   }
 }
 
@@ -15253,7 +15257,9 @@ function renderStepupPlanner() {
   var monthlyRate = CAGR / 12;
 
   // Milestones
-  var sipMilestones = {2030: '₹2.5L/mo', 2036: '₹5L/mo', 2042: '₹10L/mo'};
+  // Actual SIP at these years (10% step-up from ₹1.91L base):
+  // 2030 (yr4): ₹1.91L×1.1^4 = ₹2.80L | 2036 (yr10): ₹4.96L | 2044 (yr18): ₹10.6L
+  var sipMilestones = {2030: '₹2.8L/mo', 2036: '₹4.9L/mo', 2044: '₹10L/mo'};
 
   for (var i = 0; i < 28; i++) {
     var year   = START_YEAR + i;
