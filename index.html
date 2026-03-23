@@ -163,7 +163,123 @@ tr.milestone{background:rgba(240,180,41,.05)}
   .hdr{padding:20px 16px}
   .fund-metrics{grid-template-columns:repeat(2,1fr)}
   .comparison-grid{grid-template-columns:1fr}
+  .health-score{grid-template-columns:1fr}
+  .milestone-node{min-width:90px}
+  .inception-track{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ====================================================
+   FINANCIAL DASHBOARD PRO — APRIL 2026 UPGRADE CSS
+   ==================================================== */
+:root{
+  --grad-gold:linear-gradient(135deg,#f0b429 0%,#ffd700 100%);
+  --grad-green:linear-gradient(135deg,#30c87a 0%,#60e8a0 100%);
+  --shadow-gold:0 0 20px rgba(240,180,41,.2),0 4px 12px rgba(0,0,0,.4);
+  --shadow-green:0 0 20px rgba(48,200,122,.2),0 4px 12px rgba(0,0,0,.4);
+  --section-gradient:linear-gradient(90deg,var(--you) 0%,transparent 100%);
+  --success:#30c87a;
+}
+
+/* Glassmorphism Cards */
+.glass-card{background:rgba(26,29,33,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(240,180,41,.15);border-radius:10px;padding:20px;position:relative;overflow:hidden}
+.glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(240,180,41,.4),transparent)}
+
+/* Card hover glow */
+.card:hover{border-color:rgba(240,180,41,.12);box-shadow:0 0 15px rgba(240,180,41,.04);transition:all .2s}
+
+/* Progress Ring */
+.ring-container{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.ring-container svg{transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:rgba(255,255,255,.06);stroke-width:8}
+.ring-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1.2s ease}
+.ring-fill.gold{stroke:var(--you);filter:drop-shadow(0 0 6px rgba(240,180,41,.5))}
+.ring-fill.green{stroke:var(--jt);filter:drop-shadow(0 0 6px rgba(48,200,122,.5))}
+.ring-fill.red-ring{stroke:var(--red);filter:drop-shadow(0 0 6px rgba(232,80,64,.4))}
+.ring-label{position:absolute;text-align:center}
+.ring-score{font-size:2rem;font-weight:800;font-family:monospace;color:var(--you);line-height:1}
+.ring-max{font-size:10px;color:var(--ink3);font-family:monospace;letter-spacing:1px}
+
+/* Health Score Layout */
+.health-score{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start}
+.health-breakdown{display:flex;flex-direction:column;gap:10px}
+.health-item{display:flex;align-items:center;gap:10px}
+.health-item-label{font-size:11px;color:var(--ink2);width:180px;flex-shrink:0}
+.health-item-bar{flex:1;background:rgba(255,255,255,.05);border-radius:3px;height:6px;overflow:hidden}
+.health-item-bar-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
+.health-item-score{font-family:monospace;font-size:11px;width:50px;text-align:right;flex-shrink:0}
+.health-item-score.full{color:var(--jt2)}.health-item-score.partial{color:var(--you)}.health-item-score.low{color:var(--red)}
+
+/* Milestone Timeline */
+.milestone-track{display:flex;overflow-x:auto;padding:20px 10px 16px;gap:0;position:relative;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.milestone-connector{position:relative;display:flex;align-items:center;z-index:0}
+.milestone-line{height:2px;width:40px;background:linear-gradient(90deg,rgba(240,180,41,.3),rgba(240,180,41,.1));flex-shrink:0}
+.milestone-node{display:flex;flex-direction:column;align-items:center;min-width:110px;position:relative;z-index:1;animation:milestoneAppear .5s ease both}
+.milestone-dot{width:36px;height:36px;border-radius:50%;border:2px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:14px;margin:6px 0;transition:all .2s;flex-shrink:0}
+.milestone-node.achieved .milestone-dot{background:var(--jt-s);border-color:var(--jt);box-shadow:0 0 12px rgba(48,200,122,.4)}
+.milestone-node.on-track .milestone-dot{background:var(--you-s);border-color:var(--you);box-shadow:var(--shadow-gold)}
+.milestone-node.future .milestone-dot{opacity:.5}
+.milestone-amount{font-family:monospace;font-size:11px;font-weight:700;color:var(--ink);text-align:center}
+.milestone-year{font-size:10px;color:var(--you);font-family:monospace;text-align:center}
+.milestone-age{font-size:9px;color:var(--ink3);font-family:monospace;text-align:center}
+@keyframes milestoneAppear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Bloomberg Metric Blocks */
+.metric-block{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:12px 16px}
+.metric-block .mb-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:monospace;color:var(--ink3);margin-bottom:6px}
+.metric-block .mb-value{font-size:1.4rem;font-weight:800;font-family:monospace;color:var(--ink);line-height:1.2}
+.metric-block .mb-sub{font-size:10px;color:var(--ink3);font-family:monospace;margin-top:3px}
+.trend-up{color:var(--jt2)}.trend-up::before{content:'▲ '}
+.trend-dn{color:var(--red)}.trend-dn::before{content:'▼ '}
+
+/* Status Dots (pulsing) */
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;flex-shrink:0}
+.status-dot.green{background:var(--jt);box-shadow:0 0 6px var(--jt);animation:sdPulse 2s infinite}
+.status-dot.red{background:var(--red);box-shadow:0 0 6px var(--red);animation:sdPulse 2s infinite}
+.status-dot.yellow{background:var(--you);box-shadow:0 0 6px var(--you);animation:sdPulse 2s infinite}
+@keyframes sdPulse{0%,100%{opacity:1}50%{opacity:.45}}
+
+/* Animated counters */
+@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.count-animate{animation:countUp .6s ease both}
+
+/* Insurance Panel Cards */
+.ins-panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative}
+.ins-panel.status-done{border-left:3px solid var(--jt)}
+.ins-panel.status-progress{border-left:3px solid var(--you)}
+.ins-panel.status-new{border-left:3px solid var(--red)}
+.ins-status-toggle{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.ins-btn{padding:4px 10px;border-radius:4px;font-size:10px;font-family:monospace;cursor:pointer;border:1px solid var(--border);background:var(--bg3);color:var(--ink3);transition:all .15s;letter-spacing:1px;text-transform:uppercase}
+.ins-btn.active-red{background:var(--red-s);border-color:var(--red);color:var(--red)}
+.ins-btn.active-yellow{background:var(--you-s);border-color:var(--you);color:var(--you)}
+.ins-btn.active-green{background:var(--jt-s);border-color:var(--jt);color:var(--jt2)}
+
+/* Checklist Styles */
+.checklist-week{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.checklist-week-header{padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--border);font-weight:700;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.checklist-item{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.03);cursor:pointer;transition:background .1s}
+.checklist-item:last-child{border-bottom:none}
+.checklist-item:hover{background:rgba(255,255,255,.02)}
+.checklist-item input[type=checkbox]{cursor:pointer;accent-color:var(--jt);width:14px;height:14px;flex-shrink:0}
+.checklist-item.done{opacity:.55}
+.checklist-item.done .check-label{text-decoration:line-through;color:var(--ink3)}
+.check-label{font-size:12px;color:var(--ink)}
+
+/* Step-up Table Row Coloring */
+.stepup-active td:not(:first-child):not(:nth-child(2)){color:var(--jt2)}
+.stepup-mid td:not(:first-child):not(:nth-child(2)){color:var(--blue)}
+.stepup-late td:not(:first-child):not(:nth-child(2)){color:var(--purple)}
+.stepup-milestone{background:rgba(240,180,41,.07)!important}
+.stepup-milestone td{color:var(--you)!important;font-weight:700}
+
+/* Inception Tracker */
+.inception-track{background:linear-gradient(135deg,rgba(240,180,41,.07),rgba(48,200,122,.05));border:1px solid rgba(240,180,41,.2);border-radius:var(--r);padding:20px 24px;margin-bottom:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px}
+.inception-metric .im-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-family:monospace;color:var(--ink3);margin-bottom:5px}
+.inception-metric .im-value{font-size:1.2rem;font-weight:700;font-family:monospace;color:var(--ink)}
+.inception-metric .im-sub{font-size:10px;color:var(--ink3);font-family:monospace;margin-top:2px}
+
+/* Progress bar for April Launch */
+.launch-progress-bar{background:rgba(255,255,255,.05);border-radius:4px;height:8px;overflow:hidden;margin-top:6px}
+.launch-progress-fill{height:100%;background:var(--grad-green);border-radius:4px;transition:width .5s ease}
 </style>
 </head>
 <body>
@@ -172,7 +288,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 <div class="top-nav">
   <div class="tn active" onclick="showPage(0)">Dashboard</div>
   <div class="tn" onclick="showPage(1)">Settings</div>
-  <div class="tn" onclick="showPage(2)">📊 Family Portfolio</div>
+  <div class="tn" onclick="showPage(2)"> Family Portfolio</div>
   <div class="tn" onclick="showPage(3)">Retirement</div>
   <div class="tn" onclick="showPage(4)">Kids Education</div>
   <div class="tn" onclick="showPage(5)">Investments</div>
@@ -183,17 +299,19 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="tn" onclick="showPage(10)">Monthly Projections</div>
   <div class="tn" onclick="showPage(11)">Alerts</div>
   <div class="tn" onclick="showPage(12)">⏰ Review & Tracking</div>
-  <div class="tn" onclick="showPage(13)">📊 Fund Comparison</div>
-  <div class="tn" onclick="showPage(14)">🔗 Portfolio Overlap</div>
-  <div class="tn" onclick="showPage(15)">📋 Fund Analysis</div>
+  <div class="tn" onclick="showPage(13)"> Fund Comparison</div>
+  <div class="tn" onclick="showPage(14)"> Portfolio Overlap</div>
+  <div class="tn" onclick="showPage(15)"> Fund Analysis</div>
   <div class="tn" onclick="showPage(16)">
-    🎯 Decision Engine
+     Decision Engine
     <span id="alertBadge" style="display:none;background:var(--red);color:#fff;border-radius:10px;padding:2px 6px;font-size:9px;margin-left:3px;"></span>
   </div>
-  <div class="tn" onclick="showPage(17)">📊 Market Sentiment</div>
-  <div class="tn" onclick="showPage(18)">🎲 Stochastic Engine</div>
+  <div class="tn" onclick="showPage(17)"> Market Sentiment</div>
+  <div class="tn" onclick="showPage(18)"> Stochastic Engine</div>
   <div class="tn" onclick="showPage(19)">⚠️ Lifestyle Creep</div>
-  <div class="tn" onclick="showPage(20)">💰 Expense Tracker</div>
+  <div class="tn" onclick="showPage(20)"> Expense Tracker</div>
+  <div class="tn" onclick="showPage(21)">🚀 April Launch</div>
+  <div class="tn" onclick="showPage(22)">📅 Step-up Planner</div>
 </div>
 
 <!-- PAGE 0: DASHBOARD -->
@@ -219,10 +337,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div style="background:rgba(239,68,68,0.1);padding:20px;border-radius:8px;margin-bottom:20px;border-left:4px solid var(--red)">
         <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--red)">CRITICAL GAPS:</div>
         <div style="font-size:12px;line-height:2;color:var(--ink)">
-          🔴 Term Life: ₹0 / ₹5 Cr required<br>
-          🔴 Health Insurance: ₹0 / ₹20L required<br>
-          💰 Total Cost: ₹3,350/month (1.8% of income)<br>
-          📉 Impact on Goal: -₹2.1 Cr (still exceed target!)
+           Term Life: ₹0 / ₹5 Cr required<br>
+           Health Insurance: ₹0 / ₹20L required<br>
+           Total Cost: ₹3,350/month (1.8% of income)<br>
+           Impact on Goal: -₹2.1 Cr (still exceed target!)
         </div>
       </div>
 
@@ -253,7 +371,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <strong>USING ASSUMPTIONS</strong> - Unable to fetch live fund data.
       All projections use assumed 12% returns. Last successful data fetch: <span id="last-api-fetch">Never</span>
     </div>
-    <button onclick="fetchAllFundHistoricalData()" style="background:var(--red);color:white;border:none;padding:8px 16px;border-radius:5px;font-weight:700;font-size:11px;cursor:pointer;white-space:nowrap">🔄 Retry Now</button>
+    <button onclick="fetchAllFundHistoricalData()" style="background:var(--red);color:white;border:none;padding:8px 16px;border-radius:5px;font-weight:700;font-size:11px;cursor:pointer;white-space:nowrap"> Retry Now</button>
   </div>
 
   <div class="banner">
@@ -378,6 +496,72 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
     </div>
 
+    <!-- SECTION 2.5: PORTFOLIO HEALTH SCORE -->
+    <div class="sh"><span class="sh-n">2.5</span><h2>Portfolio Health Score</h2></div>
+    <div class="card glass-card" style="margin-bottom:13px">
+      <div class="health-score" id="healthScoreContainer">
+        <!-- Left: Ring -->
+        <div style="text-align:center">
+          <div class="ring-container">
+            <svg width="130" height="130" viewBox="0 0 130 130">
+              <circle class="ring-track" cx="65" cy="65" r="56"/>
+              <circle class="ring-fill gold" id="healthRingFill" cx="65" cy="65" r="56"
+                stroke-dasharray="351.86" stroke-dashoffset="351.86"/>
+            </svg>
+            <div class="ring-label">
+              <div class="ring-score" id="healthScoreNum">--</div>
+              <div class="ring-max">/100</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:11px;color:var(--ink3);font-family:monospace" id="healthGrade">Calculating...</div>
+        </div>
+        <!-- Right: Breakdown -->
+        <div>
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:12px">Score breakdown — insurance gap reduces score from 92 → <span id="healthScoreInline" style="color:var(--you);font-weight:700">72</span></div>
+          <div class="health-breakdown" id="healthBreakdown">
+            <div class="health-item">
+              <div class="health-item-label">Diversification (5 asset classes)</div>
+              <div class="health-item-bar"><div class="health-item-bar-fill" style="width:100%;background:var(--jt)"></div></div>
+              <div class="health-item-score full">25/25</div>
+            </div>
+            <div class="health-item">
+              <div class="health-item-label">Expense Quality (avg ER &lt;0.5%)</div>
+              <div class="health-item-bar"><div class="health-item-bar-fill" style="width:100%;background:var(--jt)"></div></div>
+              <div class="health-item-score full">20/20</div>
+            </div>
+            <div class="health-item">
+              <div class="health-item-label">Goal Alignment (corpus on track)</div>
+              <div class="health-item-bar"><div class="health-item-bar-fill" style="width:100%;background:var(--jt)"></div></div>
+              <div class="health-item-score full">20/20</div>
+            </div>
+            <div class="health-item">
+              <div class="health-item-label" style="color:var(--red)">Insurance (term + health gap) ⚠️</div>
+              <div class="health-item-bar"><div class="health-item-bar-fill" id="insuranceBarFill" style="width:47%;background:var(--red)"></div></div>
+              <div class="health-item-score low" id="insuranceScore">7/15</div>
+            </div>
+            <div class="health-item">
+              <div class="health-item-label">Sinking Funds (12-mo emergency)</div>
+              <div class="health-item-bar"><div class="health-item-bar-fill" style="width:100%;background:var(--jt)"></div></div>
+              <div class="health-item-score full">10/10</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;padding:10px 12px;background:var(--red-s);border-left:3px solid var(--red);border-radius:4px;font-size:11px">
+            ⚠️ <strong>Action needed:</strong> Secure term life (₹5Cr) + health (₹20L) insurance in April 2026 to restore score to <strong>92/100</strong>. Update status on <em>🚀 April Launch</em> page.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2.6: WEALTH MILESTONES TIMELINE -->
+    <div class="sh"><span class="sh-n">2.6</span><h2>Wealth Milestones Timeline</h2></div>
+    <div class="card" style="padding:16px;margin-bottom:13px;overflow:hidden">
+      <div style="font-size:10px;color:var(--ink3);font-family:monospace;margin-bottom:12px">CORPUS CROSSING POINTS — 28-YEAR JOURNEY (SCROLL →)</div>
+      <div class="milestone-track" id="milestonesContainer">
+        <!-- Rendered by renderMilestones() -->
+        <div style="color:var(--ink3);font-size:12px;padding:20px">Calculating milestones...</div>
+      </div>
+    </div>
+
     <div class="sh"><span class="sh-n">03</span><h2>&#128274; Insurance Calculator</h2></div>
     <div class="card d">
       <div class="ch3 d">INSURANCE REQUIREMENTS (CFP STANDARD)</div>
@@ -392,7 +576,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div style="margin-top:10px;padding:10px;background:rgba(232,80,64,.1);border-radius:5px;font-size:11px">&#128679; <strong>ACTION REQUIRED:</strong> Add insurance BEFORE starting new SIPs (April 2026). Total monthly outgo will be ₹1,77,400 (SIPs) + ₹5,000 (insurance) = ₹1,82,400/month.</div>
     </div>
 
-    <div class="sh"><span class="sh-n">04</span><h2>📊 Asset Allocation Health</h2></div>
+    <div class="sh"><span class="sh-n">04</span><h2> Asset Allocation Health</h2></div>
     <div class="card j">
       <div class="ch3 j">CURRENT ALLOCATION vs TARGET</div>
       <div id="allocation-summary"></div>
@@ -403,7 +587,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="cw"><canvas id="networthChart"></canvas></div>
 
     <!-- Insurance Coverage Health Check -->
-    <div class="sh"><span class="sh-n">06</span><h2>🛡️ Survival Basics: Emergency Fund & Insurance</h2></div>
+    <div class="sh"><span class="sh-n">06</span><h2>️ Survival Basics: Emergency Fund & Insurance</h2></div>
 
     <!-- Emergency Fund Status -->
     <div class="card" style="margin-bottom:20px;border-left:4px solid var(--success)">
@@ -449,7 +633,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <!-- Term Life Insurance -->
       <div class="card" style="border-left:4px solid var(--red)">
         <div style="padding:20px">
-          <h4 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--red)">🔴 Term Life Insurance</h4>
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--red)"> Term Life Insurance</h4>
 
           <div style="margin-bottom:16px">
             <div style="font-size:11px;color:var(--ink3);margin-bottom:6px">Required Coverage</div>
@@ -480,7 +664,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <!-- Health Insurance -->
       <div class="card" style="border-left:4px solid var(--red)">
         <div style="padding:20px">
-          <h4 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--red)">🔴 Health Insurance</h4>
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--red)"> Health Insurance</h4>
 
           <div style="margin-bottom:16px">
             <div style="font-size:11px;color:var(--ink3);margin-bottom:6px">Required Coverage (Family)</div>
@@ -513,7 +697,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Total Insurance Cost Summary -->
     <div class="card" style="margin-bottom:20px">
       <div style="padding:20px">
-        <h4 style="font-size:13px;font-weight:700;margin-bottom:16px">💰 Total Insurance Cost Impact</h4>
+        <h4 style="font-size:13px;font-weight:700;margin-bottom:16px"> Total Insurance Cost Impact</h4>
 
         <div class="g3">
           <div style="background:var(--bg3);padding:14px;border-radius:6px">
@@ -661,16 +845,16 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <strong>Tax Note:</strong> Ownership split maintained → Your: ₹1.27L (66%) | Wife: ₹64K (33%) for individual 80C limits and LTCG exemptions.
         </div>
 
-        <h3 style="margin-top:16px">📊 Fund Performance Data Quality</h3>
+        <h3 style="margin-top:16px"> Fund Performance Data Quality</h3>
 
-        <h3 style="margin-top:16px">📊 Fund Performance Data Quality</h3>
+        <h3 style="margin-top:16px"> Fund Performance Data Quality</h3>
         <div id="data-quality-status" style="background:rgba(240,180,41,0.1);border-left:3px solid var(--jt);padding:12px;border-radius:4px;margin-bottom:16px">
           <div style="font-size:12px;color:var(--ink2);margin-bottom:8px">
             Real fund performance data improves projection accuracy.
           </div>
           <div style="display:flex;gap:12px;align-items:center">
             <button onclick="refreshFundHistoricalData()" style="background:var(--jt);color:#000;border:none;padding:8px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">
-              🔄 Refresh Fund Data
+               Refresh Fund Data
             </button>
             <div id="data-quality-info" style="font-size:11px;color:var(--ink3)">
               Loading status...
@@ -678,7 +862,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
         </div>
 
-        <h3 style="margin-top:16px">💸 Expense Ratio Impact Analysis</h3>
+        <h3 style="margin-top:16px"> Expense Ratio Impact Analysis</h3>
         <div id="expense-analysis" style="background:rgba(224,64,160,0.1);border-left:3px solid var(--wife);padding:12px;border-radius:4px;margin-bottom:16px">
           <div style="font-size:12px;color:var(--ink2);margin-bottom:12px">
             Expense ratios are annual fees charged by fund houses. Even small differences compound to crores over 28 years.
@@ -688,7 +872,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
           <div style="display:flex;gap:12px;margin-top:12px">
             <button onclick="showDetailedExpenseReport()" style="background:var(--wife);color:#000;border:none;padding:8px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">
-              📊 View Detailed Report
+               View Detailed Report
             </button>
             <div style="font-size:10px;color:var(--ink3);align-self:center">
               See fund-by-fund breakdown
@@ -696,7 +880,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
         </div>
 
-        <h3 style="margin-top:16px">📈 Benchmark Comparison & Alpha</h3>
+        <h3 style="margin-top:16px"> Benchmark Comparison & Alpha</h3>
         <div id="benchmark-analysis" style="background:rgba(240,180,41,0.1);border-left:3px solid var(--jt);padding:12px;border-radius:4px;margin-bottom:16px">
           <div style="font-size:12px;color:var(--ink2);margin-bottom:12px">
             Alpha shows if your funds are beating their benchmarks. Positive alpha = outperformance. Negative = underperformance.
@@ -707,7 +891,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <div id="underperformer-alert" style="display:none;margin:12px 0;padding:8px;background:rgba(224,64,160,0.2);border-radius:4px;font-size:11px"></div>
           <div style="display:flex;gap:12px;margin-top:12px">
             <button onclick="showBenchmarkComparison()" style="background:var(--jt);color:#000;border:none;padding:8px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">
-              📊 View Alpha Analysis
+               View Alpha Analysis
             </button>
             <div style="font-size:10px;color:var(--ink3);align-self:center">
               See fund vs benchmark performance
@@ -781,21 +965,21 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
     <!-- Portfolio Backup & Restore Section -->
     <div class="field-group" style="margin-top:16px">
-      <h3>📁 Portfolio Backup & Restore</h3>
+      <h3> Portfolio Backup & Restore</h3>
       <div style="margin-bottom:12px;font-size:12px;color:var(--ink2)">
         Export your entire portfolio (funds, settings, performance data) to a JSON file, or restore from a previous backup.
       </div>
       <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
         <button onclick="exportPortfolioBackup()" class="btn-primary">
-          📥 Download Portfolio Backup
+           Download Portfolio Backup
         </button>
         <label class="btn-secondary" style="margin:0">
-          📤 Import Backup
+           Import Backup
           <input type="file" accept=".json" onchange="importPortfolioBackup(this.files[0])" style="display:none" id="import-file-input">
         </label>
       </div>
       <div style="font-size:11px;color:var(--ink3);line-height:1.5">
-        💡 <strong>Tip:</strong> Backup includes all funds, SIP amounts, settings, cached NAV data, and performance history. Import to restore your portfolio after browser cache clear or on a new device.
+         <strong>Tip:</strong> Backup includes all funds, SIP amounts, settings, cached NAV data, and performance history. Import to restore your portfolio after browser cache clear or on a new device.
       </div>
     </div>
 
@@ -937,7 +1121,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- Overlap Analysis -->
-    <div class="sh"><span class="sh-n">04</span><h2>📊 Portfolio Overlap Analysis</h2></div>
+    <div class="sh"><span class="sh-n">04</span><h2> Portfolio Overlap Analysis</h2></div>
 
     <div class="card" style="margin-bottom:20px">
       <div style="padding:20px">
@@ -1019,7 +1203,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div class="ml"><div class="d">Wife's Allocation (₹64K)</div><div class="a aw">33% of total SIP</div></div>
         <div class="ml"><div class="d">Managed As</div><div class="a aj">Single Economic Unit</div></div>
         <div style="margin-top:10px;padding:10px;background:var(--bg3);border-radius:5px;font-size:11px">
-          💡 <strong>Tax Note:</strong> Individual ownership maintained for tax optimization (80C limits, separate LTCG exemptions). Portfolio managed holistically for efficiency.
+           <strong>Tax Note:</strong> Individual ownership maintained for tax optimization (80C limits, separate LTCG exemptions). Portfolio managed holistically for efficiency.
         </div>
       </div>
     </div>
@@ -1061,7 +1245,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
 
         <div style="margin-top:20px;padding:16px;background:var(--bg3);border-radius:8px">
-          <div style="font-size:12px;font-weight:700;margin-bottom:8px">📊 Net Impact</div>
+          <div style="font-size:12px;font-weight:700;margin-bottom:8px"> Net Impact</div>
           <div style="font-size:11px;color:var(--ink2);line-height:1.8">
             <strong>Expected return:</strong> 12.8% → 13.5% (better fund selection)<br>
             <strong>Expense savings:</strong> ₹67,000 over 28 years<br>
@@ -1172,7 +1356,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
     <div class="sh"><span class="sh-n">05</span><h2>Step-Up SIP Strategy</h2></div>
     <div class="alert info">
-      💡 Assume your salary increases 10% annually. How much should you start with?
+       Assume your salary increases 10% annually. How much should you start with?
     </div>
     <div class="g3" style="margin-bottom:24px">
       <div class="card y">
@@ -1190,7 +1374,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- Luxury Lifestyle Planning Section -->
-    <div class="sh"><span class="sh-n">05</span><h2>🚗 Luxury Lifestyle Planning</h2></div>
+    <div class="sh"><span class="sh-n">05</span><h2> Luxury Lifestyle Planning</h2></div>
 
     <div class="alert success" style="margin-bottom:20px">
       <strong>✅ LUXURY CAR AFFORDABLE:</strong> A BMW/Mercedes purchase at retirement is totally manageable with your projected corpus.
@@ -1223,7 +1407,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
         <!-- Buy vs Lease Calculator -->
         <div style="background:var(--bg3);padding:20px;border-radius:8px;margin-bottom:20px">
-          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px">💡 Buy vs Lease Analysis</h4>
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px"> Buy vs Lease Analysis</h4>
 
           <div class="g2">
             <div>
@@ -1280,7 +1464,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
 
           <div style="margin-top:16px;padding:12px;background:rgba(16,185,129,0.05);border-radius:6px;border-left:4px solid var(--success)">
-            <div style="font-size:11px;font-weight:700;color:var(--success);margin-bottom:4px">💡 RECOMMENDATION</div>
+            <div style="font-size:11px;font-weight:700;color:var(--success);margin-bottom:4px"> RECOMMENDATION</div>
             <div style="font-size:11px;color:var(--ink)">
               <strong>Lease for first 6 years</strong> - Lower upfront cost (₹0 vs ₹1.8 Cr), hassle-free maintenance, upgrade every 3 years to latest model.
               After 6 years, if you love it, buy the 2060 model outright.
@@ -1290,7 +1474,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
         <!-- Impact on Corpus Longevity -->
         <div style="background:var(--bg3);padding:20px;border-radius:8px">
-          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px">📊 Impact on Corpus Longevity</h4>
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px"> Impact on Corpus Longevity</h4>
 
           <div style="font-size:11px;color:var(--ink2);margin-bottom:16px">
             Your retirement corpus needs to last from age 60 (2054) to age 90+ (2084+). Here's how the luxury car affects it:
@@ -1745,7 +1929,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       ✅ <strong>Petrol Automatic variants only</strong> - All cars below have automatic transmission. Updated March 2026.
     </div>
 
-    <div class="alert info" style="margin-bottom:16px">🚗 <strong>SMART CAR FINDER:</strong> Based on your calculated budget, compare features, prices, and running costs of popular cars. Filter by city for accurate on-road prices.</div>
+    <div class="alert info" style="margin-bottom:16px"> <strong>SMART CAR FINDER:</strong> Based on your calculated budget, compare features, prices, and running costs of popular cars. Filter by city for accurate on-road prices.</div>
 
     <!-- Filters -->
     <div class="g3" style="margin-bottom:20px">
@@ -1785,13 +1969,13 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Quick Recommendations -->
     <div class="g2" style="margin-bottom:20px">
       <div class="card j">
-        <div class="ch3 j">🎯 TOP PICK FOR YOU</div>
+        <div class="ch3 j"> TOP PICK FOR YOU</div>
         <div id="top-car-recommendation" style="padding:12px;font-size:13px">
           Loading recommendations...
         </div>
       </div>
       <div class="card g">
-        <div class="ch3 g">💰 BEST VALUE</div>
+        <div class="ch3 g"> BEST VALUE</div>
         <div id="best-value-car" style="padding:12px;font-size:13px">
           Loading recommendations...
         </div>
@@ -1806,7 +1990,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Compare Selected Cars Button -->
     <div style="text-align:center;margin-bottom:20px">
       <button onclick="showCarComparison()" class="save-btn" style="padding:14px 32px;font-size:14px">
-        📊 COMPARE SELECTED CARS
+         COMPARE SELECTED CARS
       </button>
     </div>
 
@@ -1814,7 +1998,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div id="car-comparison-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:10000;overflow:auto;padding:20px">
       <div style="max-width:1400px;margin:20px auto;background:var(--bg);border-radius:12px;padding:24px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-          <h2 style="margin:0;color:var(--jt)">🚗 Car Comparison</h2>
+          <h2 style="margin:0;color:var(--jt)"> Car Comparison</h2>
           <button onclick="closeCarComparison()" style="background:var(--red);color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:700">✕ Close</button>
         </div>
         <div id="car-comparison-content" class="tw" style="overflow-x:auto">
@@ -1955,7 +2139,41 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <p>APRIL 2026 - RETIREMENT 2054 &middot; MONTH-BY-MONTH FUND ANALYSIS</p>
   </div>
   <div class="content">
-    <div class="alert info" id="monthly-proj-info">💡 <strong>HOW THIS WORKS:</strong> This page shows your month-by-month investment projections from April 2026 until retirement. Compare anticipated investments vs actual portfolio value (live from market). Track each fund's performance, add lump sums, and see if you're on track for your retirement goal.</div>
+    <!-- SINCE INCEPTION TRACKER -->
+    <div class="inception-track" id="inceptionTracker">
+      <div class="inception-metric">
+        <div class="im-label">First SIP Date</div>
+        <div class="im-value" id="inceptionFirstDate">Apr 2026</div>
+        <div class="im-sub">Unified 8-fund portfolio</div>
+      </div>
+      <div class="inception-metric">
+        <div class="im-label">Days Invested</div>
+        <div class="im-value" id="inceptionDays">0</div>
+        <div class="im-sub">Since Apr 1, 2026</div>
+      </div>
+      <div class="inception-metric">
+        <div class="im-label">Total Deployed</div>
+        <div class="im-value" id="inceptionDeployed">₹0</div>
+        <div class="im-sub" id="inceptionDeployedSub">0 months × ₹1.91L</div>
+      </div>
+      <div class="inception-metric">
+        <div class="im-label">Portfolio NAV Value</div>
+        <div class="im-value" id="inceptionNAV" style="color:var(--jt)">₹--</div>
+        <div class="im-sub">Live market value</div>
+      </div>
+      <div class="inception-metric">
+        <div class="im-label">Unrealized Gain/Loss</div>
+        <div class="im-value" id="inceptionGain" style="color:var(--ink3)">₹--</div>
+        <div class="im-sub" id="inceptionGainPct">--</div>
+      </div>
+      <div class="inception-metric">
+        <div class="im-label">XIRR</div>
+        <div class="im-value" id="inceptionXIRR" style="color:var(--you)">--%</div>
+        <div class="im-sub">Annualised return</div>
+      </div>
+    </div>
+
+    <div class="alert info" id="monthly-proj-info"> <strong>HOW THIS WORKS:</strong> This page shows your month-by-month investment projections from April 2026 until retirement. Compare anticipated investments vs actual portfolio value (live from market). Track each fund's performance, add lump sums, and see if you're on track for your retirement goal.</div>
 
     <!-- UNIFIED FAMILY PORTFOLIO SECTION -->
     <div class="sh"><span class="sh-n">01</span><h2 id="yourFundOverviewTitle">Unified Family Portfolio - Fund Overview (8 Funds, ₹1.91L/month)</h2></div>
@@ -2105,7 +2323,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <div style="margin-top:24px;text-align:center">
-      <button class="save-btn" onclick="refreshMonthlyProjections()">🔄 REFRESH PROJECTIONS</button>
+      <button class="save-btn" onclick="refreshMonthlyProjections()"> REFRESH PROJECTIONS</button>
     </div>
     </div> <!-- End hidden wife section -->
   </div>
@@ -2119,28 +2337,15 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <p>CRITICAL ACTIONS &middot; UPCOMING MILESTONES &middot; REMINDERS</p>
   </div>
   <div class="content">
-    <div class="sh"><span class="sh-n">01</span><h2>Critical Alerts (Action Required)</h2></div>
+    <div class="sh"><span class="sh-n">01</span><h2>Critical Alerts — Insurance Progress Panel</h2></div>
 
-    <div class="alert-item" style="border-left:3px solid var(--red)">
-      <div class="alert-icon">&#128680;</div>
-      <div class="alert-body">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <h4>Buy Term Life Insurance Immediately</h4>
-          <span class="alert-badge badge-red">URGENT</span>
-        </div>
-        <p>You need at least &#8377;2 Crore term insurance. With baby coming in Dec 2026, this is non-negotiable. At age 31, a &#8377;2Cr cover costs only &#8377;800-1200/month. Get it within 30 days. Check PolicyBazaar for comparison.</p>
-      </div>
+    <!-- Dynamic Insurance Progress Panel -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-size:11px;color:var(--ink3)">Status syncs with 🚀 April Launch page. Click buttons to update.</div>
+      <div style="font-size:12px;font-family:monospace;color:var(--you)" id="alertsActionsCounter">Loading...</div>
     </div>
-
-    <div class="alert-item" style="border-left:3px solid var(--red)">
-      <div class="alert-icon">&#128680;</div>
-      <div class="alert-body">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <h4>Buy Family Health Insurance</h4>
-          <span class="alert-badge badge-red">URGENT</span>
-        </div>
-        <p>Need &#8377;10L family floater + &#8377;5L super top-up for parents. Without this, one medical emergency can derail your entire plan. Budget: &#8377;50,000-70,000/year. Recommended: Star Health / Niva Bupa.</p>
-      </div>
+    <div id="alertsInsurancePanels" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+      <!-- Rendered by renderAlertInsurancePanels() -->
     </div>
 
     <div class="alert-item" style="border-left:3px solid var(--you)">
@@ -2154,14 +2359,14 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
     </div>
 
-    <div class="alert-item" style="border-left:3px solid var(--you)">
-      <div class="alert-icon">&#9888;&#65039;</div>
+    <div class="alert-item" style="border-left:3px solid var(--jt)">
+      <div class="alert-icon">&#9989;</div>
       <div class="alert-body">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
           <h4>Monitor Unified Portfolio (8 Funds)</h4>
           <span class="alert-badge badge-green">OPTIMIZED</span>
         </div>
-        <p>✅ Portfolio optimized April 2026: 8 unified funds, ₹1.91L/month total. All SIPs active: Nifty 50 (₹60K), Parag Parikh (₹18K), Motilal Midcap (₹38K), Nippon Small Cap (₹12K), S&P 500 (₹25K), HDFC Balanced (₹12K), HDFC Corp Bond (₹20K), NPS (₹6.2K). Track via Kuvera dashboard.</p>
+        <p>✅ Portfolio optimized April 2026: 8 unified funds, ₹1.91L/month total. All SIPs active: Nifty 50 (₹60K), Parag Parikh (₹18K), Motilal Midcap (₹38K), Nippon Small Cap (₹12K), S&amp;P 500 (₹25K), HDFC Balanced (₹12K), HDFC Corp Bond (₹20K), NPS (₹6.2K). Track via Kuvera dashboard.</p>
       </div>
     </div>
 
@@ -2283,11 +2488,11 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <strong>⚡ QUICK START:</strong> Enter your current portfolio values below, click "Run Review" to get automated checks, performance analysis, rebalancing suggestions, and delta analysis (predicted vs actual).
     </div>
 
-    <div class="sh"><span class="sh-n">01</span><h2>📊 Enter Current Portfolio Values</h2></div>
+    <div class="sh"><span class="sh-n">01</span><h2> Enter Current Portfolio Values</h2></div>
     <div class="g2">
       <div class="card j">
         <div class="ch3 j">UNIFIED FAMILY PORTFOLIO - Current Values (8 Funds)</div>
-        <div class="alert info" style="margin-bottom:12px;font-size:11px">💡 Track your actual portfolio values here to compare against projections. Portfolio unified in April 2026 - ₹1.91L/month total SIP.</div>
+        <div class="alert info" style="margin-bottom:12px;font-size:11px"> Track your actual portfolio values here to compare against projections. Portfolio unified in April 2026 - ₹1.91L/month total SIP.</div>
         <div class="field-row">
           <span class="field-label">1. Nifty 50 Index Fund (₹60K SIP)</span>
           <input type="number" class="field-input" id="rv-nifty50" placeholder="₹0" step="1000">
@@ -2346,7 +2551,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div class="card j">
         <div class="ch3 j">RUN REVIEW</div>
         <button class="save-btn" onclick="runPortfolioReview()" style="width:100%;margin-bottom:10px">
-          🔍 RUN AUTOMATED REVIEW
+           RUN AUTOMATED REVIEW
         </button>
         <div style="font-size:11px;color:var(--ink3);line-height:1.6">
           This will analyze:<br>
@@ -2361,7 +2566,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
     <!-- Review Results -->
     <div id="review-results" style="display:none">
-      <div class="sh"><span class="sh-n">02</span><h2>📈 Performance Analysis</h2></div>
+      <div class="sh"><span class="sh-n">02</span><h2> Performance Analysis</h2></div>
       <div class="card j">
         <div class="ch3 j">PREDICTED VS ACTUAL PERFORMANCE</div>
         <div id="performance-analysis"></div>
@@ -2373,20 +2578,20 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div id="allocation-analysis"></div>
       </div>
 
-      <div class="sh"><span class="sh-n">04</span><h2>🎯 Automated Recommendations</h2></div>
+      <div class="sh"><span class="sh-n">04</span><h2> Automated Recommendations</h2></div>
       <div id="recommendations-list"></div>
 
-      <div class="sh"><span class="sh-n">05</span><h2>📊 Delta Analysis (Why Predicted ≠ Actual)</h2></div>
+      <div class="sh"><span class="sh-n">05</span><h2> Delta Analysis (Why Predicted ≠ Actual)</h2></div>
       <div class="card d">
         <div class="ch3 d">VARIANCE BREAKDOWN</div>
         <div id="delta-analysis"></div>
       </div>
 
-      <div class="sh"><span class="sh-n">06</span><h2>📅 Next Steps & Action Plan</h2></div>
+      <div class="sh"><span class="sh-n">06</span><h2> Next Steps & Action Plan</h2></div>
       <div id="action-plan"></div>
     </div>
 
-    <div class="sh"><span class="sh-n">07</span><h2>📜 Review History</h2></div>
+    <div class="sh"><span class="sh-n">07</span><h2> Review History</h2></div>
     <div class="card j">
       <div class="ch3 j">PAST REVIEWS</div>
       <div id="review-history">
@@ -2406,7 +2611,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <p>REAL-TIME PERFORMANCE · RETURNS · EXPENSE RATIOS · BENCHMARKS</p>
   </div>
   <div class="content">
-    <div class="alert info">💡 <strong>HOW TO USE:</strong> Compare all your funds in one view. See live NAV, returns (1Y/3Y/5Y), expense ratios, alpha vs benchmarks, and portfolio allocation. Click column headers to sort. Select funds to compare charts.</div>
+    <div class="alert info"> <strong>HOW TO USE:</strong> Compare all your funds in one view. See live NAV, returns (1Y/3Y/5Y), expense ratios, alpha vs benchmarks, and portfolio allocation. Click column headers to sort. Select funds to compare charts.</div>
 
     <!-- Quick Stats -->
     <div class="g4" style="margin-bottom:24px">
@@ -2435,7 +2640,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Add Market Funds -->
     <div class="sh"><span class="sh-n">01</span><h2>Add Other Market Funds</h2></div>
     <div class="alert info" style="margin-bottom:16px">
-      💡 Want to compare against other funds in the market? Enter any mutual fund scheme code below to add it to the comparison.
+       Want to compare against other funds in the market? Enter any mutual fund scheme code below to add it to the comparison.
       <a href="https://www.amfiindia.com/spages/NAVAll.txt" target="_blank" style="color:var(--link)">Find scheme codes here</a>
     </div>
     <div style="display:flex;gap:12px;margin-bottom:24px;align-items:flex-start">
@@ -2451,13 +2656,13 @@ tr.milestone{background:rgba(240,180,41,.05)}
         onclick="addMarketFund()"
         style="padding:12px 24px;background:var(--jt);color:white;border:none;border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap"
       >
-        🔍 Add Fund
+         Add Fund
       </button>
       <button
         onclick="clearMarketFunds()"
         style="padding:12px 24px;background:var(--red);color:white;border:none;border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap"
       >
-        🗑️ Clear All Market Funds
+        ️ Clear All Market Funds
       </button>
     </div>
     <div id="marketFundsStatus" style="margin-bottom:24px"></div>
@@ -2739,7 +2944,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div class="card g">
         <div class="ch3 g">EXCELLENT DIVERSIFICATION ✅</div>
         <div class="alert success" style="margin:8px;font-size:12px">
-          🎉 <strong>NO HIGH OVERLAP PAIRS!</strong> Your optimized portfolio has excellent stock-level diversification with avg 12.5% overlap. Previous issues (ICICI Bluechip ↔ Nifty 50: 70% overlap) resolved in April 2026 consolidation.
+           <strong>NO HIGH OVERLAP PAIRS!</strong> Your optimized portfolio has excellent stock-level diversification with avg 12.5% overlap. Previous issues (ICICI Bluechip ↔ Nifty 50: 70% overlap) resolved in April 2026 consolidation.
         </div>
         <div id="lowOverlapPairs">
           <div class="ml">
@@ -2876,28 +3081,28 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div class="bc-lbl">INDIA VIX</div>
       <div class="bci">
         <div class="v" id="vixValue">18.2</div>
-        <div class="s" id="vixSignal">🟢 Normal</div>
+        <div class="s" id="vixSignal"> Normal</div>
       </div>
     </div>
     <div class="bc">
       <div class="bc-lbl">NIFTY P/E</div>
       <div class="bci">
         <div class="v" id="peValue">22.1</div>
-        <div class="s" id="peSignal">🟢 Fair Value</div>
+        <div class="s" id="peSignal"> Fair Value</div>
       </div>
     </div>
     <div class="bc">
       <div class="bc-lbl">RBI REPO RATE</div>
       <div class="bci">
         <div class="v" id="repoValue">6.5%</div>
-        <div class="s" id="repoSignal">🟡 Neutral</div>
+        <div class="s" id="repoSignal"> Neutral</div>
       </div>
     </div>
     <div class="bc">
       <div class="bc-lbl">INFLATION (CPI)</div>
       <div class="bci">
         <div class="v" id="cpiValue">5.2%</div>
-        <div class="s" id="cpiSignal">🟡 Moderate</div>
+        <div class="s" id="cpiSignal"> Moderate</div>
       </div>
     </div>
   </div>
@@ -2905,7 +3110,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="content">
     <!-- Market Context Insights -->
     <div class="alert info" id="marketContextInsights">
-      💡 <strong>CURRENT MARKET CONTEXT:</strong> <span id="marketInsightText">Market conditions are neutral. Continue SIPs as planned.</span>
+       <strong>CURRENT MARKET CONTEXT:</strong> <span id="marketInsightText">Market conditions are neutral. Continue SIPs as planned.</span>
     </div>
 
     <!-- Section 1: Critical Alerts Dashboard -->
@@ -2936,7 +3141,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Section 3: Recommendations Panel -->
     <div class="sh"><span class="sh-n">03</span><h2>Smart Recommendations</h2></div>
 
-    <h3 style="color:var(--red);font-size:0.85rem;margin:15px 0 10px;font-weight:700;">🔴 EXIT RECOMMENDATIONS</h3>
+    <h3 style="color:var(--red);font-size:0.85rem;margin:15px 0 10px;font-weight:700;"> EXIT RECOMMENDATIONS</h3>
     <div id="exitRecommendations">
       <!-- Populated by JavaScript -->
     </div>
@@ -2951,7 +3156,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <!-- Populated by JavaScript -->
     </div>
 
-    <h3 style="color:var(--blue);font-size:0.85rem;margin:20px 0 10px;font-weight:700;">👍 HOLD (PERFORMING WELL)</h3>
+    <h3 style="color:var(--blue);font-size:0.85rem;margin:20px 0 10px;font-weight:700;"> HOLD (PERFORMING WELL)</h3>
     <div id="holdRecommendations">
       <!-- Populated by JavaScript -->
     </div>
@@ -3032,7 +3237,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Live Data Refresh Button & Status -->
     <div style="text-align:right;margin-bottom:16px">
       <button id="refresh-market-btn" onclick="manualRefreshMarketData()" style="padding:8px 16px;background:var(--jt);color:white;border:none;border-radius:6px;font-weight:700;cursor:pointer">
-        🔄 Refresh Market Data
+         Refresh Market Data
       </button>
       <div style="font-size:10px;color:var(--ink3);margin-top:4px">
         <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px">
@@ -3048,7 +3253,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
     <!-- RBI Rate Cut Alert -->
     <div class="alert success" style="margin-bottom:16px">
-      🎯 <strong>RBI RATE CUT:</strong> Repo rate reduced from 6.50% → 5.25%
+       <strong>RBI RATE CUT:</strong> Repo rate reduced from 6.50% → 5.25%
       (125 bps cut). This is bullish for equity markets. Lower borrowing costs
       boost corporate profits and make debt funds less attractive vs equity.
     </div>
@@ -3062,12 +3267,12 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div style="text-align:center;padding:20px 15px;">
           <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:0.5px;margin-bottom:8px;">INDIA VIX</div>
           <div style="font-size:2.5rem;font-weight:700;color:var(--ink);margin:5px 0;" id="sentimentVIX">18.2</div>
-          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentVIXSignal">🟡</div>
+          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentVIXSignal"></div>
           <div style="font-size:11px;font-weight:600;color:var(--ink2);margin-top:5px;" id="sentimentVIXStatus">NORMAL</div>
           <div style="font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.5;padding:0 5px;">
-            🟢 &lt;15 Low<br>
-            🟡 15-25 Normal<br>
-            🔴 &gt;25 High
+             &lt;15 Low<br>
+             15-25 Normal<br>
+             &gt;25 High
           </div>
           <div style="font-size:11px;color:var(--ink2);margin-top:12px;padding:8px;background:var(--bg3);border-radius:6px;line-height:1.6;" id="sentimentVIXInsight">
             Market volatility is NORMAL - good for SIP continuation
@@ -3080,12 +3285,12 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div style="text-align:center;padding:20px 15px;">
           <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:0.5px;margin-bottom:8px;">NIFTY 50 P/E RATIO</div>
           <div style="font-size:2.5rem;font-weight:700;color:var(--ink);margin:5px 0;" id="sentimentPE">22.1</div>
-          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentPESignal">🟡</div>
+          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentPESignal"></div>
           <div style="font-size:11px;font-weight:600;color:var(--ink2);margin-top:5px;" id="sentimentPEStatus">FAIR VALUE</div>
           <div style="font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.5;padding:0 5px;">
-            🟢 &lt;20 Undervalued<br>
-            🟡 20-24 Fair<br>
-            🔴 &gt;24 Overvalued
+             &lt;20 Undervalued<br>
+             20-24 Fair<br>
+             &gt;24 Overvalued
           </div>
           <div style="font-size:11px;color:var(--ink2);margin-top:12px;padding:8px;background:var(--bg3);border-radius:6px;line-height:1.6;" id="sentimentPEInsight">
             Market fairly valued - neither cheap nor expensive
@@ -3116,12 +3321,12 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div style="text-align:center;padding:20px 15px;">
           <div style="font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:0.5px;margin-bottom:8px;">INFLATION (CPI)</div>
           <div style="font-size:2.5rem;font-weight:700;color:var(--ink);margin:5px 0;" id="sentimentCPI">5.2%</div>
-          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentCPISignal">🟡</div>
+          <div style="font-size:1.5rem;margin:8px 0;" id="sentimentCPISignal"></div>
           <div style="font-size:11px;font-weight:600;color:var(--ink2);margin-top:5px;" id="sentimentCPIStatus">MODERATE</div>
           <div style="font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.5;padding:0 5px;">
-            🟢 &lt;4% Low<br>
-            🟡 4-6% Moderate<br>
-            🔴 &gt;6% High
+             &lt;4% Low<br>
+             4-6% Moderate<br>
+             &gt;6% High
           </div>
           <div style="font-size:11px;color:var(--ink2);margin-top:12px;padding:8px;background:var(--bg3);border-radius:6px;line-height:1.6;" id="sentimentCPIInsight">
             Moderate inflation - real returns positive
@@ -3136,7 +3341,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="g3" style="margin-bottom:25px;">
       <!-- Lump Sum Timing -->
       <div class="card">
-        <div class="ch3">💰 LUMP SUM INVESTMENT</div>
+        <div class="ch3"> LUMP SUM INVESTMENT</div>
         <div id="lumpSumRecommendation" style="padding:15px;">
           <!-- Populated by JS -->
         </div>
@@ -3152,7 +3357,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
       <!-- Debt Fund Timing -->
       <div class="card">
-        <div class="ch3">📈 DEBT FUND TIMING</div>
+        <div class="ch3"> DEBT FUND TIMING</div>
         <div id="debtTimingRecommendation" style="padding:15px;">
           <!-- Populated by JS -->
         </div>
@@ -3207,10 +3412,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
         <div style="font-size:11px;color:var(--ink2);line-height:1.8;max-width:500px;margin:0 auto;text-align:left;">
           <div style="margin-bottom:8px;"><strong>Score Ranges:</strong></div>
-          <div>🔴 0-30: RISK-OFF (defensive mode, increase debt/gold)</div>
-          <div>🟡 31-60: NEUTRAL (maintain current allocation)</div>
-          <div>🟢 61-80: MODERATE RISK-ON (good for SIP, cautious lump sum)</div>
-          <div>🟢 81-100: STRONG RISK-ON (excellent for lump sum, increase equity)</div>
+          <div> 0-30: RISK-OFF (defensive mode, increase debt/gold)</div>
+          <div> 31-60: NEUTRAL (maintain current allocation)</div>
+          <div> 61-80: MODERATE RISK-ON (good for SIP, cautious lump sum)</div>
+          <div> 81-100: STRONG RISK-ON (excellent for lump sum, increase equity)</div>
         </div>
         <div id="sentimentScoreAction" style="margin-top:20px;padding:15px;background:var(--bg3);border-radius:8px;font-size:12px;line-height:1.8;">
           <!-- Populated by JS -->
@@ -3242,7 +3447,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
         </div>
         <div style="text-align:center;padding:12px;background:var(--jt-s);border:1px solid var(--jt);border-radius:6px;">
-          <div style="font-size:1.5rem;margin-bottom:5px;">🟢</div>
+          <div style="font-size:1.5rem;margin-bottom:5px;"></div>
           <div style="font-size:11px;font-weight:600;color:var(--jt2);">
             Domestic institutions absorbing foreign selling - market resilient
           </div>
@@ -3269,7 +3474,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <div class="alert info" style="margin-bottom:25px;">
-      <strong>📊 KEY INSIGHTS FROM 12-MONTH TRENDS:</strong><br>
+      <strong> KEY INSIGHTS FROM 12-MONTH TRENDS:</strong><br>
       • VIX peaked at 24.8 in December 2025 during election volatility<br>
       • P/E touched low of 19.2 in September 2025 - that was a buying opportunity<br>
       • Current levels are near 12-month average - market in equilibrium
@@ -3328,10 +3533,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="sh"><span class="sh-n">09</span><h2>Manual Override - What-If Analysis</h2></div>
 
     <div class="card">
-      <div class="ch3">🎮 TEST DIFFERENT SCENARIOS</div>
+      <div class="ch3"> TEST DIFFERENT SCENARIOS</div>
       <div style="padding:20px;">
         <div class="alert" style="margin-bottom:15px;">
-          💡 <strong>HOW IT WORKS:</strong> Adjust the values below to see how recommendations change under different market conditions. This helps you prepare for various scenarios.
+           <strong>HOW IT WORKS:</strong> Adjust the values below to see how recommendations change under different market conditions. This helps you prepare for various scenarios.
         </div>
 
         <div class="g4" style="margin-bottom:15px;">
@@ -3369,7 +3574,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
 
         <div class="alert info" style="margin-top:15px;font-size:11px;">
-          <strong>💡 TRY THESE SCENARIOS:</strong><br>
+          <strong> TRY THESE SCENARIOS:</strong><br>
           • High Volatility: VIX = 30, P/E = 22 → See STP recommendations<br>
           • Market Crash: VIX = 35, P/E = 18 → See "BUY THE DIP" signals<br>
           • Expensive Market: VIX = 20, P/E = 28 → See defensive positioning<br>
@@ -3401,17 +3606,17 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
       <div style="display:flex;gap:12px">
         <button id="btn-conservative" onclick="setProjectionMode('conservative')" style="padding:10px 20px;background:var(--jt);color:white;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:12px">
-          🟢 Conservative
+           Conservative
         </button>
         <button id="btn-actual" onclick="setProjectionMode('actual')" style="padding:10px 20px;background:var(--bg3);color:var(--ink2);border:2px solid var(--border);border-radius:6px;font-weight:700;cursor:pointer;font-size:12px">
-          🔵 Actual (Live Data)
+           Actual (Live Data)
         </button>
       </div>
     </div>
 
     <!-- Engine Status Banner -->
     <div class="alert success" style="margin-bottom:20px">
-      <strong>🎲 Super Model Active:</strong> Running 5,000 parallel simulations with real market volatility.
+      <strong> Super Model Active:</strong> Running 5,000 parallel simulations with real market volatility.
       Success probability: <span id="success-probability" style="font-weight:700;color:var(--jt)">78%</span>
       | Expected return: <span id="expected-return-display" style="font-weight:700;color:var(--you)">10.5%</span>
     </div>
@@ -3542,13 +3747,13 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
         <div class="g2">
           <div style="background:rgba(232,80,64,0.05);padding:16px;border-radius:8px;border-left:4px solid var(--red)">
-            <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px">🔴 HIGH RISK SCENARIO</div>
+            <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px"> HIGH RISK SCENARIO</div>
             <div style="font-size:13px;margin-bottom:8px">2050 Market Crash (-40% drawdown)</div>
             <div style="font-size:11px;color:var(--ink2)">Final Corpus: <strong style="color:var(--red)">₹38 Cr</strong> (44% below goal)</div>
           </div>
 
           <div style="background:rgba(16,185,129,0.05);padding:16px;border-radius:8px;border-left:4px solid var(--success)">
-            <div style="font-size:11px;font-weight:700;color:var(--success);margin-bottom:8px">🟢 LOW RISK SCENARIO</div>
+            <div style="font-size:11px;font-weight:700;color:var(--success);margin-bottom:8px"> LOW RISK SCENARIO</div>
             <div style="font-size:13px;margin-bottom:8px">2030 Market Crash (-40% drawdown)</div>
             <div style="font-size:11px;color:var(--ink2)">Final Corpus: <strong style="color:var(--success)">₹64 Cr</strong> (97% of goal - recovers)</div>
           </div>
@@ -3567,7 +3772,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
         <!-- SIP Adjustment Simulator -->
         <div style="background:var(--bg3);padding:20px;border-radius:8px;margin-bottom:20px">
-          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--you)">📊 SIP Adjustment Simulator</h4>
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--you)"> SIP Adjustment Simulator</h4>
 
           <div style="margin-bottom:16px">
             <label style="font-size:11px;color:var(--ink2);display:block;margin-bottom:8px">
@@ -3599,20 +3804,20 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
 
           <div style="margin-top:16px;padding:14px;background:rgba(16,185,129,0.05);border-radius:6px;border-left:4px solid var(--success)">
-            <div style="font-size:11px;font-weight:700;color:var(--success);margin-bottom:6px">💡 IMPACT ANALYSIS</div>
+            <div style="font-size:11px;font-weight:700;color:var(--success);margin-bottom:6px"> IMPACT ANALYSIS</div>
             <div style="font-size:12px;color:var(--ink)" id="sip-impact-message">
               Adjust the slider above to see how increasing your SIP affects your retirement corpus.
             </div>
           </div>
 
           <button onclick="runSIPScenarioSimulation()" class="btn-primary" style="margin-top:16px;width:100%">
-            🎲 Run Simulation with Adjusted SIP
+             Run Simulation with Adjusted SIP
           </button>
         </div>
 
         <!-- Early Retirement Calculator -->
         <div style="background:var(--bg3);padding:20px;border-radius:8px">
-          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--you)">🏖️ Early Retirement Calculator</h4>
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--you)">️ Early Retirement Calculator</h4>
 
           <div style="margin-bottom:16px">
             <label style="font-size:11px;color:var(--ink2);display:block;margin-bottom:8px">
@@ -3651,7 +3856,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
 
           <button onclick="runEarlyRetirementSimulation()" class="btn-primary" style="margin-top:16px;width:100%">
-            🎲 Run Simulation with Early Retirement
+             Run Simulation with Early Retirement
           </button>
         </div>
       </div>
@@ -3664,7 +3869,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div style="padding:20px">
         <div style="margin-bottom:16px">
           <button id="sync-super-model-btn" onclick="syncSuperModelData()" style="padding:10px 20px;background:var(--jt);color:white;border:none;border-radius:6px;font-weight:700;cursor:pointer">
-            🔄 Sync Live Market Data
+             Sync Live Market Data
           </button>
           <span style="font-size:10px;color:var(--ink3);margin-left:12px">Last sync: <span id="super-model-sync-time">Not synced</span></span>
         </div>
@@ -3684,7 +3889,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
 
         <div style="margin-top:16px;padding:14px;background:rgba(240,180,41,0.05);border-radius:6px;border-left:4px solid var(--you)">
-          <div style="font-size:11px;font-weight:700;color:var(--you);margin-bottom:6px">📊 CURRENT MARKET VERDICT</div>
+          <div style="font-size:11px;font-weight:700;color:var(--you);margin-bottom:6px"> CURRENT MARKET VERDICT</div>
           <div style="font-size:12px;color:var(--ink)" id="super-market-verdict">Systematic Pitch-In: Deploy 40% lump sum now, STP remaining 60% over 12 weeks.</div>
         </div>
       </div>
@@ -3694,7 +3899,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="card" style="margin-bottom:25px">
       <div style="padding:20px;text-align:center">
         <button onclick="runMonteCarloSimulation()" class="btn-primary" style="font-size:15px;padding:16px 32px">
-          🎲 RUN 5,000 SIMULATIONS
+           RUN 5,000 SIMULATIONS
         </button>
         <div style="font-size:11px;color:var(--ink3);margin-top:12px">
           Computational time: ~3 seconds | Uses actual portfolio volatility from historical data
@@ -3783,9 +3988,9 @@ tr.milestone{background:rgba(240,180,41,.05)}
             style="width:100%;height:10px;border-radius:5px;background:linear-gradient(to right, #10b981 0%, #f59e0b 50%, #ef4444 100%);outline:none;cursor:pointer"
             oninput="updateCreepScenario(this.value)">
           <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-top:8px">
-            <span>🟢 5.5% (Inflation only)</span>
-            <span>🟡 10% (Moderate creep)</span>
-            <span>🔴 15% (High creep)</span>
+            <span> 5.5% (Inflation only)</span>
+            <span> 10% (Moderate creep)</span>
+            <span> 15% (High creep)</span>
           </div>
         </div>
 
@@ -3816,7 +4021,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
 
         <button onclick="runCreepSimulation()" class="btn-primary" style="width:100%">
-          📊 Run Full 28-Year Analysis
+           Run Full 28-Year Analysis
         </button>
       </div>
     </div>
@@ -3844,31 +4049,31 @@ tr.milestone{background:rgba(240,180,41,.05)}
               <td style="padding:10px">Housing (Rent/EMI)</td>
               <td style="padding:10px;text-align:right;color:var(--success)">1.92%</td>
               <td style="padding:10px;text-align:right">40% (₹60K)</td>
-              <td style="padding:10px;text-align:center">🟢 Low</td>
+              <td style="padding:10px;text-align:center"> Low</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
               <td style="padding:10px">Healthcare</td>
               <td style="padding:10px;text-align:right;color:var(--success)">2.3%</td>
               <td style="padding:10px;text-align:right">5% (₹7.5K)</td>
-              <td style="padding:10px;text-align:center">🟢 Low</td>
+              <td style="padding:10px;text-align:center"> Low</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
               <td style="padding:10px">Education Services</td>
               <td style="padding:10px;text-align:right;color:var(--jt)">3.35%</td>
               <td style="padding:10px;text-align:right">10% (₹15K)</td>
-              <td style="padding:10px;text-align:center">🟡 Medium</td>
+              <td style="padding:10px;text-align:center"> Medium</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
               <td style="padding:10px">Groceries & Essentials</td>
               <td style="padding:10px;text-align:right;color:var(--you)">5.2%</td>
               <td style="padding:10px;text-align:right">25% (₹37.5K)</td>
-              <td style="padding:10px;text-align:center">🟡 Medium</td>
+              <td style="padding:10px;text-align:center"> Medium</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);background:rgba(239,68,68,0.05)">
               <td style="padding:10px;font-weight:700">Personal Care & Lifestyle</td>
               <td style="padding:10px;text-align:right;color:var(--red);font-weight:700">18.2% ⚠️</td>
               <td style="padding:10px;text-align:right">20% (₹30K)</td>
-              <td style="padding:10px;text-align:center">🔴 HIGH</td>
+              <td style="padding:10px;text-align:center"> HIGH</td>
             </tr>
             <tr style="background:var(--bg3);font-weight:700">
               <td style="padding:10px">BLENDED AVERAGE</td>
@@ -3880,7 +4085,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </table>
 
         <div style="margin-top:20px;padding:16px;background:rgba(239,68,68,0.05);border-radius:8px;border-left:4px solid var(--red)">
-          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px">🔴 DANGER ZONE: Personal Care & Lifestyle (18.2%)</div>
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px"> DANGER ZONE: Personal Care & Lifestyle (18.2%)</div>
           <div style="font-size:11px;color:var(--ink);line-height:1.8">
             This category includes: Premium dining, subscriptions (Netflix, Spotify, gym), tech upgrades (phones, gadgets), fashion, grooming services.
             <br><br>
@@ -3907,7 +4112,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div style="padding:20px">
         <div class="g2">
           <div style="background:var(--bg3);padding:16px;border-radius:8px">
-            <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--red)">🔴 DON'T DO THIS:</h4>
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--red)"> DON'T DO THIS:</h4>
             <div style="font-size:11px;line-height:2;color:var(--ink2)">
               ❌ Upgrade car every 3 years<br>
               ❌ Move to bigger house with each promotion<br>
@@ -3920,7 +4125,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
 
           <div style="background:var(--bg3);padding:16px;border-radius:8px">
-            <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--success)">🟢 DO THIS INSTEAD:</h4>
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--success)"> DO THIS INSTEAD:</h4>
             <div style="font-size:11px;line-height:2;color:var(--ink2)">
               ✅ Increase SIP with every salary hike (50% of hike)<br>
               ✅ Keep housing <40% of income (don't overstretch)<br>
@@ -3934,7 +4139,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
 
         <div style="margin-top:20px;padding:16px;background:rgba(16,185,129,0.05);border-radius:8px;border-left:4px solid var(--success)">
-          <div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:8px">💡 THE 50/30/20 RULE AFTER PROMOTIONS</div>
+          <div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:8px"> THE 50/30/20 RULE AFTER PROMOTIONS</div>
           <div style="font-size:11px;color:var(--ink);line-height:1.8">
             When you get a ₹50K/month salary hike:
             <ul style="margin:8px 0;padding-left:20px">
@@ -4049,10 +4254,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div style="padding:20px">
         <div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center">
           <button onclick="exportExpensesToCSV()" class="btn-secondary" style="padding:8px 16px">
-            📥 Export to CSV
+             Export to CSV
           </button>
           <button onclick="clearAllExpenses()" class="btn-secondary" style="padding:8px 16px;color:var(--red);border-color:var(--red)">
-            🗑️ Clear All
+            ️ Clear All
           </button>
         </div>
 
@@ -4108,7 +4313,344 @@ tr.milestone{background:rgba(240,180,41,.05)}
   </div>
 </div>
 
-<!-- PAGE 22: FAMILY PORTFOLIO (UNIFIED) -->
+<!-- PAGE 21: APRIL 2026 LAUNCH — MISSION CONTROL -->
+<div class="page" id="page-21">
+  <div class="hdr">
+    <div class="htag">MISSION CONTROL · APRIL 2026</div>
+    <h1>🚀 April <span>Launch Dashboard</span></h1>
+    <p>SIP ACTIVATION · INSURANCE SETUP · WEEK-BY-WEEK CHECKLIST</p>
+  </div>
+  <div class="content">
+
+    <!-- SECTION A: MISSION BRIEFING -->
+    <div class="sh"><span class="sh-n">A</span><h2>Mission Briefing</h2></div>
+    <div class="glass-card" style="margin-bottom:13px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="metric-block">
+          <div class="mb-label">Funds Activated</div>
+          <div class="mb-value">8</div>
+          <div class="mb-sub">Unified family portfolio</div>
+        </div>
+        <div class="metric-block">
+          <div class="mb-label">Monthly SIP</div>
+          <div class="mb-value" style="color:var(--you)">₹1.91L</div>
+          <div class="mb-sub">₹22.9L/year</div>
+        </div>
+        <div class="metric-block">
+          <div class="mb-label">Horizon</div>
+          <div class="mb-value">28 yrs</div>
+          <div class="mb-sub">Apr 2026 → Mar 2054</div>
+        </div>
+        <div class="metric-block">
+          <div class="mb-label">Target Corpus</div>
+          <div class="mb-value" style="color:var(--jt)">₹66Cr</div>
+          <div class="mb-sub">Age 60, retirement</div>
+        </div>
+      </div>
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <span style="font-size:11px;color:var(--ink2)">Overall April Setup Progress</span>
+          <span style="font-size:11px;font-family:monospace;color:var(--you)" id="launchProgressPct">0%</span>
+        </div>
+        <div class="launch-progress-bar"><div class="launch-progress-fill" id="launchProgressFill" style="width:0%"></div></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px" id="launchProgressLabel">0 of 17 checklist items completed</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+        April 2026 is the starting gun. You're activating a ₹1.91L/month unified SIP across 8 carefully selected funds covering large-cap, mid-cap, small-cap, international, balanced, and debt categories — plus NPS. Simultaneously, you're securing your family's insurance safety net. This page is your command center.
+      </div>
+    </div>
+
+    <!-- SECTION B: WEEK-BY-WEEK ACTION CHECKLIST -->
+    <div class="sh"><span class="sh-n">B</span><h2>Week-by-Week Action Checklist — April 2026</h2></div>
+
+    <!-- Week 1 -->
+    <div class="checklist-week">
+      <div class="checklist-week-header">
+        <span>📋 WEEK 1 (Apr 1–7): Insurance Research</span>
+        <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="w1progress">0/5</span>
+      </div>
+      <div class="checklist-item" id="ci-w1-1" onclick="toggleChecklistItem('w1-1')">
+        <input type="checkbox" id="chk-w1-1" onclick="event.stopPropagation();toggleChecklistItem('w1-1')">
+        <span class="check-label">Research HDFC Life Click2Protect term plan (₹5Cr, 30-year)</span>
+      </div>
+      <div class="checklist-item" id="ci-w1-2" onclick="toggleChecklistItem('w1-2')">
+        <input type="checkbox" id="chk-w1-2" onclick="event.stopPropagation();toggleChecklistItem('w1-2')">
+        <span class="check-label">Research Niva Bupa / Star Health family floater (₹20L)</span>
+      </div>
+      <div class="checklist-item" id="ci-w1-3" onclick="toggleChecklistItem('w1-3')">
+        <input type="checkbox" id="chk-w1-3" onclick="event.stopPropagation();toggleChecklistItem('w1-3')">
+        <span class="check-label">Get parents health insurance quotes (Star Senior Citizen, ₹10L)</span>
+      </div>
+      <div class="checklist-item" id="ci-w1-4" onclick="toggleChecklistItem('w1-4')">
+        <input type="checkbox" id="chk-w1-4" onclick="event.stopPropagation();toggleChecklistItem('w1-4')">
+        <span class="check-label">Compare premiums across providers (PolicyBazaar / Ditto)</span>
+      </div>
+      <div class="checklist-item" id="ci-w1-5" onclick="toggleChecklistItem('w1-5')">
+        <input type="checkbox" id="chk-w1-5" onclick="event.stopPropagation();toggleChecklistItem('w1-5')">
+        <span class="check-label">Submit applications for term + health insurance</span>
+      </div>
+    </div>
+
+    <!-- Week 2 -->
+    <div class="checklist-week">
+      <div class="checklist-week-header">
+        <span>💰 WEEK 2 (Apr 8–14): SIP Activation</span>
+        <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="w2progress">0/5</span>
+      </div>
+      <div class="checklist-item" id="ci-w2-1" onclick="toggleChecklistItem('w2-1')">
+        <input type="checkbox" id="chk-w2-1" onclick="event.stopPropagation();toggleChecklistItem('w2-1')">
+        <span class="check-label">Login to MFCentral / Groww / Zerodha Coin</span>
+      </div>
+      <div class="checklist-item" id="ci-w2-2" onclick="toggleChecklistItem('w2-2')">
+        <input type="checkbox" id="chk-w2-2" onclick="event.stopPropagation();toggleChecklistItem('w2-2')">
+        <span class="check-label">Confirm KYC is complete for both (you + wife)</span>
+      </div>
+      <div class="checklist-item" id="ci-w2-3" onclick="toggleChecklistItem('w2-3')">
+        <input type="checkbox" id="chk-w2-3" onclick="event.stopPropagation();toggleChecklistItem('w2-3')">
+        <span class="check-label">Activate all 8 SIPs with correct SIP dates (1st or 5th)</span>
+      </div>
+      <div class="checklist-item" id="ci-w2-4" onclick="toggleChecklistItem('w2-4')">
+        <input type="checkbox" id="chk-w2-4" onclick="event.stopPropagation();toggleChecklistItem('w2-4')">
+        <span class="check-label">Set up NPS Tier 1 auto-debit (₹6,200/month)</span>
+      </div>
+      <div class="checklist-item" id="ci-w2-5" onclick="toggleChecklistItem('w2-5')">
+        <input type="checkbox" id="chk-w2-5" onclick="event.stopPropagation();toggleChecklistItem('w2-5')">
+        <span class="check-label">Verify wife's SIP in her account separately</span>
+      </div>
+    </div>
+
+    <!-- Week 3 -->
+    <div class="checklist-week">
+      <div class="checklist-week-header">
+        <span>✅ WEEK 3 (Apr 15–21): First Investment Confirmation</span>
+        <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="w3progress">0/4</span>
+      </div>
+      <div class="checklist-item" id="ci-w3-1" onclick="toggleChecklistItem('w3-1')">
+        <input type="checkbox" id="chk-w3-1" onclick="event.stopPropagation();toggleChecklistItem('w3-1')">
+        <span class="check-label">Confirm first SIP deducted for all 8 funds</span>
+      </div>
+      <div class="checklist-item" id="ci-w3-2" onclick="toggleChecklistItem('w3-2')">
+        <input type="checkbox" id="chk-w3-2" onclick="event.stopPropagation();toggleChecklistItem('w3-2')">
+        <span class="check-label">Note first NAV for each fund (record baseline in Monthly Projections)</span>
+      </div>
+      <div class="checklist-item" id="ci-w3-3" onclick="toggleChecklistItem('w3-3')">
+        <input type="checkbox" id="chk-w3-3" onclick="event.stopPropagation();toggleChecklistItem('w3-3')">
+        <span class="check-label">Check bank auto-pay is set up for all SIPs</span>
+      </div>
+      <div class="checklist-item" id="ci-w3-4" onclick="toggleChecklistItem('w3-4')">
+        <input type="checkbox" id="chk-w3-4" onclick="event.stopPropagation();toggleChecklistItem('w3-4')">
+        <span class="check-label">Mark April 2026 as invested in Monthly Projections page</span>
+      </div>
+    </div>
+
+    <!-- Week 4 -->
+    <div class="checklist-week">
+      <div class="checklist-week-header">
+        <span>📊 WEEK 4 (Apr 22–30): First Month Review</span>
+        <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="w4progress">0/5</span>
+      </div>
+      <div class="checklist-item" id="ci-w4-1" onclick="toggleChecklistItem('w4-1')">
+        <input type="checkbox" id="chk-w4-1" onclick="event.stopPropagation();toggleChecklistItem('w4-1')">
+        <span class="check-label">Take screenshot of first month's portfolio value</span>
+      </div>
+      <div class="checklist-item" id="ci-w4-2" onclick="toggleChecklistItem('w4-2')">
+        <input type="checkbox" id="chk-w4-2" onclick="event.stopPropagation();toggleChecklistItem('w4-2')">
+        <span class="check-label">Calculate first month corpus (should be ~₹1.91L)</span>
+      </div>
+      <div class="checklist-item" id="ci-w4-3" onclick="toggleChecklistItem('w4-3')">
+        <input type="checkbox" id="chk-w4-3" onclick="event.stopPropagation();toggleChecklistItem('w4-3')">
+        <span class="check-label">Review insurance policy documents received</span>
+      </div>
+      <div class="checklist-item" id="ci-w4-4" onclick="toggleChecklistItem('w4-4')">
+        <input type="checkbox" id="chk-w4-4" onclick="event.stopPropagation();toggleChecklistItem('w4-4')">
+        <span class="check-label">Share portfolio status with wife</span>
+      </div>
+      <div class="checklist-item" id="ci-w4-5" onclick="toggleChecklistItem('w4-5')">
+        <input type="checkbox" id="chk-w4-5" onclick="event.stopPropagation();toggleChecklistItem('w4-5')">
+        <span class="check-label">Set April 2027 calendar reminder for 10% step-up</span>
+      </div>
+    </div>
+
+    <!-- SECTION C: INSURANCE ACTION PANEL -->
+    <div class="sh"><span class="sh-n">C</span><h2>Insurance Action Panel</h2></div>
+
+    <div style="font-size:12px;color:var(--ink3);margin-bottom:10px">Track your insurance setup progress. Status changes update the Alerts page and Health Score.</div>
+    <div id="insurancePanels" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
+      <!-- Rendered by renderInsurancePanels() -->
+    </div>
+
+    <!-- Countdown -->
+    <div class="card" style="margin-bottom:13px;text-align:center;padding:20px">
+      <div style="font-size:10px;letter-spacing:2px;font-family:monospace;color:var(--ink3);margin-bottom:8px">JOURNEY STATUS</div>
+      <div style="font-size:1.8rem;font-weight:800;color:var(--you)" id="aprilCountdown">Calculating...</div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:4px" id="aprilCountdownSub">Loading...</div>
+    </div>
+
+    <!-- SECTION D: SIP SETUP GUIDE -->
+    <div class="sh"><span class="sh-n">D</span><h2>SIP Setup Guide — 8 Funds</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">STEP-BY-STEP: SETTING UP ON MFCENTRAL / GROWW / ZERODHA</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:10px">
+        <strong style="color:var(--you)">Step 1:</strong> Complete KYC on MFCENTRAL (central KYC works across all platforms)<br>
+        <strong style="color:var(--you)">Step 2:</strong> Link your bank account via NACH mandate (takes 1-2 days to activate)<br>
+        <strong style="color:var(--you)">Step 3:</strong> Search each fund by name or scheme code below<br>
+        <strong style="color:var(--you)">Step 4:</strong> Select <strong>Direct Plan — Growth</strong> (verify "Direct" appears in fund name)<br>
+        <strong style="color:var(--you)">Step 5:</strong> Set SIP date to 1st or 5th of month (salary credit usually by 28th)<br>
+        <strong style="color:var(--you)">Step 6:</strong> Set amount as per table below. Enable auto-step-up if available.<br>
+        <strong style="color:var(--you)">Step 7:</strong> Repeat for wife's SIPs in a separate account (different PAN)
+      </div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left">Fund Name</th>
+            <th style="text-align:left">Category</th>
+            <th>Monthly SIP</th>
+            <th>Scheme Code</th>
+            <th>Plan</th>
+            <th>SIP Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Nifty 50 Index Fund</td><td>Large Cap</td><td>₹60,000</td><td>120503 (UTI) / 120716 (MO)</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
+          <tr><td>Parag Parikh Flexi Cap</td><td>Flexi Cap + Intl</td><td>₹18,000</td><td>122639</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
+          <tr><td>Motilal Oswal Midcap</td><td>Mid Cap</td><td>₹38,000</td><td>135809</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>Nippon Small Cap</td><td>Small Cap</td><td>₹12,000</td><td>118778</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>Motilal Oswal S&amp;P 500</td><td>International</td><td>₹25,000</td><td>130503</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
+          <tr><td>HDFC Balanced Advantage</td><td>Balanced / Hybrid</td><td>₹12,000</td><td>100033</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>HDFC Corporate Bond</td><td>Debt</td><td>₹20,000</td><td>100022</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>NPS Tier 1 (via salary)</td><td>Pension / Debt/Eq</td><td>₹6,200</td><td>Auto-debit via employer</td><td><span class="ty">NPS</span></td><td>Salary day</td></tr>
+          <tr class="ttr"><td>Total</td><td></td><td>₹1,91,200</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:13px">
+      <div class="ch3 j">DIRECT vs REGULAR — VERIFY THIS EVERY TIME</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
+        <div style="padding:12px;background:var(--jt-s);border-radius:6px;border:1px solid rgba(48,200,122,.2)">
+          <div style="font-weight:700;color:var(--jt2);margin-bottom:5px">✅ DIRECT Plan (Use This)</div>
+          <div style="font-size:11px;color:var(--ink2)">Fund name contains "Direct". No distributor commission. Expense ratio ~0.1-0.5%. Better returns over long term by ~1-1.5% p.a.</div>
+        </div>
+        <div style="padding:12px;background:var(--red-s);border-radius:6px;border:1px solid rgba(232,80,64,.2)">
+          <div style="font-weight:700;color:var(--red);margin-bottom:5px">❌ REGULAR Plan (Avoid)</div>
+          <div style="font-size:11px;color:var(--ink2)">Fund name has no "Direct". Distributor takes commission. Higher expense ratio. Over 28 years, this costs you ₹5-8 Crore in lost returns.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 22: STEP-UP PLANNER -->
+<div class="page" id="page-22">
+  <div class="hdr">
+    <div class="htag">ANNUAL STEP-UP PLANNER · 28 YEARS</div>
+    <h1>📅 Step-up <span>SIP Planner 2026–2054</span></h1>
+    <p>10% ANNUAL STEP-UP · ₹1.91L BASE · TARGET ₹66 CRORE</p>
+  </div>
+  <div class="content">
+
+    <!-- SECTION A: 28-Year SIP Growth Table -->
+    <div class="sh"><span class="sh-n">A</span><h2>28-Year SIP Growth Table (10% Annual Step-up)</h2></div>
+    <div class="card" style="margin-bottom:13px;padding:10px 14px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px" id="stepupSummary">
+        <div class="metric-block">
+          <div class="mb-label">Total Invested</div>
+          <div class="mb-value" id="stepupTotalInvested">Calculating...</div>
+          <div class="mb-sub">28 years of SIPs</div>
+        </div>
+        <div class="metric-block">
+          <div class="mb-label">Projected Corpus</div>
+          <div class="mb-value" style="color:var(--jt)" id="stepupCorpus">Calculating...</div>
+          <div class="mb-sub">@ 12% CAGR, 10% step-up</div>
+        </div>
+        <div class="metric-block">
+          <div class="mb-label">Wealth Multiplier</div>
+          <div class="mb-value" style="color:var(--you)" id="stepupMultiplier">Calculating...</div>
+          <div class="mb-sub">Corpus ÷ Total Invested</div>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">
+        🟢 Green = 2026-2030 (Active years) &nbsp;|&nbsp; 🔵 Blue = 2031-2040 &nbsp;|&nbsp; 🟣 Purple = 2041-2054 &nbsp;|&nbsp; ⭐ Highlighted = SIP milestone year
+      </div>
+    </div>
+    <div class="tw">
+      <table id="stepupTable">
+        <thead>
+          <tr>
+            <th style="text-align:left">Year</th>
+            <th style="text-align:left">Your Age</th>
+            <th>Monthly SIP</th>
+            <th>Annual Investment</th>
+            <th>Cumulative Invested</th>
+            <th>Projected Corpus</th>
+          </tr>
+        </thead>
+        <tbody id="stepupTableBody">
+          <tr><td colspan="6" style="text-align:center;color:var(--ink3)">Loading table...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION B: Per-Fund Step-up Breakdown -->
+    <div class="sh" style="margin-top:20px"><span class="sh-n">B</span><h2>Per-Fund Step-up Breakdown</h2></div>
+    <div style="font-size:11px;color:var(--ink3);margin-bottom:10px">Monthly SIP per fund across key years. All funds step up at 10% annually — proportions remain constant.</div>
+    <div class="tw">
+      <table id="stepupPerFundTable">
+        <thead>
+          <tr>
+            <th style="text-align:left">Fund</th>
+            <th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th>
+            <th>2035</th><th>2040</th><th>2045</th><th>2054</th>
+          </tr>
+        </thead>
+        <tbody id="stepupPerFundBody">
+          <tr><td colspan="10" style="text-align:center;color:var(--ink3)">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION C: Step-up Impact Chart -->
+    <div class="sh" style="margin-top:20px"><span class="sh-n">C</span><h2>Step-up Impact — Why Discipline Matters</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div style="height:360px;position:relative">
+        <canvas id="stepupImpactChart"></canvas>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">
+        <div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+            <div style="width:14px;height:3px;background:var(--red)"></div>
+            <span style="font-size:10px;color:var(--ink3);font-family:monospace">NO STEP-UP (flat ₹1.91L)</span>
+          </div>
+          <div style="font-size:1.1rem;font-weight:700;color:var(--red)" id="stepupCorpusFlat">~₹--Cr</div>
+          <div style="font-size:10px;color:var(--ink3)">2054 corpus</div>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+            <div style="width:14px;height:3px;background:var(--you)"></div>
+            <span style="font-size:10px;color:var(--ink3);font-family:monospace">10% STEP-UP (current plan)</span>
+          </div>
+          <div style="font-size:1.1rem;font-weight:700;color:var(--you)" id="stepupCorpus10">~₹--Cr</div>
+          <div style="font-size:10px;color:var(--ink3)">2054 corpus</div>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+            <div style="width:14px;height:3px;background:var(--jt)"></div>
+            <span style="font-size:10px;color:var(--ink3);font-family:monospace">15% STEP-UP (aggressive)</span>
+          </div>
+          <div style="font-size:1.1rem;font-weight:700;color:var(--jt)" id="stepupCorpus15">~₹--Cr</div>
+          <div style="font-size:10px;color:var(--ink3)">2054 corpus</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding:12px;background:var(--jt-s);border-radius:6px;border-left:3px solid var(--jt);font-size:11px">
+        💡 <strong>The step-up discipline advantage:</strong> Each 5% increase in annual step-up rate adds roughly ₹20-30 Crore to your 2054 corpus. That's the power of behavioural discipline compounding over 28 years.
+      </div>
+    </div>
+
+  </div>
 </div>
 
 
@@ -4153,7 +4695,9 @@ function showPage(index) {
 }
 
 function renderPageCharts(index) {
-  if (index === 0) renderDashboardCharts();
+  if (index === 0) { renderDashboardCharts(); renderHealthScore(); renderMilestones(); }
+  if (index === 10) renderInceptionTracker();
+  if (index === 11) { renderAlertInsurancePanels(); }
   if (index === 2) renderFamilyPortfolio(); // NEW: Family Portfolio page
   if (index === 3) renderRetirementCharts();
   if (index === 4) renderKidsCharts();
@@ -4169,6 +4713,8 @@ function renderPageCharts(index) {
   if (index === 18) renderStochasticEngine(); // Stochastic Engine (was 19)
   if (index === 19) renderLifestyleCreep(); // Lifestyle Creep (was 20)
   if (index === 20) renderExpenseTracker(); // Expense Tracker (was 21)
+  if (index === 21) initAprilLaunch();    // April 2026 Launch Mission Control
+  if (index === 22) { renderStepupPlanner(); renderStepupPerFund(); renderStepupImpactChart(); } // Step-up Planner
 }
 
 function destroyChart(id) {
@@ -4246,7 +4792,7 @@ function updateWifePortfolioPage() {
 }
 
 function updateDashboardBanner() {
-  console.log('🔄 updateDashboardBanner() called');
+  console.log(' updateDashboardBanner() called');
   console.log('   config.yourSIP:', config.yourSIP);
   console.log('   familyFunds length:', typeof familyFunds !== 'undefined' ? familyFunds.length : 'undefined');
 
@@ -4831,7 +5377,7 @@ function renderPortfolioDonut() {
 // TAX CALCULATOR 2026 RENDER
 // ============================================================
 function renderTaxCalculator2026() {
-  console.log('💰 Rendering Tax Calculator 2026...');
+  console.log(' Rendering Tax Calculator 2026...');
 
   // Use CTC from config or default
   const annualCTC = 3634000; // Default CTC
@@ -5330,12 +5876,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   if (!hasCache) {
     // Show loading indicator
-    console.log('📡 No cached data found, fetching from MFAPI...');
+    console.log(' No cached data found, fetching from MFAPI...');
     const loadingDiv = document.createElement('div');
     loadingDiv.id = 'mfapi-loading';
     loadingDiv.style.cssText = 'position:fixed;top:20px;right:20px;background:var(--bg2);border:2px solid var(--jt);padding:16px;border-radius:8px;z-index:9999;min-width:300px';
     loadingDiv.innerHTML = `
-      <div style="font-size:13px;font-weight:700;color:var(--jt);margin-bottom:8px">📊 Fetching Real Fund Data</div>
+      <div style="font-size:13px;font-weight:700;color:var(--jt);margin-bottom:8px"> Fetching Real Fund Data</div>
       <div style="font-size:11px;color:var(--ink2);margin-bottom:8px">Getting historical performance from MFAPI...</div>
       <div style="font-size:10px;color:var(--ink3)">This may take 10-15 seconds</div>
     `;
@@ -5414,6 +5960,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   if (typeof setupReviewInputs === 'function') setupReviewInputs();
   // Render first page charts (Dashboard - index 0)
   renderDashboardCharts();
+  renderHealthScore();
+  renderMilestones();
+  renderInceptionTracker();
   initializedPages.add(0); // Mark dashboard as initialized
 });
 
@@ -5422,7 +5971,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 // ============================================
 
 async function renderMonthlyProjections() {
-  console.log('🚀 Rendering monthly projections...');
+  console.log(' Rendering monthly projections...');
 
   let loadingMsg = null;
 
@@ -5435,7 +5984,7 @@ async function renderMonthlyProjections() {
     loadingMsg.id = 'historicalLoadingMsg';
     loadingMsg.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg2);border:2px solid var(--you);padding:24px;border-radius:8px;z-index:9999;text-align:center;min-width:400px';
     loadingMsg.innerHTML = `
-      <div style="font-size:16px;font-weight:700;color:var(--you);margin-bottom:12px">📊 Loading Historical Data</div>
+      <div style="font-size:16px;font-weight:700;color:var(--you);margin-bottom:12px"> Loading Historical Data</div>
       <div style="font-size:13px;color:var(--ink2);margin-bottom:16px">Fetching performance data for ${yourFunds.length + wifeFunds.length} funds...</div>
       <div style="font-size:11px;color:var(--ink3)">This may take 10-30 seconds</div>
       <div style="margin-top:16px">
@@ -5540,7 +6089,7 @@ async function renderMonthlyProjections() {
       }
     }, 800);
 
-    console.log('🎉 Monthly projections rendering complete!');
+    console.log(' Monthly projections rendering complete!');
 
   } catch (error) {
     console.error('❌ Critical error in renderMonthlyProjections:', error);
@@ -5847,7 +6396,7 @@ function renderMonthlyTable(portfolio, funds, lumpSums) {
       archivedYears.push(y);
     }
     if (archivedYears.length > 0) {
-      archiveNote.textContent = `📦 Archived: ${archivedYears.join(', ')}`;
+      archiveNote.textContent = ` Archived: ${archivedYears.join(', ')}`;
     } else {
       archiveNote.textContent = '';
     }
@@ -5857,7 +6406,7 @@ function renderMonthlyTable(portfolio, funds, lumpSums) {
 let masterCharts = {};
 
 function renderMasterChart(portfolio, funds, lumpSums) {
-  console.log(`🎨 renderMasterChart called for ${portfolio} portfolio with ${funds.length} funds`);
+  console.log(` renderMasterChart called for ${portfolio} portfolio with ${funds.length} funds`);
 
   const canvas = document.getElementById(`${portfolio}MasterChart`);
   if (!canvas) {
@@ -5911,13 +6460,13 @@ function renderMasterChart(portfolio, funds, lumpSums) {
   const totalPort = portfolioData[portfolioData.length - 1] || 0;
   const gains = totalPort - totalInv;
 
-  console.log(`📊 ${portfolio} portfolio totals: Invested=₹${totalInv.toFixed(2)}L, Value=₹${totalPort.toFixed(2)}L, Gains=₹${gains.toFixed(2)}L`);
+  console.log(` ${portfolio} portfolio totals: Invested=₹${totalInv.toFixed(2)}L, Value=₹${totalPort.toFixed(2)}L, Gains=₹${gains.toFixed(2)}L`);
 
   const invEl = document.getElementById(`${portfolio}TotalInvestment`);
   const portEl = document.getElementById(`${portfolio}PortfolioValue`);
   const gainEl = document.getElementById(`${portfolio}GainLoss`);
 
-  console.log(`🔍 Element lookup: invEl=${!!invEl}, portEl=${!!portEl}, gainEl=${!!gainEl}`);
+  console.log(` Element lookup: invEl=${!!invEl}, portEl=${!!portEl}, gainEl=${!!gainEl}`);
 
   if (invEl) {
     invEl.textContent = `₹${totalInv.toFixed(2)}L`;
@@ -6419,7 +6968,7 @@ async function updateFundHistoricalData(fund) {
 
 // Fetch historical data for all funds (with delay to avoid rate limiting)
 async function fetchAllFundHistoricalData() {
-  console.log('🚀 Starting historical data fetch for all funds...');
+  console.log(' Starting historical data fetch for all funds...');
 
   const allFunds = [...yourFunds, ...wifeFunds];
   let successCount = 0;
@@ -6544,7 +7093,7 @@ function calculatePortfolioExpectedReturn() {
 
   const portfolioReturn = weightedReturn / totalSIP;
 
-  console.log('📊 Portfolio Expected Return Calculation:', {
+  console.log(' Portfolio Expected Return Calculation:', {
     totalSIP: `₹${totalSIP.toLocaleString()}`,
     dataBasedSIP: `₹${dataBasedSIP.toLocaleString()} (${((dataBasedSIP/totalSIP)*100).toFixed(1)}%)`,
     assumptionBasedSIP: `₹${assumptionBasedSIP.toLocaleString()} (${((assumptionBasedSIP/totalSIP)*100).toFixed(1)}%)`,
@@ -6645,7 +7194,7 @@ function generateExpenseRatioReport() {
   const allFunds = [...yourFunds, ...wifeFunds];
   const years = 28;
 
-  console.log('\n💰 EXPENSE RATIO ANALYSIS - 28 Year Impact\n');
+  console.log('\n EXPENSE RATIO ANALYSIS - 28 Year Impact\n');
   console.log('═'.repeat(80));
 
   allFunds.forEach(fund => {
@@ -6657,7 +7206,7 @@ function generateExpenseRatioReport() {
     const costLakhs = Math.round(impact.expenseCost / 100000);
 
     let expenseLevel = '✅ LOW';
-    if (expenseRatio > 0.75) expenseLevel = '🔴 HIGH';
+    if (expenseRatio > 0.75) expenseLevel = ' HIGH';
     else if (expenseRatio > 0.4) expenseLevel = '⚠️ MEDIUM';
 
     console.log(`\n${fund.name}`);
@@ -6672,7 +7221,7 @@ function generateExpenseRatioReport() {
   const totalCostCr = Math.round(totals.totalLifetimeCost / 10000000);
 
   console.log('\n' + '═'.repeat(80));
-  console.log(`\n📊 PORTFOLIO TOTALS:`);
+  console.log(`\n PORTFOLIO TOTALS:`);
   console.log(`  Weighted Avg Expense Ratio: ${totals.avgExpenseRatio}%`);
   console.log(`  Total Lifetime Cost: ₹${totalCostCr} Cr`);
   console.log(`  This is money that goes to AMC, not your corpus!\n`);
@@ -6687,7 +7236,7 @@ function saveFundHistoricalData() {
   };
 
   localStorage.setItem('fundHistoricalData', JSON.stringify(data));
-  console.log('💾 Saved fund historical data to localStorage');
+  console.log(' Saved fund historical data to localStorage');
 }
 
 // Load fund historical data from localStorage
@@ -6786,7 +7335,7 @@ async function refreshFundHistoricalData() {
 
   const infoEl = document.getElementById('data-quality-info');
   if (infoEl) {
-    infoEl.textContent = '📡 Fetching data from MFAPI...';
+    infoEl.textContent = ' Fetching data from MFAPI...';
   }
 
   try {
@@ -6796,7 +7345,7 @@ async function refreshFundHistoricalData() {
       button.disabled = false;
       button.textContent = '✅ Refreshed!';
       setTimeout(() => {
-        button.textContent = '🔄 Refresh Fund Data';
+        button.textContent = ' Refresh Fund Data';
       }, 2000);
     }
 
@@ -6816,7 +7365,7 @@ async function refreshFundHistoricalData() {
       button.disabled = false;
       button.textContent = '❌ Error';
       setTimeout(() => {
-        button.textContent = '🔄 Refresh Fund Data';
+        button.textContent = ' Refresh Fund Data';
       }, 2000);
     }
     alert('Error refreshing data. Please try again.');
@@ -6836,7 +7385,7 @@ function updateExpenseSummary() {
     let ratingText = '✅ EXCELLENT';
     if (parseFloat(totals.avgExpenseRatio) > 0.6) {
       ratingColor = 'var(--error)';
-      ratingText = '🔴 HIGH COST';
+      ratingText = ' HIGH COST';
     } else if (parseFloat(totals.avgExpenseRatio) > 0.4) {
       ratingColor = 'var(--warning)';
       ratingText = '⚠️ MODERATE';
@@ -6878,8 +7427,8 @@ function updateBenchmarkSummary() {
 
     if (alphaValue >= 2) {
       alphaColor = 'var(--success)';
-      alphaRating = '🌟 EXCELLENT';
-      alphaIcon = '🌟';
+      alphaRating = ' EXCELLENT';
+      alphaIcon = '';
     } else if (alphaValue >= 1) {
       alphaColor = 'var(--jt)';
       alphaRating = '✅ GOOD';
@@ -6941,7 +7490,7 @@ function showDetailedExpenseReport() {
     <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px" onclick="this.remove()">
       <div style="background:var(--bg2);border:2px solid var(--wife);border-radius:8px;max-width:900px;max-height:90vh;overflow-y:auto;padding:24px" onclick="event.stopPropagation()">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-          <h2 style="margin:0;color:var(--wife)">💸 Expense Ratio Impact - Fund by Fund</h2>
+          <h2 style="margin:0;color:var(--wife)"> Expense Ratio Impact - Fund by Fund</h2>
           <button onclick="this.closest('div[style*=fixed]').remove()" style="background:var(--bg3);border:none;padding:8px 16px;border-radius:4px;cursor:pointer;font-size:14px">Close</button>
         </div>
         <div style="font-size:13px;color:var(--ink2);margin-bottom:20px">
@@ -6972,7 +7521,7 @@ function showDetailedExpenseReport() {
     let expenseRating = '✅';
     if (expenseRatio > 0.75) {
       expenseColor = 'var(--error)';
-      expenseRating = '🔴';
+      expenseRating = '';
     } else if (expenseRatio > 0.4) {
       expenseColor = 'var(--warning)';
       expenseRating = '⚠️';
@@ -7008,18 +7557,18 @@ function showDetailedExpenseReport() {
         </table>
         <div style="margin-top:20px;padding:12px;background:rgba(224,64,160,0.1);border-left:3px solid var(--wife);border-radius:4px">
           <div style="font-size:11px;color:var(--ink2)">
-            <strong>💡 How to reduce expense drag:</strong>
+            <strong> How to reduce expense drag:</strong>
             <ul style="margin:8px 0;padding-left:20px">
               <li>Prefer index funds (0.05-0.15%) over active funds (0.5-1.5%)</li>
               <li>Always choose Direct plans over Regular plans (saves ~1% annually)</li>
-              <li>Consider moving high-ER funds (🔴 >0.75%) to lower-cost alternatives</li>
+              <li>Consider moving high-ER funds ( >0.75%) to lower-cost alternatives</li>
               <li>Example: Moving ₹20K from 1.0% ER to 0.1% ER saves ₹36L over 28 years!</li>
             </ul>
           </div>
         </div>
         <div style="margin-top:16px;text-align:center">
           <button onclick="generateExpenseRatioReport()" style="background:var(--bg3);border:1px solid var(--wife);padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px">
-            📋 Print to Console
+             Print to Console
           </button>
         </div>
       </div>
@@ -7079,7 +7628,7 @@ function getFundRecommendation(fund) {
       action: 'STRONG HOLD',
       reason: `Significantly outperforming benchmark by ${Math.abs(alpha).toFixed(1)}% - Excellent fund`,
       color: 'var(--success)',
-      icon: '🌟'
+      icon: ''
     };
   } else if (alpha >= 1) {
     return {
@@ -7102,7 +7651,7 @@ function getFundRecommendation(fund) {
         action: 'HOLD',
         reason: `Index fund with ${Math.abs(alpha).toFixed(1)}% tracking error - Normal for index funds`,
         color: 'var(--jt)',
-        icon: '📊'
+        icon: ''
       };
     }
     return {
@@ -7125,7 +7674,7 @@ function getFundRecommendation(fund) {
       action: 'CONSIDER EXIT',
       reason: `Underperforming benchmark by ${Math.abs(alpha).toFixed(1)}% - Consider STP to better fund`,
       color: 'var(--error)',
-      icon: '🔴'
+      icon: ''
     };
   }
 }
@@ -7134,7 +7683,7 @@ function getFundRecommendation(fund) {
 function generateFundPerformanceReport() {
   const allFunds = [...yourFunds, ...wifeFunds];
 
-  console.log('\n📊 FUND PERFORMANCE vs BENCHMARK - Alpha Analysis\n');
+  console.log('\n FUND PERFORMANCE vs BENCHMARK - Alpha Analysis\n');
   console.log('═'.repeat(90));
 
   let strongHolds = 0;
@@ -7162,11 +7711,11 @@ function generateFundPerformanceReport() {
   });
 
   console.log('\n' + '═'.repeat(90));
-  console.log(`\n📋 RECOMMENDATION SUMMARY:`);
-  console.log(`  🌟 ${strongHolds} STRONG HOLD - Continue with confidence`);
+  console.log(`\n RECOMMENDATION SUMMARY:`);
+  console.log(`   ${strongHolds} STRONG HOLD - Continue with confidence`);
   console.log(`  ✅ ${holds} HOLD - Keep investing`);
   console.log(`  ⚠️ ${reviews} REVIEW - Monitor closely`);
-  console.log(`  🔴 ${exits} CONSIDER EXIT - Look for alternatives\n`);
+  console.log(`   ${exits} CONSIDER EXIT - Look for alternatives\n`);
 }
 
 // Calculate portfolio-level alpha
@@ -7206,7 +7755,7 @@ function showBenchmarkComparison() {
     <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px" onclick="this.remove()">
       <div style="background:var(--bg2);border:2px solid var(--jt);border-radius:8px;max-width:1000px;max-height:90vh;overflow-y:auto;padding:24px" onclick="event.stopPropagation()">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-          <h2 style="margin:0;color:var(--jt)">📊 Benchmark Comparison & Alpha Analysis</h2>
+          <h2 style="margin:0;color:var(--jt)"> Benchmark Comparison & Alpha Analysis</h2>
           <button onclick="this.closest('div[style*=fixed]').remove()" style="background:var(--bg3);border:none;padding:8px 16px;border-radius:4px;cursor:pointer;font-size:14px">Close</button>
         </div>
 
@@ -7282,7 +7831,7 @@ function showBenchmarkComparison() {
 
         <div style="margin-top:20px;padding:12px;background:rgba(240,180,41,0.1);border-left:3px solid var(--jt);border-radius:4px">
           <div style="font-size:11px;color:var(--ink2)">
-            <strong>💡 How to interpret alpha:</strong>
+            <strong> How to interpret alpha:</strong>
             <ul style="margin:8px 0;padding-left:20px">
               <li><strong>+3% or more:</strong> Excellent outperformance - fund manager adding significant value</li>
               <li><strong>+1% to +3%:</strong> Good outperformance - worth the fees</li>
@@ -7298,7 +7847,7 @@ function showBenchmarkComparison() {
 
         <div style="margin-top:16px;text-align:center">
           <button onclick="generateFundPerformanceReport()" style="background:var(--bg3);border:1px solid var(--jt);padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px">
-            📋 Print Detailed Report to Console
+             Print Detailed Report to Console
           </button>
         </div>
       </div>
@@ -8148,7 +8697,7 @@ function renderEmergencyFundStatus() {
     html += `You have ₹${(ef.current / 100000).toFixed(1)}L but need ₹${(ef.required / 100000).toFixed(1)}L for ${ef.targetMonths} months coverage. `;
     html += `Shortfall: ₹${(Math.abs(ef.surplus) / 100000).toFixed(1)}L (${ef.adequacy}% funded).`;
   } else {
-    html += 'danger">🔴 <strong>Emergency Fund: Critical Gap</strong><br>';
+    html += 'danger"> <strong>Emergency Fund: Critical Gap</strong><br>';
     html += `You need ₹${(ef.required / 100000).toFixed(1)}L for ${ef.targetMonths} months of expenses but have only ₹${(ef.current / 100000).toFixed(1)}L. `;
     html += `Build emergency fund BEFORE investing. Shortfall: ₹${(Math.abs(ef.surplus) / 100000).toFixed(1)}L.`;
   }
@@ -8166,18 +8715,18 @@ function renderInsuranceAdequacy() {
 
   // Life Insurance
   if (ins.life.gap > 0) {
-    html += `<div class="alert danger">🔴 <strong>Life Insurance Gap: ₹${(ins.life.gap / 10000000).toFixed(1)} Cr</strong><br>`;
+    html += `<div class="alert danger"> <strong>Life Insurance Gap: ₹${(ins.life.gap / 10000000).toFixed(1)} Cr</strong><br>`;
     html += `Required: ₹${(ins.life.required / 10000000).toFixed(1)} Cr | Current: ₹${(ins.life.current / 10000000).toFixed(1)} Cr | Coverage: ${ins.life.adequacy}%<br>`;
-    html += `💡 Get term insurance immediately. Cost: ~₹12-15K/year for ₹5 Cr at age 32.</div>`;
+    html += ` Get term insurance immediately. Cost: ~₹12-15K/year for ₹5 Cr at age 32.</div>`;
   } else if (ins.life.current > 0) {
     html += `<div class="alert success">✅ Life Insurance: Adequate (₹${(ins.life.current / 10000000).toFixed(1)} Cr)</div>`;
   }
 
   // Health Insurance
   if (ins.health.gap > 0) {
-    html += `<div class="alert danger" style="margin-top:8px">🔴 <strong>Health Insurance Gap: ₹${(ins.health.gap / 100000).toFixed(0)}L</strong><br>`;
+    html += `<div class="alert danger" style="margin-top:8px"> <strong>Health Insurance Gap: ₹${(ins.health.gap / 100000).toFixed(0)}L</strong><br>`;
     html += `Required: ₹${(ins.health.required / 100000).toFixed(0)}L | Current: ₹${(ins.health.current / 100000).toFixed(0)}L<br>`;
-    html += `💡 Get family floater ₹20L + super top-up ₹50L. Premium: ~₹25-30K/year.</div>`;
+    html += ` Get family floater ₹20L + super top-up ₹50L. Premium: ~₹25-30K/year.</div>`;
   } else if (ins.health.current > 0) {
     html += `<div class="alert success" style="margin-top:8px">✅ Health Insurance: Adequate (₹${(ins.health.current / 100000).toFixed(0)}L)</div>`;
   }
@@ -8220,11 +8769,11 @@ function renderAllocationHealth() {
   const currentEquity = parseFloat(allocation.equity.percent);
 
   if (currentEquity > maxEquityForAge) {
-    alert += `<div class="alert danger" style="margin-top:10px">🔴 <strong>Rebalance Needed:</strong> Your equity allocation (${allocation.equity.percent}%) exceeds the age-appropriate maximum of ${maxEquityForAge}% for age ${currentAge}. Consider reducing equity and increasing debt to manage risk as you approach retirement.</div>`;
+    alert += `<div class="alert danger" style="margin-top:10px"> <strong>Rebalance Needed:</strong> Your equity allocation (${allocation.equity.percent}%) exceeds the age-appropriate maximum of ${maxEquityForAge}% for age ${currentAge}. Consider reducing equity and increasing debt to manage risk as you approach retirement.</div>`;
   }
 
   if (parseFloat(allocation.debt.percent) < 15) {
-    alert += `<div class="alert danger" style="margin-top:10px">🔴 <strong>Critical Risk:</strong> You have only ${allocation.debt.percent}% in debt. Recommended minimum: 20%. Add debt funds to reduce portfolio risk.</div>`;
+    alert += `<div class="alert danger" style="margin-top:10px"> <strong>Critical Risk:</strong> You have only ${allocation.debt.percent}% in debt. Recommended minimum: 20%. Add debt funds to reduce portfolio risk.</div>`;
   }
 
   if (parseFloat(allocation.gold.percent) < 3) {
@@ -8254,13 +8803,13 @@ function renderRetirementAdequacy() {
   } else if (ret.adequacy >= 75) {
     html += 'warning">⚠️ <strong>Retirement: Needs Attention</strong><br>';
     html += `Projected: ₹${(ret.projectedCorpus / 10000000).toFixed(1)} Cr | Required: ₹${(ret.requiredCorpus / 10000000).toFixed(1)} Cr | Gap: ₹${(Math.abs(ret.gap) / 10000000).toFixed(1)} Cr<br>`;
-    html += `💡 Increase combined SIP by ₹${(ret.additionalSIPNeeded / 1000).toFixed(0)}K/month to close gap.`;
+    html += ` Increase combined SIP by ₹${(ret.additionalSIPNeeded / 1000).toFixed(0)}K/month to close gap.`;
   } else {
-    html += 'danger">🔴 <strong>Retirement: Critical Shortfall</strong><br>';
+    html += 'danger"> <strong>Retirement: Critical Shortfall</strong><br>';
     html += `Annual expenses at retirement (2054): ₹${(ret.futureAnnualExpenses / 10000000).toFixed(2)} Cr/year<br>`;
     html += `Required corpus (4% rule): ₹${(ret.requiredCorpus / 10000000).toFixed(1)} Cr | Projected: ₹${(ret.projectedCorpus / 10000000).toFixed(1)} Cr<br>`;
     html += `<strong>Shortfall: ₹${(Math.abs(ret.gap) / 10000000).toFixed(1)} Cr (only ${ret.adequacy}% funded)</strong><br>`;
-    html += `💡 Increase combined SIP by ₹${(ret.additionalSIPNeeded / 1000).toFixed(0)}K/month.`;
+    html += ` Increase combined SIP by ₹${(ret.additionalSIPNeeded / 1000).toFixed(0)}K/month.`;
   }
   html += '</div>';
 
@@ -8450,7 +8999,7 @@ function getFallbackData(schemeCode) {
 // ============================================================
 
 function initializeIncomeCalculations() {
-  console.log('🔧 Initializing income auto-calculations...');
+  console.log(' Initializing income auto-calculations...');
 
   const ctcInput = document.getElementById('s-ctc');
   const basicInput = document.getElementById('s-basic');
@@ -8488,7 +9037,7 @@ function initializeIncomeCalculations() {
           netPayInput.value = formatAmount(netPay);
         }
 
-        console.log(`💰 CTC updated: ₹${formatAmount(ctc)} → Basic: ₹${formatAmount(basic)}, Net: ₹${formatAmount(netPay)}`);
+        console.log(` CTC updated: ₹${formatAmount(ctc)} → Basic: ₹${formatAmount(basic)}, Net: ₹${formatAmount(netPay)}`);
       }
     });
   }
@@ -8504,7 +9053,7 @@ function initializeIncomeCalculations() {
           ctcInput.value = formatAmount(ctc);
         }
 
-        console.log(`💰 Basic updated: ₹${formatAmount(basic)} → CTC: ₹${formatAmount(ctc)}`);
+        console.log(` Basic updated: ₹${formatAmount(basic)} → CTC: ₹${formatAmount(ctc)}`);
       }
     });
   }
@@ -8526,7 +9075,7 @@ function initializeIncomeCalculations() {
           basicInput.value = formatAmount(basic);
         }
 
-        console.log(`💰 Net Pay updated: ₹${formatAmount(netPay)} → CTC: ₹${formatAmount(ctc)}, Basic: ₹${formatAmount(basic)}`);
+        console.log(` Net Pay updated: ₹${formatAmount(netPay)} → CTC: ₹${formatAmount(ctc)}, Basic: ₹${formatAmount(basic)}`);
       }
     });
   }
@@ -8564,7 +9113,7 @@ function initializeIncomeCalculations() {
 }
 
 function initializeInputValidation() {
-  console.log('🔧 Initializing input validation...');
+  console.log(' Initializing input validation...');
 
   // Validate all SIP inputs for your funds
   if (typeof yourFunds !== 'undefined') {
@@ -8794,10 +9343,10 @@ function importPortfolioBackup(file) {
       const yourSIPTotal = backup.yourFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
       const wifeSIPTotal = backup.wifeFunds.reduce((sum, f) => sum + (f.monthlySIP || 0), 0);
 
-      const confirmMsg = `📦 RESTORE PORTFOLIO BACKUP?\n\n` +
+      const confirmMsg = ` RESTORE PORTFOLIO BACKUP?\n\n` +
         `Backup Date: ${backup.exportDateReadable || backup.exportDate}\n` +
         `Version: ${backup.version}\n\n` +
-        `📊 Contents:\n` +
+        ` Contents:\n` +
         `  • Your Funds: ${backup.yourFunds.length} (₹${yourSIPTotal.toLocaleString('en-IN')}/month)\n` +
         `  • Wife Funds: ${backup.wifeFunds.length} (₹${wifeSIPTotal.toLocaleString('en-IN')}/month)\n` +
         `  • Total Funds: ${fundCount}\n` +
@@ -8862,7 +9411,7 @@ function importPortfolioBackup(file) {
 }
 
 function saveConfig() {
-  console.log('💾 Saving configuration and refreshing all pages...');
+  console.log(' Saving configuration and refreshing all pages...');
 
   // Helper to parse number from formatted string (removes commas, currency symbols, etc.)
   const getValue = (id) => {
@@ -9072,7 +9621,7 @@ function saveConfig() {
   console.log('✅ Config saved:', config);
   
   // Refresh ALL dependent pages
-  console.log('🔄 Refreshing all dependent pages...');
+  console.log(' Refreshing all dependent pages...');
 
   setTimeout(() => {
     // Update dashboard banner and allocation with new values
@@ -9294,7 +9843,7 @@ function setupReviewInputs() {
 
 // Run comprehensive portfolio review
 function runPortfolioReview() {
-  console.log('🔍 Running portfolio review...');
+  console.log(' Running portfolio review...');
 
   // Get current values
   const yourValues = {
@@ -9408,8 +9957,8 @@ function runPortfolioReview() {
       <div class="d">Gold <small>Target: 5%</small></div>
       <div class="a ${Math.abs(goldPct - 5) <= 2 ? 'aj' : 'ay'}">${goldPct.toFixed(1)}%</div>
     </div>
-    ${equityPct > maxEquityForAge ? '<div class="alert danger" style="margin-top:10px">🔴 REBALANCE NEEDED: Equity at ' + equityPct.toFixed(1) + '% exceeds age-appropriate ' + maxEquityForAge + '%. Sell ₹' + ((equityPct - 75) * combinedTotal / 100 / 100000).toFixed(1) + 'L equity, buy debt.</div>' : ''}
-    ${equityPct < 65 ? '<div class="alert danger" style="margin-top:10px">🔴 REBALANCE NEEDED: Equity <65%. Sell ₹' + ((75 - equityPct) * combinedTotal / 100 / 100000).toFixed(1) + 'L debt, buy equity.</div>' : ''}
+    ${equityPct > maxEquityForAge ? '<div class="alert danger" style="margin-top:10px"> REBALANCE NEEDED: Equity at ' + equityPct.toFixed(1) + '% exceeds age-appropriate ' + maxEquityForAge + '%. Sell ₹' + ((equityPct - 75) * combinedTotal / 100 / 100000).toFixed(1) + 'L equity, buy debt.</div>' : ''}
+    ${equityPct < 65 ? '<div class="alert danger" style="margin-top:10px"> REBALANCE NEEDED: Equity <65%. Sell ₹' + ((75 - equityPct) * combinedTotal / 100 / 100000).toFixed(1) + 'L debt, buy equity.</div>' : ''}
     ${equityPct >= 65 && equityPct <= maxEquityForAge ? '<div class="alert success" style="margin-top:10px">✅ ALLOCATION HEALTHY: Within target range and age-appropriate. No rebalancing needed.</div>' : ''}
   `;
 
@@ -9451,7 +10000,7 @@ function runPortfolioReview() {
   if (delta > 100000 && deltaPct > 10) {
     recommendations.push({
       type: 'success',
-      title: 'Excellent Performance! 🎉',
+      title: 'Excellent Performance! ',
       desc: `Portfolio outperforming by ${deltaPct.toFixed(1)}%! You're beating the 12% assumption. Continue current strategy.`,
       critical: false
     });
@@ -9472,7 +10021,7 @@ function runPortfolioReview() {
     const borderColor = rec.type === 'danger' ? 'var(--red)' : rec.type === 'warning' ? 'var(--you)' : 'var(--jt)';
     recHTML += `
       <div class="alert-item" style="border-left:3px solid ${borderColor}">
-        <div class="alert-icon">${rec.type === 'danger' ? '🔴' : rec.type === 'warning' ? '⚠️' : '✅'}</div>
+        <div class="alert-icon">${rec.type === 'danger' ? '' : rec.type === 'warning' ? '⚠️' : '✅'}</div>
         <div class="alert-body">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
             <h4>${rec.title}</h4>
@@ -9516,7 +10065,7 @@ function runPortfolioReview() {
     </div>
     ${deltaPct < -15 ? `
       <div class="alert danger" style="margin-top:10px">
-        <strong>🔴 SIGNIFICANT UNDERPERFORMANCE</strong><br>
+        <strong> SIGNIFICANT UNDERPERFORMANCE</strong><br>
         Portfolio is ${Math.abs(deltaPct).toFixed(1)}% below projection. Likely causes:<br>
         • Market crash/correction in this period<br>
         • Underperforming funds (check individual fund returns)<br>
@@ -9668,7 +10217,7 @@ let comparisonChart = null;
 let marketFunds = []; // Funds added from market for comparison
 
 function renderFundComparison() {
-  console.log('🔍 Rendering Fund Comparison page...');
+  console.log(' Rendering Fund Comparison page...');
 
   // Combine all funds (portfolio + market)
   const allFunds = [
@@ -9761,7 +10310,7 @@ function renderComparisonTable(funds) {
       </td>
       <td><span class="tag tg">${fund.category}</span></td>
       <td style="text-align:center">
-        ${fund.isMarket ? `<button onclick="removeMarketFund('${fund.schemeCode}')" style="padding:4px 8px;background:var(--red);color:white;border:none;border-radius:4px;cursor:pointer;font-size:10px">🗑️ Remove</button>` : '-'}
+        ${fund.isMarket ? `<button onclick="removeMarketFund('${fund.schemeCode}')" style="padding:4px 8px;background:var(--red);color:white;border:none;border-radius:4px;cursor:pointer;font-size:10px">️ Remove</button>` : '-'}
       </td>
     `;
     tbody.appendChild(row);
@@ -10063,7 +10612,7 @@ function removeMarketFund(schemeCode) {
   // Re-render comparison
   renderFundComparison();
 
-  console.log('🗑️ Market fund removed:', schemeCode);
+  console.log('️ Market fund removed:', schemeCode);
 }
 
 function clearMarketFunds() {
@@ -10082,7 +10631,7 @@ function clearMarketFunds() {
   // Re-render comparison
   renderFundComparison();
 
-  console.log(`🗑️ Cleared ${count} market funds`);
+  console.log(`️ Cleared ${count} market funds`);
 }
 
 // ============================================================
@@ -10286,7 +10835,7 @@ function renderOverlapPairs() {
 
 // Main render function for Portfolio Overlap page
 function renderPortfolioOverlap() {
-  console.log('🔗 Rendering Portfolio Overlap Analysis...');
+  console.log(' Rendering Portfolio Overlap Analysis...');
 
   // Get all equity funds from unified familyFunds (exclude Debt, Gold, NPS, International)
   const allFunds = typeof familyFunds !== 'undefined' ? familyFunds : [...yourFunds, ...wifeFunds];
@@ -10373,7 +10922,7 @@ function renderOverlapAlerts(overlaps) {
   let html = '';
   highOverlaps.forEach(o => {
     const level = parseFloat(o.overlap) > 70 ? 'error' : 'warning';
-    const icon = parseFloat(o.overlap) > 70 ? '🚨' : '⚠️';
+    const icon = parseFloat(o.overlap) > 70 ? '' : '⚠️';
     html += `
       <div class="alert ${level}">
         ${icon} <strong>${o.fund1.name}</strong> and <strong>${o.fund2.name}</strong> have <strong>${o.overlap}% overlap</strong>
@@ -10533,7 +11082,7 @@ function renderConsolidationRecommendations(overlaps) {
     return;
   }
 
-  let html = '<div class="alert info" style="margin-bottom:16px">💡 <strong>CONSOLIDATION OPPORTUNITIES:</strong> These fund pairs have high overlap. Consider keeping only one from each pair to reduce concentration risk and simplify your portfolio.</div>';
+  let html = '<div class="alert info" style="margin-bottom:16px"> <strong>CONSOLIDATION OPPORTUNITIES:</strong> These fund pairs have high overlap. Consider keeping only one from each pair to reduce concentration risk and simplify your portfolio.</div>';
 
   highOverlaps.forEach(o => {
     const fund1SIP = o.fund1.monthlySIP;
@@ -10554,7 +11103,7 @@ function renderConsolidationRecommendations(overlaps) {
           </div>
         </div>
         <div style="background:var(--bg2);padding:12px;border-radius:8px">
-          <div style="font-weight:700;margin-bottom:8px">💡 Recommendation:</div>
+          <div style="font-weight:700;margin-bottom:8px"> Recommendation:</div>
           <div style="font-size:13px">
             Consider <strong>consolidating these into one fund</strong> with combined SIP of ₹${totalSIP.toLocaleString('en-IN')}/month.
             ${fund1SIP > fund2SIP
@@ -10902,7 +11451,7 @@ function renderHeadToHeadComparisons() {
         <div class="comparison-title">${comp.title}</div>
         <div class="comparison-grid">
           <div class="comparison-fund ${comp.winner === 1 ? 'comparison-winner' : ''}">
-            <div class="comparison-fund-name">${comp.fund1.name} ${comp.winner === 1 ? '👑' : ''}</div>
+            <div class="comparison-fund-name">${comp.fund1.name} ${comp.winner === 1 ? '' : ''}</div>
             <div class="comparison-stats">
               <div>5Y CAGR: <strong>${comp.fund1.cagr5y}</strong></div>
               <div>3Y CAGR: <strong>${comp.fund1.cagr3y}</strong></div>
@@ -10912,7 +11461,7 @@ function renderHeadToHeadComparisons() {
             </div>
           </div>
           <div class="comparison-fund ${comp.winner === 2 ? 'comparison-winner' : ''}">
-            <div class="comparison-fund-name">${comp.fund2.name} ${comp.winner === 2 ? '👑' : ''}</div>
+            <div class="comparison-fund-name">${comp.fund2.name} ${comp.winner === 2 ? '' : ''}</div>
             <div class="comparison-stats">
               <div>5Y CAGR: <strong>${comp.fund2.cagr5y}</strong></div>
               <div>3Y CAGR: <strong>${comp.fund2.cagr3y}</strong></div>
@@ -11169,7 +11718,7 @@ function generateRecommendation(fund, quarterlyData) {
 
 // Render Decision Engine page
 function renderDecisionEngine() {
-  console.log('🎯 Rendering Decision Engine...');
+  console.log(' Rendering Decision Engine...');
 
   // Auto-fetch live market data on page load
   fetchLiveMarketData();
@@ -11211,7 +11760,7 @@ function renderDecisionEngine() {
 // ============================================================
 
 async function fetchLiveMarketData() {
-  console.log('📡 Fetching live market data...');
+  console.log(' Fetching live market data...');
 
   try {
     // Attempt to fetch India VIX from NSE (Note: NSE has CORS restrictions)
@@ -11295,7 +11844,7 @@ function updateMarketTimestamp(timestamp, ageMinutes) {
 
     if (ageEl && ageMinutes !== null) {
       if (ageMinutes < 1) {
-        ageEl.textContent = '🟢 LIVE (just now)';
+        ageEl.textContent = ' LIVE (just now)';
         ageEl.style.color = '#10b981';
         ageEl.style.fontWeight = '700';
         if (indicatorEl) {
@@ -11303,7 +11852,7 @@ function updateMarketTimestamp(timestamp, ageMinutes) {
           indicatorEl.style.animation = 'pulse 2s infinite';
         }
       } else if (ageMinutes < 2) {
-        ageEl.textContent = `🟢 LIVE (${Math.floor(ageMinutes * 60)}s ago)`;
+        ageEl.textContent = ` LIVE (${Math.floor(ageMinutes * 60)}s ago)`;
         ageEl.style.color = '#10b981';
         ageEl.style.fontWeight = '700';
         if (indicatorEl) {
@@ -11311,7 +11860,7 @@ function updateMarketTimestamp(timestamp, ageMinutes) {
           indicatorEl.style.animation = 'pulse 2s infinite';
         }
       } else if (ageMinutes < 60) {
-        ageEl.textContent = `🟡 ${Math.floor(ageMinutes)} min ago`;
+        ageEl.textContent = ` ${Math.floor(ageMinutes)} min ago`;
         ageEl.style.color = '#f59e0b';
         ageEl.style.fontWeight = '600';
         if (indicatorEl) {
@@ -11319,7 +11868,7 @@ function updateMarketTimestamp(timestamp, ageMinutes) {
           indicatorEl.style.animation = 'none';
         }
       } else {
-        ageEl.textContent = '🔴 Stale - refresh recommended';
+        ageEl.textContent = ' Stale - refresh recommended';
         ageEl.style.color = '#ef4444';
         ageEl.style.fontWeight = '600';
         if (indicatorEl) {
@@ -11365,11 +11914,11 @@ function stopTimestampUpdater() {
 
 async function fetchFromMultipleSources() {
   // PRODUCTION: Multiple strategies to get live market data
-  console.log('📡 Fetching live Indian market data...');
+  console.log(' Fetching live Indian market data...');
 
   // Strategy 1: Try Yahoo Finance directly (no proxy needed, often works)
   try {
-    console.log('🔄 Trying Yahoo Finance India...');
+    console.log(' Trying Yahoo Finance India...');
     const yahooResp = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI');
     if (yahooResp.ok) {
       const yahooData = await yahooResp.json();
@@ -11390,7 +11939,7 @@ async function fetchFromMultipleSources() {
 
   // Strategy 2: Try alternative CORS proxy
   try {
-    console.log('🔄 Trying CORS Anywhere proxy...');
+    console.log(' Trying CORS Anywhere proxy...');
     const corsProxy = 'https://corsproxy.io/?';
     const nseUrl = encodeURIComponent('https://www.nseindia.com/api/allIndices');
 
@@ -11420,7 +11969,7 @@ async function fetchFromMultipleSources() {
 
   // Strategy 3: Check if local GitHub Actions data exists
   try {
-    console.log('🔄 Checking for GitHub Actions cached data...');
+    console.log(' Checking for GitHub Actions cached data...');
     const localResp = await fetch('./market-data.json');
     if (localResp.ok) {
       const localData = await localResp.json();
@@ -11435,8 +11984,8 @@ async function fetchFromMultipleSources() {
     console.warn('⚠️ No GitHub Actions cache found');
   }
 
-  console.log('📊 All sources failed - using default values');
-  console.log('💡 Recommend setting up GitHub Actions for reliable daily updates');
+  console.log(' All sources failed - using default values');
+  console.log(' Recommend setting up GitHub Actions for reliable daily updates');
   return null;
 }
 
@@ -11453,7 +12002,7 @@ function manualRefreshMarketData() {
     if (button) {
       button.textContent = '✅ Refreshed!';
       setTimeout(() => {
-        button.textContent = '🔄 Refresh Market Data';
+        button.textContent = ' Refresh Market Data';
       }, 2000);
     }
     // Reset the auto-refresh timer after manual refresh
@@ -11473,7 +12022,7 @@ function startAutoRefreshTimer() {
   // Clear any existing timers
   stopAutoRefreshTimer();
 
-  console.log('🔄 Starting 60-second auto-refresh cycle...');
+  console.log(' Starting 60-second auto-refresh cycle...');
 
   // Set next refresh time
   nextRefreshTime = Date.now() + 60000; // 60 seconds from now
@@ -11542,32 +12091,32 @@ function updateMarketContext() {
 
   // VIX signals
   if (marketContext.indiaVIX > 25) {
-    document.getElementById('vixSignal').innerHTML = '🔴 High Volatility';
+    document.getElementById('vixSignal').innerHTML = ' High Volatility';
   } else if (marketContext.indiaVIX > 20) {
-    document.getElementById('vixSignal').innerHTML = '🟡 Elevated';
+    document.getElementById('vixSignal').innerHTML = ' Elevated';
   } else {
-    document.getElementById('vixSignal').innerHTML = '🟢 Normal';
+    document.getElementById('vixSignal').innerHTML = ' Normal';
   }
 
   // PE signals
   if (marketContext.niftyPE > 24) {
-    document.getElementById('peSignal').innerHTML = '🔴 Overvalued';
+    document.getElementById('peSignal').innerHTML = ' Overvalued';
   } else if (marketContext.niftyPE > 22) {
-    document.getElementById('peSignal').innerHTML = '🟡 Fair-High';
+    document.getElementById('peSignal').innerHTML = ' Fair-High';
   } else {
-    document.getElementById('peSignal').innerHTML = '🟢 Fair Value';
+    document.getElementById('peSignal').innerHTML = ' Fair Value';
   }
 
   // Repo rate signals
-  document.getElementById('repoSignal').innerHTML = '🟡 Neutral';
+  document.getElementById('repoSignal').innerHTML = ' Neutral';
 
   // CPI signals
   if (marketContext.inflation > 6) {
-    document.getElementById('cpiSignal').innerHTML = '🔴 High';
+    document.getElementById('cpiSignal').innerHTML = ' High';
   } else if (marketContext.inflation > 5) {
-    document.getElementById('cpiSignal').innerHTML = '🟡 Moderate';
+    document.getElementById('cpiSignal').innerHTML = ' Moderate';
   } else {
-    document.getElementById('cpiSignal').innerHTML = '🟢 Low';
+    document.getElementById('cpiSignal').innerHTML = ' Low';
   }
 
   // Market insights
@@ -11637,7 +12186,7 @@ function renderCriticalAlerts(quarterlyPerf) {
 
     html += `
       <div class="alert danger" style="margin-bottom:12px;">
-        <strong>🔴 CRITICAL: ${item.fund.name}</strong><br>
+        <strong> CRITICAL: ${item.fund.name}</strong><br>
         <div style="margin-top:8px;font-size:11px;line-height:1.7;">
           <strong>Performance:</strong> ${q1Data.return}% (${quarters[0]}) vs Benchmark ${q1Data.benchmark}% | ${q2Data.return}% (${quarters[1]}) vs Benchmark ${q2Data.benchmark}%<br>
           <strong>Alpha:</strong> ${q1Data.alpha}% and ${q2Data.alpha}% (Underperforming 2 consecutive quarters)<br>
@@ -11666,7 +12215,7 @@ function renderCriticalAlerts(quarterlyPerf) {
   if (alerts.monitoring.length > 0) {
     html += `
       <div class="alert info" style="margin-bottom:12px;">
-        <strong>📊 MONITORING:</strong> ${alerts.monitoring.length} funds performing adequately (tracking benchmark)
+        <strong> MONITORING:</strong> ${alerts.monitoring.length} funds performing adequately (tracking benchmark)
       </div>
     `;
   }
@@ -11881,7 +12430,7 @@ function renderRecommendations(quarterlyPerf) {
   // STP recommendations
   let stpHtml = '';
   if (recommendations.stp.length === 0) {
-    stpHtml = '<div class="alert info" style="font-size:12px;">📊 No STP recommendations currently. Market volatility is normal.</div>';
+    stpHtml = '<div class="alert info" style="font-size:12px;"> No STP recommendations currently. Market volatility is normal.</div>';
   } else {
     recommendations.stp.forEach(item => {
       stpHtml += `
@@ -11902,7 +12451,7 @@ function renderRecommendations(quarterlyPerf) {
   // BUY recommendations
   let buyHtml = '';
   if (recommendations.buy.length === 0) {
-    buyHtml = '<div class="alert info" style="font-size:12px;">📊 No INCREASE recommendations. Current allocations are appropriate.</div>';
+    buyHtml = '<div class="alert info" style="font-size:12px;"> No INCREASE recommendations. Current allocations are appropriate.</div>';
   } else {
     recommendations.buy.forEach(item => {
       const suggestedIncrease = Math.round(item.fund.monthlySIP * 0.1); // 10% increase
@@ -12227,17 +12776,17 @@ function calculateSentimentScore() {
 // Get VIX status
 function getVIXStatus() {
   const vix = sentimentData.indiaVIX;
-  if (vix < 15) return { signal: '🟢', status: 'LOW', insight: 'Market volatility is LOW - excellent for lump sum investments' };
-  if (vix <= 25) return { signal: '🟡', status: 'NORMAL', insight: 'Market volatility is NORMAL - good for SIP continuation' };
-  return { signal: '🔴', status: 'HIGH', insight: 'Market volatility is HIGH - use STP for equity investments' };
+  if (vix < 15) return { signal: '', status: 'LOW', insight: 'Market volatility is LOW - excellent for lump sum investments' };
+  if (vix <= 25) return { signal: '', status: 'NORMAL', insight: 'Market volatility is NORMAL - good for SIP continuation' };
+  return { signal: '', status: 'HIGH', insight: 'Market volatility is HIGH - use STP for equity investments' };
 }
 
 // Get P/E status
 function getPEStatus() {
   const pe = sentimentData.niftyPE;
-  if (pe < 20) return { signal: '🟢', status: 'UNDERVALUED', insight: 'Market undervalued - excellent entry point for investments' };
-  if (pe <= 24) return { signal: '🟡', status: 'FAIR VALUE', insight: 'Market fairly valued - neither cheap nor expensive' };
-  return { signal: '🔴', status: 'OVERVALUED', insight: 'Market overvalued - book profits and increase defensive allocation' };
+  if (pe < 20) return { signal: '', status: 'UNDERVALUED', insight: 'Market undervalued - excellent entry point for investments' };
+  if (pe <= 24) return { signal: '', status: 'FAIR VALUE', insight: 'Market fairly valued - neither cheap nor expensive' };
+  return { signal: '', status: 'OVERVALUED', insight: 'Market overvalued - book profits and increase defensive allocation' };
 }
 
 // Get Repo Rate status
@@ -12251,9 +12800,9 @@ function getRepoStatus() {
 // Get CPI status
 function getCPIStatus() {
   const cpi = sentimentData.inflation;
-  if (cpi < 4) return { signal: '🟢', status: 'LOW', insight: 'Low inflation - strong real returns possible' };
-  if (cpi <= 6) return { signal: '🟡', status: 'MODERATE', insight: 'Moderate inflation - real returns positive' };
-  return { signal: '🔴', status: 'HIGH', insight: 'High inflation - real returns under pressure' };
+  if (cpi < 4) return { signal: '', status: 'LOW', insight: 'Low inflation - strong real returns possible' };
+  if (cpi <= 6) return { signal: '', status: 'MODERATE', insight: 'Moderate inflation - real returns positive' };
+  return { signal: '', status: 'HIGH', insight: 'High inflation - real returns under pressure' };
 }
 
 // Helper function to safely update text content
@@ -12311,7 +12860,7 @@ function generateTimingRecommendations() {
   if (vix < 15 && pe < 20) {
     lumpSumHTML = `
       <div style="padding:10px;background:var(--jt-s);border:1px solid var(--jt);border-radius:6px;margin-bottom:10px;">
-        <div style="font-size:1.2rem;margin-bottom:5px;">🟢 EXCELLENT TIME</div>
+        <div style="font-size:1.2rem;margin-bottom:5px;"> EXCELLENT TIME</div>
         <div style="font-size:11px;color:var(--jt2);font-weight:600;">for lump sum investments</div>
       </div>
       <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
@@ -12321,7 +12870,7 @@ function generateTimingRecommendations() {
   } else if (vix > 25 || pe > 24) {
     lumpSumHTML = `
       <div style="padding:10px;background:var(--red-s);border:1px solid var(--red);border-radius:6px;margin-bottom:10px;">
-        <div style="font-size:1.2rem;margin-bottom:5px;">🔴 AVOID LUMP SUM</div>
+        <div style="font-size:1.2rem;margin-bottom:5px;"> AVOID LUMP SUM</div>
         <div style="font-size:11px;color:var(--red);font-weight:600;">Use STP instead</div>
       </div>
       <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
@@ -12331,7 +12880,7 @@ function generateTimingRecommendations() {
   } else {
     lumpSumHTML = `
       <div style="padding:10px;background:var(--you-s);border:1px solid var(--you);border-radius:6px;margin-bottom:10px;">
-        <div style="font-size:1.2rem;margin-bottom:5px;">🟡 CAUTIOUS APPROACH</div>
+        <div style="font-size:1.2rem;margin-bottom:5px;"> CAUTIOUS APPROACH</div>
         <div style="font-size:11px;color:var(--you);font-weight:600;">Small lump sums okay</div>
       </div>
       <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
@@ -12366,7 +12915,7 @@ function generateTimingRecommendations() {
   } else {
     stpHTML = `
       <div style="padding:10px;background:var(--you-s);border:1px solid var(--you);border-radius:6px;margin-bottom:10px;">
-        <div style="font-size:1.2rem;margin-bottom:5px;">🟡 OPTIONAL</div>
+        <div style="font-size:1.2rem;margin-bottom:5px;"> OPTIONAL</div>
         <div style="font-size:11px;color:var(--you);font-weight:600;">3-month STP if cautious</div>
       </div>
       <div style="font-size:11px;color:var(--ink2);line-height:1.7;">
@@ -12432,24 +12981,24 @@ function generateAllocationSuggestions() {
     marketLabel = 'EXPENSIVE / VOLATILE';
     suggestedAlloc = { equity: 55, debt: 30, gold: 5, international: 10 };
     action = `
-      <strong>🔴 ACTION RECOMMENDED:</strong> Reduce equity by 10%, increase debt by 10%<br>
-      <strong>💡 RATIONALE:</strong> Book profits in expensive/volatile market, increase safety allocation<br>
-      <strong>📋 HOW:</strong> Redeem ₹X from equity funds, invest in HDFC Corporate Bond
+      <strong> ACTION RECOMMENDED:</strong> Reduce equity by 10%, increase debt by 10%<br>
+      <strong> RATIONALE:</strong> Book profits in expensive/volatile market, increase safety allocation<br>
+      <strong> HOW:</strong> Redeem ₹X from equity funds, invest in HDFC Corporate Bond
     `;
   } else if (pe < 18 || (vix > 30 && pe < 20)) {
     marketLabel = 'CHEAP / CORRECTION';
     suggestedAlloc = { equity: 75, debt: 10, gold: 5, international: 10 };
     action = `
-      <strong>🟢 ACTION RECOMMENDED:</strong> Increase equity by 10%, reduce debt by 10%<br>
-      <strong>💡 RATIONALE:</strong> Buy the dip opportunity - market undervalued<br>
-      <strong>📋 HOW:</strong> Redeem from HDFC Corporate Bond, invest in Parag Parikh Flexi Cap
+      <strong> ACTION RECOMMENDED:</strong> Increase equity by 10%, reduce debt by 10%<br>
+      <strong> RATIONALE:</strong> Buy the dip opportunity - market undervalued<br>
+      <strong> HOW:</strong> Redeem from HDFC Corporate Bond, invest in Parag Parikh Flexi Cap
     `;
   } else {
     marketLabel = 'FAIR';
     action = `
       <strong>✅ NO ACTION NEEDED:</strong> Maintain current allocation<br>
-      <strong>💡 RATIONALE:</strong> Market is fairly valued, no adjustment needed<br>
-      <strong>📋 CONTINUE:</strong> Stay the course with existing SIPs
+      <strong> RATIONALE:</strong> Market is fairly valued, no adjustment needed<br>
+      <strong> CONTINUE:</strong> Stay the course with existing SIPs
     `;
   }
 
@@ -12542,7 +13091,7 @@ function generateSectorRotation() {
 
   html += `
     <div class="card">
-      <div class="ch3">📊 CURRENT ENVIRONMENT</div>
+      <div class="ch3"> CURRENT ENVIRONMENT</div>
       <div style="padding:15px;text-align:center;">
         <div style="font-size:1.2rem;font-weight:700;color:var(--jt);margin-bottom:10px;">${environment}</div>
       </div>
@@ -12579,7 +13128,7 @@ function generateSectorRotation() {
   if (actionRec) {
     html += `
       <div class="alert info" style="margin-bottom:15px;">
-        <strong>📋 RECOMMENDED ACTION:</strong> ${actionRec.text}
+        <strong> RECOMMENDED ACTION:</strong> ${actionRec.text}
       </div>
     `;
   }
@@ -12638,14 +13187,14 @@ function updateSentimentScore() {
     `;
   } else if (score >= 31) {
     action = `
-      <strong>🟡 MAINTAIN CAUTIOUS APPROACH</strong><br>
+      <strong> MAINTAIN CAUTIOUS APPROACH</strong><br>
       • Continue SIPs only<br>
       • Avoid lump sum investments<br>
       • Wait for better opportunities
     `;
   } else {
     action = `
-      <strong>🔴 DEFENSIVE MODE RECOMMENDED</strong><br>
+      <strong> DEFENSIVE MODE RECOMMENDED</strong><br>
       • Pause equity lump sums<br>
       • Continue SIPs only (rupee cost averaging)<br>
       • Increase debt/gold allocation for safety
@@ -12808,7 +13357,7 @@ function renderSentimentCharts() {
 
 // Main render function for Market Sentiment Dashboard
 function renderMarketSentiment() {
-  console.log('📊 Rendering Market Sentiment Dashboard...');
+  console.log(' Rendering Market Sentiment Dashboard...');
 
   // Auto-fetch live market data on page load
   fetchLiveMarketData();
@@ -12979,7 +13528,7 @@ function setProjectionMode(mode) {
 
 // Render Stochastic Engine page
 function renderStochasticEngine() {
-  console.log('🎲 Rendering Stochastic Simulation Engine...');
+  console.log(' Rendering Stochastic Simulation Engine...');
 
   // Set to conservative mode by default
   setTimeout(() => setProjectionMode('conservative'), 100);
@@ -13003,7 +13552,7 @@ function renderStochasticEngine() {
 
 // Run Monte Carlo simulation
 async function runMonteCarloSimulation() {
-  console.log('🎲 Starting Monte Carlo simulation with 5,000 scenarios...');
+  console.log(' Starting Monte Carlo simulation with 5,000 scenarios...');
 
   const progressDiv = document.getElementById('simulation-progress');
   const progressBar = document.getElementById('sim-progress-bar');
@@ -13254,31 +13803,31 @@ function displayMonteCarloResults(stats) {
         <td style="padding:8px">90th Percentile (Best Case)</td>
         <td style="padding:8px;text-align:right;color:var(--success);font-weight:700">₹${(stats.percentiles.p90 / 10000000).toFixed(1)} Cr</td>
         <td style="padding:8px;text-align:right;color:var(--ink2)">₹${(stats.percentiles.p90 / inflFactor / 10000000).toFixed(1)} Cr</td>
-        <td style="padding:8px;text-align:center">🟢 Excellent</td>
+        <td style="padding:8px;text-align:center"> Excellent</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border)">
         <td style="padding:8px">75th Percentile</td>
         <td style="padding:8px;text-align:right;color:var(--jt);font-weight:700">₹${(stats.percentiles.p75 / 10000000).toFixed(1)} Cr</td>
         <td style="padding:8px;text-align:right;color:var(--ink2)">₹${(stats.percentiles.p75 / inflFactor / 10000000).toFixed(1)} Cr</td>
-        <td style="padding:8px;text-align:center">🟢 Good</td>
+        <td style="padding:8px;text-align:center"> Good</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border);background:rgba(240,180,41,0.05)">
         <td style="padding:8px;font-weight:700">50th Percentile (Median)</td>
         <td style="padding:8px;text-align:right;color:var(--you);font-weight:700">₹${(stats.percentiles.p50 / 10000000).toFixed(1)} Cr</td>
         <td style="padding:8px;text-align:right;color:var(--ink2)">₹${(stats.percentiles.p50 / inflFactor / 10000000).toFixed(1)} Cr</td>
-        <td style="padding:8px;text-align:center">🟡 Target</td>
+        <td style="padding:8px;text-align:center"> Target</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border)">
         <td style="padding:8px">25th Percentile</td>
         <td style="padding:8px;text-align:right;color:var(--red);font-weight:700">₹${(stats.percentiles.p25 / 10000000).toFixed(1)} Cr</td>
         <td style="padding:8px;text-align:right;color:var(--ink2)">₹${(stats.percentiles.p25 / inflFactor / 10000000).toFixed(1)} Cr</td>
-        <td style="padding:8px;text-align:center">🟠 Below Target</td>
+        <td style="padding:8px;text-align:center"> Below Target</td>
       </tr>
       <tr>
         <td style="padding:8px">10th Percentile (Worst Case)</td>
         <td style="padding:8px;text-align:right;color:var(--red);font-weight:700">₹${(stats.percentiles.p10 / 10000000).toFixed(1)} Cr</td>
         <td style="padding:8px;text-align:right;color:var(--ink2)">₹${(stats.percentiles.p10 / inflFactor / 10000000).toFixed(1)} Cr</td>
-        <td style="padding:8px;text-align:center">🔴 Risk Scenario</td>
+        <td style="padding:8px;text-align:center"> Risk Scenario</td>
       </tr>
     `;
   }
@@ -13509,7 +14058,7 @@ function renderGlidePathChart() {
 
 // Sync with live market data for Super Model
 async function syncSuperModelData() {
-  console.log('🔄 Syncing Super Model with live market data...');
+  console.log(' Syncing Super Model with live market data...');
 
   const button = document.getElementById('sync-super-model-btn');
   if (button) button.textContent = '⏳ Syncing...';
@@ -13531,7 +14080,7 @@ async function syncSuperModelData() {
     if (button) {
       button.textContent = '✅ Synced!';
       setTimeout(() => {
-        button.textContent = '🔄 Sync Live Market Data';
+        button.textContent = ' Sync Live Market Data';
       }, 2000);
     }
 
@@ -13542,7 +14091,7 @@ async function syncSuperModelData() {
     if (button) {
       button.textContent = '❌ Sync Failed';
       setTimeout(() => {
-        button.textContent = '🔄 Sync Live Market Data';
+        button.textContent = ' Sync Live Market Data';
       }, 2000);
     }
   }
@@ -13570,17 +14119,17 @@ function updateSuperModelMarketData() {
   } else if (marketContext.niftyPE > 22) {
     expectedReturn = 0.12;
     peSignal = 'Fair Value - Continue SIPs';
-    verdict = '🟡 Market Fair Value: Continue regular SIPs. Deploy 40% lump sum, STP 60% over 12 weeks.';
+    verdict = ' Market Fair Value: Continue regular SIPs. Deploy 40% lump sum, STP 60% over 12 weeks.';
     if (peSignalEl) peSignalEl.style.color = 'var(--you)';
   } else if (marketContext.niftyPE < 20) {
     expectedReturn = 0.15;
     peSignal = 'Undervalued - Opportunity';
-    verdict = '🟢 Market Undervalued: Aggressive accumulation phase. Deploy 60% lump sum now, STP 40% over 8 weeks.';
+    verdict = ' Market Undervalued: Aggressive accumulation phase. Deploy 60% lump sum now, STP 40% over 8 weeks.';
     if (peSignalEl) peSignalEl.style.color = 'var(--success)';
   } else {
     expectedReturn = 0.13;
     peSignal = 'Fair Value';
-    verdict = '📊 Systematic Pitch-In: Deploy 40% lump sum now. STP remaining 60% over 12 weeks to hedge volatility.';
+    verdict = ' Systematic Pitch-In: Deploy 40% lump sum now. STP remaining 60% over 12 weeks to hedge volatility.';
     if (peSignalEl) peSignalEl.style.color = 'var(--jt)';
   }
 
@@ -13634,7 +14183,7 @@ async function runSIPScenarioSimulation() {
   const currentSIP = config.yourSIP + config.wifeSIP;
   const newSIP = currentSIP * (1 + increasePercent / 100);
 
-  console.log(`🎲 Running scenario with SIP increased to ₹${newSIP.toLocaleString('en-IN')}`);
+  console.log(` Running scenario with SIP increased to ₹${newSIP.toLocaleString('en-IN')}`);
 
   // Temporarily override config
   const originalYourSIP = config.yourSIP;
@@ -13696,7 +14245,7 @@ async function runEarlyRetirementSimulation() {
   const retireAge = parseInt(document.getElementById('retire-age-slider').value);
   const yearsToGoal = retireAge - 32;
 
-  console.log(`🎲 Running scenario with retirement at age ${retireAge} (${yearsToGoal} years)`);
+  console.log(` Running scenario with retirement at age ${retireAge} (${yearsToGoal} years)`);
 
   // Temporarily override config
   const originalYears = monteCarloConfig.yearsToGoal;
@@ -13720,7 +14269,7 @@ async function runEarlyRetirementSimulation() {
 // ============================================================
 
 function renderFamilyPortfolio() {
-  console.log('👨‍👩‍👧‍👦 Rendering Family Portfolio (Unified)...');
+  console.log('‍‍‍ Rendering Family Portfolio (Unified)...');
 
   // Render allocation donut chart
   renderFamilyPortfolioDonut();
@@ -13824,11 +14373,11 @@ function renderFamilyProjectionTable() {
     const wifeAge = 30 + yearIndex;
 
     let milestone = '';
-    if (yearIndex === 0) milestone = '🚀 Start';
-    else if (yearIndex === 4) milestone = '🏠 Settled';
-    else if (yearIndex === 9) milestone = '👦 Child 1 Education';
-    else if (yearIndex === 14) milestone = '👧 Child 2 Education';
-    else if (yearIndex === 28) milestone = '🏖️ Retirement!';
+    if (yearIndex === 0) milestone = ' Start';
+    else if (yearIndex === 4) milestone = ' Settled';
+    else if (yearIndex === 9) milestone = ' Child 1 Education';
+    else if (yearIndex === 14) milestone = ' Child 2 Education';
+    else if (yearIndex === 28) milestone = '️ Retirement!';
 
     row.innerHTML = `
       <td>${yearData.year}</td>
@@ -13929,7 +14478,7 @@ function updateCreepScenario(creepRate) {
   } else {
     alertBox.style.background = 'rgba(239,68,68,0.05)';
     alertBox.style.borderLeftColor = 'var(--red)';
-    alertBox.querySelector('div').innerHTML = '🔴 DANGER ZONE';
+    alertBox.querySelector('div').innerHTML = ' DANGER ZONE';
     alertBox.querySelector('div').style.color = 'var(--red)';
     alertText.textContent = `At ${creepRate.toFixed(1)}% expense growth, you have HIGH lifestyle creep! Cost: ₹${opportunityCost.toFixed(1)} Cr lost, retirement delayed by ${yearsDelayed.toFixed(1)} years. URGENT ACTION NEEDED: Cut discretionary spending immediately!`;
     creepLabel.textContent = '(High creep - DANGER!)';
@@ -13946,7 +14495,7 @@ function updateCreepScenario(creepRate) {
 function runCreepSimulation() {
   const creepRate = parseFloat(document.getElementById('creep-rate-slider').value);
 
-  alert(`🔄 Running 28-year analysis with ${creepRate.toFixed(1)}% expense growth...\n\nChart and projections updated below!`);
+  alert(` Running 28-year analysis with ${creepRate.toFixed(1)}% expense growth...\n\nChart and projections updated below!`);
 
   renderCreepProjectionChart();
 }
@@ -13975,7 +14524,7 @@ function renderCreepProjectionChart() {
 
     if (monthTotal > 0) {
       currentExp = monthTotal;
-      console.log(`📊 Using actual expense tracker data: ₹${currentExp.toLocaleString()} this month`);
+      console.log(` Using actual expense tracker data: ₹${currentExp.toLocaleString()} this month`);
     }
   }
   let currentIncome = 300000; // ₹3L/month (₹36L CTC / 12)
@@ -14078,7 +14627,7 @@ function renderCreepProjectionChart() {
 let dailyExpenses = JSON.parse(localStorage.getItem('dailyExpenses')) || [];
 
 function renderExpenseTracker() {
-  console.log('💰 Rendering Expense Tracker...');
+  console.log(' Rendering Expense Tracker...');
 
   updateExpenseSummary();
   renderExpenseTable();
@@ -14312,6 +14861,573 @@ function clearAllExpenses() {
   renderExpenseCategoryChart();
 
   alert('✅ All expenses cleared!');
+}
+
+// ============================================================
+// APRIL 2026 UPGRADE — NEW FUNCTIONS
+// ============================================================
+
+// ─── 1. PORTFOLIO HEALTH SCORE ───────────────────────────────
+function calculateHealthScore() {
+  // Fixed scores for components that are already complete
+  var diversification = 25;   // 5 asset classes — full
+  var expenseQuality  = 20;   // avg ER <0.5% — full
+  var goalAlignment   = 20;   // corpus on track — full
+  var sinkingFunds    = 10;   // 12-mo emergency — full
+
+  // Insurance score depends on statuses saved in localStorage
+  var ins = loadInsuranceStatus();
+  var termDone    = ins.term    === 'completed' ? 1 : (ins.term    === 'progress' ? 0.5 : 0);
+  var healthDone  = ins.health  === 'completed' ? 1 : (ins.health  === 'progress' ? 0.5 : 0);
+  var parentsDone = ins.parents === 'completed' ? 1 : (ins.parents === 'progress' ? 0.5 : 0);
+  var insuranceScore = Math.round(((termDone * 8) + (healthDone * 5) + (parentsDone * 2)));
+  // Max insurance score = 15 (8+5+2)
+  insuranceScore = Math.min(15, insuranceScore);
+
+  var total = diversification + expenseQuality + goalAlignment + insuranceScore + sinkingFunds;
+  return {
+    total: total,
+    diversification: diversification,
+    expenseQuality: expenseQuality,
+    goalAlignment: goalAlignment,
+    insuranceScore: insuranceScore,
+    sinkingFunds: sinkingFunds
+  };
+}
+
+function renderHealthScore() {
+  var sc = calculateHealthScore();
+
+  // Update ring
+  var ringFill = document.getElementById('healthRingFill');
+  var scoreEl  = document.getElementById('healthScoreNum');
+  var gradeEl  = document.getElementById('healthGrade');
+  var insBarFill = document.getElementById('insuranceBarFill');
+  var insScoreEl = document.getElementById('insuranceScore');
+  var inlineEl   = document.getElementById('healthScoreInline');
+
+  if (!ringFill) return;
+
+  var circumference = 2 * Math.PI * 56; // r=56 → 351.86
+  var offset = circumference - (sc.total / 100) * circumference;
+  ringFill.setAttribute('stroke-dasharray', circumference.toFixed(2));
+
+  // Animate after a tiny delay
+  setTimeout(function() {
+    ringFill.style.strokeDashoffset = offset.toFixed(2);
+  }, 100);
+
+  if (scoreEl)  scoreEl.textContent = sc.total;
+  if (inlineEl) inlineEl.textContent = sc.total;
+
+  // Color ring based on score
+  if (sc.total >= 90) {
+    ringFill.classList.remove('gold','red-ring'); ringFill.classList.add('green');
+    if (gradeEl) { gradeEl.textContent = 'EXCELLENT ✅'; gradeEl.style.color = 'var(--jt2)'; }
+  } else if (sc.total >= 70) {
+    ringFill.classList.remove('green','red-ring'); ringFill.classList.add('gold');
+    if (gradeEl) { gradeEl.textContent = 'GOOD — Insurance Gap ⚠️'; gradeEl.style.color = 'var(--you)'; }
+  } else {
+    ringFill.classList.remove('green','gold'); ringFill.classList.add('red-ring');
+    if (gradeEl) { gradeEl.textContent = 'NEEDS ATTENTION 🔴'; gradeEl.style.color = 'var(--red)'; }
+  }
+
+  // Insurance bar
+  if (insBarFill) {
+    var pct = (sc.insuranceScore / 15) * 100;
+    insBarFill.style.width = pct + '%';
+    if (pct >= 100)       { insBarFill.style.background = 'var(--jt)'; }
+    else if (pct >= 50)   { insBarFill.style.background = 'var(--you)'; }
+    else                  { insBarFill.style.background = 'var(--red)'; }
+  }
+  if (insScoreEl) {
+    insScoreEl.textContent = sc.insuranceScore + '/15';
+    insScoreEl.className = 'health-item-score' + (sc.insuranceScore >= 15 ? ' full' : (sc.insuranceScore >= 8 ? ' partial' : ' low'));
+  }
+}
+
+// ─── 2. WEALTH MILESTONES TIMELINE ────────────────────────────
+function calculateMilestones() {
+  var milestones = [
+    { label: '₹25L',  crore: 0.25, emoji: '🌱' },
+    { label: '₹50L',  crore: 0.50, emoji: '🌿' },
+    { label: '₹1Cr',  crore: 1,    emoji: '🎯' },
+    { label: '₹5Cr',  crore: 5,    emoji: '⭐' },
+    { label: '₹10Cr', crore: 10,   emoji: '🚀' },
+    { label: '₹25Cr', crore: 25,   emoji: '💎' },
+    { label: '₹50Cr', crore: 50,   emoji: '👑' },
+    { label: '₹66Cr', crore: 66,   emoji: '🏆' }
+  ];
+
+  // Simulate corpus growth from Apr 2026 with 10% step-up, 12% CAGR
+  var startYear   = 2026;
+  var monthSIP    = 191200; // ₹1.91L
+  var cagr        = 0.12;
+  var stepupRate  = 0.10;
+  var corpus      = 0;
+  var currentAge  = 31;
+
+  var results = [];
+  var pendingMilestones = milestones.slice();
+
+  for (var yr = 0; yr < 30; yr++) {
+    var annualSIP   = monthSIP * (1 + stepupRate) ** yr;
+    var monthlyRate = cagr / 12;
+    // Grow existing corpus for 12 months
+    corpus = corpus * (1 + cagr) + annualSIP * (((1 + monthlyRate) ** 12 - 1) / monthlyRate);
+    var year = startYear + yr;
+    var age  = currentAge + yr;
+
+    // Check which milestones are crossed this year
+    var stillPending = [];
+    pendingMilestones.forEach(function(m) {
+      if (corpus >= m.crore * 1e7) {
+        results.push({ label: m.label, emoji: m.emoji, year: year, age: age, crore: m.crore });
+      } else {
+        stillPending.push(m);
+      }
+    });
+    pendingMilestones = stillPending;
+    if (pendingMilestones.length === 0) break;
+  }
+
+  // Add any still pending with estimated year
+  pendingMilestones.forEach(function(m) {
+    results.push({ label: m.label, emoji: m.emoji, year: '2054+', age: '60+', crore: m.crore });
+  });
+
+  return results;
+}
+
+function renderMilestones() {
+  var container = document.getElementById('milestonesContainer');
+  if (!container) return;
+
+  var milestones = calculateMilestones();
+  var currentYear = new Date().getFullYear();
+  var html = '';
+
+  milestones.forEach(function(m, i) {
+    var status = 'future';
+    if (typeof m.year === 'number') {
+      if (m.year < currentYear) status = 'achieved';
+      else if (m.year <= currentYear + 1) status = 'on-track';
+    }
+
+    if (i > 0) {
+      html += '<div class="milestone-line" style="animation-delay:' + (i * 0.1) + 's"></div>';
+    }
+
+    html += '<div class="milestone-node ' + status + '" style="animation-delay:' + (i * 0.12) + 's">';
+    html += '<div class="milestone-amount">' + m.label + '</div>';
+    html += '<div class="milestone-dot">' + m.emoji + '</div>';
+    html += '<div class="milestone-year">' + m.year + '</div>';
+    html += '<div class="milestone-age">Age ' + m.age + '</div>';
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+}
+
+// ─── 3. APRIL LAUNCH CHECKLIST ────────────────────────────────
+var CHECKLIST_IDS = [
+  'w1-1','w1-2','w1-3','w1-4','w1-5',
+  'w2-1','w2-2','w2-3','w2-4','w2-5',
+  'w3-1','w3-2','w3-3','w3-4',
+  'w4-1','w4-2','w4-3','w4-4','w4-5'
+];
+
+function initAprilLaunch() {
+  // Load checklist states
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem('aprilChecklist') || '{}'); } catch(e) {}
+
+  CHECKLIST_IDS.forEach(function(id) {
+    var chk  = document.getElementById('chk-' + id);
+    var item = document.getElementById('ci-' + id);
+    if (!chk || !item) return;
+    if (saved[id]) {
+      chk.checked = true;
+      item.classList.add('done');
+    }
+  });
+
+  updateChecklistProgress();
+  renderInsurancePanels();
+  updateAprilCountdown();
+}
+
+function toggleChecklistItem(id) {
+  var chk  = document.getElementById('chk-' + id);
+  var item = document.getElementById('ci-' + id);
+  if (!chk || !item) return;
+
+  chk.checked = !chk.checked;
+  if (chk.checked) { item.classList.add('done'); }
+  else             { item.classList.remove('done'); }
+
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem('aprilChecklist') || '{}'); } catch(e) {}
+  saved[id] = chk.checked;
+  localStorage.setItem('aprilChecklist', JSON.stringify(saved));
+
+  updateChecklistProgress();
+}
+
+function getChecklistProgress() {
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem('aprilChecklist') || '{}'); } catch(e) {}
+  var done  = CHECKLIST_IDS.filter(function(id) { return saved[id]; }).length;
+  var total = CHECKLIST_IDS.length;
+  return { done: done, total: total, pct: Math.round((done / total) * 100) };
+}
+
+function updateChecklistProgress() {
+  var p = getChecklistProgress();
+
+  // Update main progress bar (page-21 Section A)
+  var fillEl  = document.getElementById('launchProgressFill');
+  var pctEl   = document.getElementById('launchProgressPct');
+  var labelEl = document.getElementById('launchProgressLabel');
+  if (fillEl)  fillEl.style.width = p.pct + '%';
+  if (pctEl)   pctEl.textContent  = p.pct + '%';
+  if (labelEl) labelEl.textContent = p.done + ' of ' + p.total + ' checklist items completed';
+
+  // Update week counters
+  var weeks = {w1:[1,2,3,4,5],w2:[1,2,3,4,5],w3:[1,2,3,4],w4:[1,2,3,4,5]};
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem('aprilChecklist') || '{}'); } catch(e) {}
+  Object.keys(weeks).forEach(function(w) {
+    var el = document.getElementById(w + 'progress');
+    if (!el) return;
+    var done = weeks[w].filter(function(n) { return saved[w+'-'+n]; }).length;
+    el.textContent = done + '/' + weeks[w].length;
+    el.style.color = done === weeks[w].length ? 'var(--jt2)' : 'var(--ink3)';
+  });
+
+  // Also update alerts page counter
+  var alertCounter = document.getElementById('alertsActionsCounter');
+  if (alertCounter) alertCounter.textContent = p.done + '/' + p.total + ' actions done';
+}
+
+function updateAprilCountdown() {
+  var el    = document.getElementById('aprilCountdown');
+  var subEl = document.getElementById('aprilCountdownSub');
+  if (!el) return;
+
+  var aprilStart  = new Date('2026-04-01');
+  var today       = new Date();
+  var diff        = Math.floor((today - aprilStart) / (1000 * 60 * 60 * 24));
+
+  if (diff < 0) {
+    el.textContent    = Math.abs(diff) + ' days';
+    el.style.color    = 'var(--blue)';
+    if (subEl) subEl.textContent = 'until April 1, 2026 — SIP start date';
+  } else if (diff === 0) {
+    el.textContent    = '🚀 TODAY';
+    el.style.color    = 'var(--jt)';
+    if (subEl) subEl.textContent = 'April 1, 2026 — Launch day! Activate your SIPs!';
+  } else {
+    el.textContent    = diff + ' days';
+    el.style.color    = 'var(--jt)';
+    if (subEl) subEl.textContent = 'into your wealth journey (since Apr 1, 2026)';
+  }
+}
+
+// ─── 4. INSURANCE STATUS TRACKER ──────────────────────────────
+function loadInsuranceStatus() {
+  var defaults = { term: 'new', health: 'new', parents: 'new' };
+  try {
+    var saved = JSON.parse(localStorage.getItem('insuranceStatus') || '{}');
+    return Object.assign(defaults, saved);
+  } catch(e) { return defaults; }
+}
+
+function saveInsuranceStatus(type, status) {
+  var current = loadInsuranceStatus();
+  current[type] = status;
+  localStorage.setItem('insuranceStatus', JSON.stringify(current));
+  // Re-render both panels + health score
+  renderInsurancePanels();
+  renderAlertInsurancePanels();
+  renderHealthScore();
+}
+
+function buildInsuranceCard(type, cfg, status) {
+  var statusMap = {
+    'new':       { label: '🔴 NOT STARTED', cls: 'status-new',      dotCls: 'red' },
+    'progress':  { label: '🟡 IN PROGRESS', cls: 'status-progress',  dotCls: 'yellow' },
+    'completed': { label: '✅ COMPLETED',   cls: 'status-done',      dotCls: 'green' }
+  };
+  var s = statusMap[status] || statusMap['new'];
+
+  return '<div class="ins-panel ' + s.cls + '">' +
+    '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">' +
+      '<span class="status-dot ' + s.dotCls + '"></span>' +
+      '<span style="font-size:11px;font-weight:700;color:var(--ink)">' + cfg.title + '</span>' +
+    '</div>' +
+    '<div style="font-size:10px;color:var(--ink3);margin-bottom:4px">REQUIRED COVER</div>' +
+    '<div style="font-size:1rem;font-weight:700;color:var(--you);margin-bottom:8px">' + cfg.cover + '</div>' +
+    '<div style="font-size:10px;color:var(--ink3)">Provider: <span style="color:var(--ink2)">' + cfg.provider + '</span></div>' +
+    '<div style="font-size:10px;color:var(--ink3)">Est. Premium: <span style="color:var(--ink2)">' + cfg.premium + '</span></div>' +
+    '<div class="ins-status-toggle">' +
+      ['new','progress','completed'].map(function(st) {
+        var labels = {new:'Not Started', progress:'In Progress', completed:'Completed'};
+        var activeCls = st === status ? ' active-' + (st === 'new' ? 'red' : st === 'progress' ? 'yellow' : 'green') : '';
+        return '<button class="ins-btn' + activeCls + '" onclick="saveInsuranceStatus(\'' + type + '\',\'' + st + '\')">' + labels[st] + '</button>';
+      }).join('') +
+    '</div>' +
+    '<div style="margin-top:8px;font-size:10px;font-family:monospace;color:var(--ink3)">' + s.label + '</div>' +
+  '</div>';
+}
+
+function renderInsurancePanels() {
+  var container = document.getElementById('insurancePanels');
+  if (!container) return;
+  var status = loadInsuranceStatus();
+  var configs = {
+    term:    { title: '🛡️ Term Life Insurance',   cover: '₹5 Crore',  provider: 'HDFC Life Click2Protect', premium: '~₹15,000/year' },
+    health:  { title: '🏥 Family Health Insurance', cover: '₹20 Lakh',  provider: 'Niva Bupa / Star Health',  premium: '~₹25,000/year' },
+    parents: { title: '👴 Parents Health Insurance', cover: '₹10 Lakh', provider: 'Star Senior Citizen',       premium: '~₹40,000/year' }
+  };
+  var html = '';
+  Object.keys(configs).forEach(function(type) {
+    html += buildInsuranceCard(type, configs[type], status[type]);
+  });
+  container.innerHTML = html;
+}
+
+function renderAlertInsurancePanels() {
+  var container = document.getElementById('alertsInsurancePanels');
+  if (!container) return;
+  var status = loadInsuranceStatus();
+  var configs = {
+    term:    { title: '🛡️ Term Life Insurance',   cover: '₹5 Crore',  provider: 'HDFC Life Click2Protect', premium: '~₹15,000/year' },
+    health:  { title: '🏥 Family Health Insurance', cover: '₹20 Lakh',  provider: 'Niva Bupa / Star Health',  premium: '~₹25,000/year' },
+    parents: { title: '👴 Parents Health Insurance', cover: '₹10 Lakh', provider: 'Star Senior Citizen',       premium: '~₹40,000/year' }
+  };
+  var html = '';
+  Object.keys(configs).forEach(function(type) {
+    html += buildInsuranceCard(type, configs[type], status[type]);
+  });
+  container.innerHTML = html;
+  // Also update the actions counter
+  updateChecklistProgress();
+}
+
+// ─── 5. STEP-UP PLANNER ───────────────────────────────────────
+var FAMILY_FUNDS_STEPUP = [
+  { name: 'Nifty 50 Index',           sip: 60000  },
+  { name: 'Parag Parikh Flexi Cap',   sip: 18000  },
+  { name: 'Motilal Midcap',           sip: 38000  },
+  { name: 'Nippon Small Cap',         sip: 12000  },
+  { name: 'Motilal S&P 500',          sip: 25000  },
+  { name: 'HDFC Balanced Advantage',  sip: 12000  },
+  { name: 'HDFC Corporate Bond',      sip: 20000  },
+  { name: 'NPS Tier 1',               sip: 6200   }
+];
+var BASE_SIP   = 191200;
+var START_YEAR = 2026;
+var START_AGE  = 31;
+var CAGR       = 0.12;
+
+function projectedCorpus(baseSIP, years, stepupRate, cagr) {
+  var corpus = 0;
+  var monthlyRate = cagr / 12;
+  for (var yr = 0; yr < years; yr++) {
+    var annSIP = baseSIP * Math.pow(1 + stepupRate, yr);
+    corpus = corpus * (1 + cagr) + annSIP * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
+  }
+  return corpus;
+}
+
+function fmtCr(v) {
+  if (v >= 1e7) return '₹' + (v / 1e7).toFixed(1) + ' Cr';
+  if (v >= 1e5) return '₹' + (v / 1e5).toFixed(1) + ' L';
+  return '₹' + Math.round(v).toLocaleString('en-IN');
+}
+
+function renderStepupPlanner() {
+  var tbody = document.getElementById('stepupTableBody');
+  if (!tbody) return;
+
+  var html   = '';
+  var corpus = 0;
+  var cumInv = 0;
+  var totalInv   = 0;
+  var finalCorpus = 0;
+  var monthlyRate = CAGR / 12;
+
+  // Milestones
+  var sipMilestones = {2030: '₹2.5L/mo', 2036: '₹5L/mo', 2042: '₹10L/mo'};
+
+  for (var i = 0; i < 28; i++) {
+    var year   = START_YEAR + i;
+    var age    = START_AGE  + i;
+    var sip    = BASE_SIP * Math.pow(1.10, i);
+    var annInv = sip * 12;
+    cumInv    += annInv;
+    corpus     = corpus * (1 + CAGR) + annInv * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
+
+    totalInv    = cumInv;
+    finalCorpus = corpus;
+
+    var rowCls = '';
+    if (year <= 2030) rowCls = 'stepup-active';
+    else if (year <= 2040) rowCls = 'stepup-mid';
+    else rowCls = 'stepup-late';
+
+    if (sipMilestones[year]) rowCls += ' stepup-milestone';
+
+    html += '<tr class="' + rowCls + '">';
+    html += '<td>' + year + (sipMilestones[year] ? ' ⭐' : '') + '</td>';
+    html += '<td>Age ' + age + '</td>';
+    html += '<td>' + fmtCr(sip) + '/mo</td>';
+    html += '<td>' + fmtCr(annInv) + '</td>';
+    html += '<td>' + fmtCr(cumInv) + '</td>';
+    html += '<td>' + fmtCr(corpus) + '</td>';
+    html += '</tr>';
+  }
+
+  // Total row
+  html += '<tr class="ttr"><td>TOTAL</td><td>2026-2054</td><td>—</td>';
+  html += '<td>—</td><td>' + fmtCr(totalInv) + '</td><td>' + fmtCr(finalCorpus) + '</td></tr>';
+  tbody.innerHTML = html;
+
+  // Summary cards
+  var el1 = document.getElementById('stepupTotalInvested');
+  var el2 = document.getElementById('stepupCorpus');
+  var el3 = document.getElementById('stepupMultiplier');
+  if (el1) el1.textContent = fmtCr(totalInv);
+  if (el2) el2.textContent = fmtCr(finalCorpus);
+  if (el3) el3.textContent = (finalCorpus / totalInv).toFixed(1) + 'x';
+}
+
+function renderStepupPerFund() {
+  var tbody = document.getElementById('stepupPerFundBody');
+  if (!tbody) return;
+
+  var keyYears = [2026,2027,2028,2029,2030,2035,2040,2045,2054];
+  var html = '';
+
+  FAMILY_FUNDS_STEPUP.forEach(function(fund) {
+    html += '<tr><td>' + fund.name + '</td>';
+    keyYears.forEach(function(yr) {
+      var offset = yr - START_YEAR;
+      var sip = fund.sip * Math.pow(1.10, offset);
+      html += '<td>₹' + Math.round(sip/1000).toFixed(0) + 'K</td>';
+    });
+    html += '</tr>';
+  });
+
+  // Total row
+  html += '<tr class="ttr"><td>Total SIP</td>';
+  keyYears.forEach(function(yr) {
+    var offset = yr - START_YEAR;
+    var total = BASE_SIP * Math.pow(1.10, offset);
+    html += '<td>' + fmtCr(total) + '</td>';
+  });
+  html += '</tr>';
+  tbody.innerHTML = html;
+}
+
+function renderStepupImpactChart() {
+  var canvas = document.getElementById('stepupImpactChart');
+  if (!canvas) return;
+  if (chartInstances['stepupImpact']) {
+    chartInstances['stepupImpact'].destroy();
+    delete chartInstances['stepupImpact'];
+  }
+
+  var labels = [];
+  var dataFlat = [], data10 = [], data15 = [];
+  var monthlyRate = CAGR / 12;
+  var corpusFlat = 0, corpus10 = 0, corpus15 = 0;
+
+  for (var i = 0; i < 28; i++) {
+    var year = START_YEAR + i;
+    labels.push(year);
+
+    var sipFlat = BASE_SIP;
+    var sip10   = BASE_SIP * Math.pow(1.10, i);
+    var sip15   = BASE_SIP * Math.pow(1.15, i);
+    var annFlat = sipFlat * 12, ann10 = sip10 * 12, ann15 = sip15 * 12;
+
+    corpusFlat = corpusFlat * (1 + CAGR) + annFlat * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
+    corpus10   = corpus10   * (1 + CAGR) + ann10   * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
+    corpus15   = corpus15   * (1 + CAGR) + ann15   * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
+
+    dataFlat.push(+(corpusFlat / 1e7).toFixed(2));
+    data10.push(+(corpus10   / 1e7).toFixed(2));
+    data15.push(+(corpus15   / 1e7).toFixed(2));
+  }
+
+  // Update summary labels
+  var f0 = document.getElementById('stepupCorpusFlat');
+  var f1 = document.getElementById('stepupCorpus10');
+  var f2 = document.getElementById('stepupCorpus15');
+  if (f0) f0.textContent = '₹' + dataFlat[dataFlat.length-1].toFixed(1) + ' Cr';
+  if (f1) f1.textContent = '₹' + data10[data10.length-1].toFixed(1) + ' Cr';
+  if (f2) f2.textContent = '₹' + data15[data15.length-1].toFixed(1) + ' Cr';
+
+  chartInstances['stepupImpact'] = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'No Step-up (₹1.91L flat)', data: dataFlat, borderColor: 'var(--red)',  borderWidth: 2, pointRadius: 0, tension: 0.3, fill: false },
+        { label: '10% Step-up (Current Plan)', data: data10, borderColor: 'var(--you)',  borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
+        { label: '15% Step-up (Aggressive)',  data: data15, borderColor: 'var(--jt)',    borderWidth: 2, pointRadius: 0, tension: 0.3, fill: false }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#9aa2b0', font: { size: 11 } } },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ₹' + ctx.raw + ' Cr'; } } }
+      },
+      scales: {
+        x: { ticks: { color: '#50586a', font: { size: 10 } }, grid: { color: '#1e2228' } },
+        y: { ticks: { color: '#50586a', font: { size: 10 }, callback: function(v) { return '₹' + v + ' Cr'; } }, grid: { color: '#1e2228' } }
+      }
+    }
+  });
+}
+
+// ─── 6. SINCE-INCEPTION XIRR TRACKER ─────────────────────────
+function renderInceptionTracker() {
+  var firstSIPDate = new Date('2026-04-01');
+  var today        = new Date();
+
+  var daysEl     = document.getElementById('inceptionDays');
+  var deployedEl = document.getElementById('inceptionDeployed');
+  var subEl      = document.getElementById('inceptionDeployedSub');
+  var navEl      = document.getElementById('inceptionNAV');
+  var gainEl     = document.getElementById('inceptionGain');
+  var gainPctEl  = document.getElementById('inceptionGainPct');
+  var xirrEl     = document.getElementById('inceptionXIRR');
+
+  if (!daysEl) return;
+
+  var diffMs   = today - firstSIPDate;
+  var diffDays = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+  if (daysEl) daysEl.textContent = diffDays;
+
+  // Count invested months from yourInvestedMonths
+  var investedCount = 0;
+  if (typeof yourInvestedMonths !== 'undefined') {
+    investedCount = Object.values(yourInvestedMonths).filter(Boolean).length;
+  }
+
+  var totalDeployed = investedCount * 191200;
+  if (deployedEl) deployedEl.textContent = totalDeployed > 0 ? fmtCr(totalDeployed) : '₹0';
+  if (subEl) subEl.textContent = investedCount + ' months × ₹1.91L';
+
+  // NAV / Gain — if no live data, show placeholder
+  if (navEl)    navEl.textContent    = diffDays === 0 ? 'Not started' : '₹--';
+  if (gainEl)   gainEl.textContent   = '₹--';
+  if (gainPctEl) gainPctEl.textContent = 'Mark months invested above ↑';
+  if (xirrEl)   xirrEl.textContent   = investedCount < 1 ? '--' : '--%';
 }
 
 </script>
