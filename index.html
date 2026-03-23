@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -506,7 +507,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
             <svg width="130" height="130" viewBox="0 0 130 130">
               <circle class="ring-track" cx="65" cy="65" r="56"/>
               <circle class="ring-fill gold" id="healthRingFill" cx="65" cy="65" r="56"
-                stroke-dasharray="351.86" stroke-dashoffset="351.86"/>
+                stroke-dasharray="351.86" stroke-dashoffset="351.86" style="transition:none"/>
             </svg>
             <div class="ring-label">
               <div class="ring-score" id="healthScoreNum">--</div>
@@ -14912,10 +14913,16 @@ function renderHealthScore() {
   var offset = circumference - (sc.total / 100) * circumference;
   ringFill.setAttribute('stroke-dasharray', circumference.toFixed(2));
 
-  // Animate after a tiny delay
-  setTimeout(function() {
-    ringFill.style.strokeDashoffset = offset.toFixed(2);
-  }, 100);
+  // Force the "from" state via style so the browser registers it before transitioning.
+  // Double rAF ensures the initial paint happens before we set the target offset.
+  ringFill.style.transition = 'none';
+  ringFill.style.strokeDashoffset = circumference.toFixed(2);
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      ringFill.style.transition = 'stroke-dashoffset 1.2s ease';
+      ringFill.style.strokeDashoffset = offset.toFixed(2);
+    });
+  });
 
   if (scoreEl)  scoreEl.textContent = sc.total;
   if (inlineEl) inlineEl.textContent = sc.total;
