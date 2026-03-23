@@ -212,7 +212,6 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
 /* Milestone Timeline */
 .milestone-track{display:flex;overflow-x:auto;padding:20px 10px 16px;gap:0;position:relative;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-.milestone-connector{position:relative;display:flex;align-items:center;z-index:0}
 .milestone-line{height:2px;width:40px;background:linear-gradient(90deg,rgba(240,180,41,.3),rgba(240,180,41,.1));flex-shrink:0}
 .milestone-node{display:flex;flex-direction:column;align-items:center;min-width:110px;position:relative;z-index:1;animation:milestoneAppear .5s ease both}
 .milestone-dot{width:36px;height:36px;border-radius:50%;border:2px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:14px;margin:6px 0;transition:all .2s;flex-shrink:0}
@@ -4354,7 +4353,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <span style="font-size:11px;font-family:monospace;color:var(--you)" id="launchProgressPct">0%</span>
         </div>
         <div class="launch-progress-bar"><div class="launch-progress-fill" id="launchProgressFill" style="width:0%"></div></div>
-        <div style="font-size:10px;color:var(--ink3);margin-top:4px" id="launchProgressLabel">0 of 17 checklist items completed</div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:4px" id="launchProgressLabel">0 of 19 checklist items completed</div>
       </div>
       <div style="font-size:11px;color:var(--ink2);line-height:1.7">
         April 2026 is the starting gun. You're activating a ₹1.91L/month unified SIP across 8 carefully selected funds covering large-cap, mid-cap, small-cap, international, balanced, and debt categories — plus NPS. Simultaneously, you're securing your family's insurance safety net. This page is your command center.
@@ -4697,15 +4696,14 @@ function showPage(index) {
 
 function renderPageCharts(index) {
   if (index === 0) { renderDashboardCharts(); renderHealthScore(); renderMilestones(); }
-  if (index === 10) renderInceptionTracker();
-  if (index === 11) { renderAlertInsurancePanels(); }
-  if (index === 2) renderFamilyPortfolio(); // NEW: Family Portfolio page
+  if (index === 2) renderFamilyPortfolio();
   if (index === 3) renderRetirementCharts();
   if (index === 4) renderKidsCharts();
   if (index === 5) renderInvestmentCharts();
-  if (index === 6) renderTaxCalculator2026(); // Tax Optimizer page
-  if (index === 9) renderHistoricalChart(); // Historical (was 10)
-  if (index === 10) renderMonthlyProjections(); // Monthly Projections (was 11)
+  if (index === 6) renderTaxCalculator2026();
+  if (index === 9) renderHistoricalChart();
+  if (index === 10) { renderInceptionTracker(); renderMonthlyProjections(); }
+  if (index === 11) renderAlertInsurancePanels();
   if (index === 13) renderFundComparison(); // Fund Comparison (was 14)
   if (index === 14) renderPortfolioOverlap(); // Portfolio Overlap (was 15)
   if (index === 15) renderFundAnalysis(); // Fund Analysis (was 16)
@@ -5963,7 +5961,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   renderDashboardCharts();
   renderHealthScore();
   renderMilestones();
-  renderInceptionTracker();
   initializedPages.add(0); // Mark dashboard as initialized
 });
 
@@ -8354,11 +8351,11 @@ function calculateRetirementProjection() {
   const stepUpRate = config.annualStepUp || 10; // Annual step-up from Settings (default 10%)
 
   // USE ACTUAL PORTFOLIO-WEIGHTED RETURN based on historical fund performance
-  let expectedReturn = config.expectedReturn || 12; // Fallback to Settings value
+  let expectedReturn = config.expectedReturn || 12; // Fallback % (e.g. 12 means 12%)
   try {
-    const actualPortfolioReturn = calculatePortfolioExpectedReturn();
+    const actualPortfolioReturn = calculatePortfolioExpectedReturn(); // returns decimal e.g. 0.1173
     if (actualPortfolioReturn && !isNaN(actualPortfolioReturn)) {
-      expectedReturn = actualPortfolioReturn;
+      expectedReturn = actualPortfolioReturn * 100; // convert to % for use in formula below
       console.log(`✅ Using actual portfolio return: ${expectedReturn.toFixed(2)}% (not generic ${config.expectedReturn || 12}%)`);
     }
   } catch (e) {
@@ -10264,9 +10261,9 @@ function updateComparisonStats(funds) {
   }
 
   // Portfolio alpha (simplified - average alpha across funds)
-  const portfolioReturn = calculatePortfolioExpectedReturn();
-  const avgBenchmark = 13; // Simplified benchmark average
-  const alpha = (portfolioReturn - avgBenchmark).toFixed(2);
+  const portfolioReturn = calculatePortfolioExpectedReturn(); // decimal e.g. 0.1173
+  const avgBenchmark = 13; // Simplified benchmark average (%)
+  const alpha = ((portfolioReturn * 100) - avgBenchmark).toFixed(2);
   document.getElementById('comp-portfolio-alpha').textContent = (alpha >= 0 ? '+' : '') + alpha + '%';
   document.getElementById('comp-portfolio-alpha').style.color = alpha >= 0 ? 'var(--jt)' : 'var(--red)';
 }
@@ -15237,16 +15234,6 @@ var BASE_SIP   = 191200;
 var START_YEAR = 2026;
 var START_AGE  = 31;
 var CAGR       = 0.12;
-
-function projectedCorpus(baseSIP, years, stepupRate, cagr) {
-  var corpus = 0;
-  var monthlyRate = cagr / 12;
-  for (var yr = 0; yr < years; yr++) {
-    var annSIP = baseSIP * Math.pow(1 + stepupRate, yr);
-    corpus = corpus * (1 + cagr) + annSIP * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
-  }
-  return corpus;
-}
 
 function fmtCr(v) {
   if (v >= 1e7) return '₹' + (v / 1e7).toFixed(1) + ' Cr';
