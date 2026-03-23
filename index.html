@@ -4323,7 +4323,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="content">
 
     <!-- SECTION A: MISSION BRIEFING -->
-    <div class="sh"><span class="sh-n">A</span><h2>Mission Briefing</h2></div>
+    <div class="sh"><span class="sh-n">01</span><h2>Mission Briefing</h2></div>
     <div class="glass-card" style="margin-bottom:13px">
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:16px">
         <div class="metric-block">
@@ -4361,7 +4361,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- SECTION B: WEEK-BY-WEEK ACTION CHECKLIST -->
-    <div class="sh"><span class="sh-n">B</span><h2>Week-by-Week Action Checklist — April 2026</h2></div>
+    <div class="sh"><span class="sh-n">02</span><h2>Week-by-Week Action Checklist — April 2026</h2></div>
 
     <!-- Week 1 -->
     <div class="checklist-week">
@@ -4472,7 +4472,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- SECTION C: INSURANCE ACTION PANEL -->
-    <div class="sh"><span class="sh-n">C</span><h2>Insurance Action Panel</h2></div>
+    <div class="sh"><span class="sh-n">03</span><h2>Insurance Action Panel</h2></div>
 
     <div style="font-size:12px;color:var(--ink3);margin-bottom:10px">Track your insurance setup progress. Status changes update the Alerts page and Health Score.</div>
     <div id="insurancePanels" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
@@ -4487,7 +4487,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- SECTION D: SIP SETUP GUIDE -->
-    <div class="sh"><span class="sh-n">D</span><h2>SIP Setup Guide — 8 Funds</h2></div>
+    <div class="sh"><span class="sh-n">04</span><h2>SIP Setup Guide — 8 Funds</h2></div>
     <div class="card" style="margin-bottom:13px">
       <div class="ch3 y">STEP-BY-STEP: SETTING UP ON MFCENTRAL / GROWW / ZERODHA</div>
       <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:10px">
@@ -4554,7 +4554,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="content">
 
     <!-- SECTION A: 28-Year SIP Growth Table -->
-    <div class="sh"><span class="sh-n">A</span><h2>28-Year SIP Growth Table (10% Annual Step-up)</h2></div>
+    <div class="sh"><span class="sh-n">01</span><h2>28-Year SIP Growth Table (10% Annual Step-up)</h2></div>
     <div class="card" style="margin-bottom:13px;padding:10px 14px">
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px" id="stepupSummary">
         <div class="metric-block">
@@ -4596,7 +4596,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- SECTION B: Per-Fund Step-up Breakdown -->
-    <div class="sh" style="margin-top:20px"><span class="sh-n">B</span><h2>Per-Fund Step-up Breakdown</h2></div>
+    <div class="sh" style="margin-top:20px"><span class="sh-n">02</span><h2>Per-Fund Step-up Breakdown</h2></div>
     <div style="font-size:11px;color:var(--ink3);margin-bottom:10px">Monthly SIP per fund across key years. All funds step up at 10% annually — proportions remain constant.</div>
     <div class="tw">
       <table id="stepupPerFundTable">
@@ -4614,7 +4614,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- SECTION C: Step-up Impact Chart -->
-    <div class="sh" style="margin-top:20px"><span class="sh-n">C</span><h2>Step-up Impact — Why Discipline Matters</h2></div>
+    <div class="sh" style="margin-top:20px"><span class="sh-n">03</span><h2>Step-up Impact — Why Discipline Matters</h2></div>
     <div class="card" style="margin-bottom:13px">
       <div style="height:360px;position:relative">
         <canvas id="stepupImpactChart"></canvas>
@@ -6856,8 +6856,7 @@ const familyFunds = [
   { name: 'NPS Tier 1 Auto Choice Aggressive', schemeCode: 'NPS001', monthlySIP: 6200, stepUp: 10, purpose: 'Retirement - 80CCD Tax Benefit + Locked till 60', category: 'Hybrid', benchmark: 'Custom NPS Benchmark', expenseRatio: 0.09, owner: 'Shya (80CCD)', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } }
 ];
 
-// BACKWARD COMPATIBILITY: Keep old arrays for code that still references them
-// TODO: Eventually remove these and update all code to use familyFunds
+// BACKWARD COMPATIBILITY: yourFunds aliased to familyFunds
 const yourFunds = familyFunds; // Alias for backward compatibility
 const wifeFunds = []; // Empty - portfolio is now unified
 
@@ -7101,8 +7100,6 @@ function calculatePortfolioExpectedReturn() {
     assumptionBasedSIP: `₹${assumptionBasedSIP.toLocaleString()} (${((assumptionBasedSIP/totalSIP)*100).toFixed(1)}%)`,
     portfolioReturn: portfolioReturn.toFixed(2) + '%'
   });
-
-  console.table(fundBreakdown);
 
   // Return as decimal (0.1473) not percentage (14.73)
   return portfolioReturn / 100;
@@ -10481,7 +10478,6 @@ function updateComparisonChart() {
 }
 
 function sortTable(column) {
-  // TODO: Implement table sorting
   console.log('Sort by:', column);
 }
 
