@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -312,6 +311,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="tn" onclick="showPage(20)"> Expense Tracker</div>
   <div class="tn" onclick="showPage(21)">🚀 April Launch</div>
   <div class="tn" onclick="showPage(22)">📅 Step-up Planner</div>
+  <div class="tn" onclick="showPage(23)">🏦 Drawdown Plan</div>
 </div>
 
 <!-- PAGE 0: DASHBOARD -->
@@ -337,10 +337,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div style="background:rgba(239,68,68,0.1);padding:20px;border-radius:8px;margin-bottom:20px;border-left:4px solid var(--red)">
         <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--red)">CRITICAL GAPS:</div>
         <div style="font-size:12px;line-height:2;color:var(--ink)">
-           Term Life: ₹0 / ₹5 Cr required<br>
+           Term Life: ₹0 / ₹20 Cr required<br>
            Health Insurance: ₹0 / ₹20L required<br>
-           Total Cost: ₹3,350/month (1.8% of income)<br>
-           Impact on Goal: -₹2.1 Cr (still exceed target!)
+           Total Cost: ₹9,167/month (4.3% of household income)<br>
+           Impact on Goal: -₹5.8 Cr (still exceed target by 2.1x!)
         </div>
       </div>
 
@@ -386,6 +386,13 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div class="bc-lbl">MONTHLY INVESTMENTS</div>
       <div class="bc-items">
         <div class="bci"><div class="l">Family SIPs</div><div class="v aj" id="dash-family-sip">₹1.91L</div><div class="s">8 funds, unified portfolio</div></div>
+      </div>
+    </div>
+    <div class="bc">
+      <div class="bc-lbl">HOUSEHOLD CASHFLOW</div>
+      <div class="bc-items">
+        <div class="bci"><div class="l">Combined Income</div><div class="v aj" id="dash-combined-income">₹2.84L</div><div class="s">your net + wife gross</div></div>
+        <div class="bci"><div class="l">SIP Burden</div><div class="v aj" id="dash-sip-burden">67%</div><div class="s">of household income</div></div>
       </div>
     </div>
     <div class="bc">
@@ -546,7 +553,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
             </div>
           </div>
           <div style="margin-top:12px;padding:10px 12px;background:var(--red-s);border-left:3px solid var(--red);border-radius:4px;font-size:11px">
-            ⚠️ <strong>Action needed:</strong> Secure term life (₹5Cr) + health (₹20L) insurance in April 2026 to restore score to <strong>92/100</strong>. Update status on <em>🚀 April Launch</em> page.
+            ⚠️ <strong>Action needed:</strong> Secure term life (₹20Cr) + health (₹20L) insurance in April 2026 to restore score to <strong>92/100</strong>. Update status on <em>🚀 April Launch</em> page.
           </div>
         </div>
       </div>
@@ -565,15 +572,15 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="sh"><span class="sh-n">03</span><h2>&#128274; Insurance Calculator</h2></div>
     <div class="card d">
       <div class="ch3 d">INSURANCE REQUIREMENTS (CFP STANDARD)</div>
-      <div class="ml"><div class="d">Term Life Insurance<small>15x annual expenses (₹1.82L × 12 × 15)</small></div><div class="a aj">&#8377;5 Cr</div></div>
-      <div class="ml"><div class="d">Annual Premium (approx)<small>Age 32, non-smoker, 30-year term</small></div><div class="a ay">&#8377;15,000/year</div></div>
+      <div class="ml"><div class="d">Term Life Insurance<small>CFP standard: 20x annual income (₹36L CTC × 20)</small></div><div class="a aj">&#8377;20 Cr</div></div>
+      <div class="ml"><div class="d">Annual Premium (approx)<small>Age 31, non-smoker, 30-year term</small></div><div class="a ay">&#8377;65,000/year</div></div>
       <div class="ml"><div class="d">Health Insurance<small>Family floater (You + Wife + 1 Child)</small></div><div class="a aj">&#8377;20 Lakh</div></div>
       <div class="ml"><div class="d">Annual Premium (approx)</div><div class="a ay">&#8377;25,000/year</div></div>
       <div class="ml"><div class="d">Parents Health Insurance<small>Age 55-60, ₹10L coverage</small></div><div class="a aj">&#8377;10 Lakh</div></div>
       <div class="ml"><div class="d">Annual Premium (approx)</div><div class="a ay">&#8377;20,000/year</div></div>
-      <div class="tr"><div class="tl">Total Insurance Cost</div><div class="tv ar">&#8377;60,000/year</div></div>
-      <div class="tr"><div class="tl">Monthly Equivalent</div><div class="tv ar">&#8377;5,000/month</div></div>
-      <div style="margin-top:10px;padding:10px;background:rgba(232,80,64,.1);border-radius:5px;font-size:11px">&#128679; <strong>ACTION REQUIRED:</strong> Add insurance BEFORE starting new SIPs (April 2026). Total monthly outgo will be ₹1,77,400 (SIPs) + ₹5,000 (insurance) = ₹1,82,400/month.</div>
+      <div class="tr"><div class="tl">Total Insurance Cost</div><div class="tv ar">&#8377;1,10,000/year</div></div>
+      <div class="tr"><div class="tl">Monthly Equivalent</div><div class="tv ar">&#8377;9,167/month</div></div>
+      <div style="margin-top:10px;padding:10px;background:rgba(232,80,64,.1);border-radius:5px;font-size:11px">&#128679; <strong>ACTION REQUIRED:</strong> Add insurance BEFORE starting new SIPs (April 2026). Total monthly outgo: ₹1,91,200 (SIPs) + ₹9,167 (insurance) = ₹2,00,367/month. Still within combined household income.</div>
     </div>
 
     <div class="sh"><span class="sh-n">04</span><h2> Asset Allocation Health</h2></div>
@@ -637,8 +644,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
           <div style="margin-bottom:16px">
             <div style="font-size:11px;color:var(--ink3);margin-bottom:6px">Required Coverage</div>
-            <div style="font-size:2rem;font-weight:700;color:var(--red)" id="required-term-life">₹5 Cr</div>
-            <div style="font-size:10px;color:var(--ink2);margin-top:4px">10x annual income (₹36L CTC)</div>
+            <div style="font-size:2rem;font-weight:700;color:var(--red)" id="required-term-life">₹20 Cr</div>
+            <div style="font-size:10px;color:var(--ink2);margin-top:4px">20x annual income — CFP standard (₹36L CTC × 20)</div>
           </div>
 
           <div style="margin-bottom:16px">
@@ -647,16 +654,16 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
 
           <div style="background:rgba(239,68,68,0.05);padding:14px;border-radius:6px;margin-bottom:16px">
-            <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px">GAP: ₹5 Cr</div>
+            <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px">GAP: ₹20 Cr</div>
             <div style="font-size:11px;color:var(--ink2)">
-              <strong>Annual Premium:</strong> ~₹15,000/year (~₹1,250/month)<br>
-              <strong>Providers:</strong> HDFC Life, ICICI Pru, Max Life<br>
-              <strong>Deadline:</strong> Apply by March 15, 2026
+              <strong>Annual Premium:</strong> ~₹65,000/year (~₹5,417/month)<br>
+              <strong>Providers:</strong> HDFC Life Click2Protect, ICICI Pru iProtect, Max Life Smart Secure<br>
+              <strong>Deadline:</strong> Apply by April 15, 2026
             </div>
           </div>
 
           <div style="padding:12px;background:var(--bg3);border-radius:6px;font-size:10px;color:var(--ink2);line-height:1.6">
-            <strong>Why ₹5 Cr?</strong> Covers 14 years of family expenses (₹36L/year) even if you pass away tomorrow. Your family can maintain lifestyle while corpus grows.
+            <strong>Why ₹20 Cr?</strong> CFP standard: replaces 20 years of your income. If you pass away tomorrow with ₹0 corpus, ₹20 Cr at 6% returns = ₹1.2 Cr/year — family covered perpetually. ₹5 Cr only covers 14 years at current expenses.
           </div>
         </div>
       </div>
@@ -936,7 +943,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div id="emergency-fund-status" style="margin:12px 0"></div>
         <h3 style="margin-top:16px">Insurance Coverage</h3>
         <div class="field-row">
-          <span class="field-label">Life Insurance (Term) <small style="opacity:0.6">(e.g., 5,00,00,000 for ₹5 Cr)</small></span>
+          <span class="field-label">Life Insurance (Term) <small style="opacity:0.6">(e.g., 20,00,00,000 for ₹20 Cr)</small></span>
           <input class="field-input" id="s-life-insurance" type="text" value="0">
         </div>
         <div class="field-row">
@@ -4371,7 +4378,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
       <div class="checklist-item" id="ci-w1-1" onclick="toggleChecklistItem('w1-1')">
         <input type="checkbox" id="chk-w1-1" onclick="event.stopPropagation();toggleChecklistItem('w1-1')">
-        <span class="check-label">Research HDFC Life Click2Protect term plan (₹5Cr, 30-year)</span>
+        <span class="check-label">Research term plans (₹20Cr, 30-year): HDFC Life Click2Protect, ICICI Pru iProtect, Max Life Smart Secure</span>
       </div>
       <div class="checklist-item" id="ci-w1-2" onclick="toggleChecklistItem('w1-2')">
         <input type="checkbox" id="chk-w1-2" onclick="event.stopPropagation();toggleChecklistItem('w1-2')">
@@ -4653,6 +4660,172 @@ tr.milestone{background:rgba(240,180,41,.05)}
   </div>
 </div>
 
+<!-- PAGE 23: RETIREMENT DRAWDOWN PLAN -->
+<div class="page" id="page-23">
+  <div class="hdr">
+    <h1>🏦 Retirement <span>Drawdown Plan</span></h1>
+    <p>From wealth accumulation to wealth distribution — a CFP-grade decumulation strategy for your ₹66 Cr corpus at age 60.</p>
+  </div>
+  <div class="content">
+
+    <!-- SECTION 01: SWR SNAPSHOT -->
+    <div class="sh"><span class="sh-n">01</span><h2>Safe Withdrawal Rate Snapshot</h2></div>
+    <div class="alert success" style="font-size:12px">
+      ✅ At ₹66 Cr corpus, even a 4% SWR generates <strong>₹2.64 Cr/year (₹22L/month)</strong> — more than 2.5x your projected retirement expenses. You have significant flexibility.
+    </div>
+    <div class="g3" style="margin-bottom:13px">
+      <div class="card" style="border-left:4px solid var(--jt);text-align:center;padding:20px">
+        <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:8px">CONSERVATIVE (3% SWR)</div>
+        <div style="font-size:2rem;font-weight:700;color:var(--jt)" id="swr3-annual">₹1.98 Cr</div>
+        <div style="font-size:11px;color:var(--ink2);margin:4px 0">per year</div>
+        <div style="font-size:1.3rem;font-weight:700;color:var(--jt)" id="swr3-monthly">₹16.5L/mo</div>
+        <div style="margin-top:12px;font-size:10px;color:var(--ink3);line-height:1.6">Portfolio likely grows in real terms. Suitable if you want to leave a large inheritance or are uncertain about longevity.</div>
+      </div>
+      <div class="card glass-card" style="border-left:4px solid var(--you);text-align:center;padding:20px">
+        <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:8px">BALANCED (4% SWR) — RECOMMENDED</div>
+        <div style="font-size:2rem;font-weight:700;color:var(--you)" id="swr4-annual">₹2.64 Cr</div>
+        <div style="font-size:11px;color:var(--ink2);margin:4px 0">per year</div>
+        <div style="font-size:1.3rem;font-weight:700;color:var(--you)" id="swr4-monthly">₹22L/mo</div>
+        <div style="margin-top:12px;font-size:10px;color:var(--ink3);line-height:1.6">The Trinity Study standard. Historically survives 30+ year retirements. Corpus likely intact at age 90+.</div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--red);text-align:center;padding:20px">
+        <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:8px">AGGRESSIVE (5% SWR)</div>
+        <div style="font-size:2rem;font-weight:700;color:var(--red)" id="swr5-annual">₹3.30 Cr</div>
+        <div style="font-size:11px;color:var(--ink2);margin:4px 0">per year</div>
+        <div style="font-size:1.3rem;font-weight:700;color:var(--red)" id="swr5-monthly">₹27.5L/mo</div>
+        <div style="margin-top:12px;font-size:10px;color:var(--ink3);line-height:1.6">Higher spending risk. Corpus depletion possible if returns disappoint or you live past 90. Use only if health-constrained lifespan expected.</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:13px;padding:16px">
+      <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">CORPUS LONGEVITY AT DIFFERENT WITHDRAWAL RATES (starting ₹66 Cr, 7% real return)</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:12px" id="longevityTable">
+          <thead>
+            <tr style="border-bottom:1px solid var(--bdr)">
+              <th style="text-align:left;padding:8px 6px;color:var(--ink3);font-weight:600">SWR</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--ink3);font-weight:600">Annual Draw</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--ink3);font-weight:600">Monthly</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--ink3);font-weight:600">Corpus at Age 80</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--ink3);font-weight:600">Corpus at Age 90</th>
+              <th style="text-align:left;padding:8px 6px;color:var(--ink3);font-weight:600">Verdict</th>
+            </tr>
+          </thead>
+          <tbody id="longevityTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 02: THREE-BUCKET STRATEGY -->
+    <div class="sh"><span class="sh-n">02</span><h2>Three-Bucket Strategy</h2></div>
+    <div style="margin-bottom:8px;font-size:11px;color:var(--ink3)">Divide your ₹66 Cr corpus across three buckets at retirement. This eliminates sequence-of-returns risk — you never sell equity in a downturn.</div>
+    <div class="g3" style="margin-bottom:13px">
+      <!-- Bucket 1 -->
+      <div class="card" style="border-top:4px solid var(--jt)">
+        <div style="padding:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <div style="font-size:12px;font-weight:700;color:var(--jt)">BUCKET 1 — LIQUID</div>
+            <div class="status-dot green"></div>
+          </div>
+          <div style="font-size:2.2rem;font-weight:700;color:var(--jt);margin-bottom:4px" id="bucket1-amount">₹5.3 Cr</div>
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:12px">~8% of corpus · Years 1–2 of withdrawals</div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.8">
+            <strong>Where:</strong> Savings account, liquid MF, FD<br>
+            <strong>Returns:</strong> 4–6% (no market risk)<br>
+            <strong>Purpose:</strong> Covers 2 years of withdrawals immediately available. Never touched by market volatility.<br>
+            <strong>Refill:</strong> From Bucket 2 every 12–18 months.
+          </div>
+        </div>
+      </div>
+      <!-- Bucket 2 -->
+      <div class="card" style="border-top:4px solid var(--you)">
+        <div style="padding:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <div style="font-size:12px;font-weight:700;color:var(--you)">BUCKET 2 — STABLE</div>
+            <div class="status-dot yellow"></div>
+          </div>
+          <div style="font-size:2.2rem;font-weight:700;color:var(--you);margin-bottom:4px" id="bucket2-amount">₹13.2 Cr</div>
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:12px">~20% of corpus · Years 3–7 buffer</div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.8">
+            <strong>Where:</strong> Debt MFs, corporate bonds, dynamic bond funds<br>
+            <strong>Returns:</strong> 7–8% (low volatility)<br>
+            <strong>Purpose:</strong> Covers 5 years of withdrawals. Provides stability during equity downturns.<br>
+            <strong>Refill:</strong> From Bucket 3 every 3–5 years when equity markets are up.
+          </div>
+        </div>
+      </div>
+      <!-- Bucket 3 -->
+      <div class="card" style="border-top:4px solid var(--ab)">
+        <div style="padding:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <div style="font-size:12px;font-weight:700;color:var(--ab)">BUCKET 3 — GROWTH</div>
+            <div class="status-dot green"></div>
+          </div>
+          <div style="font-size:2.2rem;font-weight:700;color:var(--ab);margin-bottom:4px" id="bucket3-amount">₹47.5 Cr</div>
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:12px">~72% of corpus · Years 8+ growth engine</div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.8">
+            <strong>Where:</strong> Equity MFs, Nifty index, international funds<br>
+            <strong>Returns:</strong> 10–12% (long-term CAGR)<br>
+            <strong>Purpose:</strong> Funds all withdrawals beyond year 7. Continues growing to beat inflation.<br>
+            <strong>Refill:</strong> Never depleted — only periodically tops up Bucket 2.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:13px;padding:14px;background:var(--jt-s);border-left:3px solid var(--jt)">
+      <div style="font-size:11px;font-weight:700;margin-bottom:6px">The Key Insight: Never Sell Equity in a Downturn</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.7">When markets fall 30–40%, you live off Bucket 1 + Bucket 2 for up to 7 years. Bucket 3 recovers. When markets recover, you refill the buckets from equity gains. This eliminates the biggest retirement risk: being forced to sell at the bottom.</div>
+    </div>
+
+    <!-- SECTION 03: EQUITY GLIDE PATH -->
+    <div class="sh"><span class="sh-n">03</span><h2>Equity Glide Path — 2026 to 2060</h2></div>
+    <div style="margin-bottom:8px;font-size:11px;color:var(--ink3)">Gradually reduce equity exposure as you approach retirement. Lower volatility reduces the risk of a bad sequence of returns right before you need the money.</div>
+    <div class="card" style="margin-bottom:13px;padding:16px">
+      <canvas id="glidepathChart" height="220"></canvas>
+    </div>
+    <div class="card" style="margin-bottom:13px;padding:16px">
+      <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">REBALANCING SCHEDULE</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:12px" id="glidepathTable">
+          <thead>
+            <tr style="border-bottom:1px solid var(--bdr)">
+              <th style="text-align:left;padding:8px 6px;color:var(--ink3);font-weight:600">Year / Age</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--ink3);font-weight:600">Equity %</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--ink3);font-weight:600">Debt %</th>
+              <th style="text-align:left;padding:8px 6px;color:var(--ink3);font-weight:600">Action</th>
+            </tr>
+          </thead>
+          <tbody id="glidepathTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 04: WITHDRAWAL CALENDAR -->
+    <div class="sh"><span class="sh-n">04</span><h2>Retirement Income Planner</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card" style="padding:16px">
+        <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">PROJECTED MONTHLY EXPENSE NEEDS IN 2054</div>
+        <div class="ml"><div class="d">Current lifestyle expenses</div><div class="a ay">₹1,22,000/mo (2026)</div></div>
+        <div class="ml"><div class="d">Inflation at 6% for 28 years</div><div class="a ar">× 5.1x multiplier</div></div>
+        <div class="ml"><div class="d">Inflation-adjusted need (2054)</div><div class="a aj">₹6.2L/mo</div></div>
+        <div class="ml"><div class="d">4% SWR income available</div><div class="a aj">₹22L/mo</div></div>
+        <div class="tr"><div class="tl">Monthly Surplus</div><div class="tv aj">₹15.8L/mo</div></div>
+        <div style="margin-top:10px;font-size:10px;color:var(--jt2)">✅ SWR income is 3.5x your projected expenses. You can afford higher lifestyle, gifting, or travel.</div>
+      </div>
+      <div class="card" style="padding:16px">
+        <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">KEY RETIREMENT MILESTONES</div>
+        <div class="ml"><div class="d">SIP stop date</div><div class="a aj">March 2054 (age 60)</div></div>
+        <div class="ml"><div class="d">First withdrawal</div><div class="a aj">April 2054</div></div>
+        <div class="ml"><div class="d">Move to bucket strategy</div><div class="a aj">April 2054</div></div>
+        <div class="ml"><div class="d">NPS annuity purchase (40%)</div><div class="a ay">₹26.4 Cr → ₹2.11 Cr/year guaranteed</div></div>
+        <div class="ml"><div class="d">NPS lump sum (60%)</div><div class="a aj">₹39.6 Cr into buckets</div></div>
+        <div class="ml"><div class="d">First portfolio review post-retirement</div><div class="a ab">October 2054 (6 months in)</div></div>
+        <div style="margin-top:10px;font-size:10px;color:var(--ink3);line-height:1.7">Note: NPS corpus is separate from the ₹66 Cr equity/debt MF corpus. NPS provides a guaranteed annuity floor, while the main corpus handles the variable bucket strategy.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <script>
 // ============================================================
@@ -4718,6 +4891,7 @@ function renderPageCharts(index) {
   if (index === 20) renderExpenseTracker(); // Expense Tracker (was 21)
   if (index === 21) initAprilLaunch();    // April 2026 Launch Mission Control
   if (index === 22) { renderStepupPlanner(); renderStepupPerFund(); renderStepupImpactChart(); } // Step-up Planner
+  if (index === 23) { renderDecumulation(); renderGlidePath(); } // Drawdown Plan
 }
 
 function destroyChart(id) {
@@ -4810,6 +4984,15 @@ function updateDashboardBanner() {
 
   var dashNet = document.getElementById('dash-netpay');
   if (dashNet) dashNet.textContent = '\u20b9' + (config.netPay / 100000).toFixed(2) + 'L';
+
+  // Household cashflow metrics
+  var combinedIncome = (config.netPay || 213586) + (config.wifeGross || 70000);
+  var totalSIP = (config.yourSIP || 191200);
+  var sipBurdenPct = Math.round((totalSIP / combinedIncome) * 100);
+  var dashCombined = document.getElementById('dash-combined-income');
+  var dashBurden   = document.getElementById('dash-sip-burden');
+  if (dashCombined) dashCombined.textContent = '\u20b9' + (combinedIncome / 100000).toFixed(2) + 'L';
+  if (dashBurden)   dashBurden.textContent   = sipBurdenPct + '%';
 
   // Calculate and update retirement corpus projection
   try {
@@ -8566,7 +8749,7 @@ function calculateEmergencyFundAdequacy() {
 // ============== INSURANCE ADEQUACY CALCULATIONS ==============
 
 function calculateInsuranceAdequacy() {
-  // Life Insurance: 15x annual expenses (conservative CFP standard)
+  // Life Insurance: 20x annual income (CFP standard)
   const monthlyExpenses = (config.rent || 0) + (config.parents || 0) +
                           (config.fixedExpenses || 0) + (config.livingExpenses || 0);
   const annualExpenses = monthlyExpenses * 12;
@@ -8716,7 +8899,7 @@ function renderInsuranceAdequacy() {
   if (ins.life.gap > 0) {
     html += `<div class="alert danger"> <strong>Life Insurance Gap: ₹${(ins.life.gap / 10000000).toFixed(1)} Cr</strong><br>`;
     html += `Required: ₹${(ins.life.required / 10000000).toFixed(1)} Cr | Current: ₹${(ins.life.current / 10000000).toFixed(1)} Cr | Coverage: ${ins.life.adequacy}%<br>`;
-    html += ` Get term insurance immediately. Cost: ~₹12-15K/year for ₹5 Cr at age 32.</div>`;
+    html += ` Get term insurance immediately. CFP standard: ₹20 Cr at age 31. Cost: ~₹65K/year. Even ₹10 Cr is far better than ₹0 — start somewhere.</div>`;
   } else if (ins.life.current > 0) {
     html += `<div class="alert success">✅ Life Insurance: Adequate (₹${(ins.life.current / 10000000).toFixed(1)} Cr)</div>`;
   }
@@ -15190,7 +15373,7 @@ function renderInsurancePanels() {
   if (!container) return;
   var status = loadInsuranceStatus();
   var configs = {
-    term:    { title: '🛡️ Term Life Insurance',   cover: '₹5 Crore',  provider: 'HDFC Life Click2Protect', premium: '~₹15,000/year' },
+    term:    { title: '🛡️ Term Life Insurance',   cover: '₹20 Crore', provider: 'HDFC Life Click2Protect / Max Life Smart Secure', premium: '~₹65,000/year' },
     health:  { title: '🏥 Family Health Insurance', cover: '₹20 Lakh',  provider: 'Niva Bupa / Star Health',  premium: '~₹25,000/year' },
     parents: { title: '👴 Parents Health Insurance', cover: '₹10 Lakh', provider: 'Star Senior Citizen',       premium: '~₹40,000/year' }
   };
@@ -15206,7 +15389,7 @@ function renderAlertInsurancePanels() {
   if (!container) return;
   var status = loadInsuranceStatus();
   var configs = {
-    term:    { title: '🛡️ Term Life Insurance',   cover: '₹5 Crore',  provider: 'HDFC Life Click2Protect', premium: '~₹15,000/year' },
+    term:    { title: '🛡️ Term Life Insurance',   cover: '₹20 Crore', provider: 'HDFC Life Click2Protect / Max Life Smart Secure', premium: '~₹65,000/year' },
     health:  { title: '🏥 Family Health Insurance', cover: '₹20 Lakh',  provider: 'Niva Bupa / Star Health',  premium: '~₹25,000/year' },
     parents: { title: '👴 Parents Health Insurance', cover: '₹10 Lakh', provider: 'Star Senior Citizen',       premium: '~₹40,000/year' }
   };
@@ -15424,6 +15607,144 @@ function renderInceptionTracker() {
   if (gainEl)   gainEl.textContent   = '₹--';
   if (gainPctEl) gainPctEl.textContent = 'Mark months invested above ↑';
   if (xirrEl)   xirrEl.textContent   = investedCount < 1 ? '--' : '--%';
+}
+
+// ─── DECUMULATION — PAGE 23 ─────────────────────────────────
+
+function renderDecumulation() {
+  var corpus = 660000000; // ₹66 Cr in rupees (default)
+  // Try to pull from last retirement projection
+  try {
+    var rd = calculateRetirementProjection();
+    if (rd && rd.length > 0) corpus = rd[rd.length - 1].corpus;
+  } catch(e) {}
+
+  var corpusCr = corpus / 10000000;
+
+  // SWR cards
+  var swrRates = [0.03, 0.04, 0.05];
+  var ids = [['swr3-annual','swr3-monthly'],['swr4-annual','swr4-monthly'],['swr5-annual','swr5-monthly']];
+  swrRates.forEach(function(r, i) {
+    var annual   = corpus * r;
+    var monthly  = annual / 12;
+    var annualEl = document.getElementById(ids[i][0]);
+    var moEl     = document.getElementById(ids[i][1]);
+    if (annualEl) annualEl.textContent = fmtCr(annual);
+    if (moEl)     moEl.textContent     = '₹' + Math.round(monthly / 100000).toFixed(1) + 'L/mo';
+  });
+
+  // Bucket sizes (4% SWR = ₹2.64Cr/yr)
+  var annualSWR = corpus * 0.04;
+  var b1 = annualSWR * 2;        // 2 years liquid
+  var b2 = annualSWR * 5;        // 5 years stable
+  var b3 = corpus - b1 - b2;    // remainder growth
+  ['bucket1-amount','bucket2-amount','bucket3-amount'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = fmtCr([b1,b2,b3][i]);
+  });
+
+  // Longevity table (7% real return post-retirement)
+  var tbody = document.getElementById('longevityTableBody');
+  if (tbody) {
+    var rows = [
+      { rate: '3%',  r: 0.03 },
+      { rate: '4%',  r: 0.04 },
+      { rate: '5%',  r: 0.05 },
+      { rate: '6%',  r: 0.06 }
+    ];
+    var realReturn = 0.07;
+    tbody.innerHTML = rows.map(function(row) {
+      var annual = corpus * row.r;
+      var monthly = Math.round(annual / 12 / 100000).toFixed(1);
+      // Corpus after 20y (age 80) and 30y (age 90)
+      function projectCorpus(yrs) {
+        var c = corpus;
+        for (var y = 0; y < yrs; y++) { c = c * (1 + realReturn) - annual; if (c < 0) return 0; }
+        return c;
+      }
+      var at80 = projectCorpus(20);
+      var at90 = projectCorpus(30);
+      var verdict = at90 > corpus * 0.5 ? '<span style="color:var(--jt)">✅ Perpetual</span>'
+                  : at90 > 0            ? '<span style="color:var(--you)">⚠️ Safe to 90+</span>'
+                  :                       '<span style="color:var(--red)">🔴 Risky</span>';
+      var bg = row.rate === '4%' ? 'background:rgba(246,173,85,0.06)' : '';
+      return '<tr style="border-bottom:1px solid var(--bdr);' + bg + '">' +
+        '<td style="padding:8px 6px;font-family:monospace;font-weight:700">' + row.rate + '</td>' +
+        '<td style="padding:8px 6px;text-align:right">' + fmtCr(annual) + '</td>' +
+        '<td style="padding:8px 6px;text-align:right;font-family:monospace">₹' + monthly + 'L</td>' +
+        '<td style="padding:8px 6px;text-align:right">' + (at80 > 0 ? fmtCr(at80) : '—') + '</td>' +
+        '<td style="padding:8px 6px;text-align:right">' + (at90 > 0 ? fmtCr(at90) : '—') + '</td>' +
+        '<td style="padding:8px 6px">' + verdict + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // Glide path table
+  var gtbody = document.getElementById('glidepathTableBody');
+  if (gtbody) {
+    var schedule = [
+      { year: 2026, age: 31, eq: 75, debt: 25, action: 'Start — accumulation phase (75/25)' },
+      { year: 2030, age: 35, eq: 75, debt: 25, action: 'Maintain 75/25 — still 24 years to go' },
+      { year: 2036, age: 41, eq: 70, debt: 30, action: 'First taper: reduce equity 5% → 70/30' },
+      { year: 2040, age: 45, eq: 65, debt: 35, action: 'Mid-life review: 65/35' },
+      { year: 2044, age: 49, eq: 60, debt: 40, action: '10 years to retirement: 60/40' },
+      { year: 2048, age: 53, eq: 55, debt: 45, action: 'Pre-retirement caution: 55/45' },
+      { year: 2052, age: 57, eq: 45, debt: 55, action: 'Final approach: move majority to debt' },
+      { year: 2054, age: 60, eq: 40, debt: 60, action: 'Retirement day: activate bucket strategy' },
+      { year: 2060, age: 66, eq: 35, debt: 65, action: 'Post-retirement: maintain 35% for longevity' }
+    ];
+    gtbody.innerHTML = schedule.map(function(row) {
+      var eqColor = row.eq >= 70 ? 'var(--jt)' : row.eq >= 50 ? 'var(--you)' : 'var(--ab)';
+      return '<tr style="border-bottom:1px solid var(--bdr)">' +
+        '<td style="padding:8px 6px;font-weight:600">' + row.year + ' / Age ' + row.age + '</td>' +
+        '<td style="padding:8px 6px;text-align:right;font-weight:700;font-family:monospace;color:' + eqColor + '">' + row.eq + '%</td>' +
+        '<td style="padding:8px 6px;text-align:right;font-family:monospace;color:var(--ab)">' + row.debt + '%</td>' +
+        '<td style="padding:8px 6px;font-size:11px;color:var(--ink2)">' + row.action + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+}
+
+function renderGlidePath() {
+  destroyChart('glidepathChart');
+  var canvas = document.getElementById('glidepathChart');
+  if (!canvas) return;
+
+  var years  = [2026,2030,2036,2040,2044,2048,2052,2054,2060];
+  var equity = [75,   75,  70,  65,  60,  55,  45,  40,  35];
+  var debt   = equity.map(function(e) { return 100 - e; });
+
+  chartInstances['glidepathChart'] = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        { label: 'Equity %', data: equity, borderColor: 'rgba(246,173,85,1)', backgroundColor: 'rgba(246,173,85,0.08)', borderWidth: 2.5, pointRadius: 5, pointBackgroundColor: 'rgba(246,173,85,1)', tension: 0.3, fill: true },
+        { label: 'Debt %',   data: debt,   borderColor: 'rgba(99,179,237,1)',  backgroundColor: 'rgba(99,179,237,0.05)',  borderWidth: 2,   pointRadius: 4, pointBackgroundColor: 'rgba(99,179,237,1)', tension: 0.3, fill: true }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#9aa2b0', font: { size: 11 } } },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + ctx.raw + '%'; } } },
+        annotation: {
+          annotations: {
+            retireLine: {
+              type: 'line',
+              xMin: '2054', xMax: '2054',
+              borderColor: 'rgba(239,68,68,0.5)', borderWidth: 1.5, borderDash: [5,4],
+              label: { content: 'Retirement', enabled: true, color: '#ef4444', font: { size: 10 } }
+            }
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#50586a', font: { size: 10 } }, grid: { color: '#1e2228' } },
+        y: { min: 0, max: 100, ticks: { color: '#50586a', font: { size: 10 }, callback: function(v) { return v + '%'; } }, grid: { color: '#1e2228' } }
+      }
+    }
+  });
 }
 
 </script>
