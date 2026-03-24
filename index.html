@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -734,6 +735,37 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- SECTION 04: PORTFOLIO GAPS -->
+    <div class="sh"><span class="sh-n">04</span><h2>Portfolio Gap Alerts</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <!-- Gold SGB Alert -->
+      <div class="card" style="border-left:4px solid #f59e0b;padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-size:12px;font-weight:700;color:#f59e0b">⚠️ MISSING: GOLD ALLOCATION</div>
+          <div style="font-size:10px;font-family:monospace;padding:3px 8px;border-radius:10px;background:rgba(245,158,11,0.1);color:#f59e0b">CFP GAP</div>
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.8;margin-bottom:12px">
+          <strong>Recommended:</strong> 5% of portfolio in gold<br>
+          <strong>Monthly SIP needed:</strong> ~₹9,560/month (5% of ₹1.91L)<br>
+          <strong>Best vehicle:</strong> Sovereign Gold Bonds (SGBs) — 2.5% interest + price appreciation + <em>tax-free at maturity</em><br>
+          <strong>Why gold:</strong> Uncorrelated to equity. When Nifty crashes, gold often rises. Rupee depreciation hedge.
+        </div>
+        <div style="padding:10px 12px;background:rgba(245,158,11,0.07);border-radius:4px;font-size:10px;color:#f59e0b">
+          SGB Issue: RBI issues tranches periodically. Next tranche — watch RBI calendar. Alternative: Gold ETF (0.3% ER) for monthly SIP.
+        </div>
+      </div>
+      <!-- US Concentration Alert — rendered dynamically -->
+      <div class="card" style="padding:16px" id="usConcentrationCard">
+        <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:8px">US EQUITY CONCENTRATION ANALYSIS</div>
+        <div id="usConcentrationContent" style="font-size:11px;color:var(--ink2)">Calculating...</div>
+      </div>
+    </div>
+
+    <!-- Wife SIP note -->
+    <div class="card" style="margin-bottom:13px;padding:14px;background:var(--jt-s);border-left:3px solid var(--jt);font-size:11px">
+      <strong>Household SIP Funding Clarification:</strong> The ₹1.91L/month SIPs are funded from <em>combined</em> household income (your ₹2.14L net + wife's contribution from her ₹70K gross), not solely from your net pay. SIP burden is <strong>~67% of combined income</strong> — not the alarming 89% it appears when viewed against your income alone. Wife's SIPs are in her account for separate LTCG exemption (₹1.25L/person/year).
     </div>
 
   </div>
@@ -1844,6 +1876,144 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
       </div>
     </div>
+
+    <!-- SECTION 04: LTCG HARVEST TRACKER -->
+    <div class="sh"><span class="sh-n">04</span><h2>LTCG Annual Harvest Calendar</h2></div>
+    <div class="alert info" style="font-size:12px">
+      💡 <strong>Tax Harvesting Strategy:</strong> Every January, sell equity MF units to realize exactly ₹1.25L in gains per person (₹2.5L for the couple) — then immediately reinvest. This books gains tax-free under the annual LTCG exemption, resetting your cost basis. Over 28 years, this saves an estimated <strong>₹12–18L in taxes</strong>.
+    </div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card" style="padding:16px">
+        <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">HOW MUCH TO SELL EACH JANUARY</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.9;margin-bottom:12px">
+          <strong>Formula:</strong> Amount to sell = ₹1.25L ÷ Gain% on that fund<br>
+          <strong>Example:</strong> Fund has ₹5L corpus, grew 25% from ₹4L invested → gain% = 20%<br>
+          → Sell ₹1.25L ÷ 20% = <strong>₹6.25L worth of units</strong> to realize ₹1.25L gain<br>
+          → Immediately reinvest ₹6.25L in the same fund at new NAV<br>
+          → Cost basis resets from ₹5L → ₹6.25L. Future gains are smaller.
+        </div>
+        <div style="padding:10px 12px;background:var(--jt-s);border-radius:4px;font-size:11px;border-left:3px solid var(--jt)">
+          ✅ LTCG @ 12.5% above ₹1.25L exemption (Budget 2024). Debt MFs taxed at slab rate — no harvest benefit for debt funds.
+        </div>
+      </div>
+      <div class="card" style="padding:16px">
+        <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">ANNUAL HARVEST CALENDAR</div>
+        <div class="ml"><div class="d">Harvest window</div><div class="a aj">January 1–31 every year</div></div>
+        <div class="ml"><div class="d">Exemption per person</div><div class="a aj">₹1,25,000/year</div></div>
+        <div class="ml"><div class="d">Couple exemption (combined)</div><div class="a aj">₹2,50,000/year</div></div>
+        <div class="ml"><div class="d">Your equity funds eligible</div><div class="a ay">6 funds (not debt/NPS)</div></div>
+        <div class="ml"><div class="d">Best fund to harvest</div><div class="a aj">Highest gain% fund first</div></div>
+        <div class="ml"><div class="d">Tax saved per year (est.)</div><div class="a aj">₹31,250 (12.5% of ₹2.5L)</div></div>
+        <div class="tr"><div class="tl">28-year total tax saved</div><div class="tv aj">~₹8.75L (+ compounding benefit)</div></div>
+      </div>
+    </div>
+    <!-- Step-by-step playbook -->
+    <div class="card" style="margin-bottom:13px;padding:16px">
+      <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:14px">STEP-BY-STEP HARVEST PLAYBOOK — DO THIS EVERY JANUARY</div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="min-width:28px;height:28px;border-radius:50%;background:var(--you);color:#000;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">1</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;margin-bottom:4px">Open Kuvera / Groww → Portfolio → Fund-wise P&L</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.7">Go to each equity fund. Note two numbers: <strong>Current Value</strong> and <strong>Invested Amount</strong>. The difference is your unrealized gain.<br>
+            <em>Skip: HDFC Corp Bond (debt — taxed at slab, no benefit) and NPS (locked).</em></div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="min-width:28px;height:28px;border-radius:50%;background:var(--you);color:#000;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">2</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;margin-bottom:4px">Pick the fund with the HIGHEST gain% — harvest that first</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+            <strong>Formula:</strong> Gain% = (Current Value − Invested) ÷ Invested<br>
+            <strong>Units to sell</strong> = ₹1,25,000 ÷ Gain%<br>
+            <em>Example: Nifty 50 SIP value ₹8L, invested ₹6L → Gain = ₹2L, Gain% = 33% → Sell ₹1,25,000 ÷ 33% = <strong>₹3,78,787 worth of units</strong></em><br>
+            ⚠️ Only units held <strong>&gt;12 months qualify as LTCG</strong>. Kuvera shows holding period — filter for LTCG units only.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="min-width:28px;height:28px;border-radius:50%;background:var(--you);color:#000;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">3</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;margin-bottom:4px">Redeem → Enter amount → Confirm</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.7">In Kuvera: <em>Transact → Redeem → Enter ₹3,78,787 → Select bank → Confirm</em>.<br>
+            Redemption settles in <strong>T+2 or T+3 working days</strong>. Money hits your bank account.<br>
+            <strong>Note the date, NAV, and units sold</strong> — screenshot this confirmation screen.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="min-width:28px;height:28px;border-radius:50%;background:var(--you);color:#000;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">4</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;margin-bottom:4px">Immediately reinvest the SAME amount in the SAME fund</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+            In Kuvera: <em>Transact → Invest → Lump Sum → Same fund → ₹3,78,787 → Confirm</em>.<br>
+            This resets your cost basis to the new (higher) NAV. Future gains on these units will be smaller, meaning less future tax.<br>
+            ⚠️ <strong>Do NOT wait</strong> — reinvest the same day or next day. NAV difference is irrelevant. The goal is cost basis reset.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="min-width:28px;height:28px;border-radius:50%;background:var(--you);color:#000;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">5</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;margin-bottom:4px">Repeat for wife's account (separate ₹1.25L exemption)</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+            Wife's SIPs are in her Kuvera account. Same process — sell the highest gain% fund in <em>her</em> account to realize her ₹1.25L exemption.<br>
+            Combined household books ₹2.5L tax-free gains = <strong>₹31,250 saved per year</strong> at 12.5% LTCG rate.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="min-width:28px;height:28px;border-radius:50%;background:var(--jt);color:#000;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">6</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;margin-bottom:4px;color:var(--jt)">Save documents — ITR filing needs these</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+            Download from Kuvera → Reports → Capital Gains Statement (FY April–March).<br>
+            <strong>What to save:</strong> Transaction confirmation PDFs, Capital Gains statement for the FY, AIS (Annual Information Statement) from IT portal — verify LTCG entry matches.<br>
+            In ITR-2: <em>Schedule CG → Section 112A → Enter each fund redemption → Claim ₹1.25L exemption</em>.<br>
+            ⚠️ File before July 31 of that year. Late filing = interest on any tax due.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="min-width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">!</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;margin-bottom:4px;color:var(--red)">Common Mistakes — Avoid These</div>
+            <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+            ❌ Selling units held &lt;12 months → STCG at 20%, not LTCG (no exemption)<br>
+            ❌ Selling debt MF units → No LTCG benefit, taxed at your slab (30%)<br>
+            ❌ Not reinvesting immediately → You lose market time and the SIP deduction rhythm<br>
+            ❌ Harvesting in March instead of January → Risk of missing year-end if markets move fast<br>
+            ❌ Harvesting gains &gt; ₹1.25L per person → Excess taxed at 12.5%, no point<br>
+            ❌ Not doing it at all → Paying 12.5% on gains you could have booked tax-free every year</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:13px;padding:16px">
+      <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">LTCG HARVEST SCHEDULE — YEAR BY YEAR (estimated)</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:11px" id="ltcgHarvestTable">
+          <thead>
+            <tr style="border-bottom:1px solid var(--bdr)">
+              <th style="text-align:left;padding:7px 6px;color:var(--ink3)">Year</th>
+              <th style="text-align:right;padding:7px 6px;color:var(--ink3)">Est. Corpus</th>
+              <th style="text-align:right;padding:7px 6px;color:var(--ink3)">Est. Gain%</th>
+              <th style="text-align:right;padding:7px 6px;color:var(--ink3)">Units to Sell (You)</th>
+              <th style="text-align:right;padding:7px 6px;color:var(--ink3)">Units to Sell (Wife)</th>
+              <th style="text-align:right;padding:7px 6px;color:var(--ink3)">Tax Saved</th>
+            </tr>
+          </thead>
+          <tbody id="ltcgHarvestBody"></tbody>
+        </table>
+      </div>
+      <div style="margin-top:10px;font-size:10px;color:var(--ink3)">Note: Sell from <em>your</em> account first (harvest your ₹1.25L), then wife's account separately. Keep records — ITR filing needs purchase/sale dates.</div>
+    </div>
+
   </div>
 </div>
 
@@ -4556,12 +4726,24 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="hdr">
     <div class="htag">ANNUAL STEP-UP PLANNER · 28 YEARS</div>
     <h1>📅 Step-up <span>SIP Planner 2026–2054</span></h1>
-    <p>10% ANNUAL STEP-UP · ₹1.91L BASE · TARGET ₹66 CRORE</p>
+    <p>TIERED STEP-UP 10%→7%→5% · ₹1.91L BASE · 9% CAGR (CONSERVATIVE)</p>
   </div>
   <div class="content">
 
+    <!-- CAGR DEVIATION CARD — rendered by renderCAGRDeviation() -->
+    <div class="card glass-card" style="margin-bottom:13px;padding:16px" id="cagrDeviationCard">
+      <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">RETURN ASSUMPTION vs ANALYSIS — HOW FAR OFF ARE WE?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px" id="cagrDeviationGrid">
+        <div class="metric-block"><div class="mb-label">Analysis CAGR</div><div class="mb-value" id="cagr-analysis">--%</div><div class="mb-sub">Weighted actual (real data)</div></div>
+        <div class="metric-block"><div class="mb-label">Base Assumption</div><div class="mb-value" style="color:var(--you)">9.0%</div><div class="mb-sub">Conservative floor</div></div>
+        <div class="metric-block"><div class="mb-label">Deviation</div><div class="mb-value" id="cagr-deviation">--%</div><div class="mb-sub">Analysis vs assumption</div></div>
+        <div class="metric-block"><div class="mb-label">Corpus Impact</div><div class="mb-value" id="cagr-impact">--</div><div class="mb-sub">Additional corpus if analysis holds</div></div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:var(--ink2);line-height:1.6" id="cagrDeviationNote">Loading analysis data...</div>
+    </div>
+
     <!-- SECTION A: 28-Year SIP Growth Table -->
-    <div class="sh"><span class="sh-n">01</span><h2>28-Year SIP Growth Table (10% Annual Step-up)</h2></div>
+    <div class="sh"><span class="sh-n">01</span><h2>28-Year SIP Growth Table (Tiered 10%→7%→5% Step-up)</h2></div>
     <div class="card" style="margin-bottom:13px;padding:10px 14px">
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px" id="stepupSummary">
         <div class="metric-block">
@@ -4572,7 +4754,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div class="metric-block">
           <div class="mb-label">Projected Corpus</div>
           <div class="mb-value" style="color:var(--jt)" id="stepupCorpus">Calculating...</div>
-          <div class="mb-sub">@ 12% CAGR, 10% step-up</div>
+          <div class="mb-sub">@ 9% CAGR, tiered step-up</div>
         </div>
         <div class="metric-block">
           <div class="mb-label">Wealth Multiplier</div>
@@ -4638,7 +4820,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div>
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
             <div style="width:14px;height:3px;background:var(--you)"></div>
-            <span style="font-size:10px;color:var(--ink3);font-family:monospace">10% STEP-UP (current plan)</span>
+            <span style="font-size:10px;color:var(--ink3);font-family:monospace">REALISTIC 10%→7%→5% (current plan)</span>
           </div>
           <div style="font-size:1.1rem;font-weight:700;color:var(--you)" id="stepupCorpus10">~₹--Cr</div>
           <div style="font-size:10px;color:var(--ink3)">2054 corpus</div>
@@ -4646,7 +4828,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div>
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
             <div style="width:14px;height:3px;background:var(--jt)"></div>
-            <span style="font-size:10px;color:var(--ink3);font-family:monospace">15% STEP-UP (aggressive)</span>
+            <span style="font-size:10px;color:var(--ink3);font-family:monospace">FLAT 10% (optimistic benchmark)</span>
           </div>
           <div style="font-size:1.1rem;font-weight:700;color:var(--jt)" id="stepupCorpus15">~₹--Cr</div>
           <div style="font-size:10px;color:var(--ink3)">2054 corpus</div>
@@ -4872,12 +5054,12 @@ function showPage(index) {
 }
 
 function renderPageCharts(index) {
-  if (index === 0) { renderDashboardCharts(); renderHealthScore(); renderMilestones(); }
+  if (index === 0) { renderDashboardCharts(); renderHealthScore(); renderMilestones(); renderUSConcentration(); }
   if (index === 2) renderFamilyPortfolio();
   if (index === 3) renderRetirementCharts();
   if (index === 4) renderKidsCharts();
   if (index === 5) renderInvestmentCharts();
-  if (index === 6) renderTaxCalculator2026();
+  if (index === 6) { renderTaxCalculator2026(); renderLTCGHarvest(); }
   if (index === 9) renderHistoricalChart();
   if (index === 10) { renderInceptionTracker(); renderMonthlyProjections(); }
   if (index === 11) renderAlertInsurancePanels();
@@ -4890,7 +5072,7 @@ function renderPageCharts(index) {
   if (index === 19) renderLifestyleCreep(); // Lifestyle Creep (was 20)
   if (index === 20) renderExpenseTracker(); // Expense Tracker (was 21)
   if (index === 21) initAprilLaunch();    // April 2026 Launch Mission Control
-  if (index === 22) { renderStepupPlanner(); renderStepupPerFund(); renderStepupImpactChart(); } // Step-up Planner
+  if (index === 22) { renderCAGRDeviation(); renderStepupPlanner(); renderStepupPerFund(); renderStepupImpactChart(); } // Step-up Planner
   if (index === 23) { renderDecumulation(); renderGlidePath(); } // Drawdown Plan
 }
 
@@ -8454,11 +8636,11 @@ let config = {
   yourSIP: 191200,  // Unified family portfolio - ₹1.91L/month (8 funds, April 2026 optimized)
   wifeSIP: 0,       // Deprecated - portfolio is now unified (use yourSIP for total)
   // Investment assumptions
-  expectedReturn: 12,  // Expected equity return percentage
-  annualStepUp: 10,    // Annual SIP step-up percentage
+  expectedReturn: 9,   // Conservative base assumption (9% CAGR — CFP realistic floor)
+  annualStepUp: 10,    // Annual SIP step-up percentage (tiered model overrides this in projections)
   // Inflation rates
   inflationGeneral: 6,
-  inflationEducation: 10,
+  inflationEducation: 7.5,
   inflationHealthcare: 12,
   // Emergency fund
   emergencyFund: 2000000,  // ₹20L existing
@@ -8532,10 +8714,11 @@ function calculateRetirementProjection() {
   if (config.wifeSIP && config.wifeSIP > 0) {
     currentSIP += config.wifeSIP;
   }
-  const stepUpRate = config.annualStepUp || 10; // Annual step-up from Settings (default 10%)
+  // Tiered step-up: 10% for years 1-10, 7% for years 11-20, 5% for years 21-28
+  // (config.annualStepUp kept for legacy compatibility but overridden below)
 
   // USE ACTUAL PORTFOLIO-WEIGHTED RETURN based on historical fund performance
-  let expectedReturn = config.expectedReturn || 12; // Fallback % (e.g. 12 means 12%)
+  let expectedReturn = config.expectedReturn || 9; // Fallback % (9% conservative assumption)
   try {
     const actualPortfolioReturn = calculatePortfolioExpectedReturn(); // returns decimal e.g. 0.1173
     if (actualPortfolioReturn && !isNaN(actualPortfolioReturn)) {
@@ -8576,8 +8759,9 @@ function calculateRetirementProjection() {
       inflAdj: Math.round(inflAdjCorpus)
     });
 
-    // Apply step-up for next year
-    monthlySIP = monthlySIP * (1 + stepUpRate / 100);
+    // Apply tiered step-up for next year: 10% yr1-10, 7% yr11-20, 5% yr21+
+    var tierRate = i < 10 ? 0.10 : (i < 20 ? 0.07 : 0.05);
+    monthlySIP = monthlySIP * (1 + tierRate);
   }
 
   return data;
@@ -15146,19 +15330,18 @@ function calculateMilestones() {
     { label: '₹66Cr', crore: 66,   emoji: '🏆' }
   ];
 
-  // Simulate corpus growth from Apr 2026 with 10% step-up, 12% CAGR
+  // Simulate corpus growth from Apr 2026 with tiered step-up (10%→7%→5%), 9% CAGR (conservative)
   var startYear   = 2026;
-  var monthSIP    = 191200; // ₹1.91L
-  var cagr        = 0.12;
-  var stepupRate  = 0.10;
+  var monthSIP    = 191200; // ₹1.91L base
+  var cagr        = 0.09;   // 9% conservative assumption
   var corpus      = 0;
   var currentAge  = 31;
 
   var results = [];
   var pendingMilestones = milestones.slice();
 
-  for (var yr = 0; yr < 30; yr++) {
-    var annualSIP   = monthSIP * (1 + stepupRate) ** yr;
+  for (var yr = 0; yr < 35; yr++) {
+    var annualSIP   = getRealisticSIP(monthSIP, yr);
     var monthlyRate = cagr / 12;
     // Grow existing corpus for 12 months
     corpus = corpus * (1 + cagr) + annualSIP * (((1 + monthlyRate) ** 12 - 1) / monthlyRate);
@@ -15416,12 +15599,176 @@ var FAMILY_FUNDS_STEPUP = [
 var BASE_SIP   = 191200;
 var START_YEAR = 2026;
 var START_AGE  = 31;
-var CAGR       = 0.12;
+var CAGR       = 0.09;  // Conservative base: 9% CAGR
 
 function fmtCr(v) {
   if (v >= 1e7) return '₹' + (v / 1e7).toFixed(1) + ' Cr';
   if (v >= 1e5) return '₹' + (v / 1e5).toFixed(1) + ' L';
   return '₹' + Math.round(v).toLocaleString('en-IN');
+}
+
+// ─── US CONCENTRATION ALERT — Page 0 ──────────────────────
+function renderUSConcentration() {
+  var el = document.getElementById('usConcentrationContent');
+  var card = document.getElementById('usConcentrationCard');
+  if (!el) return;
+
+  // Each fund's US equity exposure %
+  // Parag Parikh Flexi Cap: ~35% US (variable, currently ~35%)
+  // Motilal S&P500: 100% US
+  var ppfcSIP  = 0, sp500SIP = 0, totalSIP = 0;
+  var fundsToScan = (typeof familyFunds !== 'undefined') ? familyFunds : [];
+  fundsToScan.forEach(function(f) {
+    totalSIP += f.monthlySIP || 0;
+    var n = (f.name || '').toLowerCase();
+    if (n.indexOf('parag') !== -1 || n.indexOf('ppfc') !== -1) ppfcSIP  = f.monthlySIP || 0;
+    if (n.indexOf('s&p') !== -1 || n.indexOf('sp500') !== -1 || n.indexOf('s&amp;p') !== -1) sp500SIP = f.monthlySIP || 0;
+  });
+  if (totalSIP === 0) totalSIP = 191200;
+  if (ppfcSIP  === 0) ppfcSIP  = 18000;
+  if (sp500SIP === 0) sp500SIP = 25000;
+
+  var ppfcUSExposure  = ppfcSIP  * 0.35; // ~35% of Parag Parikh is US equities
+  var sp500USExposure = sp500SIP * 1.00; // 100% US
+  var totalUS = ppfcUSExposure + sp500USExposure;
+  var usPct   = (totalUS / totalSIP) * 100;
+
+  var warningColor = usPct > 20 ? 'var(--red)' : (usPct > 15 ? '#f59e0b' : 'var(--jt)');
+  var warningLabel = usPct > 20 ? '🔴 HIGH — REDUCE' : (usPct > 15 ? '⚠️ ELEVATED' : '✅ ACCEPTABLE');
+
+  if (card) {
+    var borderColor = usPct > 20 ? 'var(--red)' : (usPct > 15 ? '#f59e0b' : 'var(--bdr)');
+    card.style.borderLeft = '4px solid ' + borderColor;
+  }
+
+  el.innerHTML =
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">' +
+    '<div><div style="font-size:10px;color:var(--ink3)">Parag Parikh US portion</div><div style="font-size:1.1rem;font-weight:700;color:var(--you)">₹' + Math.round(ppfcUSExposure/1000) + 'K/mo</div><div style="font-size:10px;color:var(--ink3)">35% of ₹' + Math.round(ppfcSIP/1000) + 'K SIP</div></div>' +
+    '<div><div style="font-size:10px;color:var(--ink3)">Motilal S&P500</div><div style="font-size:1.1rem;font-weight:700;color:var(--you)">₹' + Math.round(sp500SIP/1000) + 'K/mo</div><div style="font-size:10px;color:var(--ink3)">100% US exposure</div></div>' +
+    '</div>' +
+    '<div style="padding:10px 12px;background:rgba(239,68,68,0.06);border-radius:4px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">' +
+    '<span style="font-size:11px;color:var(--ink)">Total US Exposure</span>' +
+    '<span style="font-family:monospace;font-weight:700;color:' + warningColor + '">' + usPct.toFixed(1) + '% &nbsp; ' + warningLabel + '</span>' +
+    '</div>' +
+    (usPct > 15
+      ? '<div style="font-size:10px;color:var(--ink3);line-height:1.6">⚠️ US concentration risk: a US recession hits both Parag Parikh and S&P500 simultaneously. Consider reducing S&P500 SIP from ₹25K → ₹15K and redirecting ₹10K to a gold ETF or domestic mid-cap.</div>'
+      : '<div style="font-size:10px;color:var(--jt2)">✅ US exposure within acceptable range. Review if Parag Parikh increases its US allocation above 40%.</div>');
+}
+
+// ─── LTCG HARVEST TRACKER — Page 6 ────────────────────────
+function renderLTCGHarvest() {
+  var tbody = document.getElementById('ltcgHarvestBody');
+  if (!tbody) return;
+
+  var baseSIP = 191200;
+  var cagr    = 0.09;
+  var corpus  = 0;
+  var totalInvested = 0;
+  var html = '';
+  var exemption = 125000; // ₹1.25L per person
+
+  for (var i = 0; i < 28; i++) {
+    var year = 2026 + i;
+    if (year < 2028) { // No meaningful gains in first 2 years to harvest
+      var sip = getRealisticSIP(baseSIP, i) * 12;
+      totalInvested += sip;
+      corpus = corpus * (1 + cagr) + sip * ((Math.pow(1 + cagr/12, 12) - 1) / (cagr/12));
+      continue;
+    }
+    var sip = getRealisticSIP(baseSIP, i) * 12;
+    totalInvested += sip;
+    corpus = corpus * (1 + cagr) + sip * ((Math.pow(1 + cagr/12, 12) - 1) / (cagr/12));
+
+    var gainPct = totalInvested > 0 ? ((corpus - totalInvested) / totalInvested) : 0;
+    if (gainPct <= 0) continue;
+
+    // Equity portion only (~80% of corpus after excluding debt/NPS)
+    var equityCorpus = corpus * 0.80;
+    var sellAmt = gainPct > 0 ? (exemption / gainPct) : 0; // per person
+
+    var taxSaved = Math.round(exemption * 0.125); // 12.5% LTCG saved per person
+    var totalTaxSaved = taxSaved * 2; // both persons
+
+    html += '<tr style="border-bottom:1px solid var(--bdr)">' +
+      '<td style="padding:7px 6px;font-weight:600">Jan ' + year + '</td>' +
+      '<td style="padding:7px 6px;text-align:right">' + fmtCr(corpus) + '</td>' +
+      '<td style="padding:7px 6px;text-align:right;font-family:monospace">' + (gainPct * 100).toFixed(0) + '%</td>' +
+      '<td style="padding:7px 6px;text-align:right">' + fmtCr(Math.min(sellAmt, equityCorpus * 0.5)) + '</td>' +
+      '<td style="padding:7px 6px;text-align:right">' + fmtCr(Math.min(sellAmt, equityCorpus * 0.5)) + '</td>' +
+      '<td style="padding:7px 6px;text-align:right;color:var(--jt);font-weight:600">₹' + (totalTaxSaved / 1000).toFixed(0) + 'K</td>' +
+      '</tr>';
+  }
+  tbody.innerHTML = html || '<tr><td colspan="6" style="padding:12px;color:var(--ink3);text-align:center">No harvest data — fetch historical fund returns first.</td></tr>';
+}
+
+// ─── CAGR DEVIATION — Page 22 ──────────────────────────────
+function renderCAGRDeviation() {
+  var analysisEl  = document.getElementById('cagr-analysis');
+  var deviationEl = document.getElementById('cagr-deviation');
+  var impactEl    = document.getElementById('cagr-impact');
+  var noteEl      = document.getElementById('cagrDeviationNote');
+  if (!analysisEl) return;
+
+  var assumption = 9.0; // % conservative base
+  var analysisPct;
+  try {
+    var raw = calculatePortfolioExpectedReturn(); // decimal e.g. 0.1173
+    analysisPct = raw * 100;
+  } catch(e) {
+    analysisPct = null;
+  }
+
+  if (!analysisPct || isNaN(analysisPct)) {
+    analysisEl.textContent = 'No data yet';
+    deviationEl.textContent = '--';
+    impactEl.textContent = '--';
+    if (noteEl) noteEl.textContent = 'Historical fund data not yet loaded. Fetch data from the Historical Returns page.';
+    return;
+  }
+
+  var deviation = analysisPct - assumption;
+  analysisEl.textContent = analysisPct.toFixed(1) + '%';
+  analysisEl.style.color = analysisPct > assumption ? 'var(--jt)' : 'var(--you)';
+
+  deviationEl.textContent = (deviation >= 0 ? '+' : '') + deviation.toFixed(1) + '%';
+  deviationEl.style.color = deviation >= 0 ? 'var(--jt)' : 'var(--red)';
+
+  // Rough corpus impact: simulate at both rates for 28 years with tiered step-up
+  function corpusAt(cagrPct) {
+    var c = 0, sip = 191200;
+    var r = cagrPct / 100, mr = r / 12;
+    for (var i = 0; i < 28; i++) {
+      var s = getRealisticSIP(sip, i) * 12;
+      c = c * (1 + r) + s * ((Math.pow(1 + mr, 12) - 1) / mr);
+    }
+    return c;
+  }
+  var corpusAssumption = corpusAt(assumption);
+  var corpusAnalysis   = corpusAt(analysisPct);
+  var diff = corpusAnalysis - corpusAssumption;
+  impactEl.textContent = (diff >= 0 ? '+' : '') + fmtCr(Math.abs(diff));
+  impactEl.style.color = diff >= 0 ? 'var(--jt)' : 'var(--red)';
+
+  if (noteEl) {
+    if (deviation >= 2) {
+      noteEl.innerHTML = '✅ <strong>Good news:</strong> Historical fund performance (' + analysisPct.toFixed(1) + '%) is significantly above your conservative 9% assumption. This means your actual corpus could be ' + fmtCr(diff) + ' larger. The 9% assumption gives you a meaningful safety margin — you\'re more likely to beat it than miss it.';
+    } else if (deviation >= 0) {
+      noteEl.innerHTML = '⚠️ <strong>Marginal buffer:</strong> Analysis CAGR is only ' + deviation.toFixed(1) + '% above assumption. Watch for any underperforming funds and consider replacing them if 5Y CAGR stays below benchmark for 12+ months.';
+    } else {
+      noteEl.innerHTML = '🔴 <strong>Warning:</strong> Historical analysis (' + analysisPct.toFixed(1) + '%) is BELOW the 9% assumption by ' + Math.abs(deviation).toFixed(1) + '%. If this persists, projected corpus could be ' + fmtCr(Math.abs(diff)) + ' lower. Review fund selection on the Fund Comparison page.';
+    }
+  }
+}
+
+// ─── Tiered step-up model: 10% yr1-10, 7% yr11-20, 5% yr21-28
+// yearOffset = 0 means starting SIP (no step-up applied yet)
+function getRealisticSIP(baseSIP, yearOffset) {
+  var sip = baseSIP;
+  for (var j = 0; j < yearOffset; j++) {
+    var rate = j < 10 ? 0.10 : (j < 20 ? 0.07 : 0.05);
+    sip *= (1 + rate);
+  }
+  return sip;
 }
 
 function renderStepupPlanner() {
@@ -15435,15 +15782,14 @@ function renderStepupPlanner() {
   var finalCorpus = 0;
   var monthlyRate = CAGR / 12;
 
-  // Milestones
-  // Actual SIP at these years (10% step-up from ₹1.91L base):
-  // 2030 (yr4): ₹1.91L×1.1^4 = ₹2.80L | 2036 (yr10): ₹4.96L | 2044 (yr18): ₹10.6L
-  var sipMilestones = {2030: '₹2.8L/mo', 2036: '₹4.9L/mo', 2044: '₹10L/mo'};
+  // Milestones using tiered 10%→7%→5% step-up:
+  // 2030 (i=4): ₹2.80L | 2036 (i=10): ₹4.95L | 2047 (i=21): ₹10.25L
+  var sipMilestones = {2030: '₹2.8L/mo', 2036: '₹5.0L/mo', 2047: '₹10.3L/mo'};
 
   for (var i = 0; i < 28; i++) {
     var year   = START_YEAR + i;
     var age    = START_AGE  + i;
-    var sip    = BASE_SIP * Math.pow(1.10, i);
+    var sip    = getRealisticSIP(BASE_SIP, i);
     var annInv = sip * 12;
     cumInv    += annInv;
     corpus     = corpus * (1 + CAGR) + annInv * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
@@ -15493,7 +15839,7 @@ function renderStepupPerFund() {
     html += '<tr><td>' + fund.name + '</td>';
     keyYears.forEach(function(yr) {
       var offset = yr - START_YEAR;
-      var sip = fund.sip * Math.pow(1.10, offset);
+      var sip = getRealisticSIP(fund.sip, offset);
       html += '<td>₹' + Math.round(sip/1000).toFixed(0) + 'K</td>';
     });
     html += '</tr>';
@@ -15503,7 +15849,7 @@ function renderStepupPerFund() {
   html += '<tr class="ttr"><td>Total SIP</td>';
   keyYears.forEach(function(yr) {
     var offset = yr - START_YEAR;
-    var total = BASE_SIP * Math.pow(1.10, offset);
+    var total = getRealisticSIP(BASE_SIP, offset);
     html += '<td>' + fmtCr(total) + '</td>';
   });
   html += '</tr>';
@@ -15528,13 +15874,13 @@ function renderStepupImpactChart() {
     labels.push(year);
 
     var sipFlat = BASE_SIP;
-    var sip10   = BASE_SIP * Math.pow(1.10, i);
-    var sip15   = BASE_SIP * Math.pow(1.15, i);
-    var annFlat = sipFlat * 12, ann10 = sip10 * 12, ann15 = sip15 * 12;
+    var sipReal = getRealisticSIP(BASE_SIP, i);       // Tiered 10%→7%→5%
+    var sip10   = BASE_SIP * Math.pow(1.10, i);       // Flat 10% (optimistic benchmark)
+    var annFlat = sipFlat * 12, annReal = sipReal * 12, ann10 = sip10 * 12;
 
     corpusFlat = corpusFlat * (1 + CAGR) + annFlat * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
-    corpus10   = corpus10   * (1 + CAGR) + ann10   * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
-    corpus15   = corpus15   * (1 + CAGR) + ann15   * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
+    corpus10   = corpus10   * (1 + CAGR) + annReal  * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
+    corpus15   = corpus15   * (1 + CAGR) + ann10    * ((Math.pow(1 + monthlyRate, 12) - 1) / monthlyRate);
 
     dataFlat.push(+(corpusFlat / 1e7).toFixed(2));
     data10.push(+(corpus10   / 1e7).toFixed(2));
@@ -15555,8 +15901,8 @@ function renderStepupImpactChart() {
       labels: labels,
       datasets: [
         { label: 'No Step-up (₹1.91L flat)', data: dataFlat, borderColor: 'var(--red)',  borderWidth: 2, pointRadius: 0, tension: 0.3, fill: false },
-        { label: '10% Step-up (Current Plan)', data: data10, borderColor: 'var(--you)',  borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
-        { label: '15% Step-up (Aggressive)',  data: data15, borderColor: 'var(--jt)',    borderWidth: 2, pointRadius: 0, tension: 0.3, fill: false }
+        { label: 'Realistic 10%→7%→5% (Current Plan)', data: data10, borderColor: 'var(--you)',  borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
+        { label: 'Flat 10% (Optimistic)',  data: data15, borderColor: 'var(--jt)',    borderWidth: 2, pointRadius: 0, tension: 0.3, fill: false }
       ]
     },
     options: {
