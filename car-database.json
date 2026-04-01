@@ -1,13 +1,31 @@
 {
-  "lastUpdated": "2026-03-06",
-  "note": "PETROL AUTOMATIC variants only - Updated for company lease budget ₹16-20L on-road",
+  "lastUpdated": "2026-04-01",
+  "note": "PETROL AUTOMATIC variants only - Reviewed April 2026",
   "cities": {
-    "bangalore": {"rto": 13, "insurance": 8},
-    "delhi": {"rto": 10, "insurance": 7},
-    "mumbai": {"rto": 12, "insurance": 9},
-    "chennai": {"rto": 13, "insurance": 8},
-    "hyderabad": {"rto": 12, "insurance": 7},
-    "pune": {"rto": 13, "insurance": 8}
+    "bangalore": {
+      "rto": 13,
+      "insurance": 8
+    },
+    "delhi": {
+      "rto": 10,
+      "insurance": 7
+    },
+    "mumbai": {
+      "rto": 12,
+      "insurance": 9
+    },
+    "chennai": {
+      "rto": 13,
+      "insurance": 8
+    },
+    "hyderabad": {
+      "rto": 12,
+      "insurance": 7
+    },
+    "pune": {
+      "rto": 13,
+      "insurance": 8
+    }
   },
   "cars": [
     {
@@ -16,9 +34,18 @@
       "segment": "Compact SUV",
       "exShowroom": 1050000,
       "variants": [
-        {"name": "S (AT)", "price": 1050000},
-        {"name": "SX (AT)", "price": 1220000},
-        {"name": "SX(O) (AT)", "price": 1380000}
+        {
+          "name": "S (AT)",
+          "price": 1050000
+        },
+        {
+          "name": "SX (AT)",
+          "price": 1220000
+        },
+        {
+          "name": "SX(O) (AT)",
+          "price": 1380000
+        }
       ],
       "mileage": "17.50 kmpl",
       "fuelType": "Petrol Automatic",
@@ -28,9 +55,23 @@
       "seating": 5,
       "bootSpace": "350 L",
       "safety": "3 Star (Global NCAP)",
-      "features": ["8-inch Touchscreen", "Sunroof", "6 Airbags", "Wireless Charging"],
-      "pros": ["Compact size for city", "Turbo performance", "Feature-rich", "Good DCT gearbox"],
-      "cons": ["Cramped rear seat", "Firm ride", "Diesel not available"],
+      "features": [
+        "8-inch Touchscreen",
+        "Sunroof",
+        "6 Airbags",
+        "Wireless Charging"
+      ],
+      "pros": [
+        "Compact size for city",
+        "Turbo performance",
+        "Feature-rich",
+        "Good DCT gearbox"
+      ],
+      "cons": [
+        "Cramped rear seat",
+        "Firm ride",
+        "Diesel not available"
+      ],
       "recommendation": "Best compact automatic SUV for city driving"
     },
     {
@@ -39,9 +80,18 @@
       "segment": "Compact SUV",
       "exShowroom": 1095000,
       "variants": [
-        {"name": "VXi (AT)", "price": 1095000},
-        {"name": "ZXi (AT)", "price": 1255000},
-        {"name": "ZXi+ (AT)", "price": 1430000}
+        {
+          "name": "VXi (AT)",
+          "price": 1095000
+        },
+        {
+          "name": "ZXi (AT)",
+          "price": 1255000
+        },
+        {
+          "name": "ZXi+ (AT)",
+          "price": 1430000
+        }
       ],
       "mileage": "19.80 kmpl",
       "fuelType": "Petrol Automatic",
@@ -51,9 +101,24 @@
       "seating": 5,
       "bootSpace": "328 L",
       "safety": "4 Star (Global NCAP)",
-      "features": ["9-inch Touchscreen", "Sunroof", "6 Airbags", "360° Camera", "HUD"],
-      "pros": ["Spacious cabin", "Smooth AT", "Maruti service network", "Good fuel efficiency"],
-      "cons": ["Underpowered", "Basic interiors", "No paddle shifters"],
+      "features": [
+        "9-inch Touchscreen",
+        "Sunroof",
+        "6 Airbags",
+        "360° Camera",
+        "HUD"
+      ],
+      "pros": [
+        "Spacious cabin",
+        "Smooth AT",
+        "Maruti service network",
+        "Good fuel efficiency"
+      ],
+      "cons": [
+        "Underpowered",
+        "Basic interiors",
+        "No paddle shifters"
+      ],
       "recommendation": "Best value automatic with Maruti reliability"
     },
     {
@@ -62,10 +127,22 @@
       "segment": "Compact SUV",
       "exShowroom": 1120000,
       "variants": [
-        {"name": "Smart+ (AT)", "price": 1120000},
-        {"name": "Pure+ (AT)", "price": 1240000},
-        {"name": "Creative+ (AT)", "price": 1440000},
-        {"name": "Fearless+ (AT)", "price": 1680000}
+        {
+          "name": "Smart+ (AT)",
+          "price": 1120000
+        },
+        {
+          "name": "Pure+ (AT)",
+          "price": 1240000
+        },
+        {
+          "name": "Creative+ (AT)",
+          "price": 1440000
+        },
+        {
+          "name": "Fearless+ (AT)",
+          "price": 1680000
+        }
       ],
       "mileage": "17.00 kmpl",
       "fuelType": "Petrol Automatic",
@@ -75,9 +152,23 @@
       "seating": 5,
       "bootSpace": "350 L",
       "safety": "5 Star (Global NCAP)",
-      "features": ["10.25-inch Touchscreen", "Sunroof", "6 Airbags", "JBL Audio", "Ventilated Seats"],
-      "pros": ["5-star safety rating", "Powerful turbo engine", "Premium features", "Solid build quality"],
-      "cons": ["DCA gearbox jerky in traffic", "Average service network vs Maruti"],
+      "features": [
+        "10.25-inch Touchscreen",
+        "Sunroof",
+        "6 Airbags",
+        "JBL Audio",
+        "Ventilated Seats"
+      ],
+      "pros": [
+        "5-star safety rating",
+        "Powerful turbo engine",
+        "Premium features",
+        "Solid build quality"
+      ],
+      "cons": [
+        "DCA gearbox jerky in traffic",
+        "Average service network vs Maruti"
+      ],
       "recommendation": "Best automatic SUV for safety-conscious buyers"
     },
     {
@@ -86,9 +177,18 @@
       "segment": "Compact SUV",
       "exShowroom": 1130000,
       "variants": [
-        {"name": "HTK+ (AT)", "price": 1130000},
-        {"name": "HTX (AT)", "price": 1320000},
-        {"name": "GTX+ (AT)", "price": 1580000}
+        {
+          "name": "HTK+ (AT)",
+          "price": 1130000
+        },
+        {
+          "name": "HTX (AT)",
+          "price": 1320000
+        },
+        {
+          "name": "GTX+ (AT)",
+          "price": 1580000
+        }
       ],
       "mileage": "18.20 kmpl",
       "fuelType": "Petrol Automatic",
@@ -98,9 +198,23 @@
       "seating": 5,
       "bootSpace": "392 L",
       "safety": "3 Star (Global NCAP)",
-      "features": ["10.25-inch Touchscreen", "Sunroof", "6 Airbags", "Bose Audio", "Air Purifier"],
-      "pros": ["Feature-loaded", "Peppy turbo engine", "Premium feel", "Good DCT"],
-      "cons": ["Expensive top variants", "Average safety rating"],
+      "features": [
+        "10.25-inch Touchscreen",
+        "Sunroof",
+        "6 Airbags",
+        "Bose Audio",
+        "Air Purifier"
+      ],
+      "pros": [
+        "Feature-loaded",
+        "Peppy turbo engine",
+        "Premium feel",
+        "Good DCT"
+      ],
+      "cons": [
+        "Expensive top variants",
+        "Average safety rating"
+      ],
       "recommendation": "Best feature-rich automatic compact SUV"
     },
     {
@@ -109,9 +223,18 @@
       "segment": "Mid-Size SUV",
       "exShowroom": 1450000,
       "variants": [
-        {"name": "EX (AT)", "price": 1450000},
-        {"name": "SX (AT)", "price": 1750000},
-        {"name": "SX(O) (AT)", "price": 2050000}
+        {
+          "name": "EX (AT)",
+          "price": 1450000
+        },
+        {
+          "name": "SX (AT)",
+          "price": 1750000
+        },
+        {
+          "name": "SX(O) (AT)",
+          "price": 2050000
+        }
       ],
       "mileage": "17.40 kmpl",
       "fuelType": "Petrol Automatic",
@@ -121,9 +244,24 @@
       "seating": 5,
       "bootSpace": "433 L",
       "safety": "3 Star (Global NCAP)",
-      "features": ["10.25-inch Dual Screens", "Panoramic Sunroof", "ADAS Level 2", "Ventilated Seats", "360° Camera"],
-      "pros": ["Spacious and comfortable", "Loaded with features", "Powerful turbo engine", "Smooth AT"],
-      "cons": ["Expensive", "Average safety rating", "Premium for top variant"],
+      "features": [
+        "10.25-inch Dual Screens",
+        "Panoramic Sunroof",
+        "ADAS Level 2",
+        "Ventilated Seats",
+        "360° Camera"
+      ],
+      "pros": [
+        "Spacious and comfortable",
+        "Loaded with features",
+        "Powerful turbo engine",
+        "Smooth AT"
+      ],
+      "cons": [
+        "Expensive",
+        "Average safety rating",
+        "Premium for top variant"
+      ],
       "recommendation": "Best automatic mid-size SUV for features and comfort"
     },
     {
@@ -132,9 +270,18 @@
       "segment": "Mid-Size SUV",
       "exShowroom": 1420000,
       "variants": [
-        {"name": "HTK+ (AT)", "price": 1420000},
-        {"name": "HTX (AT)", "price": 1680000},
-        {"name": "GTX+ (AT)", "price": 1990000}
+        {
+          "name": "HTK+ (AT)",
+          "price": 1420000
+        },
+        {
+          "name": "HTX (AT)",
+          "price": 1680000
+        },
+        {
+          "name": "GTX+ (AT)",
+          "price": 1990000
+        }
       ],
       "mileage": "16.50 kmpl",
       "fuelType": "Petrol Automatic",
@@ -144,9 +291,23 @@
       "seating": 5,
       "bootSpace": "433 L",
       "safety": "3 Star (Global NCAP)",
-      "features": ["10.25-inch Touchscreen", "Sunroof", "ADAS", "Bose Audio", "Ventilated Seats"],
-      "pros": ["Sporty design", "Premium features", "Powerful engine", "Good resale value"],
-      "cons": ["Expensive top variants", "Firm suspension"],
+      "features": [
+        "10.25-inch Touchscreen",
+        "Sunroof",
+        "ADAS",
+        "Bose Audio",
+        "Ventilated Seats"
+      ],
+      "pros": [
+        "Sporty design",
+        "Premium features",
+        "Powerful engine",
+        "Good resale value"
+      ],
+      "cons": [
+        "Expensive top variants",
+        "Firm suspension"
+      ],
       "recommendation": "Best automatic SUV for enthusiasts wanting features"
     },
     {
@@ -155,9 +316,18 @@
       "segment": "Mid-Size SUV",
       "exShowroom": 1580000,
       "variants": [
-        {"name": "Zeta (AT)", "price": 1580000},
-        {"name": "Alpha (AT)", "price": 1820000},
-        {"name": "Alpha+ Hybrid (AT)", "price": 2150000}
+        {
+          "name": "Zeta (AT)",
+          "price": 1580000
+        },
+        {
+          "name": "Alpha (AT)",
+          "price": 1820000
+        },
+        {
+          "name": "Alpha+ Hybrid (AT)",
+          "price": 2150000
+        }
       ],
       "mileage": "21.11 kmpl (Mild Hybrid) / 27.97 kmpl (Strong Hybrid)",
       "fuelType": "Petrol Automatic (Hybrid)",
@@ -167,9 +337,24 @@
       "seating": 5,
       "bootSpace": "373 L",
       "safety": "4 Star (Global NCAP)",
-      "features": ["9-inch Touchscreen", "Panoramic Sunroof", "360° Camera", "Ventilated Seats", "Hybrid Tech"],
-      "pros": ["Excellent hybrid mileage", "Maruti reliability", "Smooth e-CVT (hybrid)", "Good features"],
-      "cons": ["Hybrid premium expensive", "Boot space reduced in hybrid", "Underpowered non-hybrid"],
+      "features": [
+        "9-inch Touchscreen",
+        "Panoramic Sunroof",
+        "360° Camera",
+        "Ventilated Seats",
+        "Hybrid Tech"
+      ],
+      "pros": [
+        "Excellent hybrid mileage",
+        "Maruti reliability",
+        "Smooth e-CVT (hybrid)",
+        "Good features"
+      ],
+      "cons": [
+        "Hybrid premium expensive",
+        "Boot space reduced in hybrid",
+        "Underpowered non-hybrid"
+      ],
       "recommendation": "Best automatic SUV for fuel efficiency (hybrid)"
     },
     {
@@ -178,8 +363,14 @@
       "segment": "Mid-Size SUV",
       "exShowroom": 1550000,
       "variants": [
-        {"name": "Ambition (AT)", "price": 1550000},
-        {"name": "Style (AT)", "price": 1950000}
+        {
+          "name": "Ambition (AT)",
+          "price": 1550000
+        },
+        {
+          "name": "Style (AT)",
+          "price": 1950000
+        }
       ],
       "mileage": "15.80 kmpl",
       "fuelType": "Petrol Automatic",
@@ -189,9 +380,24 @@
       "seating": 5,
       "bootSpace": "385 L",
       "safety": "5 Star (Global NCAP)",
-      "features": ["10-inch Touchscreen", "Sunroof", "6 Airbags", "Wireless Charging", "Cruise Control"],
-      "pros": ["5-star safety", "European build quality", "Refined TSI engine", "Best-in-class handling"],
-      "cons": ["Higher service costs", "Limited service network", "Basic features vs competitors"],
+      "features": [
+        "10-inch Touchscreen",
+        "Sunroof",
+        "6 Airbags",
+        "Wireless Charging",
+        "Cruise Control"
+      ],
+      "pros": [
+        "5-star safety",
+        "European build quality",
+        "Refined TSI engine",
+        "Best-in-class handling"
+      ],
+      "cons": [
+        "Higher service costs",
+        "Limited service network",
+        "Basic features vs competitors"
+      ],
       "recommendation": "Best automatic SUV for European quality and safety"
     },
     {
@@ -200,9 +406,18 @@
       "segment": "Mid-Size SUV",
       "exShowroom": 1340000,
       "variants": [
-        {"name": "Style (AT)", "price": 1340000},
-        {"name": "Super (AT)", "price": 1630000},
-        {"name": "Sharp (AT)", "price": 1850000}
+        {
+          "name": "Style (AT)",
+          "price": 1340000
+        },
+        {
+          "name": "Super (AT)",
+          "price": 1630000
+        },
+        {
+          "name": "Sharp (AT)",
+          "price": 1850000
+        }
       ],
       "mileage": "15.50 kmpl",
       "fuelType": "Petrol Automatic",
@@ -212,9 +427,25 @@
       "seating": 5,
       "bootSpace": "448 L",
       "safety": "5 Star (Global NCAP)",
-      "features": ["10.1-inch Touchscreen", "Panoramic Sunroof", "ADAS Level 2", "AI Assistant", "6 Airbags"],
-      "pros": ["5-star safety", "Tech-loaded", "Value for money", "AI personal assistant", "CVT is smooth"],
-      "cons": ["Uncertain resale value", "Limited service network", "CVT lacks punch"],
+      "features": [
+        "10.1-inch Touchscreen",
+        "Panoramic Sunroof",
+        "ADAS Level 2",
+        "AI Assistant",
+        "6 Airbags"
+      ],
+      "pros": [
+        "5-star safety",
+        "Tech-loaded",
+        "Value for money",
+        "AI personal assistant",
+        "CVT is smooth"
+      ],
+      "cons": [
+        "Uncertain resale value",
+        "Limited service network",
+        "CVT lacks punch"
+      ],
       "recommendation": "Best tech-loaded automatic SUV in budget"
     },
     {
@@ -223,9 +454,18 @@
       "segment": "Mid-Size SUV",
       "exShowroom": 1550000,
       "variants": [
-        {"name": "S (AT)", "price": 1550000},
-        {"name": "G (AT)", "price": 1750000},
-        {"name": "V Hybrid (AT)", "price": 1980000}
+        {
+          "name": "S (AT)",
+          "price": 1550000
+        },
+        {
+          "name": "G (AT)",
+          "price": 1750000
+        },
+        {
+          "name": "V Hybrid (AT)",
+          "price": 1980000
+        }
       ],
       "mileage": "19.80 kmpl / 27.97 kmpl (Hybrid)",
       "fuelType": "Petrol Automatic (Hybrid)",
@@ -235,9 +475,24 @@
       "seating": 5,
       "bootSpace": "370 L",
       "safety": "5 Star (Global NCAP)",
-      "features": ["9-inch Touchscreen", "Panoramic Sunroof", "360° Camera", "Hybrid Tech", "Toyota Safety Sense"],
-      "pros": ["Toyota reliability", "Excellent hybrid mileage", "5-star safety", "Strong resale value"],
-      "cons": ["Premium pricing", "Basic features vs Creta/Seltos", "Waiting period"],
+      "features": [
+        "9-inch Touchscreen",
+        "Panoramic Sunroof",
+        "360° Camera",
+        "Hybrid Tech",
+        "Toyota Safety Sense"
+      ],
+      "pros": [
+        "Toyota reliability",
+        "Excellent hybrid mileage",
+        "5-star safety",
+        "Strong resale value"
+      ],
+      "cons": [
+        "Premium pricing",
+        "Basic features vs Creta/Seltos",
+        "Waiting period"
+      ],
       "recommendation": "Best automatic SUV for reliability and hybrid efficiency"
     },
     {
@@ -246,9 +501,18 @@
       "segment": "Mid-Size SUV",
       "exShowroom": 1850000,
       "variants": [
-        {"name": "AX3 (AT)", "price": 1850000},
-        {"name": "AX5 (AT)", "price": 2150000},
-        {"name": "AX7 (AT)", "price": 2550000}
+        {
+          "name": "AX3 (AT)",
+          "price": 1850000
+        },
+        {
+          "name": "AX5 (AT)",
+          "price": 2150000
+        },
+        {
+          "name": "AX7 (AT)",
+          "price": 2550000
+        }
       ],
       "mileage": "12.40 kmpl",
       "fuelType": "Petrol Automatic",
@@ -258,9 +522,24 @@
       "seating": 7,
       "bootSpace": "451 L (5-seater)",
       "safety": "5 Star (Global NCAP)",
-      "features": ["10.25-inch Dual Screens", "Panoramic Sunroof", "ADAS Level 2", "Sony Audio", "Ventilated Seats"],
-      "pros": ["Most powerful engine", "7-seater option", "Loaded with features", "5-star safety"],
-      "cons": ["Poor fuel efficiency", "Expensive", "Long waiting period"],
+      "features": [
+        "10.25-inch Dual Screens",
+        "Panoramic Sunroof",
+        "ADAS Level 2",
+        "Sony Audio",
+        "Ventilated Seats"
+      ],
+      "pros": [
+        "Most powerful engine",
+        "7-seater option",
+        "Loaded with features",
+        "5-star safety"
+      ],
+      "cons": [
+        "Poor fuel efficiency",
+        "Expensive",
+        "Long waiting period"
+      ],
       "recommendation": "Best automatic 7-seater SUV for power and space"
     },
     {
@@ -269,9 +548,18 @@
       "segment": "Sedan",
       "exShowroom": 1950000,
       "variants": [
-        {"name": "V Hybrid (e-CVT)", "price": 1950000},
-        {"name": "VX Hybrid (e-CVT)", "price": 2080000},
-        {"name": "ZX Hybrid (e-CVT)", "price": 2150000}
+        {
+          "name": "V Hybrid (e-CVT)",
+          "price": 1950000
+        },
+        {
+          "name": "VX Hybrid (e-CVT)",
+          "price": 2080000
+        },
+        {
+          "name": "ZX Hybrid (e-CVT)",
+          "price": 2150000
+        }
       ],
       "mileage": "26.50 kmpl",
       "fuelType": "Petrol Automatic (Hybrid)",
@@ -281,9 +569,23 @@
       "seating": 5,
       "bootSpace": "506 L",
       "safety": "4 Star (ASEAN NCAP)",
-      "features": ["8-inch Touchscreen", "Honda Connect", "Lane Watch Camera", "Cruise Control"],
-      "pros": ["Exceptional mileage (26 kmpl)", "Huge boot space", "Refined hybrid system", "Honda reliability"],
-      "cons": ["Premium pricing for sedan", "Basic features vs SUVs", "Limited ground clearance"],
+      "features": [
+        "8-inch Touchscreen",
+        "Honda Connect",
+        "Lane Watch Camera",
+        "Cruise Control"
+      ],
+      "pros": [
+        "Exceptional mileage (26 kmpl)",
+        "Huge boot space",
+        "Refined hybrid system",
+        "Honda reliability"
+      ],
+      "cons": [
+        "Premium pricing for sedan",
+        "Basic features vs SUVs",
+        "Limited ground clearance"
+      ],
       "recommendation": "Best automatic sedan for fuel efficiency and comfort"
     },
     {
@@ -292,8 +594,14 @@
       "segment": "Sedan",
       "exShowroom": 1360000,
       "variants": [
-        {"name": "SX (AT)", "price": 1360000},
-        {"name": "SX(O) (AT)", "price": 1780000}
+        {
+          "name": "SX (AT)",
+          "price": 1360000
+        },
+        {
+          "name": "SX(O) (AT)",
+          "price": 1780000
+        }
       ],
       "mileage": "17.70 kmpl",
       "fuelType": "Petrol Automatic",
@@ -303,9 +611,23 @@
       "seating": 5,
       "bootSpace": "528 L",
       "safety": "3 Star (Global NCAP)",
-      "features": ["10.25-inch Dual Screens", "Sunroof", "ADAS Level 2", "Ventilated Seats", "Bose Audio"],
-      "pros": ["Feature-loaded", "Powerful turbo engine", "Premium cabin", "Good DCT gearbox"],
-      "cons": ["Expensive top variant", "Sedans less popular than SUVs"],
+      "features": [
+        "10.25-inch Dual Screens",
+        "Sunroof",
+        "ADAS Level 2",
+        "Ventilated Seats",
+        "Bose Audio"
+      ],
+      "pros": [
+        "Feature-loaded",
+        "Powerful turbo engine",
+        "Premium cabin",
+        "Good DCT gearbox"
+      ],
+      "cons": [
+        "Expensive top variant",
+        "Sedans less popular than SUVs"
+      ],
       "recommendation": "Best feature-packed automatic sedan"
     },
     {
@@ -314,8 +636,14 @@
       "segment": "Sedan",
       "exShowroom": 1480000,
       "variants": [
-        {"name": "Highline (AT)", "price": 1480000},
-        {"name": "Topline (AT)", "price": 1880000}
+        {
+          "name": "Highline (AT)",
+          "price": 1480000
+        },
+        {
+          "name": "Topline (AT)",
+          "price": 1880000
+        }
       ],
       "mileage": "17.50 kmpl",
       "fuelType": "Petrol Automatic",
@@ -325,9 +653,24 @@
       "seating": 5,
       "bootSpace": "521 L",
       "safety": "5 Star (Global NCAP)",
-      "features": ["10-inch Touchscreen", "Ventilated Seats", "Wireless Charging", "6 Airbags", "Cruise Control"],
-      "pros": ["5-star safety", "German build quality", "Spacious cabin", "Best-in-class handling"],
-      "cons": ["Higher maintenance costs", "Limited brand presence", "Expensive"],
+      "features": [
+        "10-inch Touchscreen",
+        "Ventilated Seats",
+        "Wireless Charging",
+        "6 Airbags",
+        "Cruise Control"
+      ],
+      "pros": [
+        "5-star safety",
+        "German build quality",
+        "Spacious cabin",
+        "Best-in-class handling"
+      ],
+      "cons": [
+        "Higher maintenance costs",
+        "Limited brand presence",
+        "Expensive"
+      ],
       "recommendation": "Best automatic German sedan with safety"
     },
     {
@@ -336,8 +679,14 @@
       "segment": "Sedan",
       "exShowroom": 1460000,
       "variants": [
-        {"name": "Ambition (AT)", "price": 1460000},
-        {"name": "Style (AT)", "price": 1860000}
+        {
+          "name": "Ambition (AT)",
+          "price": 1460000
+        },
+        {
+          "name": "Style (AT)",
+          "price": 1860000
+        }
       ],
       "mileage": "17.60 kmpl",
       "fuelType": "Petrol Automatic",
@@ -347,9 +696,24 @@
       "seating": 5,
       "bootSpace": "521 L",
       "safety": "5 Star (Global NCAP - Expected)",
-      "features": ["10-inch Touchscreen", "Sunroof", "6 Airbags", "Wireless Charging", "Cruise Control"],
-      "pros": ["European build quality", "Refined TSI engine", "Spacious cabin", "Premium feel"],
-      "cons": ["Higher service costs", "Limited service network", "Basic features in base"],
+      "features": [
+        "10-inch Touchscreen",
+        "Sunroof",
+        "6 Airbags",
+        "Wireless Charging",
+        "Cruise Control"
+      ],
+      "pros": [
+        "European build quality",
+        "Refined TSI engine",
+        "Spacious cabin",
+        "Premium feel"
+      ],
+      "cons": [
+        "Higher service costs",
+        "Limited service network",
+        "Basic features in base"
+      ],
       "recommendation": "Best European automatic sedan for refinement"
     }
   ]
