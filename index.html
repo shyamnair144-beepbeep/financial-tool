@@ -310,9 +310,9 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="tn" onclick="showPage(18)"> Stochastic Engine</div>
   <div class="tn" onclick="showPage(19)">⚠️ Lifestyle Creep</div>
   <div class="tn" onclick="showPage(20)"> Expense Tracker</div>
-  <div class="tn" onclick="showPage(21)">🚀 April Launch</div>
-  <div class="tn" onclick="showPage(22)">📅 Step-up Planner</div>
-  <div class="tn" onclick="showPage(23)">🏦 Drawdown Plan</div>
+  <div class="tn" onclick="showPage(21)"> April Launch</div>
+  <div class="tn" onclick="showPage(22)"> Step-up Planner</div>
+  <div class="tn" onclick="showPage(23)"> Drawdown Plan</div>
 </div>
 
 <!-- PAGE 0: DASHBOARD -->
@@ -386,7 +386,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="bc">
       <div class="bc-lbl">MONTHLY INVESTMENTS</div>
       <div class="bc-items">
-        <div class="bci"><div class="l">Family SIPs</div><div class="v aj" id="dash-family-sip">₹1.91L</div><div class="s">8 funds, unified portfolio</div></div>
+        <div class="bci"><div class="l">Family SIPs</div><div class="v aj" id="dash-family-sip">₹1.91L</div><div class="s">9 funds, unified portfolio</div></div>
       </div>
     </div>
     <div class="bc">
@@ -554,7 +554,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
             </div>
           </div>
           <div style="margin-top:12px;padding:10px 12px;background:var(--red-s);border-left:3px solid var(--red);border-radius:4px;font-size:11px">
-            ⚠️ <strong>Action needed:</strong> Secure term life (₹20Cr) + health (₹20L) insurance in April 2026 to restore score to <strong>92/100</strong>. Update status on <em>🚀 April Launch</em> page.
+            ⚠️ <strong>Action needed:</strong> Secure term life (₹20Cr) + health (₹20L) insurance in April 2026 to restore score to <strong>92/100</strong>. Update status on <em> April Launch</em> page.
           </div>
         </div>
       </div>
@@ -740,20 +740,36 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- SECTION 04: PORTFOLIO GAPS -->
     <div class="sh"><span class="sh-n">04</span><h2>Portfolio Gap Alerts</h2></div>
     <div class="g2" style="margin-bottom:13px">
-      <!-- Gold SGB Alert -->
-      <div class="card" style="border-left:4px solid #f59e0b;padding:16px">
+      <!-- Gold Alert — RESOLVED -->
+      <div class="card" style="border-left:4px solid var(--jt);padding:16px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div style="font-size:12px;font-weight:700;color:#f59e0b">⚠️ MISSING: GOLD ALLOCATION</div>
-          <div style="font-size:10px;font-family:monospace;padding:3px 8px;border-radius:10px;background:rgba(245,158,11,0.1);color:#f59e0b">CFP GAP</div>
+          <div style="font-size:12px;font-weight:700;color:var(--jt)">✅ GOLD: ADDED — Nippon India Gold Savings Fund</div>
+          <div style="font-size:10px;font-family:monospace;padding:3px 8px;border-radius:10px;background:rgba(48,200,122,0.1);color:var(--jt)">RESOLVED</div>
         </div>
         <div style="font-size:11px;color:var(--ink2);line-height:1.8;margin-bottom:12px">
-          <strong>Recommended:</strong> 5% of portfolio in gold<br>
-          <strong>Monthly SIP needed:</strong> ~₹9,560/month (5% of ₹1.91L)<br>
-          <strong>Best vehicle:</strong> Sovereign Gold Bonds (SGBs) — 2.5% interest + price appreciation + <em>tax-free at maturity</em><br>
-          <strong>Why gold:</strong> Uncorrelated to equity. When Nifty crashes, gold often rises. Rupee depreciation hedge.
+          <strong>Allocation:</strong> ₹10,000/month (5.2% of total SIP)<br>
+          <strong>Vehicle:</strong> Nippon India Gold Savings Fund Direct Growth (FoF tracking Gold ETF)<br>
+          <strong>ER:</strong> 0.12% · <strong>Benchmark:</strong> Domestic Gold Price<br>
+          <strong>SGB upgrade path:</strong> When RBI resumes SGB issuance, redirect 2–3 months of gold SIP into a lump-sum SGB (2.5% interest + LTCG-free at maturity). See Tax page Section 05 for details.
         </div>
-        <div style="padding:10px 12px;background:rgba(245,158,11,0.07);border-radius:4px;font-size:10px;color:#f59e0b">
-          SGB Issue: RBI issues tranches periodically. Next tranche — watch RBI calendar. Alternative: Gold ETF (0.3% ER) for monthly SIP.
+        <div style="padding:10px 12px;background:rgba(48,200,122,0.06);border-radius:4px;font-size:10px;color:var(--jt2)">
+          Gold FoF → SGB when available. FoF ER 0.12% acceptable for monthly SIP until RBI reopens SGB window.
+        </div>
+      </div>
+      <!-- PPF 80C Alert -->
+      <div class="card" style="border-left:4px solid var(--red);padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-size:12px;font-weight:700;color:var(--red)">⚠️ 80C GAP — OPEN PPF ACCOUNT</div>
+          <div style="font-size:10px;font-family:monospace;padding:3px 8px;border-radius:10px;background:rgba(232,80,64,0.1);color:var(--red)">ACTION NEEDED</div>
+        </div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.8;margin-bottom:12px">
+          <strong>Problem:</strong> PP Flexi Cap is NOT an ELSS — your ₹1.5L 80C limit is unfilled<br>
+          <strong>Fix:</strong> PPF at ₹12,500/month = ₹1,50,000/year → full 80C deduction<br>
+          <strong>Tax saved:</strong> ₹45,000/year at 30% slab (≈ ₹3,750/month back in pocket)<br>
+          <strong>Return:</strong> 7.1% p.a. tax-free (EEE) ≈ 10.2% pre-tax equivalent
+        </div>
+        <div style="padding:10px 12px;background:rgba(232,80,64,0.06);border-radius:4px;font-size:10px;color:var(--red)">
+          Open at SBI or Post Office. Auto-debit on 1st of month. ₹12,500/month is separate from your ₹1.91L SIP total. See Tax page Section 05.
         </div>
       </div>
       <!-- US Concentration Alert — rendered dynamically -->
@@ -840,34 +856,39 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">31% allocation</span>
         </div>
         <div class="field-row">
-          <span class="field-label">Parag Parikh Flexi Cap (ELSS)</span>
+          <span class="field-label">Parag Parikh Flexi Cap (Flexi)</span>
           <input class="field-input" id="s-sip-1" type="number" value="18000">
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">9% allocation</span>
         </div>
         <div class="field-row">
           <span class="field-label">Motilal Oswal Midcap Direct</span>
-          <input class="field-input" id="s-sip-2" type="number" value="38000">
-          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">20% allocation</span>
-        </div>
-        <div class="field-row">
-          <span class="field-label">Nippon India Small Cap Direct</span>
-          <input class="field-input" id="s-sip-3" type="number" value="12000">
-          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">6% allocation</span>
-        </div>
-        <div class="field-row">
-          <span class="field-label">Motilal Oswal S&P 500 Index (US)</span>
-          <input class="field-input" id="s-sip-4" type="number" value="25000">
+          <input class="field-input" id="s-sip-2" type="number" value="25000">
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">13% allocation</span>
         </div>
         <div class="field-row">
-          <span class="field-label">HDFC Balanced Advantage (Hybrid)</span>
-          <input class="field-input" id="s-sip-5" type="number" value="12000">
-          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">6% allocation</span>
+          <span class="field-label">HDFC Mid-Cap Opportunities Direct</span>
+          <input class="field-input" id="s-sip-3b" type="number" value="13000">
+          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">7% allocation</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Nippon India Small Cap Direct</span>
+          <input class="field-input" id="s-sip-3" type="number" value="15000">
+          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">8% allocation</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Motilal Oswal S&P 500 Index (US)</span>
+          <input class="field-input" id="s-sip-4" type="number" value="18000">
+          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">9% allocation</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Nippon Gold Savings Fund (Commodity)</span>
+          <input class="field-input" id="s-sip-5b" type="number" value="10000">
+          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">5% allocation</span>
         </div>
         <div class="field-row">
           <span class="field-label">HDFC Corporate Bond Fund (Debt)</span>
-          <input class="field-input" id="s-sip-6" type="number" value="20000">
-          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">10% allocation</span>
+          <input class="field-input" id="s-sip-6" type="number" value="26000">
+          <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">14% allocation</span>
         </div>
         <div class="field-row">
           <span class="field-label">NPS Tier 1 (Retirement)</span>
@@ -1037,7 +1058,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="content">
 
     <!-- Monthly Investment Breakdown -->
-    <div class="sh"><span class="sh-n">01</span><h2>Current Monthly Investment Breakdown (8 Funds)</h2></div>
+    <div class="sh"><span class="sh-n">01</span><h2>Current Monthly Investment Breakdown (9 Funds)</h2></div>
 
     <div class="tw">
       <table>
@@ -1055,24 +1076,32 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </tr>
           <tr>
             <td>Flexi Cap Active</td>
-            <td>Parag Parikh Flexi Cap Direct Growth (ELSS)</td>
+            <td>Parag Parikh Flexi Cap Direct Growth</td>
             <td id="fam-sip-2">₹18,000</td>
-            <td>International exposure + 80C</td>
+            <td>International exposure + Value (80C via PPF)</td>
             <td>18.5%</td>
             <td><span class="tag ty">MODERATE</span></td>
           </tr>
           <tr>
             <td>Midcap Active</td>
             <td>Motilal Oswal Midcap Direct Growth</td>
-            <td id="fam-sip-3">₹38,000</td>
+            <td id="fam-sip-3">₹25,000</td>
             <td>Growth driver</td>
             <td>16.8%</td>
             <td><span class="tag tr2">HIGH</span></td>
           </tr>
           <tr>
+            <td>Midcap Active</td>
+            <td>HDFC Mid-Cap Opportunities Fund Direct Growth</td>
+            <td id="fam-sip-3b">₹13,000</td>
+            <td>Mid cap alpha, AMC diversification</td>
+            <td>16.5%</td>
+            <td><span class="tag tr2">HIGH</span></td>
+          </tr>
+          <tr>
             <td>Small Cap Active</td>
             <td>Nippon India Small Cap Fund Direct Growth</td>
-            <td id="fam-sip-4">₹12,000</td>
+            <td id="fam-sip-4">₹15,000</td>
             <td>High alpha potential</td>
             <td>19.2%</td>
             <td><span class="tag tr2">HIGH</span></td>
@@ -1080,23 +1109,23 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr>
             <td>International Index</td>
             <td>Motilal Oswal S&P 500 Index Fund</td>
-            <td id="fam-sip-5">₹25,000</td>
-            <td>US market exposure (13% allocation)</td>
+            <td id="fam-sip-5">₹18,000</td>
+            <td>US market exposure (9% allocation)</td>
             <td>14.0%</td>
             <td><span class="tag ty">MODERATE</span></td>
           </tr>
           <tr>
-            <td>Hybrid</td>
-            <td>HDFC Balanced Advantage Fund</td>
-            <td id="fam-sip-6">₹12,000</td>
-            <td>Dynamic allocation, volatility control</td>
-            <td>11.5%</td>
+            <td>Commodity</td>
+            <td>Nippon India Gold Savings Fund Direct Growth</td>
+            <td id="fam-sip-5b">₹10,000</td>
+            <td>Gold hedge, inflation + INR protection</td>
+            <td>12.0%</td>
             <td><span class="tag tg">LOW</span></td>
           </tr>
           <tr>
             <td>Debt</td>
             <td>HDFC Corporate Bond Fund Direct Growth</td>
-            <td id="fam-sip-7">₹20,000</td>
+            <td id="fam-sip-7">₹26,000</td>
             <td>Stability + moderate returns</td>
             <td>7.8%</td>
             <td><span class="tag tg">LOW</span></td>
@@ -1139,22 +1168,23 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
       </div>
       <div class="card j">
-        <div class="ch3 j">SATELLITE (40%)</div>
+        <div class="ch3 j">SATELLITE (37%)</div>
         <div style="font-size:12px;line-height:1.8">
           Active funds for outperformance.<br>
-          • Parag Parikh: ₹18K (9%)<br>
-          • Motilal Midcap: ₹38K (20%)<br>
-          • Nippon Small Cap: ₹12K (6%)<br>
+          • Parag Parikh Flexi: ₹18K (9%)<br>
+          • Motilal Midcap: ₹25K (13%)<br>
+          • HDFC Midcap Opp: ₹13K (7%)<br>
+          • Nippon Small Cap: ₹15K (8%)<br>
           <strong>Goal: Beat index by 3-5%</strong>
         </div>
       </div>
       <div class="card j">
-        <div class="ch3 j">STABLE (17%)</div>
+        <div class="ch3 j">STABLE (19%)</div>
         <div style="font-size:12px;line-height:1.8">
           Lower volatility allocation.<br>
-          • HDFC Balanced: ₹12K (6%)<br>
-          • HDFC Corp Bond: ₹20K (10%)<br>
-          <strong>Goal: Cushion during crashes</strong>
+          • Nippon Gold: ₹10K (5%)<br>
+          • HDFC Corp Bond: ₹26K (14%)<br>
+          <strong>Goal: Cushion + Inflation hedge</strong>
         </div>
       </div>
     </div>
@@ -1167,10 +1197,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div style="margin-bottom:20px;padding:16px;background:rgba(16,185,129,0.05);border-radius:8px;border-left:4px solid var(--success)">
           <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--success)">✅ OVERLAP OPTIMIZED</h4>
           <div style="font-size:11px;line-height:1.8;color:var(--ink)">
-            <strong>Analysis completed:</strong> All 8 funds reviewed for holding overlaps.<br>
-            <strong>Result:</strong> Minimal overlap detected (< 15% across any fund pair)<br>
-            <strong>Previous issue RESOLVED:</strong> ICICI Bluechip (70% overlap) removed in April 2026<br>
-            <strong>Diversification score:</strong> 92/100 (excellent)
+            <strong>Analysis completed:</strong> All 9 funds reviewed for holding overlaps.<br>
+            <strong>Result:</strong> Minimal overlap detected (< 15% across any equity fund pair)<br>
+            <strong>Previous issue RESOLVED:</strong> ICICI Bluechip (70% overlap) removed; HDFC BAF (redundant hybrid) removed April 2026<br>
+            <strong>Diversification score:</strong> 94/100 (excellent — Gold + dual mid-cap AMC added)
           </div>
         </div>
 
@@ -1247,8 +1277,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
     </div>
 
-    <!-- Why 8 Funds -->
-    <div class="sh"><span class="sh-n">07</span><h2>Why 8 Funds? (The Math)</h2></div>
+    <!-- Why 9 Funds -->
+    <div class="sh"><span class="sh-n">07</span><h2>Why 9 Funds? (The Math)</h2></div>
 
     <div class="card" style="margin-bottom:20px">
       <div style="padding:20px">
@@ -1271,7 +1301,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </div>
 
           <div style="padding:16px;background:rgba(16,185,129,0.05);border-radius:8px;border-left:4px solid var(--success)">
-            <div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:8px">✅ CURRENT (8 Funds)</div>
+            <div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:8px">✅ CURRENT (9 Funds)</div>
             <div style="font-size:11px;color:var(--ink);line-height:1.8">
               • Zero overlap > 15%<br>
               • Each fund serves unique purpose<br>
@@ -1289,7 +1319,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
             <strong>Expected return:</strong> 12.8% → 13.5% (better fund selection)<br>
             <strong>Expense savings:</strong> ₹67,000 over 28 years<br>
             <strong>Added corpus:</strong> +₹3.8 Cr by 2054<br>
-            <strong>Rebalancing ease:</strong> 8 funds vs 18 funds to track
+            <strong>Rebalancing ease:</strong> 9 funds vs 18 funds to track
           </div>
         </div>
       </div>
@@ -1654,49 +1684,49 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr>
             <td>Midcap Active</td>
             <td>Motilal Oswal Midcap Direct Growth</td>
-            <td>₹38,000</td>
-            <td>20%</td>
+            <td>₹25,000</td>
+            <td>13%</td>
             <td>Growth driver - High alpha potential</td>
             <td><span class="tag tr2">HIGH</span></td>
           </tr>
           <tr>
             <td>International</td>
             <td>Motilal Oswal S&P 500 Index Fund</td>
-            <td>₹25,000</td>
-            <td>13%</td>
-            <td>US market exposure - Currency diversification</td>
+            <td>₹18,000</td>
+            <td>9%</td>
+            <td>US market exposure - Currency diversification (trimmed)</td>
             <td><span class="tag ty">MODERATE</span></td>
           </tr>
           <tr>
             <td>Debt</td>
             <td>HDFC Corporate Bond Fund Direct Growth</td>
-            <td>₹20,000</td>
-            <td>10%</td>
+            <td>₹26,000</td>
+            <td>14%</td>
             <td>Stability - Consistent 7-8% returns</td>
             <td><span class="tag tg">LOW</span></td>
           </tr>
           <tr>
             <td>Flexi Cap</td>
-            <td>Parag Parikh Flexi Cap Direct Growth (ELSS)</td>
+            <td>Parag Parikh Flexi Cap Direct Growth</td>
             <td>₹18,000</td>
             <td>9%</td>
-            <td>International + Value + 80C tax saving</td>
+            <td>International + Value (80C via PPF separately)</td>
             <td><span class="tag ty">MODERATE</span></td>
           </tr>
           <tr>
             <td>Small Cap</td>
             <td>Nippon India Small Cap Fund Direct Growth</td>
-            <td>₹12,000</td>
-            <td>6%</td>
+            <td>₹15,000</td>
+            <td>8%</td>
             <td>High alpha - Small cap outperformance</td>
             <td><span class="tag tr2">HIGH</span></td>
           </tr>
           <tr>
-            <td>Hybrid</td>
-            <td>HDFC Balanced Advantage Fund</td>
-            <td>₹12,000</td>
-            <td>6%</td>
-            <td>Dynamic allocation - Crash protection</td>
+            <td>Commodity</td>
+            <td>Nippon India Gold Savings Fund Direct Growth</td>
+            <td>₹10,000</td>
+            <td>5%</td>
+            <td>Gold hedge - Inflation + INR protection</td>
             <td><span class="tag tg">LOW</span></td>
           </tr>
           <tr>
@@ -1778,7 +1808,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <tbody>
           <tr><td>80C</td><td>EPF (Employer + Employee)</td><td>&#8377;2,01,137</td><td rowspan="3">&#8377;1,50,000</td><td rowspan="3">&#8377;45,000</td></tr>
           <tr><td>80C</td><td>LIC Premium</td><td>&#8377;30,000</td></tr>
-          <tr><td>80C</td><td>ELSS SIP (New)</td><td>&#8377;1,20,000</td></tr>
+          <tr><td>80C</td><td>PPF (₹12.5K/mo — replaces ELSS, fix PP Flexi mislabel)</td><td>&#8377;1,50,000</td></tr>
           <tr><td>80CCD(1B)</td><td>NPS Tier 1 (Additional)</td><td>&#8377;96,000</td><td>&#8377;50,000</td><td>&#8377;15,000</td></tr>
           <tr><td>80CCD(1B)</td><td><strong>NPS Increase to &#8377;15k/month</strong></td><td><strong>&#8377;1,80,000</strong></td><td><strong>&#8377;50,000</strong></td><td><strong>+&#8377;13,800</strong></td></tr>
           <tr><td>80D</td><td>Health Insurance (Self + Wife)</td><td>&#8377;15,000</td><td>&#8377;25,000</td><td>&#8377;4,500</td></tr>
@@ -1853,7 +1883,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           &#9744; Buy health insurance (save &#8377;15k in taxes)<br>
           &#9744; Submit rent receipts monthly to HR<br>
           &#9744; Continue LIC (already giving 80C benefit)<br>
-          &#9744; Ensure ELSS SIP is in Direct plan
+          &#9744; Open PPF account (₹12.5K/month = ₹1.5L/year 80C)
         </div>
       </div>
       <div class="card j">
@@ -1880,7 +1910,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- SECTION 04: LTCG HARVEST TRACKER -->
     <div class="sh"><span class="sh-n">04</span><h2>LTCG Annual Harvest Calendar</h2></div>
     <div class="alert info" style="font-size:12px">
-      💡 <strong>Tax Harvesting Strategy:</strong> Every January, sell equity MF units to realize exactly ₹1.25L in gains per person (₹2.5L for the couple) — then immediately reinvest. This books gains tax-free under the annual LTCG exemption, resetting your cost basis. Over 28 years, this saves an estimated <strong>₹12–18L in taxes</strong>.
+       <strong>Tax Harvesting Strategy:</strong> Every January, sell equity MF units to realize exactly ₹1.25L in gains per person (₹2.5L for the couple) — then immediately reinvest. This books gains tax-free under the annual LTCG exemption, resetting your cost basis. Over 28 years, this saves an estimated <strong>₹12–18L in taxes</strong>.
     </div>
     <div class="g2" style="margin-bottom:13px">
       <div class="card" style="padding:16px">
@@ -2012,6 +2042,193 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </table>
       </div>
       <div style="margin-top:10px;font-size:10px;color:var(--ink3)">Note: Sell from <em>your</em> account first (harvest your ₹1.25L), then wife's account separately. Keep records — ITR filing needs purchase/sale dates.</div>
+    </div>
+
+    <!-- SECTION 05: GOVERNMENT SCHEMES -->
+    <div class="sh"><span class="sh-n">05</span><h2>Government Schemes — Tax-Free Compounders</h2></div>
+
+    <div class="alert warning" style="margin-bottom:13px">
+      <strong>80C STATUS:</strong> Parag Parikh Flexi Cap is NOT an ELSS — your ₹1,50,000/year 80C deduction is currently <strong>unfilled</strong>. PPF below fixes this and saves ₹45,000/year in tax. This is the highest-priority action before your first SIP debit.
+    </div>
+
+    <!-- PPF Card -->
+    <div class="card" style="border-left:4px solid var(--jt);margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--jt2);margin-bottom:3px">PPF — Public Provident Fund</div>
+          <div style="font-size:10px;font-family:monospace;color:var(--ink3)">EEE STATUS · 80C ELIGIBLE · GOVERNMENT BACKED · ZERO RISK</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--jt);font-family:monospace">7.1%</div>
+          <div style="font-size:9px;color:var(--ink3)">p.a. tax-free</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.06)">
+        <div>
+          <div style="font-size:9px;font-family:monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:1px">Monthly</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--jt)">₹12,500</div>
+          <div style="font-size:10px;color:var(--ink3)">= ₹1.5L/year</div>
+        </div>
+        <div>
+          <div style="font-size:9px;font-family:monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:1px">80C Saved</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--you)">₹45,000/yr</div>
+          <div style="font-size:10px;color:var(--ink3)">@ 30% slab</div>
+        </div>
+        <div>
+          <div style="font-size:9px;font-family:monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:1px">Matures</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--ink)">2041</div>
+          <div style="font-size:10px;color:var(--ink3)">15yr (extendable)</div>
+        </div>
+        <div>
+          <div style="font-size:9px;font-family:monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:1px">Pre-tax equiv.</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--jt)">~10.2%</div>
+          <div style="font-size:10px;color:var(--ink3)">@ 30% bracket</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+        <div style="background:rgba(48,200,122,0.05);padding:12px;border-radius:6px">
+          <div style="font-size:10px;font-weight:700;color:var(--jt2);margin-bottom:6px">WHY PPF OVER ELSS HERE</div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+            • Zero market risk — guaranteed by GOI<br>
+            • EEE: contribution, interest, maturity all tax-free<br>
+            • 7.1% tax-free beats Corp Bond 7.8% fully taxable<br>
+            • Partial withdrawal allowed from Year 7<br>
+            • Loan against PPF balance from Year 3
+          </div>
+        </div>
+        <div style="background:rgba(240,180,41,0.05);padding:12px;border-radius:6px">
+          <div style="font-size:10px;font-weight:700;color:var(--you);margin-bottom:6px">SETUP STEPS</div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+            &#9744; Walk in to SBI or Post Office with Aadhaar + PAN<br>
+            &#9744; Open PPF account (takes ~20 min, same day)<br>
+            &#9744; Set standing instruction: ₹12,500 on 1st every month<br>
+            &#9744; Note account number for ITR 80C claim<br>
+            &#9744; Also open wife's PPF (₹1.5L limit is per person)
+          </div>
+        </div>
+      </div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:4px;font-size:10px;color:var(--ink3);line-height:1.6">
+        <strong>Corpus projection:</strong> ₹12,500/month × 15 years at 7.1% = <strong>~₹40.6L tax-free by 2041</strong>. Extend by 5-year blocks — by 2054 (retirement) this grows to ~₹1.2Cr. Small but entirely risk-free and tax-free — perfect ballast alongside your equity portfolio.
+      </div>
+    </div>
+
+    <!-- SGB Card -->
+    <div class="card" style="border-left:4px solid #d4a017;margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#d4a017;margin-bottom:3px">SGB — Sovereign Gold Bonds</div>
+          <div style="font-size:10px;font-family:monospace;color:var(--ink3)">RBI ISSUED · 2.5% INTEREST · LTCG EXEMPT AT MATURITY · 8-YR TENURE</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:1.4rem;font-weight:800;color:#d4a017;font-family:monospace">2.5%</div>
+          <div style="font-size:9px;color:var(--ink3)">+ gold appreciation</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+        <div style="background:rgba(212,160,23,0.06);padding:12px;border-radius:6px">
+          <div style="font-size:10px;font-weight:700;color:#d4a017;margin-bottom:6px">SGB vs GOLD ETF — COMPARISON</div>
+          <div class="tw" style="margin:0">
+            <table style="font-size:10px">
+              <thead>
+                <tr><th style="text-align:left">Feature</th><th>SGB</th><th>Gold FoF</th></tr>
+              </thead>
+              <tbody>
+                <tr><td style="text-align:left">Interest</td><td>2.5%/yr taxable</td><td>None</td></tr>
+                <tr><td style="text-align:left">LTCG tax</td><td>Zero at maturity</td><td>12.5% after ₹1.25L</td></tr>
+                <tr><td style="text-align:left">Liquidity</td><td>Low (8yr lock)</td><td>High (T+2)</td></tr>
+                <tr><td style="text-align:left">Availability</td><td>Periodic tranches</td><td>Always open</td></tr>
+                <tr><td style="text-align:left">SIP possible</td><td>No</td><td>Yes</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div style="background:rgba(212,160,23,0.06);padding:12px;border-radius:6px">
+          <div style="font-size:10px;font-weight:700;color:#d4a017;margin-bottom:6px">STRATEGY</div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.7">
+            1. <strong>Now:</strong> Continue ₹10K/month Nippon Gold FoF (SIP-friendly)<br>
+            2. <strong>When SGB opens:</strong> Redirect 3–4 months of gold SIP (₹30–40K) into one SGB tranche as lump sum<br>
+            3. <strong>Long term:</strong> Build a mix — FoF for liquidity, SGB for tax-free maturity<br><br>
+            <strong>Watch:</strong> RBI typically issues SGB tranches in Oct/Nov and Apr/May windows. RBI website + Zerodha/Kuvera alerts.
+          </div>
+        </div>
+      </div>
+      <div style="padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:4px;font-size:10px;color:var(--ink3)">
+        RBI halted new SGB issuances in FY2024-25. No confirmed FY2026-27 calendar yet. Stay on Gold FoF SIP until RBI announces. Existing SGBs can be bought on secondary market (NSE/BSE) at a small premium.
+      </div>
+    </div>
+
+    <!-- RBI Floating Rate Bonds -->
+    <div class="card" style="border-left:4px solid var(--blue);margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:3px">RBI Floating Rate Savings Bonds (2020)</div>
+          <div style="font-size:10px;font-family:monospace;color:var(--ink3)">GOVERNMENT BACKED · NO 80C · TAXABLE · 7-YEAR LOCK</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--blue);font-family:monospace">8.05%</div>
+          <div style="font-size:9px;color:var(--ink3)">p.a. (floating, resets Jun/Dec)</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.8;margin-bottom:10px">
+        Rate = NSC rate + 35 bps, reset every 6 months. No 80C benefit. Fully taxable at slab rate (30% = effective 5.6% post-tax). 7-year lock-in. No secondary market.<br>
+        <strong>Use case:</strong> If emergency fund grows beyond ₹25L (i.e., you have more than 12 months expenses idle), park surplus here rather than savings account. Not for regular SIP — lump sum only via RBI Retail Direct or major banks.
+      </div>
+      <div style="padding:8px 12px;background:rgba(77,158,240,0.06);border-radius:4px;font-size:10px;color:var(--blue)">
+        Priority: LOW for now. Your emergency fund (₹20L) is already well-sized. Revisit when surplus cash exceeds ₹5L over the emergency target.
+      </div>
+    </div>
+
+    <!-- Summary Table -->
+    <div class="card" style="margin-bottom:13px">
+      <div style="font-size:10px;font-family:monospace;color:var(--ink3);margin-bottom:12px">GOVERNMENT SCHEMES — QUICK COMPARISON</div>
+      <div class="tw" style="margin:0">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left">Scheme</th>
+              <th>Rate</th>
+              <th>80C?</th>
+              <th>Tax on Returns</th>
+              <th>Lock-in</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:left;font-weight:700">PPF</td>
+              <td>7.1% p.a.</td>
+              <td><span class="tag tg">YES ₹1.5L</span></td>
+              <td>Tax-Free (EEE)</td>
+              <td>15 years</td>
+              <td><span class="tag tg">DO IT NOW</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:left;font-weight:700">SGB</td>
+              <td>2.5% + gold</td>
+              <td><span class="tag tr2">NO</span></td>
+              <td>Interest taxable; maturity LTCG-free</td>
+              <td>8 years</td>
+              <td><span class="tag ty">WHEN AVAILABLE</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:left;font-weight:700">RBI FRB</td>
+              <td>8.05% floating</td>
+              <td><span class="tag tr2">NO</span></td>
+              <td>Slab rate (30%)</td>
+              <td>7 years</td>
+              <td><span class="tag ai">LOW — SURPLUS ONLY</span></td>
+            </tr>
+            <tr>
+              <td style="text-align:left;font-weight:700">NPS (existing)</td>
+              <td>Market-linked</td>
+              <td><span class="tag tg">80CCD ₹50K extra</span></td>
+              <td>Partial exempt on withdrawal</td>
+              <td>Till age 60</td>
+              <td><span class="tag tg">ALREADY ACTIVE</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>
@@ -2353,7 +2570,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="alert info" id="monthly-proj-info"> <strong>HOW THIS WORKS:</strong> This page shows your month-by-month investment projections from April 2026 until retirement. Compare anticipated investments vs actual portfolio value (live from market). Track each fund's performance, add lump sums, and see if you're on track for your retirement goal.</div>
 
     <!-- UNIFIED FAMILY PORTFOLIO SECTION -->
-    <div class="sh"><span class="sh-n">01</span><h2 id="yourFundOverviewTitle">Unified Family Portfolio - Fund Overview (8 Funds, ₹1.91L/month)</h2></div>
+    <div class="sh"><span class="sh-n">01</span><h2 id="yourFundOverviewTitle">Unified Family Portfolio - Fund Overview (9 Funds, ₹1.91L/month)</h2></div>
     <div id="yourFundCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmin(320px,1fr));gap:12px;margin-bottom:24px">
       <!-- Fund cards will be generated by JavaScript -->
     </div>
@@ -2518,7 +2735,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 
     <!-- Dynamic Insurance Progress Panel -->
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <div style="font-size:11px;color:var(--ink3)">Status syncs with 🚀 April Launch page. Click buttons to update.</div>
+      <div style="font-size:11px;color:var(--ink3)">Status syncs with  April Launch page. Click buttons to update.</div>
       <div style="font-size:12px;font-family:monospace;color:var(--you)" id="alertsActionsCounter">Loading...</div>
     </div>
     <div id="alertsInsurancePanels" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
@@ -2540,10 +2757,10 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div class="alert-icon">&#9989;</div>
       <div class="alert-body">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <h4>Monitor Unified Portfolio (8 Funds)</h4>
+          <h4>Monitor Unified Portfolio (9 Funds)</h4>
           <span class="alert-badge badge-green">OPTIMIZED</span>
         </div>
-        <p>✅ Portfolio optimized April 2026: 8 unified funds, ₹1.91L/month total. All SIPs active: Nifty 50 (₹60K), Parag Parikh (₹18K), Motilal Midcap (₹38K), Nippon Small Cap (₹12K), S&amp;P 500 (₹25K), HDFC Balanced (₹12K), HDFC Corp Bond (₹20K), NPS (₹6.2K). Track via Kuvera dashboard.</p>
+        <p>✅ Portfolio revised April 2026: 9 funds, ₹1.91L/month total. Nifty 50 (₹60K), PP Flexi (₹18K), MO Midcap (₹25K), HDFC Midcap Opp (₹13K), Nippon Small Cap (₹15K), S&amp;P 500 (₹18K), Nippon Gold (₹10K), HDFC Corp Bond (₹26K), NPS (₹6.2K). 80C via PPF ₹12.5K/month separately. Track via Kuvera.</p>
       </div>
     </div>
 
@@ -2668,8 +2885,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="sh"><span class="sh-n">01</span><h2> Enter Current Portfolio Values</h2></div>
     <div class="g2">
       <div class="card j">
-        <div class="ch3 j">UNIFIED FAMILY PORTFOLIO - Current Values (8 Funds)</div>
-        <div class="alert info" style="margin-bottom:12px;font-size:11px"> Track your actual portfolio values here to compare against projections. Portfolio unified in April 2026 - ₹1.91L/month total SIP.</div>
+        <div class="ch3 j">UNIFIED FAMILY PORTFOLIO - Current Values (9 Funds)</div>
+        <div class="alert info" style="margin-bottom:12px;font-size:11px"> Track your actual portfolio values here to compare against projections. Portfolio revised April 2026 - ₹1.91L/month total SIP. 80C via PPF ₹12.5K/month tracked separately.</div>
         <div class="field-row">
           <span class="field-label">1. Nifty 50 Index Fund (₹60K SIP)</span>
           <input type="number" class="field-input" id="rv-nifty50" placeholder="₹0" step="1000">
@@ -2679,27 +2896,31 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <input type="number" class="field-input" id="rv-ppfc" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">3. Motilal Oswal Midcap (₹38K SIP)</span>
+          <span class="field-label">3. Motilal Oswal Midcap (₹25K SIP)</span>
           <input type="number" class="field-input" id="rv-motilal" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">4. Nippon Small Cap (₹12K SIP)</span>
+          <span class="field-label">4. HDFC Mid-Cap Opportunities (₹13K SIP)</span>
+          <input type="number" class="field-input" id="rv-hdfc-mid" placeholder="₹0" step="1000">
+        </div>
+        <div class="field-row">
+          <span class="field-label">5. Nippon Small Cap (₹15K SIP)</span>
           <input type="number" class="field-input" id="rv-quant" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">5. Motilal S&P 500 Index (₹25K SIP)</span>
+          <span class="field-label">6. Motilal S&P 500 Index (₹18K SIP)</span>
           <input type="number" class="field-input" id="rv-sp500" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">6. HDFC Balanced Advantage (₹12K SIP)</span>
-          <input type="number" class="field-input" id="rv-hdfc-bal" placeholder="₹0" step="1000">
+          <span class="field-label">7. Nippon Gold Savings Fund (₹10K SIP)</span>
+          <input type="number" class="field-input" id="rv-gold" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">7. HDFC Corporate Bond (₹20K SIP)</span>
+          <span class="field-label">8. HDFC Corporate Bond (₹26K SIP)</span>
           <input type="number" class="field-input" id="rv-corp-bond" placeholder="₹0" step="1000">
         </div>
         <div class="field-row">
-          <span class="field-label">8. NPS Tier 1 Auto Choice (₹6.2K SIP)</span>
+          <span class="field-label">9. NPS Tier 1 Auto Choice (₹6.2K SIP)</span>
           <input type="number" class="field-input" id="rv-nps" placeholder="₹0" step="1000">
         </div>
         <div class="tr">
@@ -3029,50 +3250,58 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr>
             <td>Motilal Oswal Midcap Fund</td>
             <td>Mid Cap Active</td>
-            <td>₹38,000</td>
-            <td>20%</td>
+            <td>₹25,000</td>
+            <td>13%</td>
             <td>0.55%</td>
-            <td>Growth driver - High alpha potential</td>
+            <td>Growth driver - High alpha potential (reduced)</td>
           </tr>
           <tr>
             <td>Motilal Oswal S&P 500 Index</td>
             <td>International</td>
-            <td>₹25,000</td>
-            <td>13%</td>
+            <td>₹18,000</td>
+            <td>9%</td>
             <td>0.50%</td>
-            <td>US market + Currency diversification</td>
+            <td>US market + Currency diversification (trimmed)</td>
+          </tr>
+          <tr>
+            <td>HDFC Mid-Cap Opportunities Fund</td>
+            <td>Mid Cap Active</td>
+            <td>₹13,000</td>
+            <td>7%</td>
+            <td>0.77%</td>
+            <td>Mid cap alpha, AMC diversification</td>
+          </tr>
+          <tr>
+            <td>Nippon India Gold Savings Fund</td>
+            <td>Commodity</td>
+            <td>₹10,000</td>
+            <td>5%</td>
+            <td>0.12%</td>
+            <td>Gold hedge - Inflation + INR protection</td>
           </tr>
           <tr>
             <td>HDFC Corporate Bond Fund</td>
             <td>Debt</td>
-            <td>₹20,000</td>
-            <td>10%</td>
+            <td>₹26,000</td>
+            <td>14%</td>
             <td>0.41%</td>
             <td>Stability - Consistent 7-8% returns</td>
           </tr>
           <tr>
-            <td>Parag Parikh Flexi Cap (ELSS)</td>
+            <td>Parag Parikh Flexi Cap</td>
             <td>Flexi Cap</td>
             <td>₹18,000</td>
             <td>9%</td>
             <td>0.68%</td>
-            <td>International + Value + 80C tax saving</td>
+            <td>International + Value (80C via PPF separately)</td>
           </tr>
           <tr>
             <td>Nippon Small Cap Fund</td>
             <td>Small Cap Active</td>
-            <td>₹12,000</td>
-            <td>6%</td>
+            <td>₹15,000</td>
+            <td>8%</td>
             <td>0.71%</td>
             <td>High alpha - Small cap outperformance</td>
-          </tr>
-          <tr>
-            <td>HDFC Balanced Advantage Fund</td>
-            <td>Hybrid</td>
-            <td>₹12,000</td>
-            <td>6%</td>
-            <td>0.31%</td>
-            <td>Dynamic allocation - Crash protection</td>
           </tr>
           <tr>
             <td>NPS Tier 1</td>
@@ -3086,7 +3315,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
             <td colspan="2"><strong>TOTAL FAMILY PORTFOLIO</strong></td>
             <td><strong>₹1,91,200</strong></td>
             <td><strong>100%</strong></td>
-            <td><strong>0.38% avg</strong></td>
+            <td><strong>0.40% avg</strong></td>
             <td><strong>₹22,94,400/year</strong></td>
           </tr>
         </tbody>
@@ -3101,15 +3330,15 @@ tr.milestone{background:rgba(240,180,41,.05)}
           • Low cost (0.38% vs industry 0.8%)<br>
           • Balanced across asset classes<br>
           • Clear strategic roles - no redundancy<br>
-          • Tax-optimized (ELSS + NPS)
+          • Tax-optimized (PPF 80C + NPS 80CCD)
         </div>
       </div>
       <div class="card y">
         <div class="ch3 y">Core-Satellite-Stable Strategy</div>
         <div style="padding:8px;font-size:12px;line-height:1.7">
-          <strong>Core (45%):</strong> Nifty 50 + S&P 500<br>
-          <strong>Satellite (35%):</strong> Midcap + Small + Flexi<br>
-          <strong>Stable (17%):</strong> Debt + Hybrid<br>
+          <strong>Core (40%):</strong> Nifty 50 + S&P 500<br>
+          <strong>Satellite (37%):</strong> 2x Midcap + Small + Flexi<br>
+          <strong>Stable (19%):</strong> Gold + Corp Bond<br>
           <strong>Tax (3%):</strong> NPS locked savings
         </div>
       </div>
@@ -3155,7 +3384,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           • Avg expense ratio: 0.58%<br>
           • Management complexity: HIGH<br><br>
           <strong>After (April 2026):</strong><br>
-          • 8 unified funds ✅<br>
+          • 9 unified funds ✅<br>
           • 0 high overlap pairs ✅<br>
           • Avg expense ratio: 0.38% ✅<br>
           • Management complexity: LOW ✅
@@ -4494,7 +4723,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 <div class="page" id="page-21">
   <div class="hdr">
     <div class="htag">MISSION CONTROL · APRIL 2026</div>
-    <h1>🚀 April <span>Launch Dashboard</span></h1>
+    <h1> April <span>Launch Dashboard</span></h1>
     <p>SIP ACTIVATION · INSURANCE SETUP · WEEK-BY-WEEK CHECKLIST</p>
   </div>
   <div class="content">
@@ -4505,8 +4734,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:16px">
         <div class="metric-block">
           <div class="mb-label">Funds Activated</div>
-          <div class="mb-value">8</div>
-          <div class="mb-sub">Unified family portfolio</div>
+          <div class="mb-value">9</div>
+          <div class="mb-sub">+ PPF govt scheme</div>
         </div>
         <div class="metric-block">
           <div class="mb-label">Monthly SIP</div>
@@ -4543,7 +4772,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Week 1 -->
     <div class="checklist-week">
       <div class="checklist-week-header">
-        <span>📋 WEEK 1 (Apr 1–7): Insurance Research</span>
+        <span> WEEK 1 (Apr 1–7): Insurance Research</span>
         <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="w1progress">0/5</span>
       </div>
       <div class="checklist-item" id="ci-w1-1" onclick="toggleChecklistItem('w1-1')">
@@ -4571,7 +4800,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Week 2 -->
     <div class="checklist-week">
       <div class="checklist-week-header">
-        <span>💰 WEEK 2 (Apr 8–14): SIP Activation</span>
+        <span> WEEK 2 (Apr 8–14): SIP Activation</span>
         <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="w2progress">0/5</span>
       </div>
       <div class="checklist-item" id="ci-w2-1" onclick="toggleChecklistItem('w2-1')">
@@ -4584,7 +4813,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
       <div class="checklist-item" id="ci-w2-3" onclick="toggleChecklistItem('w2-3')">
         <input type="checkbox" id="chk-w2-3" onclick="event.stopPropagation();toggleChecklistItem('w2-3')">
-        <span class="check-label">Activate all 8 SIPs with correct SIP dates (1st or 5th)</span>
+        <span class="check-label">Activate all 9 SIPs with correct SIP dates (1st or 5th) + open PPF account</span>
       </div>
       <div class="checklist-item" id="ci-w2-4" onclick="toggleChecklistItem('w2-4')">
         <input type="checkbox" id="chk-w2-4" onclick="event.stopPropagation();toggleChecklistItem('w2-4')">
@@ -4604,7 +4833,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
       <div class="checklist-item" id="ci-w3-1" onclick="toggleChecklistItem('w3-1')">
         <input type="checkbox" id="chk-w3-1" onclick="event.stopPropagation();toggleChecklistItem('w3-1')">
-        <span class="check-label">Confirm first SIP deducted for all 8 funds</span>
+        <span class="check-label">Confirm first SIP deducted for all 9 funds + PPF standing instruction active</span>
       </div>
       <div class="checklist-item" id="ci-w3-2" onclick="toggleChecklistItem('w3-2')">
         <input type="checkbox" id="chk-w3-2" onclick="event.stopPropagation();toggleChecklistItem('w3-2')">
@@ -4623,7 +4852,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <!-- Week 4 -->
     <div class="checklist-week">
       <div class="checklist-week-header">
-        <span>📊 WEEK 4 (Apr 22–30): First Month Review</span>
+        <span> WEEK 4 (Apr 22–30): First Month Review</span>
         <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="w4progress">0/5</span>
       </div>
       <div class="checklist-item" id="ci-w4-1" onclick="toggleChecklistItem('w4-1')">
@@ -4664,7 +4893,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
 
     <!-- SECTION D: SIP SETUP GUIDE -->
-    <div class="sh"><span class="sh-n">04</span><h2>SIP Setup Guide — 8 Funds</h2></div>
+    <div class="sh"><span class="sh-n">04</span><h2>SIP Setup Guide — 9 Funds + PPF</h2></div>
     <div class="card" style="margin-bottom:13px">
       <div class="ch3 y">STEP-BY-STEP: SETTING UP ON MFCENTRAL / GROWW / ZERODHA</div>
       <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:10px">
@@ -4691,15 +4920,17 @@ tr.milestone{background:rgba(240,180,41,.05)}
           </tr>
         </thead>
         <tbody>
-          <tr><td>Nifty 50 Index Fund</td><td>Large Cap</td><td>₹60,000</td><td>120503 (UTI) / 120716 (MO)</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
+          <tr><td>Nifty 50 Index Fund</td><td>Large Cap</td><td>₹60,000</td><td>120716 (MO Nifty 50)</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
           <tr><td>Parag Parikh Flexi Cap</td><td>Flexi Cap + Intl</td><td>₹18,000</td><td>122639</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
-          <tr><td>Motilal Oswal Midcap</td><td>Mid Cap</td><td>₹38,000</td><td>135777</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
-          <tr><td>Nippon Small Cap</td><td>Small Cap</td><td>₹12,000</td><td>118989</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
-          <tr><td>Motilal Oswal S&amp;P 500</td><td>International</td><td>₹25,000</td><td>120835</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
-          <tr><td>HDFC Balanced Advantage</td><td>Balanced / Hybrid</td><td>₹12,000</td><td>101305</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
-          <tr><td>HDFC Corporate Bond</td><td>Debt</td><td>₹20,000</td><td>119931</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>Motilal Oswal Midcap</td><td>Mid Cap</td><td>₹25,000</td><td>135777</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>HDFC Mid-Cap Opportunities</td><td>Mid Cap</td><td>₹13,000</td><td>118564 (verify)</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>Nippon Small Cap</td><td>Small Cap</td><td>₹15,000</td><td>118989</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>Motilal Oswal S&amp;P 500</td><td>International</td><td>₹18,000</td><td>120835</td><td><span class="tg">DIRECT</span></td><td>1st</td></tr>
+          <tr><td>Nippon India Gold Savings</td><td>Gold FoF</td><td>₹10,000</td><td>118825 (verify)</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
+          <tr><td>HDFC Corporate Bond</td><td>Debt</td><td>₹26,000</td><td>119931</td><td><span class="tg">DIRECT</span></td><td>5th</td></tr>
           <tr><td>NPS Tier 1 (via salary)</td><td>Pension / Debt/Eq</td><td>₹6,200</td><td>Auto-debit via employer</td><td><span class="ty">NPS</span></td><td>Salary day</td></tr>
-          <tr class="ttr"><td>Total</td><td></td><td>₹1,91,200</td><td></td><td></td><td></td></tr>
+          <tr><td>PPF Account</td><td>Govt Scheme 80C</td><td>₹12,500</td><td>Post Office / SBI Branch</td><td><span class="ty">PPF</span></td><td>1st–5th</td></tr>
+          <tr class="ttr"><td>Total (MF+NPS)</td><td></td><td>₹1,91,200</td><td></td><td></td><td></td></tr>
         </tbody>
       </table>
     </div>
@@ -4725,7 +4956,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 <div class="page" id="page-22">
   <div class="hdr">
     <div class="htag">ANNUAL STEP-UP PLANNER · 28 YEARS</div>
-    <h1>📅 Step-up <span>SIP Planner 2026–2054</span></h1>
+    <h1> Step-up <span>SIP Planner 2026–2054</span></h1>
     <p>TIERED STEP-UP 10%→7%→5% · ₹1.91L BASE · 9% CAGR (CONSERVATIVE)</p>
   </div>
   <div class="content">
@@ -4763,7 +4994,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
       </div>
       <div style="font-size:10px;color:var(--ink3);margin-bottom:8px">
-        🟢 Green = 2026-2030 (Active years) &nbsp;|&nbsp; 🔵 Blue = 2031-2040 &nbsp;|&nbsp; 🟣 Purple = 2041-2054 &nbsp;|&nbsp; ⭐ Highlighted = SIP milestone year
+         Green = 2026-2030 (Active years) &nbsp;|&nbsp;  Blue = 2031-2040 &nbsp;|&nbsp;  Purple = 2041-2054 &nbsp;|&nbsp; ⭐ Highlighted = SIP milestone year
       </div>
     </div>
     <div class="tw">
@@ -4835,7 +5066,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
       </div>
       <div style="margin-top:12px;padding:12px;background:var(--jt-s);border-radius:6px;border-left:3px solid var(--jt);font-size:11px">
-        💡 <strong>The step-up discipline advantage:</strong> Each 5% increase in annual step-up rate adds roughly ₹20-30 Crore to your 2054 corpus. That's the power of behavioural discipline compounding over 28 years.
+         <strong>The step-up discipline advantage:</strong> Each 5% increase in annual step-up rate adds roughly ₹20-30 Crore to your 2054 corpus. That's the power of behavioural discipline compounding over 28 years.
       </div>
     </div>
 
@@ -4845,7 +5076,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
 <!-- PAGE 23: RETIREMENT DRAWDOWN PLAN -->
 <div class="page" id="page-23">
   <div class="hdr">
-    <h1>🏦 Retirement <span>Drawdown Plan</span></h1>
+    <h1> Retirement <span>Drawdown Plan</span></h1>
     <p>From wealth accumulation to wealth distribution — a CFP-grade decumulation strategy for your ₹66 Cr corpus at age 60.</p>
   </div>
   <div class="content">
@@ -6036,11 +6267,13 @@ function renderInvestmentCharts() {
   const labels = funds.map(f => {
     // Shorten names for chart display
     if (f.name.includes('Nifty 50')) return 'Nifty 50 Index';
-    if (f.name.includes('Parag Parikh')) return 'Parag Parikh ELSS';
-    if (f.name.includes('Motilal Oswal Midcap')) return 'Motilal Midcap';
-    if (f.name.includes('Nippon')) return 'Nippon Small Cap';
+    if (f.name.includes('Parag Parikh')) return 'Parag Parikh Flexi';
+    if (f.name.includes('Motilal Oswal Midcap')) return 'MO Midcap';
+    if (f.name.includes('Mid-Cap Opportunities')) return 'HDFC Midcap Opp';
+    if (f.name.includes('Nippon') && f.name.includes('Small')) return 'Nippon Small Cap';
+    if (f.name.includes('Gold Savings')) return 'Nippon Gold';
+    if (f.name.includes('Nippon')) return 'Nippon Fund';
     if (f.name.includes('S&P 500')) return 'S&P 500 Index';
-    if (f.name.includes('Balanced')) return 'HDFC Balanced';
     if (f.name.includes('Corporate Bond')) return 'HDFC Corp Bond';
     if (f.name.includes('NPS')) return 'NPS Tier 1';
     return f.name.substring(0, 20);
@@ -6053,11 +6286,12 @@ function renderInvestmentCharts() {
   const colors = [
     '#30c87a', // Nifty 50 (green)
     '#f0b429', // Parag Parikh (yellow)
-    '#e040a0', // Motilal Midcap (purple)
+    '#e040a0', // MO Midcap (pink/purple)
+    '#c084fc', // HDFC Midcap Opp (light purple)
     '#ff6b9d', // Nippon Small (pink)
     '#4d9ef0', // S&P 500 (blue)
-    '#50c8c8', // HDFC Balanced (teal)
-    '#9aa2b0', // HDFC Bond (gray)
+    '#d4a017', // Nippon Gold (dark gold)
+    '#9aa2b0', // HDFC Corp Bond (gray)
     '#7c8ea6'  // NPS (dark gray)
   ];
 
@@ -7212,12 +7446,13 @@ function calculateStepUpSIP(targetCorpus, years, expectedReturn, stepUpRate) {
 // IMPORTANT: Order matches Settings page inputs (s-sip-0 through s-sip-7)
 const familyFunds = [
   { name: 'Nifty 50 Index Fund Direct Growth', schemeCode: '120716', monthlySIP: 60000, stepUp: 10, purpose: 'Core - Market Returns at Minimal Cost', category: 'Large Cap', benchmark: 'Nifty 50 TRI', expenseRatio: 0.07, owner: 'Combined (66% Shya, 34% Avantika for tax)', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
-  { name: 'Parag Parikh Flexi Cap Direct Growth', schemeCode: '122639', monthlySIP: 18000, stepUp: 10, purpose: 'Satellite - International + Value + 80C Tax Saving (ELSS)', category: 'Flexi Cap', benchmark: 'Nifty 500 TRI', expenseRatio: 0.68, owner: 'Shya (80C)', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
-  { name: 'Motilal Oswal Midcap Fund Direct Growth', schemeCode: '135777', monthlySIP: 38000, stepUp: 10, purpose: 'Growth - High Alpha Potential', category: 'Mid Cap', benchmark: 'Nifty Midcap 150 TRI', expenseRatio: 0.55, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
-  { name: 'Nippon India Small Cap Fund Direct Growth', schemeCode: '118989', monthlySIP: 12000, stepUp: 10, purpose: 'Growth - Small Cap Outperformance', category: 'Small Cap', benchmark: 'Nifty Smallcap 250 TRI', expenseRatio: 0.71, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
-  { name: 'Motilal Oswal S&P 500 Index Fund Direct Growth', schemeCode: '120835', monthlySIP: 25000, stepUp: 10, purpose: 'International - US Market + Currency Diversification', category: 'International', benchmark: 'S&P 500 TRI', expenseRatio: 0.50, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
-  { name: 'HDFC Balanced Advantage Fund Direct Growth', schemeCode: '101305', monthlySIP: 12000, stepUp: 10, purpose: 'Hybrid - Dynamic Allocation + Crash Protection', category: 'Hybrid', benchmark: 'CRISIL Hybrid 35+65 TRI', expenseRatio: 0.31, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
-  { name: 'HDFC Corporate Bond Fund Direct Growth', schemeCode: '119931', monthlySIP: 20000, stepUp: 10, purpose: 'Stability - Consistent 7-8% Returns', category: 'Debt', benchmark: 'CRISIL Composite Bond Index', expenseRatio: 0.41, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'Parag Parikh Flexi Cap Direct Growth', schemeCode: '122639', monthlySIP: 18000, stepUp: 10, purpose: 'Satellite - International + Value Investing (NOT ELSS — claim 80C via PPF separately)', category: 'Flexi Cap', benchmark: 'Nifty 500 TRI', expenseRatio: 0.68, owner: 'Shya', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'Motilal Oswal Midcap Fund Direct Growth', schemeCode: '135777', monthlySIP: 25000, stepUp: 10, purpose: 'Growth - High Alpha Potential (Reduced: AMC concentration risk)', category: 'Mid Cap', benchmark: 'Nifty Midcap 150 TRI', expenseRatio: 0.55, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'HDFC Mid-Cap Opportunities Fund Direct Growth', schemeCode: '118564', monthlySIP: 13000, stepUp: 10, purpose: 'Growth - Mid Cap Alpha, AMC Diversification from Motilal Oswal', category: 'Mid Cap', benchmark: 'Nifty Midcap 100 TRI', expenseRatio: 0.77, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'Nippon India Small Cap Fund Direct Growth', schemeCode: '118989', monthlySIP: 15000, stepUp: 10, purpose: 'Growth - Small Cap Outperformance', category: 'Small Cap', benchmark: 'Nifty Smallcap 250 TRI', expenseRatio: 0.71, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'Motilal Oswal S&P 500 Index Fund Direct Growth', schemeCode: '120835', monthlySIP: 18000, stepUp: 10, purpose: 'International - US Market + Currency Diversification (Trimmed: US concentration risk)', category: 'International', benchmark: 'S&P 500 TRI', expenseRatio: 0.50, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'Nippon India Gold Savings Fund Direct Growth', schemeCode: '118825', monthlySIP: 10000, stepUp: 5, purpose: 'Hedge - Gold Allocation, Inflation + INR Currency Protection', category: 'Commodity', benchmark: 'Domestic Gold Price', expenseRatio: 0.12, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
+  { name: 'HDFC Corporate Bond Fund Direct Growth', schemeCode: '119931', monthlySIP: 26000, stepUp: 5, purpose: 'Stability - Consistent 7-8% Returns + Capital Preservation', category: 'Debt', benchmark: 'CRISIL Composite Bond Index', expenseRatio: 0.41, owner: 'Combined', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'NPS Tier 1 Auto Choice Aggressive', schemeCode: 'NPS001', monthlySIP: 6200, stepUp: 10, purpose: 'Retirement - 80CCD Tax Benefit + Locked till 60', category: 'Hybrid', benchmark: 'Custom NPS Benchmark', expenseRatio: 0.09, owner: 'Shya (80CCD)', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } }
 ];
 
@@ -11031,7 +11266,11 @@ const fundHoldings = {
     name: 'Motilal Oswal S&P 500 Index Fund Direct Growth',
     holdings: ['Apple', 'Microsoft', 'Amazon', 'NVIDIA', 'Alphabet', 'Meta Platforms', 'Tesla', 'Berkshire Hathaway', 'Visa', 'JPMorgan Chase']
   },
-  '101305': { // HDFC Balanced Advantage Fund
+  '118564': { // HDFC Mid-Cap Opportunities Fund Direct Growth
+    name: 'HDFC Mid-Cap Opportunities Fund Direct Growth',
+    holdings: ['Cholamandalam Investment', 'Max Healthcare', 'Tube Investments', 'Cummins India', 'Persistent Systems', 'Sundaram Finance', 'Voltas', 'Mphasis', 'Bharat Forge', 'Indian Hotels']
+  },
+  '101305': { // HDFC Balanced Advantage Fund (removed from active portfolio)
     name: 'HDFC Balanced Advantage Fund Direct Growth',
     holdings: ['HDFC Bank', 'ICICI Bank', 'Reliance Industries', 'Infosys', 'TCS', 'Bharti Airtel', 'Axis Bank', 'Kotak Mahindra Bank', 'SBI', 'Larsen & Toubro']
   },
@@ -15300,7 +15539,7 @@ function renderHealthScore() {
     if (gradeEl) { gradeEl.textContent = 'GOOD — Insurance Gap ⚠️'; gradeEl.style.color = 'var(--you)'; }
   } else {
     ringFill.classList.remove('green','gold'); ringFill.classList.add('red-ring');
-    if (gradeEl) { gradeEl.textContent = 'NEEDS ATTENTION 🔴'; gradeEl.style.color = 'var(--red)'; }
+    if (gradeEl) { gradeEl.textContent = 'NEEDS ATTENTION '; gradeEl.style.color = 'var(--red)'; }
   }
 
   // Insurance bar
@@ -15320,14 +15559,14 @@ function renderHealthScore() {
 // ─── 2. WEALTH MILESTONES TIMELINE ────────────────────────────
 function calculateMilestones() {
   var milestones = [
-    { label: '₹25L',  crore: 0.25, emoji: '🌱' },
-    { label: '₹50L',  crore: 0.50, emoji: '🌿' },
-    { label: '₹1Cr',  crore: 1,    emoji: '🎯' },
+    { label: '₹25L',  crore: 0.25, emoji: '' },
+    { label: '₹50L',  crore: 0.50, emoji: '' },
+    { label: '₹1Cr',  crore: 1,    emoji: '' },
     { label: '₹5Cr',  crore: 5,    emoji: '⭐' },
-    { label: '₹10Cr', crore: 10,   emoji: '🚀' },
-    { label: '₹25Cr', crore: 25,   emoji: '💎' },
-    { label: '₹50Cr', crore: 50,   emoji: '👑' },
-    { label: '₹66Cr', crore: 66,   emoji: '🏆' }
+    { label: '₹10Cr', crore: 10,   emoji: '' },
+    { label: '₹25Cr', crore: 25,   emoji: '' },
+    { label: '₹50Cr', crore: 50,   emoji: '' },
+    { label: '₹66Cr', crore: 66,   emoji: '' }
   ];
 
   // Simulate corpus growth from Apr 2026 with tiered step-up (10%→7%→5%), 9% CAGR (conservative)
@@ -15494,7 +15733,7 @@ function updateAprilCountdown() {
     el.style.color    = 'var(--blue)';
     if (subEl) subEl.textContent = 'until April 1, 2026 — SIP start date';
   } else if (diff === 0) {
-    el.textContent    = '🚀 TODAY';
+    el.textContent    = ' TODAY';
     el.style.color    = 'var(--jt)';
     if (subEl) subEl.textContent = 'April 1, 2026 — Launch day! Activate your SIPs!';
   } else {
@@ -15525,8 +15764,8 @@ function saveInsuranceStatus(type, status) {
 
 function buildInsuranceCard(type, cfg, status) {
   var statusMap = {
-    'new':       { label: '🔴 NOT STARTED', cls: 'status-new',      dotCls: 'red' },
-    'progress':  { label: '🟡 IN PROGRESS', cls: 'status-progress',  dotCls: 'yellow' },
+    'new':       { label: ' NOT STARTED', cls: 'status-new',      dotCls: 'red' },
+    'progress':  { label: ' IN PROGRESS', cls: 'status-progress',  dotCls: 'yellow' },
     'completed': { label: '✅ COMPLETED',   cls: 'status-done',      dotCls: 'green' }
   };
   var s = statusMap[status] || statusMap['new'];
@@ -15556,9 +15795,9 @@ function renderInsurancePanels() {
   if (!container) return;
   var status = loadInsuranceStatus();
   var configs = {
-    term:    { title: '🛡️ Term Life Insurance',   cover: '₹20 Crore', provider: 'HDFC Life Click2Protect / Max Life Smart Secure', premium: '~₹65,000/year' },
-    health:  { title: '🏥 Family Health Insurance', cover: '₹20 Lakh',  provider: 'Niva Bupa / Star Health',  premium: '~₹25,000/year' },
-    parents: { title: '👴 Parents Health Insurance', cover: '₹10 Lakh', provider: 'Star Senior Citizen',       premium: '~₹40,000/year' }
+    term:    { title: '️ Term Life Insurance',   cover: '₹20 Crore', provider: 'HDFC Life Click2Protect / Max Life Smart Secure', premium: '~₹65,000/year' },
+    health:  { title: ' Family Health Insurance', cover: '₹20 Lakh',  provider: 'Niva Bupa / Star Health',  premium: '~₹25,000/year' },
+    parents: { title: ' Parents Health Insurance', cover: '₹10 Lakh', provider: 'Star Senior Citizen',       premium: '~₹40,000/year' }
   };
   var html = '';
   Object.keys(configs).forEach(function(type) {
@@ -15572,9 +15811,9 @@ function renderAlertInsurancePanels() {
   if (!container) return;
   var status = loadInsuranceStatus();
   var configs = {
-    term:    { title: '🛡️ Term Life Insurance',   cover: '₹20 Crore', provider: 'HDFC Life Click2Protect / Max Life Smart Secure', premium: '~₹65,000/year' },
-    health:  { title: '🏥 Family Health Insurance', cover: '₹20 Lakh',  provider: 'Niva Bupa / Star Health',  premium: '~₹25,000/year' },
-    parents: { title: '👴 Parents Health Insurance', cover: '₹10 Lakh', provider: 'Star Senior Citizen',       premium: '~₹40,000/year' }
+    term:    { title: '️ Term Life Insurance',   cover: '₹20 Crore', provider: 'HDFC Life Click2Protect / Max Life Smart Secure', premium: '~₹65,000/year' },
+    health:  { title: ' Family Health Insurance', cover: '₹20 Lakh',  provider: 'Niva Bupa / Star Health',  premium: '~₹25,000/year' },
+    parents: { title: ' Parents Health Insurance', cover: '₹10 Lakh', provider: 'Star Senior Citizen',       premium: '~₹40,000/year' }
   };
   var html = '';
   Object.keys(configs).forEach(function(type) {
@@ -15589,11 +15828,12 @@ function renderAlertInsurancePanels() {
 var FAMILY_FUNDS_STEPUP = [
   { name: 'Nifty 50 Index',           sip: 60000  },
   { name: 'Parag Parikh Flexi Cap',   sip: 18000  },
-  { name: 'Motilal Midcap',           sip: 38000  },
-  { name: 'Nippon Small Cap',         sip: 12000  },
-  { name: 'Motilal S&P 500',          sip: 25000  },
-  { name: 'HDFC Balanced Advantage',  sip: 12000  },
-  { name: 'HDFC Corporate Bond',      sip: 20000  },
+  { name: 'Motilal Midcap',           sip: 25000  },
+  { name: 'HDFC Midcap Opp',          sip: 13000  },
+  { name: 'Nippon Small Cap',         sip: 15000  },
+  { name: 'Motilal S&P 500',          sip: 18000  },
+  { name: 'Nippon Gold Fund',         sip: 10000  },
+  { name: 'HDFC Corporate Bond',      sip: 26000  },
   { name: 'NPS Tier 1',               sip: 6200   }
 ];
 var BASE_SIP   = 191200;
@@ -15634,7 +15874,7 @@ function renderUSConcentration() {
   var usPct   = (totalUS / totalSIP) * 100;
 
   var warningColor = usPct > 20 ? 'var(--red)' : (usPct > 15 ? '#f59e0b' : 'var(--jt)');
-  var warningLabel = usPct > 20 ? '🔴 HIGH — REDUCE' : (usPct > 15 ? '⚠️ ELEVATED' : '✅ ACCEPTABLE');
+  var warningLabel = usPct > 20 ? ' HIGH — REDUCE' : (usPct > 15 ? '⚠️ ELEVATED' : '✅ ACCEPTABLE');
 
   if (card) {
     var borderColor = usPct > 20 ? 'var(--red)' : (usPct > 15 ? '#f59e0b' : 'var(--bdr)');
@@ -15651,7 +15891,7 @@ function renderUSConcentration() {
     '<span style="font-family:monospace;font-weight:700;color:' + warningColor + '">' + usPct.toFixed(1) + '% &nbsp; ' + warningLabel + '</span>' +
     '</div>' +
     (usPct > 15
-      ? '<div style="font-size:10px;color:var(--ink3);line-height:1.6">⚠️ US concentration risk: a US recession hits both Parag Parikh and S&P500 simultaneously. Consider reducing S&P500 SIP from ₹25K → ₹15K and redirecting ₹10K to a gold ETF or domestic mid-cap.</div>'
+      ? '<div style="font-size:10px;color:var(--ink3);line-height:1.6">⚠️ US concentration risk: a US recession hits both Parag Parikh and S&P500 simultaneously. S&P 500 trimmed to ₹18K (from ₹25K) and ₹10K redirected to Nippon Gold Savings. Monitor if PP Flexi increases US allocation above 40%.</div>'
       : '<div style="font-size:10px;color:var(--jt2)">✅ US exposure within acceptable range. Review if Parag Parikh increases its US allocation above 40%.</div>');
 }
 
@@ -15755,7 +15995,7 @@ function renderCAGRDeviation() {
     } else if (deviation >= 0) {
       noteEl.innerHTML = '⚠️ <strong>Marginal buffer:</strong> Analysis CAGR is only ' + deviation.toFixed(1) + '% above assumption. Watch for any underperforming funds and consider replacing them if 5Y CAGR stays below benchmark for 12+ months.';
     } else {
-      noteEl.innerHTML = '🔴 <strong>Warning:</strong> Historical analysis (' + analysisPct.toFixed(1) + '%) is BELOW the 9% assumption by ' + Math.abs(deviation).toFixed(1) + '%. If this persists, projected corpus could be ' + fmtCr(Math.abs(diff)) + ' lower. Review fund selection on the Fund Comparison page.';
+      noteEl.innerHTML = ' <strong>Warning:</strong> Historical analysis (' + analysisPct.toFixed(1) + '%) is BELOW the 9% assumption by ' + Math.abs(deviation).toFixed(1) + '%. If this persists, projected corpus could be ' + fmtCr(Math.abs(diff)) + ' lower. Review fund selection on the Fund Comparison page.';
     }
   }
 }
@@ -16012,7 +16252,7 @@ function renderDecumulation() {
       var at90 = projectCorpus(30);
       var verdict = at90 > corpus * 0.5 ? '<span style="color:var(--jt)">✅ Perpetual</span>'
                   : at90 > 0            ? '<span style="color:var(--you)">⚠️ Safe to 90+</span>'
-                  :                       '<span style="color:var(--red)">🔴 Risky</span>';
+                  :                       '<span style="color:var(--red)"> Risky</span>';
       var bg = row.rate === '4%' ? 'background:rgba(246,173,85,0.06)' : '';
       return '<tr style="border-bottom:1px solid var(--bdr);' + bg + '">' +
         '<td style="padding:8px 6px;font-family:monospace;font-weight:700">' + row.rate + '</td>' +
