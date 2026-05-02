@@ -312,6 +312,14 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="tn" onclick="showPage(21)"> April Launch</div>
   <div class="tn" onclick="showPage(22)"> Step-up Planner</div>
   <div class="tn" onclick="showPage(23)"> Drawdown Plan</div>
+  <div class="tn" onclick="showPage(24)">⚖️ Net Worth</div>
+  <div class="tn" onclick="showPage(25)"> EPF Dashboard</div>
+  <div class="tn" onclick="showPage(26)">🏠 Home Loan</div>
+  <div class="tn" onclick="showPage(27)"> Salary Planner</div>
+  <div class="tn" onclick="showPage(28)"> FIRE Calc</div>
+  <div class="tn" onclick="showPage(29)"> CG Ledger</div>
+  <div class="tn" onclick="showPage(30)">📋 Annual Review</div>
+  <div class="tn" onclick="showPage(31)"> Wife's Portfolio</div>
 </div>
 
 <!-- PAGE 0: DASHBOARD -->
@@ -819,6 +827,20 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <span class="field-label">Wife Investment (Monthly)</span>
           <input class="field-input" id="s-wife-inv" type="text" value="50,000">
         </div>
+        <div style="margin-top:10px;padding:10px 0 2px;border-top:1px solid var(--border)">
+          <div style="font-size:10px;letter-spacing:1.5px;font-family:monospace;color:var(--blue);text-transform:uppercase;margin-bottom:8px">Annual Bonus / Variable Income</div>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Your Annual Bonus (expected) <small style="opacity:.6">used for projection</small></span>
+          <input class="field-input" id="s-bonus-you" type="number" value="0" oninput="updateBonusDisplay()">
+        </div>
+        <div class="field-row">
+          <span class="field-label">Wife's Annual Bonus (expected)</span>
+          <input class="field-input" id="s-bonus-wife" type="number" value="0" oninput="updateBonusDisplay()">
+        </div>
+        <div id="bonus-summary" style="margin-top:6px;padding:8px 10px;background:rgba(77,158,240,.06);border-radius:4px;font-size:10px;color:var(--ink3);line-height:1.8">
+          Monthly equivalent: <strong id="bonus-monthly-equiv" style="color:var(--blue)">₹0</strong> — Recommended allocation: 50% → SIP top-up · 30% → sinking funds · 20% lifestyle
+        </div>
       </div>
       <div class="field-group">
         <h3>Monthly Expenses</h3>
@@ -834,13 +856,77 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <span class="field-label">Other Fixed Expenses</span>
           <input class="field-input" id="s-fixed" type="text" value="13,000">
         </div>
-        <div class="field-row">
-          <span class="field-label">Living / Variable Expenses</span>
-          <input class="field-input" id="s-living" type="text" value="49,000">
+        <!-- Living Expense Breakdown -->
+        <div style="margin-top:6px;padding:6px 0 2px;border-top:1px solid rgba(255,255,255,.04)">
+          <div style="font-size:10px;letter-spacing:1.2px;font-family:monospace;color:var(--ink3);text-transform:uppercase;margin-bottom:6px">Living / Variable — per category</div>
         </div>
-        <div class="field-row">
-          <span class="field-label">Total Sinking Funds</span>
-          <input class="field-input" id="s-sinking" type="text" value="60,000">
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Groceries & Utilities</span>
+          <input class="field-input" id="s-living-groceries" type="number" value="20000" oninput="sumLivingExpenses()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Dining & Entertainment</span>
+          <input class="field-input" id="s-living-dining" type="number" value="12000" oninput="sumLivingExpenses()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Transport (fuel / metro / cab)</span>
+          <input class="field-input" id="s-living-transport" type="number" value="10000" oninput="sumLivingExpenses()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Other Personal (clothing, misc)</span>
+          <input class="field-input" id="s-living-other" type="number" value="7000" oninput="sumLivingExpenses()">
+        </div>
+        <div class="field-row" style="background:rgba(255,255,255,.03);border-radius:3px;padding:5px 8px">
+          <span class="field-label" style="font-weight:700">Total Living Expenses</span>
+          <input class="field-input" id="s-living" type="text" value="49,000" readonly style="opacity:.7;background:var(--bg);cursor:default;font-weight:700">
+        </div>
+
+        <!-- Sinking Funds Breakdown -->
+        <div style="margin-top:10px;padding:6px 0 2px;border-top:1px solid rgba(255,255,255,.04)">
+          <div style="font-size:10px;letter-spacing:1.2px;font-family:monospace;color:var(--ink3);text-transform:uppercase;margin-bottom:6px">Sinking Funds — per category</div>
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Vacation</span>
+          <input class="field-input" id="s-sink-vacation" type="number" value="15000" oninput="sumSinkingFunds()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Festival / Gifts</span>
+          <input class="field-input" id="s-sink-festivals" type="number" value="5000" oninput="sumSinkingFunds()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Car Fund</span>
+          <input class="field-input" id="s-sink-car" type="number" value="20000" oninput="sumSinkingFunds()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Baby Fund</span>
+          <input class="field-input" id="s-sink-baby" type="number" value="10000" oninput="sumSinkingFunds()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Home Emergency</span>
+          <input class="field-input" id="s-sink-home-emergency" type="number" value="5000" oninput="sumSinkingFunds()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Medical Contingency</span>
+          <input class="field-input" id="s-sink-medical" type="number" value="5000" oninput="sumSinkingFunds()">
+        </div>
+        <div style="margin-top:6px;padding:4px 0 2px">
+          <div style="font-size:9px;letter-spacing:1px;font-family:monospace;color:var(--blue);text-transform:uppercase;margin-bottom:4px;padding-left:12px">New funds (start as advised)</div>
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Home Down Payment <small style="opacity:.6">start ₹10K recommended</small></span>
+          <input class="field-input" id="s-sink-home-down" type="number" value="0" oninput="sumSinkingFunds()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">Parents Care Fund <small style="opacity:.6">start ₹5K recommended</small></span>
+          <input class="field-input" id="s-sink-parents-care" type="number" value="0" oninput="sumSinkingFunds()">
+        </div>
+        <div class="field-row" style="padding-left:12px">
+          <span class="field-label" style="font-size:11px">School Fees Fund <small style="opacity:.6">start 2028, ₹10–15K</small></span>
+          <input class="field-input" id="s-sink-school" type="number" value="0" oninput="sumSinkingFunds()">
+        </div>
+        <div class="field-row" style="background:rgba(255,255,255,.03);border-radius:3px;padding:5px 8px">
+          <span class="field-label" style="font-weight:700">Total Sinking Funds</span>
+          <input class="field-input" id="s-sinking" type="text" value="60,000" readonly style="opacity:.7;background:var(--bg);cursor:default;font-weight:700">
         </div>
       </div>
       <div class="field-group">
@@ -1690,77 +1776,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <thead>
           <tr><th>Asset Class</th><th>Fund Name</th><th>Monthly SIP</th><th>% Allocation</th><th>Purpose</th><th>Risk</th></tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Large Cap Index</td>
-            <td>Nifty 50 Index Fund Direct Growth</td>
-            <td>₹60,000</td>
-            <td>31%</td>
-            <td>Core holding - Market returns at 0.07% cost</td>
-            <td><span class="tag tg">LOW</span></td>
-          </tr>
-          <tr>
-            <td>Midcap Active</td>
-            <td>Motilal Oswal Midcap Direct Growth</td>
-            <td>₹25,000</td>
-            <td>13%</td>
-            <td>Growth driver - High alpha potential</td>
-            <td><span class="tag tr2">HIGH</span></td>
-          </tr>
-          <tr>
-            <td>International</td>
-            <td>Motilal Oswal S&P 500 Index Fund</td>
-            <td>₹18,000</td>
-            <td>9%</td>
-            <td>US market exposure - Currency diversification (trimmed)</td>
-            <td><span class="tag ty">MODERATE</span></td>
-          </tr>
-          <tr>
-            <td>Debt</td>
-            <td>HDFC Corporate Bond Fund Direct Growth</td>
-            <td>₹26,000</td>
-            <td>14%</td>
-            <td>Stability - Consistent 7-8% returns</td>
-            <td><span class="tag tg">LOW</span></td>
-          </tr>
-          <tr>
-            <td>Flexi Cap</td>
-            <td>Parag Parikh Flexi Cap Direct Growth</td>
-            <td>₹18,000</td>
-            <td>9%</td>
-            <td>International + Value (80C via PPF separately)</td>
-            <td><span class="tag ty">MODERATE</span></td>
-          </tr>
-          <tr>
-            <td>Small Cap</td>
-            <td>Nippon India Small Cap Fund Direct Growth</td>
-            <td>₹15,000</td>
-            <td>8%</td>
-            <td>High alpha - Small cap outperformance</td>
-            <td><span class="tag tr2">HIGH</span></td>
-          </tr>
-          <tr>
-            <td>Commodity</td>
-            <td>Nippon India Gold Savings Fund Direct Growth</td>
-            <td>₹10,000</td>
-            <td>5%</td>
-            <td>Gold hedge - Inflation + INR protection</td>
-            <td><span class="tag tg">LOW</span></td>
-          </tr>
-          <tr>
-            <td>Retirement</td>
-            <td>NPS Tier 1 (Auto-choice Aggressive)</td>
-            <td>₹6,200</td>
-            <td>3%</td>
-            <td>80CCD tax benefit - Locked till 60</td>
-            <td><span class="tag ty">MODERATE</span></td>
-          </tr>
-          <tr class="ttr">
-            <td colspan="2"><strong>TOTAL FAMILY MONTHLY INVESTMENT</strong></td>
-            <td><strong>₹1,91,200</strong></td>
-            <td><strong>100%</strong></td>
-            <td colspan="2"><strong>₹22,94,400/year</strong></td>
-          </tr>
+        <tbody id="inv-fund-tbody">
+          <!-- Populated dynamically by renderInvestmentTable() from familyFunds array -->
         </tbody>
       </table>
     </div>
@@ -2504,13 +2521,17 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr><th>Sinking Fund</th><th>Purpose</th><th>Monthly</th><th>Annual Pool</th><th>Usage Frequency</th><th>Investment</th></tr>
         </thead>
         <tbody>
-          <tr><td>Annual Vacation</td><td>1 trip/year (India/International)</td><td>&#8377;15,000</td><td>&#8377;1,80,000</td><td>Yearly (Dec/Jan)</td><td>Liquid Fund</td></tr>
-          <tr><td>Festival/Gifts</td><td>Diwali, birthdays, family events</td><td>&#8377;5,000</td><td>&#8377;60,000</td><td>Quarterly</td><td>Liquid Fund</td></tr>
-          <tr><td>Car Fund</td><td>Late 2026 car lease/furniture</td><td>&#8377;20,000</td><td>&#8377;2,40,000</td><td>One-time (late 2026)</td><td>Ultra Short Duration</td></tr>
-          <tr><td>Baby Preparation</td><td>Delivery, nursery, initial expenses</td><td>&#8377;10,000</td><td>&#8377;1,20,000</td><td>2026-2027</td><td>Liquid Fund</td></tr>
-          <tr><td>Home Emergency</td><td>Appliance repair, home needs</td><td>&#8377;5,000</td><td>&#8377;60,000</td><td>As needed</td><td>Debt MF</td></tr>
-          <tr><td>Medical Contingency</td><td>Beyond insurance coverage</td><td>&#8377;5,000</td><td>&#8377;60,000</td><td>As needed</td><td>Liquid Fund</td></tr>
-          <tr class="ttr"><td colspan="2"><strong>TOTAL SINKING FUNDS</strong></td><td><strong>&#8377;60,000</strong></td><td><strong>&#8377;7,20,000</strong></td><td></td><td></td></tr>
+          <tr><td>Annual Vacation</td><td>1 trip/year (India/International)</td><td id="sf-vacation">&#8377;15,000</td><td>&#8377;1,80,000</td><td>Yearly (Dec/Jan)</td><td>Liquid Fund</td></tr>
+          <tr><td>Festival/Gifts</td><td>Diwali, birthdays, family events</td><td id="sf-festivals">&#8377;5,000</td><td>&#8377;60,000</td><td>Quarterly</td><td>Liquid Fund</td></tr>
+          <tr><td>Car Fund</td><td>Late 2026 car lease/initial costs</td><td id="sf-car">&#8377;20,000</td><td>&#8377;2,40,000</td><td>One-time (late 2026)</td><td>Ultra Short Duration</td></tr>
+          <tr><td>Baby Preparation</td><td>Delivery, nursery, initial expenses (⚠️ may need ₹20K — redirect vacation fund)</td><td id="sf-baby">&#8377;10,000</td><td>&#8377;1,20,000</td><td>2026-2027</td><td>Liquid Fund</td></tr>
+          <tr><td>Home Emergency</td><td>Appliance repair, home needs</td><td id="sf-home-emergency">&#8377;5,000</td><td>&#8377;60,000</td><td>As needed</td><td>Debt MF</td></tr>
+          <tr><td>Medical Contingency</td><td>Beyond insurance coverage</td><td id="sf-medical">&#8377;5,000</td><td>&#8377;60,000</td><td>As needed</td><td>Liquid Fund</td></tr>
+          <tr class="ttr"><td colspan="2"><strong>EXISTING SINKING FUNDS TOTAL</strong></td><td id="sf-existing-total"><strong>&#8377;60,000</strong></td><td><strong>&#8377;7,20,000</strong></td><td></td><td></td></tr>
+          <tr style="background:rgba(77,158,240,.06)"><td style="color:var(--blue);font-weight:700">Home Down Payment</td><td>Target 2031–33 home purchase (recommended ₹10K/month)</td><td id="sf-home-down">&#8377;0</td><td id="sf-home-down-annual">&#8377;0</td><td>2031–33 purchase</td><td>Short-term Debt MF</td></tr>
+          <tr style="background:rgba(77,158,240,.06)"><td style="color:var(--blue);font-weight:700">Parents Care Fund</td><td>Out-of-pocket medical beyond insurance (recommended ₹5K/month)</td><td id="sf-parents-care">&#8377;0</td><td id="sf-parents-care-annual">&#8377;0</td><td>As needed from 2027</td><td>Liquid Fund</td></tr>
+          <tr style="background:rgba(77,158,240,.06)"><td style="color:var(--blue);font-weight:700">School Fees Fund</td><td>Child 1 school 2029, Child 2 school 2031 (recommended ₹10–15K/month from 2028)</td><td id="sf-school">&#8377;0</td><td id="sf-school-annual">&#8377;0</td><td>2029 onwards</td><td>Liquid Fund</td></tr>
+          <tr class="ttr"><td colspan="2"><strong>GRAND TOTAL (all sinking funds)</strong></td><td id="sf-grand-total"><strong>&#8377;60,000</strong></td><td id="sf-grand-annual"><strong>&#8377;7,20,000</strong></td><td></td><td></td></tr>
         </tbody>
       </table>
     </div>
@@ -2518,27 +2539,27 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="g3">
       <div class="card j">
         <div class="ch3 j">VACATION FUND</div>
-        <div class="ml"><div class="d">Monthly Allocation</div><div class="a ay">&#8377;15,000</div></div>
-        <div class="ml"><div class="d">Annual Pool</div><div class="a aj">&#8377;1,80,000</div></div>
-        <div class="ml"><div class="d">Returns @ 6%</div><div class="a ab">&#8377;5,400</div></div>
-        <div class="tr"><div class="tl">Available for Trip</div><div class="tv aj">&#8377;1,85,400</div></div>
+        <div class="ml"><div class="d">Monthly Allocation</div><div class="a ay" id="card-sf-vacation">&#8377;15,000</div></div>
+        <div class="ml"><div class="d">Annual Pool</div><div class="a aj" id="card-sf-vacation-annual">&#8377;1,80,000</div></div>
+        <div class="ml"><div class="d">Returns @ 6%</div><div class="a ab" id="card-sf-vacation-returns">&#8377;5,400</div></div>
+        <div class="tr"><div class="tl">Available for Trip</div><div class="tv aj" id="card-sf-vacation-total">&#8377;1,85,400</div></div>
         <div style="margin-top:10px;font-size:11px;color:var(--ink3)">Enough for:<br>&bull; Domestic: Goa/Kerala/Himachal (&#8377;80k-1.2L)<br>&bull; International: Thailand/Bali/Dubai (&#8377;1.5-1.8L)</div>
       </div>
       <div class="card j">
         <div class="ch3 j">CAR FUND (Till Late 2026)</div>
-        <div class="ml"><div class="d">Monthly Allocation</div><div class="a ay">&#8377;20,000</div></div>
+        <div class="ml"><div class="d">Monthly Allocation</div><div class="a ay" id="card-sf-car">&#8377;20,000</div></div>
         <div class="ml"><div class="d">Duration</div><div class="a ab">24 months</div></div>
-        <div class="ml"><div class="d">Contributions</div><div class="a ab">&#8377;4,80,000</div></div>
-        <div class="ml"><div class="d">Returns @ 7%</div><div class="a ab">&#8377;35,000</div></div>
-        <div class="tr"><div class="tl">Total by Jan 2028</div><div class="tv aj">&#8377;5,15,000</div></div>
+        <div class="ml"><div class="d">Contributions</div><div class="a ab" id="card-sf-car-contrib">&#8377;4,80,000</div></div>
+        <div class="ml"><div class="d">Returns @ 7%</div><div class="a ab" id="card-sf-car-returns">&#8377;35,000</div></div>
+        <div class="tr"><div class="tl">Total by Jan 2028</div><div class="tv aj" id="card-sf-car-total">&#8377;5,15,000</div></div>
         <div style="margin-top:10px;font-size:11px;color:var(--ink3)">Use for:<br>&bull; Baby furniture &amp; nursery setup<br>&bull; First year baby expenses buffer<br>&bull; Contingency for car lease</div>
       </div>
       <div class="card j">
         <div class="ch3 j">BABY FUND (Jul 2026-2027)</div>
-        <div class="ml"><div class="d">Monthly Allocation</div><div class="a ay">&#8377;10,000</div></div>
+        <div class="ml"><div class="d">Monthly Allocation</div><div class="a ay" id="card-sf-baby">&#8377;10,000</div></div>
         <div class="ml"><div class="d">Start Date</div><div class="a ab">Jul 2026</div></div>
-        <div class="ml"><div class="d">By Delivery (Dec 2026)</div><div class="a aj">&#8377;60,000</div></div>
-        <div class="ml"><div class="d">By 1st Birthday</div><div class="a aj">&#8377;1,80,000</div></div>
+        <div class="ml"><div class="d">By Delivery (Dec 2026)</div><div class="a aj" id="card-sf-baby-delivery">&#8377;60,000</div></div>
+        <div class="ml"><div class="d">By 1st Birthday</div><div class="a aj" id="card-sf-baby-year1">&#8377;1,80,000</div></div>
         <div style="margin-top:10px;font-size:11px;color:var(--ink3)">Covers:<br>&bull; Hospital delivery: &#8377;40-60k (after insurance)<br>&bull; Nursery setup: &#8377;30-50k<br>&bull; First year needs: &#8377;60-80k</div>
       </div>
     </div>
@@ -5003,8 +5024,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
         <div class="metric-block">
           <div class="mb-label">Monthly SIP</div>
-          <div class="mb-value" style="color:var(--you)">₹1.91L</div>
-          <div class="mb-sub">₹22.9L/year</div>
+          <div class="mb-value" style="color:var(--you)" id="launch-sip-value">₹1.91L</div>
+          <div class="mb-sub" id="launch-sip-annual">₹22.9L/year</div>
         </div>
         <div class="metric-block">
           <div class="mb-label">Horizon</div>
@@ -5626,6 +5647,527 @@ tr.milestone{background:rgba(240,180,41,.05)}
 </div>
 
 
+<!-- PAGE 24: NET WORTH STATEMENT -->
+<div class="page" id="page-24">
+  <div class="hdr">
+    <div class="htag">FINANCIAL BALANCE SHEET</div>
+    <h1>Your <span>Net Worth</span> Statement</h1>
+    <p>ASSETS − LIABILITIES = TRUE WEALTH · UPDATE QUARTERLY</p>
+  </div>
+  <div class="content">
+    <div class="alert">💡 <strong>WHY THIS MATTERS:</strong> Your ₹66 Cr projection shows future wealth. This page shows wealth TODAY. Update every quarter from EPFO passbook, Kuvera, and bank statements.</div>
+
+    <div class="g2" style="margin-bottom:13px">
+      <!-- ASSETS -->
+      <div class="card j">
+        <div class="ch3 j">ASSETS — What You Own</div>
+        <div class="field-row"><span class="field-label">MF Portfolio (from Kuvera)</span><input class="field-input" id="nw-mf" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">EPF + VPF Balance (EPFO passbook)</span><input class="field-input" id="nw-epf" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">PPF Balance (ICICI Bank)</span><input class="field-input" id="nw-ppf" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">NPS Tier 1 Balance</span><input class="field-input" id="nw-nps" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">Bank + FD Balances</span><input class="field-input" id="nw-bank" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">Emergency Fund (auto)</span><input class="field-input" id="nw-ef" type="number" readonly style="opacity:.7;background:var(--bg)"></div>
+        <div class="field-row"><span class="field-label">Gold (FoF + physical)</span><input class="field-input" id="nw-gold" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">Home Value (if owned)</span><input class="field-input" id="nw-home" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">Other Assets</span><input class="field-input" id="nw-other-assets" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="tr"><div class="tl" style="color:var(--jt)">Total Assets</div><div class="tv aj" id="nw-total-assets">₹0</div></div>
+      </div>
+      <!-- LIABILITIES -->
+      <div class="card d">
+        <div class="ch3 d">LIABILITIES — What You Owe</div>
+        <div class="field-row"><span class="field-label">Home Loan Outstanding</span><input class="field-input" id="nw-home-loan" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">Car Loan Outstanding</span><input class="field-input" id="nw-car-loan" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">Personal Loan</span><input class="field-input" id="nw-personal-loan" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">Credit Card Outstanding</span><input class="field-input" id="nw-cc" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="field-row"><span class="field-label">Other Liabilities</span><input class="field-input" id="nw-other-liab" type="number" placeholder="0" oninput="calcNetWorth()"></div>
+        <div class="tr"><div class="tl" style="color:var(--red)">Total Liabilities</div><div class="tv ar" id="nw-total-liab">₹0</div></div>
+        <div style="margin-top:16px;padding:14px;background:rgba(48,200,122,.08);border-radius:6px;text-align:center">
+          <div style="font-size:10px;letter-spacing:2px;color:var(--ink3);margin-bottom:6px">NET WORTH (Assets − Liabilities)</div>
+          <div style="font-size:2rem;font-weight:800;color:var(--jt)" id="nw-total">₹0</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px" id="nw-da-ratio">Debt-to-Asset: 0%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Metrics -->
+    <div class="g4" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Total Assets</div><div class="mb-value" id="nw-m-assets" style="color:var(--jt)">₹0</div></div>
+      <div class="metric-block"><div class="mb-label">Total Liabilities</div><div class="mb-value" id="nw-m-liab" style="color:var(--red)">₹0</div></div>
+      <div class="metric-block"><div class="mb-label">Savings Rate</div><div class="mb-value" id="nw-savings-rate" style="color:var(--you)">—</div><div class="mb-sub">of combined income</div></div>
+      <div class="metric-block"><div class="mb-label">Liquid Assets</div><div class="mb-value" id="nw-liquid" style="color:var(--blue)">₹0</div><div class="mb-sub">MF + bank + EF</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Asset Allocation Breakdown</h2></div>
+    <div class="cw-s"><canvas id="nwDonutChart"></canvas></div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Net Worth History (Quarterly Snapshots)</h2></div>
+    <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center">
+      <button class="save-btn" onclick="saveNWSnapshot()" style="font-size:11px;padding:8px 16px">📸 Save Today's Snapshot</button>
+      <span style="font-size:11px;color:var(--ink3)">Save quarterly after updating values above</span>
+    </div>
+    <div class="tw"><table><thead><tr><th style="text-align:left">Date</th><th>Assets</th><th>Liabilities</th><th>Net Worth</th><th>Change</th></tr></thead><tbody id="nw-history-tbody"><tr><td colspan="5" style="text-align:center;color:var(--ink3);padding:20px">No snapshots yet — fill in values above and click Save Snapshot</td></tr></tbody></table></div>
+    <div style="margin-top:8px;text-align:right"><button onclick="clearNWHistory()" style="background:none;border:1px solid var(--border);color:var(--ink3);padding:4px 10px;border-radius:4px;font-size:10px;cursor:pointer">Clear history</button></div>
+  </div>
+</div>
+
+<!-- PAGE 25: EPF DASHBOARD -->
+<div class="page" id="page-25">
+  <div class="hdr">
+    <div class="htag">PROVIDENT FUND TRACKER</div>
+    <h1>EPF + VPF <span>Corpus Dashboard</span></h1>
+    <p>EMPLOYEE + EMPLOYER PF · VPF BOOSTER · EPS PENSION · 8.25% EEE</p>
+  </div>
+  <div class="content">
+    <div class="alert success">✅ EPF + VPF is your second-largest retirement engine. At ₹45,522/month total PF contribution compounding at 8.25% for 28 years, this alone builds <strong>~₹6.5–7 Cr</strong> by retirement — a number that currently doesn't appear in your ₹66 Cr corpus!</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Current PF Status</h2></div>
+    <div class="g3" style="margin-bottom:13px">
+      <div class="card y">
+        <div class="ch3 y">CURRENT EPF BALANCE</div>
+        <div class="field-row"><span class="field-label">EPF Balance (from EPFO passbook)</span><input class="field-input" id="epf-balance" type="number" value="0" oninput="renderEPFProjection()"></div>
+        <div class="field-row"><span class="field-label">Last Updated</span><input class="field-input" id="epf-last-updated" type="text" placeholder="e.g. March 2026"></div>
+        <div class="field-row"><span class="field-label">Years in EPF service</span><input class="field-input" id="epf-years-service" type="number" value="3" oninput="renderEPFProjection()"></div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">MONTHLY PF BREAKDOWN</div>
+        <div class="ml"><div class="d">Employee EPF (12% of basic)</div><div class="a ay" id="epf-emp">₹16,761</div></div>
+        <div class="ml"><div class="d">Employer EPF (3.67% of basic)</div><div class="a aj" id="epf-er-epf">₹5,127</div></div>
+        <div class="ml"><div class="d">EPS (8.33%, capped ₹1,250)</div><div class="a ab" id="epf-eps">₹1,250</div></div>
+        <div class="ml"><div class="d">VPF (voluntary)</div><div class="a ap" id="epf-vpf-monthly">₹12,000</div></div>
+        <div class="tr"><div class="tl">Total Monthly PF</div><div class="tv aj" id="epf-total-monthly">₹35,138</div></div>
+      </div>
+      <div class="card p">
+        <div class="ch3 p">TAX THRESHOLD WATCH</div>
+        <div class="ml"><div class="d">EPF employee (annual)</div><div class="a ay" id="epf-emp-annual">₹2,01,132</div></div>
+        <div class="ml"><div class="d">VPF (annual)</div><div class="a ap" id="epf-vpf-annual">₹1,44,000</div></div>
+        <div class="ml"><div class="d">Total PF contributions</div><div class="a ar" id="epf-total-annual">₹3,45,132</div></div>
+        <div class="ml"><div class="d">Tax-free threshold</div><div class="a aj">₹2,50,000</div></div>
+        <div class="ml"><div class="d">Taxable excess</div><div class="a ar" id="epf-taxable-excess">₹95,132</div></div>
+        <div class="ml"><div class="d">Annual tax impact (@ 30%)</div><div class="a ar" id="epf-tax-impact">₹2,354</div></div>
+        <div style="margin-top:8px;font-size:10px;color:var(--ink3)">Negligible vs EEE benefit on full corpus</div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>EPF + VPF Corpus Projection (2026–2054)</h2></div>
+    <div class="cw"><canvas id="epfProjectionChart"></canvas></div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Projected Corpus Milestones</h2></div>
+    <div class="g4" style="margin-bottom:13px" id="epf-milestones"></div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>EPS Pension Estimate at Retirement</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">EMPLOYEE PENSION SCHEME (EPS) — GUARANTEED GOVERNMENT ANNUITY</div>
+      <div class="g3" style="margin-top:12px">
+        <div style="background:var(--bg3);padding:14px;border-radius:6px">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:6px">EPS Pension Formula</div>
+          <div style="font-size:12px;color:var(--ink2);line-height:1.8">(Pensionable Salary × Years of Service) ÷ 70<br><small style="color:var(--ink3)">Pensionable salary capped at ₹15,000/month</small></div>
+        </div>
+        <div style="background:var(--bg3);padding:14px;border-radius:6px">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:6px">Your Estimated Monthly Pension</div>
+          <div style="font-size:1.8rem;font-weight:700;color:var(--you)" id="eps-monthly-pension">₹6,000</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">Based on ₹15,000 × 28 yrs ÷ 70</div>
+        </div>
+        <div style="background:var(--bg3);padding:14px;border-radius:6px">
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:6px">Annual EPS Income at Retirement</div>
+          <div style="font-size:1.8rem;font-weight:700;color:var(--jt)" id="eps-annual-pension">₹72,000</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:4px">Guaranteed government pension for life</div>
+        </div>
+      </div>
+      <div class="alert" style="margin-top:12px;font-size:11px">ℹ️ <strong>EPS is separate from EPF.</strong> Your employer contributes 8.33% of basic to EPS (not your EPF account). EPS provides a guaranteed pension for life, but the corpus is not withdrawable. To get full benefit, service must be ≥10 years (you'll have 28 years by retirement).</div>
+    </div>
+
+    <div class="sh"><span class="sh-n">05</span><h2>Year-by-Year EPF + VPF Table</h2></div>
+    <div class="tw"><table><thead><tr><th style="text-align:left">Year</th><th>Age</th><th>Annual Contribution</th><th>Interest Earned</th><th>EPF+VPF Corpus</th></tr></thead><tbody id="epf-table-body"></tbody></table></div>
+  </div>
+</div>
+
+<!-- PAGE 26: HOME LOAN MODELLER -->
+<div class="page" id="page-26">
+  <div class="hdr">
+    <div class="htag">HOME PURCHASE PLANNER</div>
+    <h1>Home Loan <span>EMI Modeller</span></h1>
+    <p>BUY vs RENT · EMI vs SIP TRADEOFF · TAX BENEFITS · OPTIMAL TIMING</p>
+  </div>
+  <div class="content">
+    <div class="alert warning">⚠️ <strong>CRITICAL DECISION:</strong> A ₹70K–90K EMI could reduce your retirement corpus by ₹8–15 Cr. Model this carefully BEFORE signing any agreement. Target purchase: 2031–33.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Home Purchase Inputs</h2></div>
+    <div class="settings-grid" style="margin-bottom:13px">
+      <div class="field-group">
+        <h3>Property Details</h3>
+        <div class="field-row"><span class="field-label">Home Value (₹)</span><input class="field-input" id="hl-home-value" type="number" value="8000000" oninput="calcHomeLoan()"></div>
+        <div class="field-row"><span class="field-label">Down Payment (%)</span><input class="field-input" id="hl-dp-pct" type="number" value="20" min="10" max="50" oninput="calcHomeLoan()"></div>
+        <div class="field-row"><span class="field-label">Down Payment (₹)</span><input class="field-input" id="hl-dp-amt" type="text" readonly style="opacity:.7;background:var(--bg)"></div>
+        <div class="field-row"><span class="field-label">Loan Amount (₹)</span><input class="field-input" id="hl-loan-amt" type="text" readonly style="opacity:.7;background:var(--bg)"></div>
+        <div class="field-row"><span class="field-label">Registration + Stamp Duty (~7%)</span><input class="field-input" id="hl-reg" type="text" readonly style="opacity:.7;background:var(--bg)"></div>
+      </div>
+      <div class="field-group">
+        <h3>Loan Terms</h3>
+        <div class="field-row"><span class="field-label">Interest Rate (%)</span><input class="field-input" id="hl-rate" type="number" value="8.5" step="0.1" oninput="calcHomeLoan()"></div>
+        <div class="field-row"><span class="field-label">Loan Tenure (years)</span><select class="field-input" id="hl-tenure" onchange="calcHomeLoan()" style="height:32px"><option value="20">20 years</option><option value="25" selected>25 years</option><option value="30">30 years</option></select></div>
+        <div class="field-row"><span class="field-label">Purchase Year</span><select class="field-input" id="hl-year" onchange="calcHomeLoan()" style="height:32px"><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option><option value="2031">2031</option><option value="2032" selected>2032</option><option value="2033">2033</option><option value="2035">2035</option></select></div>
+        <div class="field-row"><span class="field-label">Expected Monthly Income in Purchase Year</span><input class="field-input" id="hl-income-then" type="number" value="350000" oninput="calcHomeLoan()"></div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>EMI & Total Cost</h2></div>
+    <div class="g4" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Monthly EMI</div><div class="mb-value" id="hl-emi" style="color:var(--red)">₹0</div><div class="mb-sub" id="hl-emi-pct">% of income</div></div>
+      <div class="metric-block"><div class="mb-label">Total Interest</div><div class="mb-value" id="hl-total-interest" style="color:var(--red)">₹0</div></div>
+      <div class="metric-block"><div class="mb-label">Total Payment</div><div class="mb-value" id="hl-total-payment" style="color:var(--ink)">₹0</div></div>
+      <div class="metric-block"><div class="mb-label">Loan Paid Off</div><div class="mb-value" id="hl-payoff-year" style="color:var(--jt)">—</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Corpus Impact — The Real Cost</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card d">
+        <div class="ch3 d">RETIREMENT CORPUS REDUCTION</div>
+        <div class="ml"><div class="d">Current projected corpus</div><div class="a aj">₹66 Cr</div></div>
+        <div class="ml"><div class="d">EMI reduces available SIP by</div><div class="a ar" id="hl-sip-reduction">₹0/month</div></div>
+        <div class="ml"><div class="d">Down payment corpus opportunity cost</div><div class="a ar" id="hl-dp-opportunity">₹0</div></div>
+        <div class="ml"><div class="d">Estimated corpus reduction</div><div class="a ar" id="hl-corpus-hit">₹0 Cr</div></div>
+        <div class="tr"><div class="tl">New projected corpus</div><div class="tv" id="hl-new-corpus">₹66 Cr</div></div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">TAX BENEFITS (ANNUAL)</div>
+        <div class="ml"><div class="d">Section 24(b) — Interest deduction</div><div class="a aj">Up to ₹2,00,000/year</div></div>
+        <div class="ml"><div class="d">Tax saved on interest (@ 30%)</div><div class="a aj" id="hl-tax-24b">₹60,000</div></div>
+        <div class="ml"><div class="d">Section 80C — Principal repayment</div><div class="a ai">Cap already filled by EPF</div></div>
+        <div class="ml"><div class="d">Net after-tax EMI</div><div class="a aj" id="hl-after-tax-emi">₹0</div></div>
+        <div style="margin-top:10px;padding:10px;background:rgba(48,200,122,.08);border-radius:5px;font-size:11px">💡 Effective EMI reduces by ~₹5,000/month after Section 24(b) tax benefit at 30% slab.</div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>Rent vs Buy Analysis</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">BREAK-EVEN ANALYSIS</div>
+      <div class="g3" style="margin-top:10px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Current Rent</div><div style="font-size:1.2rem;font-weight:700" id="hl-current-rent">₹40,000</div><div style="font-size:10px;color:var(--ink3)">Growing 8% p.a.</div></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Rent by Purchase Year</div><div style="font-size:1.2rem;font-weight:700;color:var(--you)" id="hl-rent-then">₹0</div><div style="font-size:10px;color:var(--ink3)">Projected rent at that year</div></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">EMI vs Rent Delta</div><div style="font-size:1.2rem;font-weight:700;color:var(--red)" id="hl-emi-rent-delta">₹0</div><div style="font-size:10px;color:var(--ink3)">Extra cost of buying</div></div>
+      </div>
+      <div id="hl-rent-buy-verdict" style="margin-top:12px;padding:10px 14px;background:var(--bg3);border-radius:5px;font-size:12px;line-height:1.7"></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">05</span><h2>Optimal Purchase Year Finder</h2></div>
+    <div class="tw"><table><thead><tr><th style="text-align:left">Year</th><th>Your Income Est.</th><th>EMI</th><th>EMI % Income</th><th>Affordability</th></tr></thead><tbody id="hl-optimal-tbody"></tbody></table></div>
+  </div>
+</div>
+
+<!-- PAGE 27: SALARY INCREMENT SIMULATOR -->
+<div class="page" id="page-27">
+  <div class="hdr">
+    <div class="htag">SALARY REVISION PLANNER</div>
+    <h1>Increment <span>Allocation Simulator</span></h1>
+    <p>PLAN EVERY RAISE · ROUTE 50% TO SIPS · COMPOUNDING MAGIC</p>
+  </div>
+  <div class="content">
+    <div class="alert success">✅ <strong>THE GOLDEN RULE:</strong> For every salary increment, route 50% to SIP step-up. Doing this consistently is worth ₹10–15 Cr more at retirement than spending 100% of increments.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Increment Calculator</h2></div>
+    <div class="settings-grid" style="margin-bottom:13px">
+      <div class="field-group">
+        <h3>Current Salary</h3>
+        <div class="field-row"><span class="field-label">Current Net Pay (monthly)</span><input class="field-input" id="si-curr-net" type="number" value="201586" oninput="calcIncrement()"></div>
+        <div class="field-row"><span class="field-label">Current Total SIP</span><input class="field-input" id="si-curr-sip" type="number" value="191200" oninput="calcIncrement()"></div>
+        <div class="field-row"><span class="field-label">Annual Bonus Received</span><input class="field-input" id="si-bonus" type="number" value="0" oninput="calcIncrement()"></div>
+      </div>
+      <div class="field-group">
+        <h3>New Salary</h3>
+        <div class="field-row"><span class="field-label">New CTC (annual)</span><input class="field-input" id="si-new-ctc" type="number" value="0" placeholder="Enter new CTC" oninput="calcIncrement()"></div>
+        <div class="field-row"><span class="field-label">New Net Pay (monthly est.)</span><input class="field-input" id="si-new-net" type="number" value="0" placeholder="After tax + EPF + VPF" oninput="calcIncrement()"></div>
+        <div class="field-row"><span class="field-label">Effective Date</span><input class="field-input" id="si-eff-date" type="text" placeholder="e.g. April 2027"></div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Increment Summary</h2></div>
+    <div class="g4" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Monthly Increment</div><div class="mb-value" id="si-monthly-delta" style="color:var(--jt)">₹0</div></div>
+      <div class="metric-block"><div class="mb-label">Annual Increment</div><div class="mb-value" id="si-annual-delta" style="color:var(--jt)">₹0</div></div>
+      <div class="metric-block"><div class="mb-label">Hike %</div><div class="mb-value" id="si-hike-pct" style="color:var(--you)">0%</div></div>
+      <div class="metric-block"><div class="mb-label">+ Bonus Monthly Equiv.</div><div class="mb-value" id="si-bonus-monthly" style="color:var(--blue)">₹0</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Allocation Planner (Editable)</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:16px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">SIP Top-up %</div><input class="field-input" id="si-sip-pct" type="number" value="50" min="0" max="100" oninput="calcIncrement()" style="width:100%"><div style="font-size:10px;color:var(--jt);margin-top:2px" id="si-sip-amt">₹0/month</div></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Insurance/Goals %</div><input class="field-input" id="si-ins-pct" type="number" value="20" min="0" max="100" oninput="calcIncrement()" style="width:100%"><div style="font-size:10px;color:var(--blue);margin-top:2px" id="si-ins-amt">₹0/month</div></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Sinking Funds %</div><input class="field-input" id="si-sink-pct" type="number" value="15" min="0" max="100" oninput="calcIncrement()" style="width:100%"><div style="font-size:10px;color:var(--purple);margin-top:2px" id="si-sink-amt">₹0/month</div></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Lifestyle %</div><input class="field-input" id="si-life-pct" type="number" value="15" min="0" max="100" oninput="calcIncrement()" style="width:100%"><div style="font-size:10px;color:var(--you);margin-top:2px" id="si-life-amt">₹0/month</div></div>
+      </div>
+      <div id="si-alloc-warning" style="display:none" class="alert danger" style="font-size:11px">⚠️ Allocation percentages must add up to 100%</div>
+
+      <div style="margin-top:12px;padding:12px;background:rgba(48,200,122,.06);border-radius:5px">
+        <div style="font-size:11px;font-weight:700;color:var(--jt);margin-bottom:8px">Recommended SIP distribution of the top-up:</div>
+        <div id="si-sip-breakdown" style="font-size:11px;color:var(--ink2);line-height:2"></div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>Corpus Impact of This Increment</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card j">
+        <div class="ch3 j">WITH THIS ALLOCATION</div>
+        <div class="ml"><div class="d">New monthly SIP total</div><div class="a aj" id="si-new-sip-total">₹0</div></div>
+        <div class="ml"><div class="d">Additional annual investment</div><div class="a aj" id="si-extra-annual">₹0</div></div>
+        <div class="ml"><div class="d">Corpus boost at retirement (est.)</div><div class="a aj" id="si-corpus-boost">+₹0 Cr</div></div>
+        <div class="tr"><div class="tl">New projected corpus</div><div class="tv aj" id="si-new-corpus">₹66 Cr</div></div>
+      </div>
+      <div class="card y">
+        <div class="ch3 y">BONUS ALLOCATION</div>
+        <div class="ml"><div class="d">Bonus received</div><div class="a ay" id="si-bonus-display">₹0</div></div>
+        <div class="ml"><div class="d">50% → SIP lump sum</div><div class="a aj" id="si-bonus-sip">₹0</div></div>
+        <div class="ml"><div class="d">30% → Sinking/goal funds</div><div class="a ab" id="si-bonus-sink">₹0</div></div>
+        <div class="ml"><div class="d">20% → Lifestyle/vacation</div><div class="a ay" id="si-bonus-life">₹0</div></div>
+        <div class="ml"><div class="d">Lump sum corpus impact</div><div class="a aj" id="si-bonus-corpus">+₹0 Cr</div></div>
+      </div>
+    </div>
+    <button class="save-btn" onclick="applyIncrementToSettings()">✅ Apply New Net Pay to Settings</button>
+    <span style="font-size:11px;color:var(--ink3);margin-left:12px">Updates your net pay — you manually update SIP amounts in Settings tab</span>
+  </div>
+</div>
+
+<!-- PAGE 28: FIRE CALCULATOR -->
+<div class="page" id="page-28">
+  <div class="hdr">
+    <div class="htag">FINANCIAL INDEPENDENCE</div>
+    <h1>FIRE <span>Calculator</span></h1>
+    <p>RETIRE EARLY · COAST FIRE · SEMI-FIRE · YOUR FREEDOM DATE</p>
+  </div>
+  <div class="content">
+    <div class="alert">🔥 <strong>FIRE = Financial Independence, Retire Early.</strong> At your current savings rate you have more options than you think. This calculator shows your real freedom date for various retirement ages and lifestyles.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Retirement Expense Inputs</h2></div>
+    <div class="settings-grid" style="margin-bottom:13px">
+      <div class="field-group">
+        <h3>Expenses at Retirement</h3>
+        <div class="field-row"><span class="field-label">Monthly Expenses Today (₹)</span><input class="field-input" id="fire-monthly-exp" type="number" value="122000" oninput="calcFIRE()"></div>
+        <div class="field-row"><span class="field-label">Inflation Rate (%)</span><input class="field-input" id="fire-inflation" type="number" value="6" step="0.5" oninput="calcFIRE()"></div>
+        <div class="field-row"><span class="field-label">Safe Withdrawal Rate (%)</span><select class="field-input" id="fire-swr" onchange="calcFIRE()" style="height:32px"><option value="3">3% (Very Conservative)</option><option value="3.5" selected>3.5% (Conservative)</option><option value="4">4% (Standard)</option></select></div>
+      </div>
+      <div class="field-group">
+        <h3>Semi-FIRE Scenario</h3>
+        <div class="field-row"><span class="field-label">Part-time Income (₹/month)</span><input class="field-input" id="fire-semi-income" type="number" value="100000" oninput="calcFIRE()"></div>
+        <div class="field-row"><span class="field-label">Other Income at Retirement (₹/month)</span><input class="field-input" id="fire-other-income" type="number" value="0" placeholder="Rental, EPS pension etc." oninput="calcFIRE()"></div>
+        <div class="field-row"><span class="field-label">NPS Annuity est. (₹/year)</span><input class="field-input" id="fire-nps-annuity" type="number" value="21100000" oninput="calcFIRE()"></div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>FIRE Scenarios by Retirement Age</h2></div>
+    <div id="fire-scenarios-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:13px"></div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Coast FIRE — When Can You Stop Investing?</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">COAST FIRE POINT</div>
+      <div style="font-size:12px;color:var(--ink2);margin-bottom:12px;line-height:1.7">Coast FIRE = the point where your existing corpus, without any new contributions, will grow to your target retirement corpus by age 60 at the expected CAGR. After this point, you <em>could</em> stop investing and coast to retirement.</div>
+      <div id="coast-fire-result" style="padding:16px;background:var(--bg3);border-radius:6px"></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>Corpus Required vs Trajectory</h2></div>
+    <div class="cw"><canvas id="fireChart"></canvas></div>
+  </div>
+</div>
+
+<!-- PAGE 29: CAPITAL GAINS TAX LEDGER -->
+<div class="page" id="page-29">
+  <div class="hdr">
+    <div class="htag">TAX LEDGER</div>
+    <h1>Capital Gains <span>Tax Tracker</span></h1>
+    <p>LTCG HARVEST LOG · ITR SCHEDULE CG · ₹2.5L COUPLE EXEMPTION</p>
+  </div>
+  <div class="content">
+    <div class="alert success">✅ Book exactly ₹1.25L LTCG gains per person every January. This saves ₹31,250/year × 28 years = ~₹8.75L in taxes. Log every transaction here for clean ITR filing.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>FY Summary</h2></div>
+    <div class="g4" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Your LTCG This FY</div><div class="mb-value" id="cg-you-ltcg" style="color:var(--you)">₹0</div><div class="mb-sub" id="cg-you-remaining">₹1,25,000 remaining</div></div>
+      <div class="metric-block"><div class="mb-label">Wife's LTCG This FY</div><div class="mb-value" id="cg-wife-ltcg" style="color:var(--wife)">₹0</div><div class="mb-sub" id="cg-wife-remaining">₹1,25,000 remaining</div></div>
+      <div class="metric-block"><div class="mb-label">Total Tax Saved</div><div class="mb-value" id="cg-tax-saved" style="color:var(--jt)">₹0</div><div class="mb-sub">at 12.5% LTCG rate</div></div>
+      <div class="metric-block"><div class="mb-label">Your STCG This FY</div><div class="mb-value" id="cg-stcg" style="color:var(--red)">₹0</div><div class="mb-sub">Taxable @ 20%</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Log a Transaction</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:12px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Person</div><select class="field-input" id="cg-person" style="height:32px;width:100%"><option value="you">You</option><option value="wife">Wife</option></select></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Fund Name</div><input class="field-input" id="cg-fund" type="text" placeholder="e.g. Nifty 50 Index Fund" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Units Sold</div><input class="field-input" id="cg-units" type="number" placeholder="0" style="width:100%" oninput="calcCGEntry()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Purchase Date</div><input class="field-input" id="cg-buy-date" type="date" style="width:100%" oninput="calcCGEntry()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Purchase NAV (₹)</div><input class="field-input" id="cg-buy-nav" type="number" placeholder="0" step="0.01" style="width:100%" oninput="calcCGEntry()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Sale Date</div><input class="field-input" id="cg-sell-date" type="date" style="width:100%" oninput="calcCGEntry()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Sale NAV (₹)</div><input class="field-input" id="cg-sell-nav" type="number" placeholder="0" step="0.01" style="width:100%" oninput="calcCGEntry()"></div>
+      </div>
+      <div id="cg-entry-preview" style="padding:10px;background:var(--bg3);border-radius:5px;font-size:11px;margin-bottom:10px;color:var(--ink3)">Enter details above to preview gain/loss</div>
+      <button class="save-btn" onclick="addCGTransaction()" style="font-size:11px;padding:8px 16px">+ Add Transaction</button>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Transaction Log</h2></div>
+    <div class="tw"><table><thead><tr><th style="text-align:left">Date</th><th style="text-align:left">Person</th><th style="text-align:left">Fund</th><th>Units</th><th>Holding</th><th>Type</th><th>Gain/Loss</th><th>Tax</th><th></th></tr></thead><tbody id="cg-log-tbody"><tr><td colspan="9" style="text-align:center;color:var(--ink3);padding:20px">No transactions logged yet</td></tr></tbody></table></div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>LTCG Harvest Opportunity Tracker</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">JANUARY HARVEST WINDOW — BOOK BEFORE MARCH 31</div>
+      <div class="g3" style="margin-top:12px">
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:6px">Your Remaining Exemption</div><div style="font-size:1.5rem;font-weight:700;color:var(--you)" id="cg-you-remaining-display">₹1,25,000</div></div>
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:6px">Wife Remaining Exemption</div><div style="font-size:1.5rem;font-weight:700;color:var(--wife)" id="cg-wife-remaining-display">₹1,25,000</div></div>
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:6px">Annual Tax Saving (if fully used)</div><div style="font-size:1.5rem;font-weight:700;color:var(--jt)">₹31,250</div><div style="font-size:10px;color:var(--ink3);margin-top:4px">= 12.5% × ₹2.5L couple</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 30: ANNUAL REVIEW WIZARD -->
+<div class="page" id="page-30">
+  <div class="hdr">
+    <div class="htag">GUIDED ANNUAL REVIEW</div>
+    <h1>Annual Financial <span>Review Wizard</span></h1>
+    <p>6-STEP GUIDED FLOW · EVERY APRIL · TAKES 30 MINUTES</p>
+  </div>
+  <div class="content">
+    <div class="alert">📋 <strong>RUN THIS EVERY APRIL:</strong> Step through each section. Apply changes. Your ₹66 Cr plan stays on track only with annual discipline checks.</div>
+
+    <!-- Progress -->
+    <div style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap" id="review-step-indicators"></div>
+
+    <!-- Step 1: Corpus Check -->
+    <div id="review-step-1" class="card" style="margin-bottom:13px;border-left:3px solid var(--you)">
+      <div class="ch3 y">STEP 1 — CORPUS HEALTH CHECK</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Actual Portfolio Value Today (₹)</div><input class="field-input" id="rv-actual-corpus" type="number" placeholder="Enter from Kuvera" style="width:100%" oninput="calcReviewStep1()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Review Year</div><select class="field-input" id="rv-year" style="height:32px;width:100%" onchange="calcReviewStep1()"><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option></select></div>
+      </div>
+      <div id="rv-step1-result" style="margin-top:12px;padding:12px;background:var(--bg3);border-radius:5px;font-size:12px;color:var(--ink3)">Enter actual portfolio value to see if you're ahead or behind projection.</div>
+    </div>
+
+    <!-- Step 2: SIP Step-up -->
+    <div id="review-step-2" class="card" style="margin-bottom:13px;border-left:3px solid var(--jt)">
+      <div class="ch3 j">STEP 2 — SIP STEP-UP (10% ANNUAL)</div>
+      <div id="rv-stepup-table" style="margin-top:12px"></div>
+      <button onclick="applyStepupFromReview()" class="save-btn" style="margin-top:12px;font-size:11px;padding:8px 16px">Apply 10% Step-up to All Funds</button>
+    </div>
+
+    <!-- Step 3: LTCG Harvest -->
+    <div id="review-step-3" class="card" style="margin-bottom:13px;border-left:3px solid var(--blue)">
+      <div class="ch3" style="color:var(--blue)">STEP 3 — LTCG HARVEST CHECK</div>
+      <div style="margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        Book gains in January each year. Both you and wife should each book exactly ₹1.25L in LTCG gains then immediately reinvest.
+      </div>
+      <div class="g3" style="margin-top:12px">
+        <div style="background:var(--bg3);padding:12px;border-radius:5px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Your LTCG booked this FY</div><div style="font-size:1.2rem;font-weight:700;color:var(--you)" id="rv-your-ltcg">₹0</div></div>
+        <div style="background:var(--bg3);padding:12px;border-radius:5px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Wife's LTCG booked this FY</div><div style="font-size:1.2rem;font-weight:700;color:var(--wife)" id="rv-wife-ltcg">₹0</div></div>
+        <div style="background:var(--bg3);padding:12px;border-radius:5px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Tax saved this year</div><div style="font-size:1.2rem;font-weight:700;color:var(--jt)" id="rv-tax-saved">₹0</div></div>
+      </div>
+    </div>
+
+    <!-- Step 4: Insurance Review -->
+    <div id="review-step-4" class="card" style="margin-bottom:13px;border-left:3px solid var(--red)">
+      <div class="ch3 d">STEP 4 — INSURANCE ADEQUACY CHECK</div>
+      <div style="margin-top:12px" id="rv-insurance-check"></div>
+    </div>
+
+    <!-- Step 5: Rebalancing -->
+    <div id="review-step-5" class="card" style="margin-bottom:13px;border-left:3px solid var(--purple)">
+      <div class="ch3 p">STEP 5 — REBALANCING (EXACT AMOUNTS)</div>
+      <div style="font-size:11px;color:var(--ink3);margin-bottom:10px;margin-top:8px">Enter current portfolio value per asset class to get exact rebalancing instructions.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Current Equity Value (₹)</div><input class="field-input" id="rb-equity" type="number" placeholder="0" oninput="calcRebalancing()" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Current Debt Value (₹)</div><input class="field-input" id="rb-debt" type="number" placeholder="0" oninput="calcRebalancing()" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Current Gold Value (₹)</div><input class="field-input" id="rb-gold" type="number" placeholder="0" oninput="calcRebalancing()" style="width:100%"></div>
+      </div>
+      <div id="rb-result" style="padding:12px;background:var(--bg3);border-radius:5px;font-size:12px;color:var(--ink3)">Enter values above to see rebalancing instructions.</div>
+    </div>
+
+    <!-- Step 6: Update Settings -->
+    <div id="review-step-6" class="card" style="margin-bottom:13px;border-left:3px solid var(--jt)">
+      <div class="ch3 j">STEP 6 — UPDATE YOUR PLAN</div>
+      <div style="margin-top:12px;font-size:12px;color:var(--ink2);line-height:2">
+        ✅ After completing steps 1–5, update your Settings tab with new salary, revised SIP amounts, and updated insurance premiums.<br>
+        ✅ Log this year's review date below for tracking.
+      </div>
+      <div style="display:flex;gap:12px;margin-top:12px;align-items:center">
+        <input class="field-input" id="rv-review-date" type="date" style="width:200px">
+        <button class="save-btn" onclick="logReviewDate()" style="font-size:11px;padding:8px 16px">✅ Mark Review Complete</button>
+      </div>
+      <div id="rv-history" style="margin-top:12px;font-size:11px;color:var(--ink3)"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 31: WIFE'S PORTFOLIO & TAX VIEW -->
+<div class="page" id="page-31">
+  <div class="hdr">
+    <div class="htag">WIFE'S FINANCIAL PROFILE</div>
+    <h1>Wife's <span>Portfolio & Tax View</span></h1>
+    <p>SEPARATE PAN · 0% TAX BRACKET · LTCG OPTIMISATION · PPF TRACKER</p>
+  </div>
+  <div class="content">
+    <div class="alert success">✅ Wife is in the <strong>0% income tax bracket</strong> (₹8.4L income, effective tax ≈ ₹19,500/year). Every investment in her name is maximally tax-efficient. Her LTCG exemption (₹1.25L/year) is the same as yours — use it separately.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Wife's Monthly Portfolio</h2></div>
+    <div class="g3" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Wife's Monthly SIP</div><div class="mb-value" id="wife-monthly-sip" style="color:var(--wife)">₹65,008</div><div class="mb-sub">34% of unified portfolio</div></div>
+      <div class="metric-block"><div class="mb-label">Wife's PPF (monthly)</div><div class="mb-value" id="wife-ppf-monthly" style="color:var(--jt)">₹12,000</div><div class="mb-sub">Once opened — EEE 7.1%</div></div>
+      <div class="metric-block"><div class="mb-label">Total Wife's Investment</div><div class="mb-value" id="wife-total-investment" style="color:var(--you)">₹77,008</div><div class="mb-sub">per month</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Funds in Wife's Name (34% Allocation)</h2></div>
+    <div class="tw" style="margin-bottom:13px"><table><thead><tr><th style="text-align:left">Fund</th><th>Monthly SIP</th><th>Allocation %</th><th>Purpose</th></tr></thead><tbody id="wife-fund-tbody"></tbody></table></div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Wife's Tax Profile</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card w">
+        <div class="ch3 w">INCOME TAX CALCULATION</div>
+        <div class="ml"><div class="d">Annual Gross Income</div><div class="a aw" id="wife-gross-income">₹8,40,000</div></div>
+        <div class="ml"><div class="d">Standard Deduction</div><div class="a aj">- ₹75,000</div></div>
+        <div class="ml"><div class="d">Taxable Income</div><div class="a aw" id="wife-taxable">₹7,65,000</div></div>
+        <div class="ml"><div class="d">Tax Slab (5% on ₹3.15L)</div><div class="a ar" id="wife-tax-slab">₹15,750</div></div>
+        <div class="ml"><div class="d">Health + Education Cess (4%)</div><div class="a ar" id="wife-cess">₹630</div></div>
+        <div class="tr"><div class="tl">Annual Tax</div><div class="tv ar" id="wife-annual-tax">₹16,380</div></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--ink3)">Effective rate: ~2% — nearly tax-free income</div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">80C OPPORTUNITY</div>
+        <div class="ml"><div class="d">Wife's EPF contribution</div><div class="a ai">₹0 (not salaried PF)</div></div>
+        <div class="ml"><div class="d">80C limit</div><div class="a aj">₹1,50,000/year</div></div>
+        <div class="ml"><div class="d">Wife's 80C used</div><div class="a ar">₹0</div></div>
+        <div class="ml"><div class="d">Unused 80C gap</div><div class="a ay">₹1,50,000</div></div>
+        <div style="margin-top:10px;padding:10px;background:rgba(240,180,41,.08);border-radius:5px;font-size:11px">💡 Wife can use ELSS funds for ₹1.5L 80C deduction — saves ₹7,500/year at 5% slab. Small saving but valid. Alternative: PPF covers this in EEE form.</div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>Wife's LTCG Tracker</h2></div>
+    <div class="g3" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Annual LTCG Exemption</div><div class="mb-value" style="color:var(--wife)">₹1,25,000</div></div>
+      <div class="metric-block"><div class="mb-label">Booked This FY</div><div class="mb-value" id="wife-ltcg-booked" style="color:var(--you)">₹0</div><div class="mb-sub">from CG Ledger</div></div>
+      <div class="metric-block"><div class="mb-label">Remaining to Book</div><div class="mb-value" id="wife-ltcg-remaining" style="color:var(--jt)">₹1,25,000</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">05</span><h2>Wife's PPF Projection</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 j">PPF CORPUS TRACKER (ONCE OPENED)</div>
+      <div class="field-row" style="margin-top:10px"><span class="field-label">PPF Start Date</span><input class="field-input" id="wife-ppf-start" type="text" placeholder="e.g. June 2026"></div>
+      <div class="field-row"><span class="field-label">Current PPF Balance (₹)</span><input class="field-input" id="wife-ppf-balance" type="number" value="0" oninput="calcWifePPF()"></div>
+      <div class="g3" style="margin-top:12px" id="wife-ppf-metrics">
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Corpus by 2041 (15 yr)</div><div style="font-size:1.3rem;font-weight:700;color:var(--jt)" id="wife-ppf-2041">~₹39.1L</div></div>
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Corpus by 2054 (extended)</div><div style="font-size:1.3rem;font-weight:700;color:var(--jt)" id="wife-ppf-2054">~₹1.27 Cr</div></div>
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Combined PPF (yours + wife)</div><div style="font-size:1.3rem;font-weight:700;color:var(--jt)" id="wife-ppf-combined">~₹2.54 Cr</div></div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">06</span><h2>Couple's Combined Tax Optimisation</h2></div>
+    <div class="card">
+      <div class="ch3 y">OPTIMAL COUPLE STRATEGY</div>
+      <div style="margin-top:12px;font-size:12px;color:var(--ink2);line-height:2">
+        🏆 <strong>Combined LTCG exemption:</strong> ₹2.5L/year — fully use both PANs each January<br>
+        🏆 <strong>Split investments:</strong> 66% in your name (30% slab), 34% in wife's name (5% slab) — already done ✅<br>
+        🏆 <strong>Wife's 80C:</strong> Open PPF for wife → ₹1.44L/year in EEE — better than ELSS<br>
+        💡 <strong>Future home loan:</strong> If home is jointly owned, BOTH can claim ₹2L interest deduction each = ₹4L total deduction / year<br>
+        💡 <strong>Wife's ELSS:</strong> If wife's income grows past ₹10L, shift some SIP to ELSS for 80C benefit
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ============================================================
 // STATE & CONFIG
@@ -5676,6 +6218,7 @@ function renderPageCharts(index) {
   if (index === 3) renderRetirementCharts();
   if (index === 4) renderKidsCharts();
   if (index === 5) renderInvestmentCharts();
+  if (index === 8) renderSinkingFundsTable();
   if (index === 6) { renderTaxCalculator2026(); renderLTCGHarvest(); renderPPFGrowth(); }
   if (index === 9) renderHistoricalChart();
   if (index === 10) { renderInceptionTracker(); renderMonthlyProjections(); }
@@ -5691,6 +6234,14 @@ function renderPageCharts(index) {
   if (index === 21) initAprilLaunch();    // April 2026 Launch Mission Control
   if (index === 22) { renderCAGRDeviation(); renderStepupPlanner(); renderStepupPerFund(); renderStepupImpactChart(); } // Step-up Planner
   if (index === 23) { renderDecumulation(); renderGlidePath(); } // Drawdown Plan
+  if (index === 24) renderNetWorth();
+  if (index === 25) renderEPFDashboard();
+  if (index === 26) calcHomeLoan();
+  if (index === 27) calcIncrement();
+  if (index === 28) calcFIRE();
+  if (index === 29) renderCGLedger();
+  if (index === 30) renderAnnualReview();
+  if (index === 31) renderWifeTaxView();
 }
 
 function destroyChart(id) {
@@ -6639,7 +7190,139 @@ function renderKidsCharts() {
 // ============================================================
 // CHART: INVESTMENTS ALLOCATION
 // ============================================================
+function renderSinkingFundsTable() {
+  const fmt  = v => '₹' + (v || 0).toLocaleString('en-IN');
+  const fmtK = v => v >= 100000 ? '₹' + (v/100000).toFixed(1) + 'L' : fmt(v);
+  const c    = config;
+  const set  = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = fmt(val); };
+
+  // ── Main table cells ──────────────────────────────────────────────────────
+  set('sf-vacation',         c.sinkVacation      || 15000);
+  set('sf-festivals',        c.sinkFestivals     || 5000);
+  set('sf-car',              c.sinkCar           || 20000);
+  set('sf-baby',             c.sinkBaby          || 10000);
+  set('sf-home-emergency',   c.sinkHomeEmergency || 5000);
+  set('sf-medical',          c.sinkMedical       || 5000);
+  set('sf-home-down',        c.sinkHomeDown      || 0);
+  set('sf-parents-care',     c.sinkParentsCare   || 0);
+  set('sf-school',           c.sinkSchool        || 0);
+
+  const existing = (c.sinkVacation||15000)+(c.sinkFestivals||5000)+(c.sinkCar||20000)+
+                   (c.sinkBaby||10000)+(c.sinkHomeEmergency||5000)+(c.sinkMedical||5000);
+  const newFunds = (c.sinkHomeDown||0)+(c.sinkParentsCare||0)+(c.sinkSchool||0);
+  const grand    = existing + newFunds;
+  set('sf-existing-total', existing);
+  set('sf-grand-total',    grand);
+
+  const setAnn = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = fmt(v * 12); };
+  setAnn('sf-home-down',    c.sinkHomeDown    || 0);
+  setAnn('sf-parents-care', c.sinkParentsCare || 0);
+  setAnn('sf-school',       c.sinkSchool      || 0);
+  const gAnn = document.getElementById('sf-grand-annual');
+  if (gAnn) gAnn.textContent = fmt(grand * 12);
+
+  // ── Detail cards (Vacation / Car / Baby) ──────────────────────────────────
+  const vac  = c.sinkVacation || 15000;
+  const car  = c.sinkCar      || 20000;
+  const baby = c.sinkBaby     || 10000;
+
+  // Vacation card
+  set('card-sf-vacation',        vac);
+  set('card-sf-vacation-annual', vac * 12);
+  const vacRet = Math.round(vac * 12 * 0.06);
+  set('card-sf-vacation-returns', vacRet);
+  set('card-sf-vacation-total',   vac * 12 + vacRet);
+
+  // Car card (24-month horizon)
+  set('card-sf-car',         car);
+  set('card-sf-car-contrib', car * 24);
+  const carRet = Math.round(car * 24 * 0.07 / 2);
+  set('card-sf-car-returns', carRet);
+  set('card-sf-car-total',   car * 24 + carRet);
+
+  // Baby card
+  set('card-sf-baby',          baby);
+  set('card-sf-baby-delivery', baby * 6);
+  set('card-sf-baby-year1',    baby * 18);
+}
+
+// ── Investments tab fund table ─────────────────────────────────────────────
+function renderInvestmentTable() {
+  const tbody = document.getElementById('inv-fund-tbody');
+  if (!tbody) return;
+
+  const funds = (typeof familyFunds !== 'undefined' && familyFunds.length > 0) ? familyFunds : [];
+  const total = funds.reduce((s, f) => s + (f.monthlySIP || 0), 0);
+  const fmt   = v => '₹' + (v || 0).toLocaleString('en-IN');
+
+  const riskTag = r => {
+    if (!r) return '';
+    const rc = r.toUpperCase();
+    if (rc === 'HIGH')     return '<span class="tag tr2">HIGH</span>';
+    if (rc === 'MODERATE') return '<span class="tag ty">MODERATE</span>';
+    return '<span class="tag tg">LOW</span>';
+  };
+
+  const catLabel = f => {
+    const cat = (f.category || '').toLowerCase();
+    if (cat.includes('large'))  return 'Large Cap Index';
+    if (cat.includes('mid'))    return 'Mid Cap Active';
+    if (cat.includes('small'))  return 'Small Cap';
+    if (cat.includes('flexi'))  return 'Flexi Cap';
+    if (cat.includes('intl') || cat.includes('international')) return 'International';
+    if (cat.includes('debt') || cat.includes('bond')) return 'Debt';
+    if (cat.includes('comm') || cat.includes('gold')) return 'Commodity / Gold';
+    if (cat.includes('hybrid') || f.name.toLowerCase().includes('nps')) return 'Retirement (NPS)';
+    return f.category || 'Other';
+  };
+
+  let rows = funds.map(f => {
+    const pct  = total > 0 ? Math.round((f.monthlySIP / total) * 100) : 0;
+    const risk = f.riskLevel || (f.category && f.category.toLowerCase().includes('small') ? 'HIGH'
+               : f.category && f.category.toLowerCase().includes('mid') ? 'HIGH' : 'MODERATE');
+    return `<tr>
+      <td>${catLabel(f)}</td>
+      <td>${f.name}</td>
+      <td>${fmt(f.monthlySIP)}</td>
+      <td>${pct}%</td>
+      <td style="font-size:10px;color:var(--ink3)">${(f.purpose || '').split('(')[0].trim()}</td>
+      <td>${riskTag(risk)}</td>
+    </tr>`;
+  }).join('');
+
+  // Government schemes row
+  const ppf = config.ppfMonthly || 12000;
+  const vpf = config.vpfMonthly || 12000;
+  rows += `<tr style="background:rgba(77,158,240,.04)">
+    <td colspan="2" style="color:var(--blue);font-weight:700">Govt Schemes (PPF + VPF)</td>
+    <td style="color:var(--blue)">${fmt(ppf + vpf)}</td>
+    <td style="color:var(--blue)">—</td>
+    <td style="font-size:10px;color:var(--ink3)">EEE — tax-free returns (7.1% + 8.25%)</td>
+    <td><span class="tag tb">EEE</span></td>
+  </tr>`;
+
+  rows += `<tr class="ttr">
+    <td colspan="2"><strong>TOTAL MONTHLY INVESTMENT</strong></td>
+    <td><strong>${fmt(total + ppf + vpf)}</strong></td>
+    <td><strong>100%</strong></td>
+    <td colspan="2"><strong>${fmt((total + ppf + vpf) * 12)}/year</strong></td>
+  </tr>`;
+
+  tbody.innerHTML = rows;
+
+  // Update page header
+  const hdr = document.getElementById('inv-total-hdr');
+  if (hdr) hdr.textContent = '₹' + (total / 100000).toFixed(2) + 'L/month';
+
+  // Update April Launch metric blocks
+  const lv  = document.getElementById('launch-sip-value');
+  const lan = document.getElementById('launch-sip-annual');
+  if (lv)  lv.textContent  = '₹' + (total / 100000).toFixed(2) + 'L';
+  if (lan) lan.textContent  = '₹' + ((total * 12) / 100000).toFixed(1) + 'L/year';
+}
+
 function renderInvestmentCharts() {
+  renderInvestmentTable();       // Always refresh fund table from familyFunds
   destroyChart('allocationChart');
   var ctx = document.getElementById('allocationChart');
   if (!ctx) return;
@@ -9260,6 +9943,24 @@ let config = {
   wifeSIP: 0,       // Deprecated - portfolio is now unified (use yourSIP for total)
   vpfMonthly: 12000, // Voluntary PF — salary deduction, 8.25% EEE, same EPF account
   ppfMonthly: 12000, // PPF — ICICI Bank, 7.1% EEE, till 2041
+  // Annual bonus
+  annualBonusYou: 0,
+  annualBonusWife: 0,
+  // Living expense breakdown (sum = livingExpenses)
+  livingGroceries: 20000,
+  livingDining: 12000,
+  livingTransport: 10000,
+  livingOther: 7000,
+  // Sinking fund breakdown (sum = sinkingFunds)
+  sinkVacation: 15000,
+  sinkFestivals: 5000,
+  sinkCar: 20000,
+  sinkBaby: 10000,
+  sinkHomeEmergency: 5000,
+  sinkMedical: 5000,
+  sinkHomeDown: 0,
+  sinkParentsCare: 0,
+  sinkSchool: 0,
   // Investment assumptions
   expectedReturn: 9,   // Conservative base assumption (9% CAGR — CFP realistic floor)
   annualStepUp: 10,    // Annual SIP step-up percentage (tiered model overrides this in projections)
@@ -10558,8 +11259,32 @@ function saveConfig() {
   config.rent = getValue('s-rent');
   config.parents = getValue('s-parents');
   config.fixedExpenses = getValue('s-fixed');
-  config.livingExpenses = getValue('s-living');
-  config.sinkingFunds = getValue('s-sinking');
+  // Living expense sub-categories (s-living is the readonly auto-sum)
+  config.livingGroceries  = getValue('s-living-groceries');
+  config.livingDining     = getValue('s-living-dining');
+  config.livingTransport  = getValue('s-living-transport');
+  config.livingOther      = getValue('s-living-other');
+  config.livingExpenses   = config.livingGroceries + config.livingDining + config.livingTransport + config.livingOther
+                            || getValue('s-living');
+
+  // Sinking fund sub-categories (s-sinking is the readonly auto-sum)
+  config.sinkVacation     = getValue('s-sink-vacation');
+  config.sinkFestivals    = getValue('s-sink-festivals');
+  config.sinkCar          = getValue('s-sink-car');
+  config.sinkBaby         = getValue('s-sink-baby');
+  config.sinkHomeEmergency = getValue('s-sink-home-emergency');
+  config.sinkMedical      = getValue('s-sink-medical');
+  config.sinkHomeDown     = getValue('s-sink-home-down');
+  config.sinkParentsCare  = getValue('s-sink-parents-care');
+  config.sinkSchool       = getValue('s-sink-school');
+  config.sinkingFunds     = config.sinkVacation + config.sinkFestivals + config.sinkCar +
+                            config.sinkBaby + config.sinkHomeEmergency + config.sinkMedical +
+                            config.sinkHomeDown + config.sinkParentsCare + config.sinkSchool
+                            || getValue('s-sinking');
+
+  // Annual bonus
+  config.annualBonusYou  = getValue('s-bonus-you');
+  config.annualBonusWife = getValue('s-bonus-wife');
   
   // Update config with unified SIP total
   config.yourSIP = totalSIP;  // Unified family portfolio total
@@ -10658,9 +11383,11 @@ function saveConfig() {
     if (typeof renderInsuranceAdequacy === 'function') renderInsuranceAdequacy();
     if (typeof renderAllocationHealth === 'function') renderAllocationHealth();
     if (typeof renderRetirementAdequacy === 'function') renderRetirementAdequacy();
+    if (typeof renderSinkingFundsTable  === 'function') renderSinkingFundsTable();
+    if (typeof renderInvestmentTable    === 'function') renderInvestmentTable();
 
     console.log('✅ All pages refreshed including critical features (inflation, emergency fund, insurance, asset allocation)');
-    alert('✅ Settings saved! All pages updated with inflation-adjusted goals, emergency fund status, insurance gaps, and asset allocation health.');
+    alert('✅ Settings saved! All pages updated — income, expenses, sinking funds, VPF, bonus, and projections all refreshed.');
   }, 100);
 }
 
@@ -10752,8 +11479,29 @@ function populateSettingsInputs() {
   // VPF
   setValue('s-vpf-monthly', config.vpfMonthly || 12000);
 
-  // Refresh totals after populating
-  setTimeout(updateSettingsTotals, 50);
+  // Annual bonus
+  setValue('s-bonus-you', config.annualBonusYou || 0);
+  setValue('s-bonus-wife', config.annualBonusWife || 0);
+
+  // Living expense sub-categories
+  setValue('s-living-groceries', config.livingGroceries || 20000);
+  setValue('s-living-dining',    config.livingDining    || 12000);
+  setValue('s-living-transport', config.livingTransport || 10000);
+  setValue('s-living-other',     config.livingOther     || 7000);
+
+  // Sinking fund sub-categories
+  setValue('s-sink-vacation',       config.sinkVacation      || 15000);
+  setValue('s-sink-festivals',      config.sinkFestivals     || 5000);
+  setValue('s-sink-car',            config.sinkCar           || 20000);
+  setValue('s-sink-baby',           config.sinkBaby          || 10000);
+  setValue('s-sink-home-emergency', config.sinkHomeEmergency || 5000);
+  setValue('s-sink-medical',        config.sinkMedical       || 5000);
+  setValue('s-sink-home-down',      config.sinkHomeDown      || 0);
+  setValue('s-sink-parents-care',   config.sinkParentsCare   || 0);
+  setValue('s-sink-school',         config.sinkSchool        || 0);
+
+  // Refresh all auto-sums and totals after populating
+  setTimeout(() => { sumLivingExpenses(); sumSinkingFunds(); updateBonusDisplay(); updateSettingsTotals(); }, 50);
 }
 
 // ============================================
@@ -10780,6 +11528,37 @@ function updateSettingsTotals() {
   const grandTotal = familyTotal + ppf + vpf;
   const grandTotalEl = document.getElementById('grand-total-investment');
   if (grandTotalEl) grandTotalEl.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
+}
+
+// ── Living expense sub-category sum ───────────────────────────────────────────
+function sumLivingExpenses() {
+  const ids = ['s-living-groceries','s-living-dining','s-living-transport','s-living-other'];
+  let total = 0;
+  ids.forEach(id => { const el = document.getElementById(id); if (el) total += parseFloat(el.value) || 0; });
+  const out = document.getElementById('s-living');
+  if (out) out.value = total.toLocaleString('en-IN');
+  updateSettingsTotals();
+}
+
+// ── Sinking fund sub-category sum ─────────────────────────────────────────────
+function sumSinkingFunds() {
+  const ids = ['s-sink-vacation','s-sink-festivals','s-sink-car','s-sink-baby',
+               's-sink-home-emergency','s-sink-medical','s-sink-home-down',
+               's-sink-parents-care','s-sink-school'];
+  let total = 0;
+  ids.forEach(id => { const el = document.getElementById(id); if (el) total += parseFloat(el.value) || 0; });
+  const out = document.getElementById('s-sinking');
+  if (out) out.value = total.toLocaleString('en-IN');
+  updateSettingsTotals();
+}
+
+// ── Bonus display helper ───────────────────────────────────────────────────────
+function updateBonusDisplay() {
+  const you  = parseFloat(document.getElementById('s-bonus-you')?.value)  || 0;
+  const wife = parseFloat(document.getElementById('s-bonus-wife')?.value) || 0;
+  const monthlyEquiv = Math.round((you + wife) / 12);
+  const el = document.getElementById('bonus-monthly-equiv');
+  if (el) el.textContent = '₹' + monthlyEquiv.toLocaleString('en-IN');
 }
 
 // Attach listeners when Settings page loads
@@ -16884,6 +17663,699 @@ function renderGlidePath() {
       }
     }
   });
+}
+
+// ============================================================
+// PAGE 24: NET WORTH STATEMENT
+// ============================================================
+function renderNetWorth() {
+  const ef = document.getElementById('nw-ef');
+  if (ef) ef.value = (config.emergencyFund || 2000000).toLocaleString('en-IN');
+  calcNetWorth();
+  renderNWHistory();
+}
+
+function calcNetWorth() {
+  const g = id => parseFloat(document.getElementById(id)?.value?.toString().replace(/,/g,'')) || 0;
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+
+  const assets = g('nw-mf') + g('nw-epf') + g('nw-ppf') + g('nw-nps') + g('nw-bank')
+               + g('nw-ef') + g('nw-gold') + g('nw-home') + g('nw-other-assets');
+  const liab   = g('nw-home-loan') + g('nw-car-loan') + g('nw-personal-loan') + g('nw-cc') + g('nw-other-liab');
+  const nw     = assets - liab;
+  const liquid = g('nw-mf') + g('nw-bank') + g('nw-ef');
+  const daPct  = assets > 0 ? ((liab / assets) * 100).toFixed(1) : 0;
+
+  const totalIncome = (config.netPay || 201586) + (config.wifeGross || 70000);
+  const totalInv    = (config.yourSIP || 191200) + (config.ppfMonthly || 12000) + (config.vpfMonthly || 12000);
+  const savingsRate = totalIncome > 0 ? Math.round((totalInv / totalIncome) * 100) : 0;
+
+  const s = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = fmt(v); };
+  s('nw-total-assets', assets); s('nw-total-liab', liab); s('nw-m-assets', assets);
+  s('nw-m-liab', liab); s('nw-liquid', liquid);
+  const nwEl = document.getElementById('nw-total');
+  if (nwEl) { nwEl.textContent = fmt(nw); nwEl.style.color = nw >= 0 ? 'var(--jt)' : 'var(--red)'; }
+  const daEl = document.getElementById('nw-da-ratio');
+  if (daEl) daEl.textContent = `Debt-to-Asset: ${daPct}%`;
+  const srEl = document.getElementById('nw-savings-rate');
+  if (srEl) srEl.textContent = savingsRate + '%';
+
+  // Donut chart
+  if (assets > 0) renderNWDonut([
+    { label: 'MF Portfolio', val: parseFloat(document.getElementById('nw-mf')?.value) || 0, color: 'var(--jt)' },
+    { label: 'EPF + VPF',   val: parseFloat(document.getElementById('nw-epf')?.value) || 0, color: 'var(--you)' },
+    { label: 'PPF',         val: parseFloat(document.getElementById('nw-ppf')?.value) || 0, color: 'var(--blue)' },
+    { label: 'NPS',         val: parseFloat(document.getElementById('nw-nps')?.value) || 0, color: 'var(--purple)' },
+    { label: 'Bank + FD',   val: parseFloat(document.getElementById('nw-bank')?.value) || 0, color: 'var(--ink2)' },
+    { label: 'Emergency',   val: config.emergencyFund || 2000000, color: 'var(--jt2)' },
+    { label: 'Gold',        val: parseFloat(document.getElementById('nw-gold')?.value) || 0, color: '#ffd700' },
+  ]);
+}
+
+function renderNWDonut(slices) {
+  destroyChart('nwDonutChart');
+  const ctx = document.getElementById('nwDonutChart');
+  if (!ctx) return;
+  const filtered = slices.filter(s => s.val > 0);
+  chartInstances['nwDonutChart'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: filtered.map(s => s.label),
+      datasets: [{ data: filtered.map(s => s.val), backgroundColor: filtered.map(s => s.color), borderWidth: 0 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#eef0f4', font: { size: 11 } } } } }
+  });
+}
+
+function saveNWSnapshot() {
+  const g = id => parseFloat(document.getElementById(id)?.value?.toString().replace(/,/g,'')) || 0;
+  const assets = g('nw-mf')+g('nw-epf')+g('nw-ppf')+g('nw-nps')+g('nw-bank')+g('nw-ef')+g('nw-gold')+g('nw-home')+g('nw-other-assets');
+  const liab   = g('nw-home-loan')+g('nw-car-loan')+g('nw-personal-loan')+g('nw-cc')+g('nw-other-liab');
+  const history = JSON.parse(localStorage.getItem('nwHistory') || '[]');
+  history.push({ date: new Date().toLocaleDateString('en-IN'), assets, liab, nw: assets - liab });
+  localStorage.setItem('nwHistory', JSON.stringify(history));
+  renderNWHistory();
+  alert('✅ Snapshot saved!');
+}
+
+function renderNWHistory() {
+  const tbody = document.getElementById('nw-history-tbody');
+  if (!tbody) return;
+  const history = JSON.parse(localStorage.getItem('nwHistory') || '[]');
+  if (!history.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--ink3);padding:20px">No snapshots yet</td></tr>'; return; }
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  tbody.innerHTML = history.map((h, i) => {
+    const prev = history[i - 1];
+    const change = prev ? h.nw - prev.nw : 0;
+    const cc = change >= 0 ? 'var(--jt)' : 'var(--red)';
+    return `<tr><td>${h.date}</td><td>${fmt(h.assets)}</td><td>${fmt(h.liab)}</td><td style="font-weight:700">${fmt(h.nw)}</td><td style="color:${cc}">${change >= 0 ? '+' : ''}${fmt(change)}</td></tr>`;
+  }).join('');
+}
+
+function clearNWHistory() {
+  if (confirm('Clear all net worth snapshots?')) { localStorage.removeItem('nwHistory'); renderNWHistory(); }
+}
+
+// ============================================================
+// PAGE 25: EPF DASHBOARD
+// ============================================================
+function renderEPFDashboard() {
+  const basic   = config.basicSalary || 139678;
+  const empEPF  = Math.round(basic * 0.12);
+  const erEPF   = Math.round(basic * 0.0367);
+  const eps     = Math.min(Math.round(basic * 0.0833), 1250);
+  const vpf     = config.vpfMonthly || 12000;
+  const total   = empEPF + erEPF + eps + vpf;
+
+  const empAnn  = empEPF * 12;
+  const vpfAnn  = vpf * 12;
+  const totalAnn = empAnn + vpfAnn;
+  const taxable = Math.max(0, totalAnn - 250000);
+  const taxImpact = Math.round(taxable * 0.0825 * 0.30);
+
+  const fmt = v => '₹' + v.toLocaleString('en-IN');
+  const s = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = fmt(v); };
+  s('epf-emp', empEPF); s('epf-er-epf', erEPF); s('epf-eps', eps); s('epf-vpf-monthly', vpf);
+  s('epf-total-monthly', total); s('epf-emp-annual', empAnn); s('epf-vpf-annual', vpfAnn);
+  s('epf-total-annual', totalAnn); s('epf-taxable-excess', taxable); s('epf-tax-impact', taxImpact);
+
+  // EPS pension (₹15,000 capped × 28 years ÷ 70)
+  const epsPension = Math.round(15000 * 28 / 70);
+  s('eps-monthly-pension', epsPension); s('eps-annual-pension', epsPension * 12);
+
+  renderEPFProjection();
+}
+
+function renderEPFProjection() {
+  const rate    = 0.0825;
+  const basic   = config.basicSalary || 139678;
+  const empEPF  = Math.round(basic * 0.12);
+  const erEPF   = Math.round(basic * 0.0367);
+  const vpf     = config.vpfMonthly || 12000;
+  const monthlyTotal = empEPF + erEPF + vpf;
+  const annualTotal  = monthlyTotal * 12;
+  const currentBal   = parseFloat(document.getElementById('epf-balance')?.value) || 0;
+
+  const labels = [], data = [];
+  let corpus = currentBal;
+  const tbody = document.getElementById('epf-table-body');
+  let rows = '';
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+
+  for (let i = 0; i <= 28; i++) {
+    const yr = 2026 + i;
+    const interest = Math.round(corpus * rate);
+    corpus = Math.round(corpus + annualTotal + interest);
+    labels.push(yr);
+    data.push(corpus);
+
+    // Milestones
+    const milestones = [1000000, 5000000, 10000000, 20000000, 30000000, 50000000, 70000000];
+    const isMilestone = milestones.includes(Math.round(corpus / 1000000) * 1000000) && i > 0;
+    rows += `<tr${isMilestone ? ' class="milestone"' : ''}><td>${yr}</td><td>${31+i}</td><td>${fmt(annualTotal)}</td><td>${fmt(interest)}</td><td style="font-weight:${i===28?'700':'400'}">${fmt(corpus)}</td></tr>`;
+  }
+  if (tbody) tbody.innerHTML = rows;
+
+  // Milestones grid
+  const mg = document.getElementById('epf-milestones');
+  if (mg) {
+    const targets = [{ v: 1e6, l: '₹10L' }, { v: 5e6, l: '₹50L' }, { v: 1e7, l: '₹1 Cr' }, { v: 5e7, l: '₹5 Cr' }];
+    mg.innerHTML = targets.map(t => {
+      let hitYr = '—';
+      let c2 = currentBal;
+      for (let i = 0; i <= 28; i++) { c2 = c2 + annualTotal + c2 * rate; if (c2 >= t.v && hitYr === '—') hitYr = 2026 + i; }
+      return `<div class="metric-block"><div class="mb-label">Reaches ${t.l}</div><div class="mb-value" style="font-size:1rem;color:var(--you)">${hitYr}</div></div>`;
+    }).join('');
+  }
+
+  // Chart
+  destroyChart('epfProjectionChart');
+  const ctx = document.getElementById('epfProjectionChart');
+  if (!ctx) return;
+  chartInstances['epfProjectionChart'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{ label: 'EPF+VPF Corpus', data, borderColor: 'var(--jt)', backgroundColor: 'rgba(48,200,122,.1)', fill: true, tension: 0.3, pointRadius: 3 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      scales: { y: { ticks: { callback: v => '₹' + (v/1e7).toFixed(1) + 'Cr', color: 'var(--ink3)' }, grid: { color: 'rgba(255,255,255,.05)' } }, x: { ticks: { color: 'var(--ink3)' }, grid: { display: false } } },
+      plugins: { legend: { labels: { color: 'var(--ink)' } } }
+    }
+  });
+}
+
+// ============================================================
+// PAGE 26: HOME LOAN MODELLER
+// ============================================================
+function calcHomeLoan() {
+  const gv = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const sv = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+
+  const homeVal  = gv('hl-home-value');
+  const dpPct    = gv('hl-dp-pct') / 100;
+  const dp       = homeVal * dpPct;
+  const loan     = homeVal - dp;
+  const reg      = homeVal * 0.07;
+  const rate     = gv('hl-rate') / 100 / 12;
+  const months   = gv('hl-tenure') * 12;
+  const income   = gv('hl-income-then') || 350000;
+  const purchYr  = parseInt(document.getElementById('hl-year')?.value) || 2032;
+  const rent     = config.rent || 40000;
+
+  const fmtEl = (id, v) => { const el = document.getElementById(id); if (el) el.value = fmt(v); };
+  fmtEl('hl-dp-amt', dp); fmtEl('hl-loan-amt', loan); fmtEl('hl-reg', reg);
+
+  // EMI
+  const emi = rate > 0 ? Math.round(loan * rate * Math.pow(1+rate, months) / (Math.pow(1+rate, months) - 1)) : 0;
+  const totalPmt = emi * months;
+  const totalInt = totalPmt - loan;
+  const payoffYr = purchYr + gv('hl-tenure');
+
+  sv('hl-emi', fmt(emi));
+  const emiPct = income > 0 ? Math.round((emi / income) * 100) : 0;
+  sv('hl-emi-pct', emiPct + '% of income' + (emiPct > 40 ? ' ⚠️ HIGH' : emiPct < 30 ? ' ✅ OK' : ' 🟡 WATCH'));
+  sv('hl-total-interest', fmt(totalInt));
+  sv('hl-total-payment', fmt(totalPmt));
+  sv('hl-payoff-year', payoffYr);
+
+  // Corpus impact
+  const sipReduction = Math.max(0, emi - rent); // net additional cash outflow vs current rent
+  const dpOpptyCost  = Math.round(dp * Math.pow(1.12, 2054 - purchYr) / 1e7);
+  const corpusHit    = Math.round((sipReduction * 12 * ((Math.pow(1.12, 2054 - purchYr) - 1) / 0.12)) / 1e7);
+  const currentCorpus = 66;
+  sv('hl-sip-reduction', fmt(sipReduction) + '/month');
+  sv('hl-dp-opportunity', '₹' + dpOpptyCost + ' Cr (opportunity cost of down payment at 12% CAGR)');
+  sv('hl-corpus-hit', '-₹' + corpusHit + ' Cr');
+  const newCorEl = document.getElementById('hl-new-corpus');
+  if (newCorEl) { const nc = Math.max(0, currentCorpus - corpusHit); newCorEl.textContent = '₹' + nc + ' Cr'; newCorEl.style.color = nc < 60 ? 'var(--red)' : 'var(--jt)'; }
+
+  // Tax benefit
+  const annInterest1 = Math.min(loan * gv('hl-rate') / 100, 200000);
+  sv('hl-tax-24b', fmt(Math.round(annInterest1 * 0.30)));
+  sv('hl-after-tax-emi', fmt(Math.round(emi - annInterest1 * 0.30 / 12)));
+
+  // Rent trajectory at purchase year
+  const yrsToP = purchYr - 2026;
+  const rentAtP = Math.round(rent * Math.pow(1.08, yrsToP));
+  sv('hl-current-rent', fmt(rent)); sv('hl-rent-then', fmt(rentAtP));
+  const delta = emi - rentAtP;
+  sv('hl-emi-rent-delta', fmt(Math.abs(delta)) + (delta >= 0 ? ' (EMI costs more)' : ' (EMI cheaper)'));
+  const verdEl = document.getElementById('hl-rent-buy-verdict');
+  if (verdEl) verdEl.innerHTML = delta <= 0
+    ? `✅ <strong>BUY IS CHEAPER:</strong> By ${purchYr}, EMI (${fmt(emi)}) < Rent (${fmt(rentAtP)}). Buying makes financial sense.`
+    : `⚠️ <strong>RENTING IS CHEAPER:</strong> EMI exceeds projected rent by ${fmt(delta)}/month in ${purchYr}. Buying builds equity but costs more monthly.`;
+
+  // Optimal year table
+  const optTbody = document.getElementById('hl-optimal-tbody');
+  if (optTbody) {
+    let rows = '';
+    for (let yr = 2028; yr <= 2038; yr++) {
+      const yrs = yr - 2026;
+      const incEst = Math.round(income * Math.pow(1.10, yr - purchYr));
+      const ep = emiPct; // EMI is same; income grows
+      const adjEmiPct = Math.round((emi / incEst) * 100);
+      const ok = adjEmiPct <= 30 ? '✅ Comfortable' : adjEmiPct <= 40 ? '🟡 Manageable' : '🔴 Stretch';
+      rows += `<tr${yr === purchYr ? ' class="milestone"' : ''}><td>${yr}</td><td>${fmt(incEst)}</td><td>${fmt(emi)}</td><td>${adjEmiPct}%</td><td>${ok}</td></tr>`;
+    }
+    optTbody.innerHTML = rows;
+  }
+}
+
+// ============================================================
+// PAGE 27: SALARY INCREMENT SIMULATOR
+// ============================================================
+function calcIncrement() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const sv = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  const currNet = g('si-curr-net') || config.netPay || 201586;
+  const newNet  = g('si-new-net');
+  const currSIP = g('si-curr-sip') || config.yourSIP || 191200;
+  const bonus   = g('si-bonus');
+
+  const delta   = Math.max(0, newNet - currNet);
+  const hikePct = currNet > 0 ? ((delta / currNet) * 100).toFixed(1) : 0;
+
+  sv('si-monthly-delta',  fmt(delta));
+  sv('si-annual-delta',   fmt(delta * 12));
+  sv('si-hike-pct',       hikePct + '%');
+  sv('si-bonus-monthly',  fmt(Math.round(bonus / 12)));
+
+  const sipPct  = g('si-sip-pct') / 100;
+  const insPct  = g('si-ins-pct') / 100;
+  const sinkPct = g('si-sink-pct') / 100;
+  const lifePct = g('si-life-pct') / 100;
+  const totalPct = sipPct + insPct + sinkPct + lifePct;
+
+  const warnEl = document.getElementById('si-alloc-warning');
+  if (warnEl) warnEl.style.display = Math.abs(totalPct - 1) > 0.01 ? 'block' : 'none';
+
+  const sipAmt  = Math.round(delta * sipPct);
+  const insAmt  = Math.round(delta * insPct);
+  const sinkAmt = Math.round(delta * sinkPct);
+  const lifeAmt = Math.round(delta * lifePct);
+
+  sv('si-sip-amt',  fmt(sipAmt) + '/month');
+  sv('si-ins-amt',  fmt(insAmt) + '/month');
+  sv('si-sink-amt', fmt(sinkAmt) + '/month');
+  sv('si-life-amt', fmt(lifeAmt) + '/month');
+
+  // SIP per fund breakdown
+  const breakdown = document.getElementById('si-sip-breakdown');
+  if (breakdown && typeof familyFunds !== 'undefined' && sipAmt > 0) {
+    const total = familyFunds.reduce((s, f) => s + (f.monthlySIP || 0), 0);
+    breakdown.innerHTML = familyFunds.map(f => {
+      const inc = total > 0 ? Math.round((f.monthlySIP / total) * sipAmt) : 0;
+      return `<span style="color:var(--ink2)">${f.name.split(' ').slice(0,3).join(' ')}: </span><strong style="color:var(--jt)">+${fmt(inc)}</strong><br>`;
+    }).join('');
+  }
+
+  const newSIP = currSIP + sipAmt;
+  sv('si-new-sip-total', fmt(newSIP));
+  sv('si-extra-annual', fmt(sipAmt * 12));
+  const corpusBoost = Math.round((sipAmt * 12 * ((Math.pow(1.12, 28) - 1) / 0.12)) / 1e7);
+  sv('si-corpus-boost', '+₹' + corpusBoost + ' Cr');
+  sv('si-new-corpus', '₹' + Math.round(66 + corpusBoost) + ' Cr');
+
+  sv('si-bonus-display', fmt(bonus));
+  sv('si-bonus-sip',     fmt(Math.round(bonus * 0.5)));
+  sv('si-bonus-sink',    fmt(Math.round(bonus * 0.3)));
+  sv('si-bonus-life',    fmt(Math.round(bonus * 0.2)));
+  const bonusCorpus = Math.round((bonus * 0.5 * Math.pow(1.12, 28)) / 1e7);
+  sv('si-bonus-corpus', '+₹' + bonusCorpus + ' Cr');
+}
+
+function applyIncrementToSettings() {
+  const newNet = parseFloat(document.getElementById('si-new-net')?.value) || 0;
+  if (!newNet) { alert('Please enter new net pay first.'); return; }
+  const el = document.getElementById('s-netpay');
+  if (el) { el.value = newNet.toLocaleString('en-IN'); }
+  config.netPay = newNet;
+  alert('✅ Net pay updated in Settings. Now go to Settings tab and update your SIP amounts per the breakdown above, then click Save Settings.');
+  showPage(1);
+}
+
+// ============================================================
+// PAGE 28: FIRE CALCULATOR
+// ============================================================
+function calcFIRE() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const monthlyExp  = g('fire-monthly-exp') || 122000;
+  const inflation   = g('fire-inflation') / 100 || 0.06;
+  const swr         = g('fire-swr') / 100 || 0.035;
+  const semiIncome  = g('fire-semi-income');
+  const otherIncome = g('fire-other-income');
+  const npsAnnuity  = g('fire-nps-annuity') / 12;
+
+  const startYear   = 2026;
+  const startAge    = 32;
+  const cagr        = 0.12;
+  const fmt         = v => '₹' + Math.round(v / 1e7 * 10) / 10 + ' Cr';
+
+  const retAges = [45, 48, 50, 52, 55, 58, 60];
+  const grid = document.getElementById('fire-scenarios-grid');
+  if (!grid) return;
+
+  // Build corpus trajectory from current SIP
+  const trajectory = {};
+  let corpus = 0;
+  let sip = (config.yourSIP || 191200);
+  for (let i = 0; i <= 30; i++) {
+    const yr = startYear + i;
+    const age = startAge + i;
+    corpus = corpus * (1 + cagr) + sip * 12;
+    trajectory[age] = corpus;
+    const tr = i < 10 ? 0.10 : i < 20 ? 0.07 : 0.05;
+    sip *= (1 + tr);
+  }
+
+  grid.innerHTML = retAges.map(retAge => {
+    const yrs = retAge - startAge;
+    const lifeExpectancy = 90;
+    const retYears = lifeExpectancy - retAge;
+    const expAtRetirement = monthlyExp * Math.pow(1 + inflation, yrs) * 12;
+    const corpusNeeded    = expAtRetirement / swr;
+    const semiNeeded      = Math.max(0, (expAtRetirement - (semiIncome + otherIncome + npsAnnuity) * 12)) / swr;
+    const traj           = trajectory[retAge] || 0;
+    const gap             = corpusNeeded - traj;
+    const achieved        = traj >= corpusNeeded;
+    const semiAchieved    = traj >= semiNeeded;
+    const color           = achieved ? 'var(--jt)' : semiAchieved ? 'var(--you)' : 'var(--red)';
+    const status          = achieved ? '✅ Achievable' : semiAchieved ? '🟡 Semi-FIRE OK' : '❌ Not yet';
+    return `<div class="card" style="border-left:3px solid ${color}">
+      <div style="font-size:11px;font-weight:700;color:${color};margin-bottom:8px">Retire at Age ${retAge} (${startYear + yrs})</div>
+      <div class="ml"><div class="d">Annual expense at retirement</div><div class="a" style="color:var(--you)">${'₹' + Math.round(expAtRetirement / 1e5) / 10 + 'L/yr'}</div></div>
+      <div class="ml"><div class="d">Corpus needed (${(swr*100)}% SWR)</div><div class="a" style="color:var(--red)">${fmt(corpusNeeded)}</div></div>
+      <div class="ml"><div class="d">Trajectory corpus by ${retAge}</div><div class="a" style="color:var(--jt)">${fmt(traj)}</div></div>
+      ${gap > 0 ? `<div class="ml"><div class="d">Gap</div><div class="a" style="color:var(--red)">-${fmt(gap)}</div></div>` : `<div class="ml"><div class="d">Surplus</div><div class="a" style="color:var(--jt)">+${fmt(-gap)}</div></div>`}
+      <div class="tr"><div class="tl">${status}</div></div>
+      ${!achieved && semiAchieved ? `<div style="font-size:10px;color:var(--you);margin-top:6px">With ₹${semiIncome.toLocaleString('en-IN')}/mo part-time income — Semi-FIRE achievable</div>` : ''}
+    </div>`;
+  }).join('');
+
+  // Coast FIRE
+  const target60 = trajectory[60] || 0;
+  let coastCorpus = 0, coastYear = '—', coastAge = '—';
+  for (let i = 0; i <= 28; i++) {
+    const corpus2 = (trajectory[startAge + i] || 0);
+    if (corpus2 * Math.pow(1 + cagr, 28 - i) >= target60 && coastYear === '—') {
+      coastYear = startYear + i; coastAge = startAge + i;
+      coastCorpus = corpus2;
+      break;
+    }
+  }
+  const coastEl = document.getElementById('coast-fire-result');
+  if (coastEl) coastEl.innerHTML = coastYear !== '—'
+    ? `<div style="font-size:12px;color:var(--ink2)">You reach your Coast FIRE point at <strong style="color:var(--you)">age ${coastAge} (${coastYear})</strong> with a corpus of <strong style="color:var(--jt)">₹${Math.round(coastCorpus/1e7*10)/10} Cr</strong>.<br>At that point you can <em>stop all SIPs</em> and your existing corpus will still grow to ₹${Math.round(target60/1e7)} Cr by age 60 at ${(cagr*100)}% CAGR.</div>`
+    : '<div style="color:var(--ink3)">Build more corpus — Coast FIRE point not yet calculated</div>';
+
+  // Chart
+  destroyChart('fireChart');
+  const ctx = document.getElementById('fireChart');
+  if (!ctx) return;
+  const labels = retAges;
+  chartInstances['fireChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: retAges.map(a => `Age ${a}`),
+      datasets: [
+        { label: 'Corpus Needed', data: retAges.map(a => { const e = monthlyExp * Math.pow(1+inflation, a-startAge)*12; return e/swr; }), backgroundColor: 'rgba(232,80,64,.5)', borderColor: 'var(--red)', borderWidth: 1 },
+        { label: 'Trajectory Corpus', data: retAges.map(a => trajectory[a] || 0), backgroundColor: 'rgba(48,200,122,.5)', borderColor: 'var(--jt)', borderWidth: 1 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      scales: { y: { ticks: { callback: v => '₹' + (v/1e7).toFixed(0) + 'Cr', color: 'var(--ink3)' }, grid: { color: 'rgba(255,255,255,.05)' } }, x: { ticks: { color: 'var(--ink3)' } } },
+      plugins: { legend: { labels: { color: 'var(--ink)' } } }
+    }
+  });
+}
+
+// ============================================================
+// PAGE 29: CAPITAL GAINS TAX LEDGER
+// ============================================================
+let cgTransactions = JSON.parse(localStorage.getItem('cgTransactions') || '[]');
+
+function renderCGLedger() {
+  updateCGSummary();
+  renderCGTable();
+}
+
+function calcCGEntry() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const units = g('cg-units'), buyNAV = g('cg-buy-nav'), sellNAV = g('cg-sell-nav');
+  const buyDate = document.getElementById('cg-buy-date')?.value;
+  const sellDate = document.getElementById('cg-sell-date')?.value;
+  const prev = document.getElementById('cg-entry-preview');
+  if (!prev || !units || !buyNAV || !sellNAV) return;
+
+  const gain = units * (sellNAV - buyNAV);
+  const buyD = buyDate ? new Date(buyDate) : null;
+  const sellD = sellDate ? new Date(sellDate) : null;
+  const days = buyD && sellD ? Math.round((sellD - buyD) / 86400000) : 0;
+  const isLTCG = days >= 365;
+  const taxRate = isLTCG ? 0.125 : 0.20;
+  const tax = gain > 0 ? Math.round(gain * taxRate) : 0;
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+
+  prev.innerHTML = `<span style="color:${gain>=0?'var(--jt)':'var(--red)'}"><strong>Gain: ${fmt(gain)}</strong></span> · Holding: ${days} days · Type: <span style="color:${isLTCG?'var(--jt)':'var(--you)'}">${isLTCG?'LTCG (12.5%)':'STCG (20%)'}</span> · Tax: <span style="color:var(--red)">${fmt(tax)}</span>`;
+}
+
+function addCGTransaction() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const gs = id => document.getElementById(id)?.value || '';
+  const units = g('cg-units'), buyNAV = g('cg-buy-nav'), sellNAV = g('cg-sell-nav');
+  const fund = gs('cg-fund'), person = gs('cg-person');
+  const buyDate = gs('cg-buy-date'), sellDate = gs('cg-sell-date');
+  if (!units || !buyNAV || !sellNAV || !fund) { alert('Please fill all fields.'); return; }
+
+  const gain = units * (sellNAV - buyNAV);
+  const days = buyDate && sellDate ? Math.round((new Date(sellDate) - new Date(buyDate)) / 86400000) : 0;
+  const isLTCG = days >= 365;
+  const tax = gain > 0 ? Math.round(gain * (isLTCG ? 0.125 : 0.20)) : 0;
+
+  cgTransactions.push({ fund, person, units, buyDate, buyNAV, sellDate, sellNAV, gain: Math.round(gain), days, isLTCG, tax, id: Date.now() });
+  localStorage.setItem('cgTransactions', JSON.stringify(cgTransactions));
+  renderCGLedger();
+  ['cg-fund','cg-units','cg-buy-nav','cg-sell-nav'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+}
+
+function updateCGSummary() {
+  const fy = new Date().getFullYear();
+  const fyStart = new Date(fy, 3, 1); // April 1
+  const fyTxns = cgTransactions.filter(t => new Date(t.sellDate) >= fyStart);
+  const youLTCG  = fyTxns.filter(t => t.person === 'you'  && t.isLTCG && t.gain > 0).reduce((s,t) => s + t.gain, 0);
+  const wifeLTCG = fyTxns.filter(t => t.person === 'wife' && t.isLTCG && t.gain > 0).reduce((s,t) => s + t.gain, 0);
+  const stcg     = fyTxns.filter(t => !t.isLTCG && t.gain > 0).reduce((s,t) => s + t.gain, 0);
+  const taxSaved = Math.min(125000, youLTCG) * 0.125 + Math.min(125000, wifeLTCG) * 0.125;
+
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const s = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  s('cg-you-ltcg',  fmt(youLTCG)); s('cg-wife-ltcg', fmt(wifeLTCG));
+  s('cg-stcg',      fmt(stcg));    s('cg-tax-saved',  fmt(taxSaved));
+  s('cg-you-remaining',  fmt(Math.max(0, 125000 - youLTCG))  + ' remaining');
+  s('cg-wife-remaining', fmt(Math.max(0, 125000 - wifeLTCG)) + ' remaining');
+  s('cg-you-remaining-display',  fmt(Math.max(0, 125000 - youLTCG)));
+  s('cg-wife-remaining-display', fmt(Math.max(0, 125000 - wifeLTCG)));
+
+  // Wife's tab sync
+  const wl = document.getElementById('wife-ltcg-booked');    if (wl) wl.textContent = fmt(wifeLTCG);
+  const wr = document.getElementById('wife-ltcg-remaining'); if (wr) wr.textContent = fmt(Math.max(0, 125000 - wifeLTCG));
+  // Review wizard sync
+  const yl = document.getElementById('rv-your-ltcg');  if (yl) yl.textContent = fmt(youLTCG);
+  const wlr = document.getElementById('rv-wife-ltcg'); if (wlr) wlr.textContent = fmt(wifeLTCG);
+  s('rv-tax-saved', fmt(taxSaved));
+}
+
+function renderCGTable() {
+  const tbody = document.getElementById('cg-log-tbody');
+  if (!tbody) return;
+  if (!cgTransactions.length) { tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--ink3);padding:20px">No transactions yet</td></tr>'; return; }
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  tbody.innerHTML = cgTransactions.map(t => `<tr>
+    <td>${t.sellDate}</td>
+    <td style="color:${t.person==='you'?'var(--you)':'var(--wife)'}">${t.person === 'you' ? 'You' : 'Wife'}</td>
+    <td>${t.fund}</td>
+    <td>${t.units}</td>
+    <td>${t.days} days</td>
+    <td><span class="tag ${t.isLTCG?'tg':'ty'}">${t.isLTCG?'LTCG':'STCG'}</span></td>
+    <td style="color:${t.gain>=0?'var(--jt)':'var(--red)'}">${fmt(t.gain)}</td>
+    <td style="color:var(--red)">${fmt(t.tax)}</td>
+    <td><button onclick="deleteCGTxn(${t.id})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:12px">✕</button></td>
+  </tr>`).join('');
+}
+
+function deleteCGTxn(id) {
+  cgTransactions = cgTransactions.filter(t => t.id !== id);
+  localStorage.setItem('cgTransactions', JSON.stringify(cgTransactions));
+  renderCGLedger();
+}
+
+// ============================================================
+// PAGE 30: ANNUAL REVIEW WIZARD
+// ============================================================
+function renderAnnualReview() {
+  // Step indicators
+  const ind = document.getElementById('review-step-indicators');
+  if (ind) {
+    ind.innerHTML = [1,2,3,4,5,6].map(n => `<div style="padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;font-family:monospace;background:var(--bg3);border:1px solid var(--border);color:var(--ink3)">Step ${n}</div>`).join('');
+  }
+  // Stepup table
+  renderReviewStepup();
+  // Insurance check
+  renderReviewInsurance();
+  // Load review history
+  const hist = JSON.parse(localStorage.getItem('reviewHistory') || '[]');
+  const histEl = document.getElementById('rv-history');
+  if (histEl) histEl.textContent = hist.length ? 'Previous reviews: ' + hist.map(h => h.date).join(', ') : 'No previous reviews logged.';
+}
+
+function calcReviewStep1() {
+  const actual  = parseFloat(document.getElementById('rv-actual-corpus')?.value) || 0;
+  const year    = parseInt(document.getElementById('rv-year')?.value) || 2026;
+  const yrs     = year - 2026;
+  const data    = calculateRetirementProjection();
+  const proj    = data[yrs] ? data[yrs].corpus : 0;
+  const el      = document.getElementById('rv-step1-result');
+  if (!el || !actual) return;
+  const gap = actual - proj;
+  const fmt = v => '₹' + Math.round(v / 1e7 * 10) / 10 + ' Cr';
+  el.innerHTML = gap >= 0
+    ? `✅ <strong>Ahead of plan!</strong> Actual: ${fmt(actual)} vs Projected: ${fmt(proj)}. Surplus: ${fmt(gap)}. Great discipline — consider increasing step-up or adding bonus lump-sum.`
+    : `⚠️ <strong>Behind plan.</strong> Actual: ${fmt(actual)} vs Projected: ${fmt(proj)}. Gap: ${fmt(Math.abs(gap))}. Review: missed SIPs? Market down-year? Normal short-term variance is acceptable.`;
+  el.style.color = gap >= 0 ? 'var(--jt)' : 'var(--you)';
+}
+
+function renderReviewStepup() {
+  const el = document.getElementById('rv-stepup-table');
+  if (!el || typeof familyFunds === 'undefined') return;
+  const fmt = v => '₹' + v.toLocaleString('en-IN');
+  el.innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;font-size:11px">' +
+    '<div style="color:var(--ink3);font-weight:700">Fund</div><div style="color:var(--ink3);font-weight:700">Current SIP</div><div style="color:var(--jt);font-weight:700">After 10% Step-up</div>' +
+    familyFunds.map(f => `<div style="color:var(--ink2)">${f.name.split(' ').slice(0,3).join(' ')}</div><div>${fmt(f.monthlySIP)}</div><div style="color:var(--jt)">${fmt(Math.round(f.monthlySIP * 1.1))}</div>`).join('') +
+    `<div style="font-weight:700">TOTAL</div><div style="font-weight:700">${fmt(familyFunds.reduce((s,f) => s + f.monthlySIP, 0))}</div><div style="color:var(--jt);font-weight:700">${fmt(familyFunds.reduce((s,f) => s + Math.round(f.monthlySIP * 1.1), 0))}</div>` +
+    '</div>';
+}
+
+function applyStepupFromReview() {
+  if (!confirm('Apply 10% step-up to all fund SIPs? This updates Settings inputs.')) return;
+  if (typeof familyFunds === 'undefined') return;
+  familyFunds.forEach((f, i) => {
+    f.monthlySIP = Math.round(f.monthlySIP * 1.1);
+    const el = document.getElementById(`s-sip-${i}`);
+    if (el) el.value = f.monthlySIP;
+  });
+  config.yourSIP = familyFunds.reduce((s, f) => s + f.monthlySIP, 0);
+  updateSettingsTotals();
+  alert('✅ Step-up applied! Go to Settings and click Save Settings to persist changes.');
+  renderReviewStepup();
+}
+
+function renderReviewInsurance() {
+  const el = document.getElementById('rv-insurance-check');
+  if (!el) return;
+  const termOk   = (config.lifeInsuranceCurrent || 0) >= 20000000;
+  const healthOk = (config.healthInsuranceCurrent || 0) >= 2000000;
+  const parOk    = (config.parentsHealthInsurance || 0) >= 1500000;
+  el.innerHTML = [
+    [termOk,   '✅ Term Life OK (₹2 Cr+)', '❌ Term Life: Apply ₹2 Cr minimum — HDFC Click2Protect'],
+    [healthOk, '✅ Health Insurance OK (₹20L)', '❌ Health: Apply ₹20L family floater now'],
+    [parOk,    '✅ Parents Health OK (₹15L+)', '❌ Parents Health: Upgrade to ₹15L — costs rise with age'],
+  ].map(([ok, y, n]) => `<div style="padding:8px 12px;margin:4px 0;border-radius:5px;font-size:12px;background:${ok?'rgba(48,200,122,.08)':'rgba(232,80,64,.08)'};color:${ok?'var(--jt)':'var(--red)'}">${ok ? y : n}</div>`).join('');
+}
+
+function calcRebalancing() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const equity = g('rb-equity'), debt = g('rb-debt'), gold = g('rb-gold');
+  const total = equity + debt + gold;
+  const el = document.getElementById('rb-result');
+  if (!el || total === 0) return;
+
+  const targetEquity = 0.73, targetDebt = 0.18, targetGold = 0.05; // rough targets
+  const eqPct = equity / total, dPct = debt / total, gPct = gold / total;
+  const fmt = v => '₹' + Math.round(Math.abs(v)).toLocaleString('en-IN');
+
+  const eqAdj = (targetEquity - eqPct) * total;
+  const dAdj  = (targetDebt  - dPct)  * total;
+  const gAdj  = (targetGold  - gPct)  * total;
+
+  const line = (label, adj) => `<div style="margin:4px 0;font-size:12px">${label}: <strong style="color:${adj>0?'var(--jt)':'var(--red)'}">${adj > 0 ? '▲ Buy ' : '▼ Sell '} ${fmt(adj)}</strong></div>`;
+  el.innerHTML = `<div style="margin-bottom:8px;font-size:11px;color:var(--ink3)">Current: Equity ${(eqPct*100).toFixed(0)}% | Debt ${(dPct*100).toFixed(0)}% | Gold ${(gPct*100).toFixed(0)}% · Target: 73%/18%/5%</div>` +
+    (Math.abs(eqAdj) < 10000 && Math.abs(dAdj) < 10000 ? '✅ <strong>Portfolio is balanced — no action needed</strong>' :
+     line('Equity (increase Nifty 50 SIP or lump sum)', eqAdj) + line('Debt (Corp Bond / PPF / VPF)', dAdj) + line('Gold (Nippon Gold FoF)', gAdj));
+}
+
+function logReviewDate() {
+  const date = document.getElementById('rv-review-date')?.value || new Date().toISOString().split('T')[0];
+  const history = JSON.parse(localStorage.getItem('reviewHistory') || '[]');
+  history.push({ date });
+  localStorage.setItem('reviewHistory', JSON.stringify(history));
+  const el = document.getElementById('rv-history');
+  if (el) el.textContent = 'Reviews: ' + history.map(h => h.date).join(', ');
+  alert('✅ Review logged for ' + date);
+}
+
+// ============================================================
+// PAGE 31: WIFE'S PORTFOLIO & TAX VIEW
+// ============================================================
+function renderWifeTaxView() {
+  const wifeGross = (config.wifeGross || 70000) * 12;
+  const taxable   = Math.max(0, wifeGross - 75000);
+  const slab5     = Math.max(0, Math.min(taxable - 300000, 400000));
+  const tax       = Math.round(slab5 * 0.05);
+  const cess      = Math.round(tax * 0.04);
+  const fmt       = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const sv        = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = fmt(v); };
+
+  sv('wife-gross-income', wifeGross); sv('wife-taxable', taxable);
+  sv('wife-tax-slab', tax); sv('wife-cess', cess); sv('wife-annual-tax', tax + cess);
+
+  // Wife's SIP (34% of unified)
+  const total = typeof familyFunds !== 'undefined' ? familyFunds.reduce((s,f) => s+f.monthlySIP, 0) : 191200;
+  const wifeSIP = Math.round(total * 0.34);
+  const ppf = config.ppfMonthly || 12000;
+  sv('wife-monthly-sip',      wifeSIP);
+  sv('wife-ppf-monthly',      ppf);
+  sv('wife-total-investment', wifeSIP + ppf);
+
+  // Fund table
+  const tbody = document.getElementById('wife-fund-tbody');
+  if (tbody && typeof familyFunds !== 'undefined') {
+    const fmtS = v => '₹' + v.toLocaleString('en-IN');
+    tbody.innerHTML = familyFunds.map(f => {
+      const wifePortion = Math.round(f.monthlySIP * 0.34);
+      const pct = total > 0 ? Math.round((f.monthlySIP / total) * 100) : 0;
+      return `<tr><td>${f.name}</td><td>${fmtS(wifePortion)}</td><td>${pct}%</td><td style="font-size:10px;color:var(--ink3)">${(f.purpose||'').split('(')[0].trim()}</td></tr>`;
+    }).join('');
+  }
+
+  // PPF projection
+  calcWifePPF();
+
+  // CG sync
+  updateCGSummary();
+}
+
+function calcWifePPF() {
+  const bal  = parseFloat(document.getElementById('wife-ppf-balance')?.value) || 0;
+  const rate = 0.071;
+  const sip  = config.ppfMonthly || 12000;
+  let c = bal;
+  let c2041 = 0, c2054 = 0;
+  for (let i = 0; i <= 28; i++) {
+    c = c * (1 + rate) + sip * 12;
+    if (i === 15) c2041 = c;
+    if (i === 28) c2054 = c;
+  }
+  const fmt = v => '₹' + (v / 1e5 >= 100 ? (v/1e7).toFixed(2) + ' Cr' : (v/1e5).toFixed(1) + 'L');
+  const sv = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = fmt(v); };
+  sv('wife-ppf-2041', c2041); sv('wife-ppf-2054', c2054);
+  // Your PPF
+  let yc = 0;
+  for (let i = 0; i <= 28; i++) yc = yc * (1 + rate) + sip * 12;
+  sv('wife-ppf-combined', c2054 + yc);
 }
 
 </script>
