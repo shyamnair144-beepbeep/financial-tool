@@ -385,7 +385,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="bc">
       <div class="bc-lbl">MONTHLY INVESTMENTS</div>
       <div class="bc-items">
-        <div class="bci"><div class="l">Family SIPs</div><div class="v aj" id="dash-family-sip">₹1.91L</div><div class="s">9 funds, unified portfolio</div></div>
+        <div class="bci"><div class="l">Family SIPs</div><div class="v aj" id="dash-family-sip">₹1.91L</div><div class="s">9 funds + PPF + VPF (₹2.15L total)</div></div>
       </div>
     </div>
     <div class="bc">
@@ -421,10 +421,11 @@ tr.milestone{background:rgba(240,180,41,.05)}
         <div class="ml"><div class="d">Special Allowance</div><div class="a ay">&#8377;72,172</div></div>
         <div class="ml"><div class="d">LTA</div><div class="a ay">&#8377;11,635</div></div>
         <div class="tr"><div class="tl">Gross Earnings</div><div class="tv ay">&#8377;2,79,356</div></div>
-        <div class="ml"><div class="d">- PF</div><div class="a ar">&#8377;16,761</div></div>
+        <div class="ml"><div class="d">- EPF (Employee 12%)</div><div class="a ar">&#8377;16,761</div></div>
+        <div class="ml"><div class="d">- VPF (Voluntary PF)<small>8.25% EEE, same PF a/c</small></div><div class="a ar">&#8377;12,000</div></div>
         <div class="ml"><div class="d">- Income Tax</div><div class="a ar">&#8377;48,809</div></div>
         <div class="ml"><div class="d">- Prof Tax</div><div class="a ar">&#8377;200</div></div>
-        <div class="tr"><div class="tl">Net Pay</div><div class="tv aj">&#8377;2,13,586</div></div>
+        <div class="tr"><div class="tl">Net Pay (after VPF)</div><div class="tv aj">&#8377;2,01,586</div></div>
       </div>
       <div class="card w">
         <div class="ch3 w">WIFE'S INCOME</div>
@@ -755,20 +756,20 @@ tr.milestone{background:rgba(240,180,41,.05)}
           Gold FoF → SGB when available. FoF ER 0.12% acceptable for monthly SIP until RBI reopens SGB window.
         </div>
       </div>
-      <!-- PPF Status — ACTIVE -->
+      <!-- PPF + VPF Status — ACTIVE -->
       <div class="card" style="border-left:4px solid var(--jt);padding:16px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div style="font-size:12px;font-weight:700;color:var(--jt)">✅ PPF ACTIVE — ICICI Bank, ₹12K/month till 2041</div>
+          <div style="font-size:12px;font-weight:700;color:var(--jt)">✅ PPF + VPF — Both Active (₹24K/month, EEE returns)</div>
           <div style="font-size:10px;font-family:monospace;padding:3px 8px;border-radius:10px;background:rgba(48,200,122,0.1);color:var(--jt)">LIVE</div>
         </div>
-        <div style="font-size:11px;color:var(--ink2);line-height:1.8;margin-bottom:12px">
-          <strong>Note:</strong> Your EPF (₹2.01L/year) already fills the ₹1.5L 80C cap — PPF gets no extra 80C deduction<br>
-          <strong>PPF value:</strong> 7.1% p.a. tax-free (EEE) ≈ 10.2% pre-tax equivalent. Growth and maturity are never taxed<br>
-          <strong>Corpus by 2041:</strong> ~₹37L tax-free at ₹12K/month × 15 years<br>
-          <strong>Strategy:</strong> Extend in 5-yr blocks post-2041 — by retirement (2054) ~₹1.1Cr risk-free ballast
+        <div style="font-size:11px;color:var(--ink2);line-height:1.8;margin-bottom:10px">
+          <strong>PPF (ICICI Bank):</strong> ₹12K/month — 7.1% EEE, ≈ 10.2% pre-tax equivalent. Corpus ~₹1.27Cr by 2054<br>
+          <strong>VPF (salary deduction):</strong> ₹12K/month — 8.25% EEE, same EPF account. Corpus ~₹1.6Cr by 2054<br>
+          <strong>80C:</strong> EPF (₹2.01L/yr) fills the ₹1.5L cap — PPF &amp; VPF get no additional 80C. Both are pure EEE wealth builders<br>
+          <strong>⚠️ Tax note:</strong> EPF+VPF = ₹3.45L/yr &gt; ₹2.5L → interest on excess ≈ ₹2,354/yr tax. Negligible.
         </div>
         <div style="padding:10px 12px;background:rgba(48,200,122,0.06);border-radius:4px;font-size:10px;color:var(--jt2)">
-          Auto-debit set via ICICI Bank app. Keep PPF account number noted for ITR (even though 80C benefit is via EPF, PPF maturity is tax-free). See Tax page Section 05.
+          VPF restructuring tip: Since ₹12K comes from salary (reducing net pay), consider reducing HDFC Corp Bond SIP from ₹26K → ₹14K to maintain same cash outflow. VPF (8.25% EEE) beats Corp Bond Fund (~7.5% taxable) for debt allocation. Update Net Pay to ₹2,01,586 in Settings.
         </div>
       </div>
       <!-- US Concentration Alert — rendered dynamically -->
@@ -807,8 +808,8 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <input class="field-input" id="s-basic" type="text" value="1,39,678">
         </div>
         <div class="field-row">
-          <span class="field-label">Net Pay (Monthly)</span>
-          <input class="field-input" id="s-netpay" type="text" value="2,13,586">
+          <span class="field-label">Net Pay (Monthly) <small style="opacity:.6">after EPF + VPF + tax deductions</small></span>
+          <input class="field-input" id="s-netpay" type="text" value="2,01,586">
         </div>
         <div class="field-row">
           <span class="field-label">Wife Gross Salary (Monthly)</span>
@@ -866,45 +867,63 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </div>
         <div class="field-row">
           <span class="field-label">HDFC Mid-Cap Opportunities Direct</span>
-          <input class="field-input" id="s-sip-3b" type="number" value="13000">
+          <input class="field-input" id="s-sip-3" type="number" value="13000">
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">7% allocation</span>
         </div>
         <div class="field-row">
           <span class="field-label">Nippon India Small Cap Direct</span>
-          <input class="field-input" id="s-sip-3" type="number" value="15000">
+          <input class="field-input" id="s-sip-4" type="number" value="15000">
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">8% allocation</span>
         </div>
         <div class="field-row">
           <span class="field-label">Motilal Oswal S&P 500 Index (US)</span>
-          <input class="field-input" id="s-sip-4" type="number" value="18000">
+          <input class="field-input" id="s-sip-5" type="number" value="18000">
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">9% allocation</span>
         </div>
         <div class="field-row">
           <span class="field-label">Nippon Gold Savings Fund (Commodity)</span>
-          <input class="field-input" id="s-sip-5b" type="number" value="10000">
+          <input class="field-input" id="s-sip-6" type="number" value="10000">
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">5% allocation</span>
         </div>
         <div class="field-row">
           <span class="field-label">HDFC Corporate Bond Fund (Debt)</span>
-          <input class="field-input" id="s-sip-6" type="number" value="26000">
+          <input class="field-input" id="s-sip-7" type="number" value="26000">
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">14% allocation</span>
         </div>
         <div class="field-row">
           <span class="field-label">NPS Tier 1 (Retirement)</span>
-          <input class="field-input" id="s-sip-7" type="number" value="6200">
+          <input class="field-input" id="s-sip-8" type="number" value="6200">
           <span class="field-note" style="font-size:10px;color:var(--ink3);margin-left:8px">3% allocation</span>
         </div>
-        
+
         <div class="field-row" style="background:rgba(48,200,122,.05);border-radius:4px;padding:8px;margin-top:8px">
-          <span class="field-label" style="font-weight:700;color:var(--jt)">Total Family SIPs</span>
+          <span class="field-label" style="font-weight:700;color:var(--jt)">Total Family SIPs (MF + NPS)</span>
           <span style="font-family:monospace;font-weight:700;color:var(--jt2);font-size:1.1rem" id="family-sip-total-settings">₹1,91,200</span>
         </div>
-        
-        <div style="margin-top:12px;padding:10px;background:var(--bg3);border-radius:4px;font-size:10px;color:var(--ink3)">
-          <strong>Tax Note:</strong> Ownership split maintained → Your: ₹1.27L (66%) | Wife: ₹64K (33%) for individual 80C limits and LTCG exemptions.
+
+        <!-- Government Schemes (EEE — not counted in MF SIP total) -->
+        <div style="margin-top:14px;padding:12px;background:rgba(77,158,240,.06);border:1px solid rgba(77,158,240,.15);border-radius:6px">
+          <div style="font-size:10px;letter-spacing:1.5px;font-family:monospace;color:var(--blue);text-transform:uppercase;margin-bottom:10px">Government Schemes (EEE — shown separately)</div>
+          <div class="field-row">
+            <span class="field-label">PPF (ICICI Bank, EEE 7.1%) <small style="opacity:.6">Fixed 15-yr instrument</small></span>
+            <span style="font-family:monospace;font-size:12px;color:var(--blue)">₹12,000</span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">VPF — Voluntary PF (EEE 8.25%) <small style="opacity:.6">Salary deduction, same PF a/c</small></span>
+            <input class="field-input" id="s-vpf-monthly" type="number" value="12000">
+          </div>
+          <div class="field-row" style="background:rgba(77,158,240,.08);border-radius:4px;padding:6px;margin-top:6px">
+            <span class="field-label" style="font-weight:700;color:var(--blue)">Total Monthly Investment</span>
+            <span style="font-family:monospace;font-weight:700;color:var(--blue);font-size:1rem" id="grand-total-investment">₹2,15,200</span>
+          </div>
+          <div style="margin-top:8px;font-size:10px;color:var(--ink3);line-height:1.6">
+            ⚠️ <strong>Tax note:</strong> EPF (₹2.01L/yr) + VPF (₹1.44L/yr) = ₹3.45L/yr &gt; ₹2.5L threshold → interest on excess (₹95K × 8.25% = ₹7,848/yr) is taxable. Impact: ~₹2,354/yr at 30% slab — negligible vs. EEE benefit.
+          </div>
         </div>
 
-        <h3 style="margin-top:16px"> Fund Performance Data Quality</h3>
+        <div style="margin-top:12px;padding:10px;background:var(--bg3);border-radius:4px;font-size:10px;color:var(--ink3)">
+          <strong>Tax Note:</strong> Ownership split maintained → Your: ₹1.27L (66%) | Wife: ₹64K (33%) for individual 80C limits and LTCG exemptions. VPF reduces net pay by ₹12K/month — update Net Pay field above to ₹2,01,586.
+        </div>
 
         <h3 style="margin-top:16px"> Fund Performance Data Quality</h3>
         <div id="data-quality-status" style="background:rgba(240,180,41,0.1);border-left:3px solid var(--jt);padding:12px;border-radius:4px;margin-bottom:16px">
@@ -1747,42 +1766,69 @@ tr.milestone{background:rgba(240,180,41,.05)}
     </div>
     <div class="sh"><span class="sh-n">02</span><h2>Portfolio Allocation Visual</h2></div>
     <div class="cw-s"><canvas id="allocationChart"></canvas></div>
-    <div class="sh"><span class="sh-n">03</span><h2>Action Plan: Next 30 Days</h2></div>
+    <div class="sh"><span class="sh-n">03</span><h2>Priority Action Plan — May–Dec 2026</h2></div>
+    <div class="alert warning" style="margin-bottom:12px">
+      &#9888;&#65039; <strong>SIPs are LIVE (April 2026). This is Phase 2 — securing the plan's foundation before baby arrives in Dec 2026.</strong>
+    </div>
     <div class="g2">
-      <div class="card y">
-        <div class="ch3 y">WEEK 1 (Today - 7 days)</div>
-        <div style="font-size:12px;line-height:1.8">
-          &#9744; Open demat account (Zerodha/Groww/Kuvera)<br>
-          &#9744; Complete KYC for mutual funds<br>
-          &#9744; Buy health insurance (&#8377;10L family + &#8377;5L parents)<br>
-          &#9744; Check term insurance (need &#8377;2 Cr cover)
+      <div class="card d">
+        <div class="ch3 d">THIS WEEK — INSURANCE (NON-NEGOTIABLE)</div>
+        <div style="font-size:12px;line-height:1.9">
+          &#9744; Apply for &#8377;2 Cr Term Life online — HDFC Click2Protect / ICICI iProtect / Max Smart Secure (45 min)<br>
+          &#9744; Apply for &#8377;20L Family Floater — Niva Bupa / Star Health (include wife + baby-to-be)<br>
+          &#9744; Apply for &#8377;15L Parents Health — Star Senior Citizen (age 55–60 window closing fast)<br>
+          &#9744; Add Disability + Accident Rider to term plan (+&#8377;1,000–2,000/month)<br>
+          &#9744; Update net pay to &#8377;2,01,586 in Settings (VPF deduction)
+        </div>
+      </div>
+      <div class="card d">
+        <div class="ch3 d">MAY 2026 — LEGAL & NOMINEES</div>
+        <div style="font-size:12px;line-height:1.9">
+          &#9744; Update nominee on all 9 MF folios → wife (via Kuvera/MFCentral)<br>
+          &#9744; Update EPF nominee → wife (EPFO portal / employer HR)<br>
+          &#9744; Update PPF nominee → wife (ICICI Bank branch)<br>
+          &#9744; Update bank account nominees + add wife as joint holder<br>
+          &#9744; Draft a basic Will naming guardian for Child 1 (lawyer, &#8377;5K–15K)
         </div>
       </div>
       <div class="card y">
-        <div class="ch3 y">WEEK 2 (8-14 days)</div>
-        <div style="font-size:12px;line-height:1.8">
-          &#9744; Set up 6 new SIPs (start small, increase later)<br>
-          &#9744; Link bank for auto-debit on 1st of month<br>
-          &#9744; Increase NPS to &#8377;15k via salary portal<br>
-          &#9744; Set up liquid funds for sinking funds
+        <div class="ch3 y">JUNE 2026 — WIFE's PPF + PORTFOLIO RESTRUCTURE</div>
+        <div style="font-size:12px;line-height:1.9">
+          &#9744; Open wife's PPF account (ICICI Bank app, &#8377;500 to activate)<br>
+          &#9744; Start wife's PPF SIP at &#8377;12,000/month — separate EEE &#8377;1.27 Cr corpus by 2054<br>
+          &#9744; Reduce HDFC Corp Bond SIP: &#8377;26K → &#8377;14K (VPF covers debt quota at 8.25% EEE)<br>
+          &#9744; Redirect freed &#8377;12K → Nifty 50 (₹60K → ₹72K) for stronger equity core<br>
+          &#9744; Verify LTA claim submitted with travel proof (&#8377;1.39L exempt per year)
         </div>
       </div>
       <div class="card y">
-        <div class="ch3 y">WEEK 3 (15-21 days)</div>
-        <div style="font-size:12px;line-height:1.8">
-          &#9744; Create tracker for expenses<br>
-          &#9744; Submit rent receipts for HRA exemption<br>
-          &#9744; Review wife's employer benefits<br>
-          &#9744; Set calendar reminder for annual review
+        <div class="ch3 y">JULY–SEPT 2026 — BABY PREP + NEW SINKING FUNDS</div>
+        <div style="font-size:12px;line-height:1.9">
+          &#9744; Redirect vacation sinking fund (&#8377;20K) → baby fund until Jan 2028<br>
+          &#9744; Build &#8377;1.4L liquid buffer (2 months wife income) for maternity leave income loss<br>
+          &#9744; Start Home Down Payment fund: &#8377;10,000/month in liquid/debt fund<br>
+          &#9744; Start Parents Care fund: &#8377;5,000/month in liquid fund (target &#8377;10L by 2030)<br>
+          &#9744; Book hospital for delivery. Add baby to health insurance on birth.
         </div>
       </div>
-      <div class="card y">
-        <div class="ch3 y">WEEK 4 (22-30 days)</div>
-        <div style="font-size:12px;line-height:1.8">
-          &#9744; Automate transfers on 2nd of month<br>
-          &#9744; Print this plan and review with wife<br>
-          &#9744; Set up password manager for accounts<br>
-          &#9744; Start expense tracking app
+      <div class="card j">
+        <div class="ch3 j">OCT–DEC 2026 — CAR + BABY ARRIVAL</div>
+        <div style="font-size:12px;line-height:1.9">
+          &#9744; Confirm company car lease policy — apply immediately when announced<br>
+          &#9744; If lease: cancel &#8377;20K car sinking fund → redirect to baby fund or home fund<br>
+          &#9744; On baby arrival: add to all insurance policies within 30 days of birth<br>
+          &#9744; Start Child 1 SIP immediately after birth (don't delay even one month)<br>
+          &#9744; Do LTCG harvest: book &#8377;1.25L gains each (you + wife) before 31 Dec — saves &#8377;31,250/year
+        </div>
+      </div>
+      <div class="card j">
+        <div class="ch3 j">JAN 2027 ONWARDS — STEP-UP & SCHOOL PLANNING</div>
+        <div style="font-size:12px;line-height:1.9">
+          &#9744; Apply 10% SIP step-up on all funds (April 2027 — set calendar reminder NOW)<br>
+          &#9744; Add school fees budget line: &#8377;10K–15K/month from 2028 (Child 1 starts school 2029)<br>
+          &#9744; Review baby expenses vs budget after 3 months — adjust sinking funds accordingly<br>
+          &#9744; Recheck NPS: keep at &#8377;4,167–6,200/month. Do NOT increase beyond &#8377;50K/year (no extra tax benefit above 80CCD limit)<br>
+          &#9744; Reassess home purchase timeline — target 2031–33 purchase
         </div>
       </div>
     </div>
@@ -1808,6 +1854,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr><td>80C</td><td>EPF (Employer + Employee)</td><td>&#8377;2,01,137</td><td rowspan="3">&#8377;1,50,000</td><td rowspan="3">&#8377;45,000</td></tr>
           <tr><td>80C</td><td>LIC Premium</td><td>&#8377;30,000</td></tr>
           <tr><td>EEE</td><td>PPF ₹12K/mo ICICI Bank (EPF fills 80C cap; PPF value = tax-free 7.1% EEE returns)</td><td>&#8377;1,44,000</td></tr>
+          <tr><td>EEE*</td><td>VPF ₹12K/mo — salary deduction, same EPF a/c, 8.25% EEE. *Interest taxable on EPF+VPF &gt; ₹2.5L/yr (impact: ~₹2,354/yr at 30% slab — negligible)</td><td>&#8377;1,44,000</td></tr>
           <tr><td>80CCD(1B)</td><td>NPS Tier 1 (Additional)</td><td>&#8377;96,000</td><td>&#8377;50,000</td><td>&#8377;15,000</td></tr>
           <tr><td>80CCD(1B)</td><td><strong>NPS Increase to &#8377;15k/month</strong></td><td><strong>&#8377;1,80,000</strong></td><td><strong>&#8377;50,000</strong></td><td><strong>+&#8377;13,800</strong></td></tr>
           <tr><td>80D</td><td>Health Insurance (Self + Wife)</td><td>&#8377;15,000</td><td>&#8377;25,000</td><td>&#8377;4,500</td></tr>
@@ -2779,38 +2826,148 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <!-- Rendered by renderAlertInsurancePanels() -->
     </div>
 
-    <div class="alert-item" style="border-left:3px solid var(--you)">
-      <div class="alert-icon">&#9888;&#65039;</div>
+    <!-- CRITICAL: Apply Term Life THIS WEEK -->
+    <div class="alert-item" style="border-left:3px solid var(--red)">
+      <div class="alert-icon">&#128680;</div>
       <div class="alert-body">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <h4>Increase NPS to &#8377;15,000/month</h4>
-          <span class="alert-badge badge-yellow">HIGH PRIORITY</span>
+          <h4>Apply for Term Life Insurance — THIS WEEK</h4>
+          <span class="alert-badge badge-red">PRIORITY 0</span>
         </div>
-        <p>Currently at &#8377;8,000/month. Increasing to &#8377;15,000 saves additional &#8377;13,800 in taxes annually under 80CCD(1B). Submit request through salary portal this month to get tax benefit for FY2026-27.</p>
+        <p>Baby arrives Dec 2026. &#8377;0 life cover = &#8377;0 for family if anything happens. Apply online NOW: HDFC Life Click2Protect / ICICI Pru iProtect / Max Life Smart Secure. Need: &#8377;2 Cr cover, 30-year term, non-smoker. Takes 45 minutes online. Cost: ~&#8377;5,417/month. Also add Disability + Accident Rider (+&#8377;1,000–2,000/month) — pays out if you're disabled, not just deceased.</p>
       </div>
     </div>
 
+    <!-- CRITICAL: Health Insurance -->
+    <div class="alert-item" style="border-left:3px solid var(--red)">
+      <div class="alert-icon">&#128680;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Apply for Health Insurance — Family + Parents</h4>
+          <span class="alert-badge badge-red">PRIORITY 0</span>
+        </div>
+        <p><strong>Family Floater:</strong> &#8377;20L cover (self + wife + baby-to-be) — Niva Bupa/Star Health. ~&#8377;2,100/month. Add baby within 30 days of birth. <strong>Parents:</strong> &#8377;15L each (not &#8377;10L — one ICU stay in metro = &#8377;8–15L). Star Senior Citizen / Care. ~&#8377;1,650/month. Every month of delay = higher premium + risk of waiting period hitting during an emergency.</p>
+      </div>
+    </div>
+
+    <!-- CRITICAL: Will & Nominees -->
+    <div class="alert-item" style="border-left:3px solid var(--red)">
+      <div class="alert-icon">&#128203;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Will + Nominee Update — Before Baby Arrives</h4>
+          <span class="alert-badge badge-red">BEFORE DEC 2026</span>
+        </div>
+        <p>Update nominee on all 9 MF folios, EPF (EPFO portal/HR), PPF (ICICI Bank), and all bank accounts → wife. Add wife as joint holder on savings account. Draft a simple Will naming guardian for Child 1 (lawyer, ~&#8377;10K). Without this, if both parents pass, Child 1 goes to court for asset inheritance — years of legal delays.</p>
+      </div>
+    </div>
+
+    <!-- HIGH: Wife's PPF -->
+    <div class="alert-item" style="border-left:3px solid var(--you)">
+      <div class="alert-icon">&#127981;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Open Wife's PPF Account — ₹1.27 Cr Free Money by 2054</h4>
+          <span class="alert-badge badge-yellow">HIGH PRIORITY</span>
+        </div>
+        <p>Wife has no PPF. At her 0% tax bracket (₹8.4L income), PPF gives 7.1% EEE returns — effectively 10.2% pre-tax equivalent. &#8377;12,000/month for 15 years = ~&#8377;39L by 2041, extended to ~&#8377;1.27 Cr by 2054. Combined with your PPF = &#8377;2.54 Cr tax-free ballast at retirement. Open via ICICI Bank app in 10 minutes. Cost: &#8377;500 to activate.</p>
+      </div>
+    </div>
+
+    <!-- HIGH: Portfolio Restructure — Corp Bond + VPF -->
+    <div class="alert-item" style="border-left:3px solid var(--you)">
+      <div class="alert-icon">&#9881;&#65039;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Restructure Debt Allocation — Corp Bond → VPF + Nifty 50</h4>
+          <span class="alert-badge badge-yellow">HIGH PRIORITY</span>
+        </div>
+        <p>VPF (₹12K/month, 8.25% EEE) now covers your debt quota. HDFC Corp Bond at 30% slab yields ~5.25% post-tax vs VPF 8.25% tax-free. Action: Reduce Corp Bond SIP from ₹26K → ₹14K. Redirect ₹12K → Nifty 50 (₹60K → ₹72K). Net result: Same ₹1.91L/month SIP, better risk-adjusted debt, stronger equity core. No cash flow impact.</p>
+      </div>
+    </div>
+
+    <!-- HIGH: Baby Budget Gap -->
+    <div class="alert-item" style="border-left:3px solid var(--you)">
+      <div class="alert-icon">&#128118;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Baby Budget Gap — ₹7–25K/month Underfunded</h4>
+          <span class="alert-badge badge-yellow">DEC 2026</span>
+        </div>
+        <p>Your sinking fund allocates ~₹20K for baby. Actual cost: ₹27–45K/month (daycare ₹15–25K + consumables ₹6–10K + medical ₹3–5K + gear ₹3–5K). Action: From July 2026, redirect vacation savings (₹20K) to baby fund. Build ₹1.4L maternity leave buffer (wife's 2 months income) by October in a liquid fund. Wife's income may pause 3–6 months — budget must absorb this.</p>
+      </div>
+    </div>
+
+    <!-- MEDIUM: School Fees Fund -->
+    <div class="alert-item" style="border-left:3px solid var(--blue)">
+      <div class="alert-icon">&#127979;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>School Fees Fund — Starts 2029, Not in Budget</h4>
+          <span class="alert-badge" style="background:var(--blue-s);border:1px solid var(--blue);color:var(--blue)">PLAN BY 2028</span>
+        </div>
+        <p>Child 1 starts school 2029 (age 3). Private school in metro: ₹10–20K/month ongoing for 15 years. Not modelled anywhere in your plan. Action: From Jan 2028, redirect ₹10K–15K/month (freed from baby fund as daycare costs reduce) into a school fees sinking fund. Child 2 will overlap (2031–33). Plan for ₹25–35K/month in school fees at peak (2031–2037).</p>
+      </div>
+    </div>
+
+    <!-- MEDIUM: Home Down Payment Fund -->
+    <div class="alert-item" style="border-left:3px solid var(--blue)">
+      <div class="alert-icon">&#127968;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Home Purchase Planning — Target 2031–33, Start Fund Now</h4>
+          <span class="alert-badge" style="background:var(--blue-s);border:1px solid var(--blue);color:var(--blue)">MEDIUM PRIORITY</span>
+        </div>
+        <p>No home purchase goal exists in your plan. You're paying ₹40K/month rent (₹48L+ over 10 years, growing 8–10%/year). By 2030, rent will likely be ₹55–60K. Target home purchase 2031–33 when corpus crosses ₹1 Cr milestone and salary absorbs EMI. Action: Start ₹10,000/month Home Down Payment fund in liquid/short debt fund from July 2026 → ~₹8–10L by 2033 + returns for down payment on ₹80L–₹1.2 Cr home.</p>
+      </div>
+    </div>
+
+    <!-- MEDIUM: Parents Care Fund -->
+    <div class="alert-item" style="border-left:3px solid var(--blue)">
+      <div class="alert-icon">&#128106;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Parents Care Fund — Medical Costs Will Spike Post-60</h4>
+          <span class="alert-badge" style="background:var(--blue-s);border:1px solid var(--blue);color:var(--blue)">MEDIUM PRIORITY</span>
+        </div>
+        <p>Parents are 55–60. Health insurance (₹15L) covers one serious illness. A second event in the same year, long-term care (home nurse, assisted living), or a gap year between policies = uncovered. Action: Start ₹5,000/month Parents Care Fund in liquid fund. Target ₹10L by 2030. Separate from insurance premiums. Earmarked solely for out-of-pocket parental medical expenses.</p>
+      </div>
+    </div>
+
+    <!-- MEDIUM: NPS — Don't Increase Beyond Tax Limit -->
+    <div class="alert-item" style="border-left:3px solid var(--jt)">
+      <div class="alert-icon">&#9888;&#65039;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>NPS: Keep at ₹4,167–6,200/month — Don't Over-invest</h4>
+          <span class="alert-badge badge-green">CALIBRATE</span>
+        </div>
+        <p>Current NPS: ₹6,200/month (₹74,400/year). 80CCD(1B) limit: ₹50,000/year = ₹4,167/month. Every rupee above ₹4,167/month in NPS gets zero additional tax benefit AND is locked till age 60 with no liquidity. Do NOT increase NPS to ₹15K/month — it destroys liquidity for no extra tax gain. Current ₹6,200 is acceptable. Consider reducing to ₹4,167 and redirecting ₹2,033 to a liquid equity fund.</p>
+      </div>
+    </div>
+
+    <!-- GOOD: Portfolio Status -->
     <div class="alert-item" style="border-left:3px solid var(--jt)">
       <div class="alert-icon">&#9989;</div>
       <div class="alert-body">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <h4>Monitor Unified Portfolio (9 Funds)</h4>
-          <span class="alert-badge badge-green">OPTIMIZED</span>
+          <h4>Portfolio Live — ₹2.15L/month Total Investment</h4>
+          <span class="alert-badge badge-green">LIVE</span>
         </div>
-        <p>✅ Portfolio live April 2026: 9 MFs ₹1.91L/month + PPF ₹12K/month (ICICI Bank, till 2041). Nifty 50 (₹60K), PP Flexi (₹18K), MO Midcap (₹25K), HDFC Midcap Opp (₹13K), Nippon Small (₹15K), S&amp;P 500 (₹18K), Nippon Gold (₹10K), Corp Bond (₹26K), NPS (₹6.2K). EPF fills 80C cap; PPF = EEE 7.1% tax-free returns. Track via Kuvera.</p>
+        <p>✅ 9 MFs ₹1.91L/month + PPF ₹12K/month (ICICI Bank, EEE 7.1%) + VPF ₹12K/month (salary deduction, EEE 8.25%) = ₹2.15L/month total. EPF (₹16,761/month employer+employee) runs separately. Track all via Kuvera. Annual LTCG harvest (₹2.5L couple, Jan each year) saves ₹31,250/year — set a calendar reminder.</p>
       </div>
     </div>
 
     <div class="sh"><span class="sh-n">02</span><h2>Upcoming Milestones</h2></div>
 
-    <div class="alert-item" style="border-left:3px solid var(--blue)">
+    <div class="alert-item" style="border-left:3px solid var(--red)">
       <div class="alert-icon">&#127881;</div>
       <div class="alert-body">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <h4>Baby Arriving Dec 2026</h4>
-          <span class="alert-badge" style="background:var(--blue-s);border:1px solid var(--blue);color:var(--blue)">6 MONTHS AWAY</span>
+          <h4>Baby Arriving Dec 2026 — 7 Months Away</h4>
+          <span class="alert-badge badge-red">PREP NOW</span>
         </div>
-        <p>Prepare: &#8377;60K in baby fund by then. Book hospital room. Buy nursery essentials. Update insurance to add baby. Start Child 1 SIP immediately after birth (don't delay).</p>
+        <p><strong>July:</strong> Redirect ₹20K vacation fund → baby fund. <strong>Oct:</strong> Build ₹1.4L maternity buffer in liquid fund (wife income pause). <strong>Nov:</strong> Book hospital room, buy nursery essentials. <strong>Dec/Birth:</strong> Add baby to family floater within 30 days. Start Child 1 SIP immediately — every month of delay at this age costs ₹3–5L at corpus end. Expected additional monthly expense from Jan 2027: ₹27–45K.</p>
       </div>
     </div>
 
@@ -2819,9 +2976,42 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div class="alert-body">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
           <h4>Car Decision: Late 2026</h4>
-          <span class="alert-badge" style="background:var(--blue-s);border:1px solid var(--blue);color:var(--blue)">8-10 MONTHS AWAY</span>
+          <span class="alert-badge" style="background:var(--blue-s);border:1px solid var(--blue);color:var(--blue)">8–10 MONTHS AWAY</span>
         </div>
-        <p>Save &#8377;20K/month in ultra-short duration fund. When office lease policy is announced (expected late 2026), you'll have savings ready. Apply for company car lease (salary &#8377;40L, good eligibility). Target: &#8377;15-18L car with tax benefits.</p>
+        <p>Company car lease expected late 2026 — if announced, apply immediately (30% lease deductible from salary = significant tax saving). Car fund: ₹20K/month in ultra-short duration fund → ₹1.8–2L by Dec 2026 for initial costs. If lease materialises, redirect the ₹20K/month freed → baby fund or home down payment fund.</p>
+      </div>
+    </div>
+
+    <div class="alert-item" style="border-left:3px solid var(--blue)">
+      <div class="alert-icon">&#127981;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Wife's PPF Account — Open by June 2026</h4>
+          <span class="alert-badge" style="background:var(--blue-s);border:1px solid var(--blue);color:var(--blue)">1 MONTH AWAY</span>
+        </div>
+        <p>Opens a separate EEE corpus at 7.1% tax-free. ₹12,000/month → ~₹39L by 2041 → ~₹1.27 Cr by 2054. Combined with your PPF = ₹2.54 Cr tax-free ballast. Open via ICICI Bank app in 10 minutes (₹500 minimum). Wife is in 0% slab — every rupee grows at maximum EEE efficiency.</p>
+      </div>
+    </div>
+
+    <div class="alert-item" style="border-left:3px solid var(--purple)">
+      <div class="alert-icon">&#127979;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Child 1 Starts School — 2029 (3 Years Away)</h4>
+          <span class="alert-badge" style="background:var(--purple-s);border:1px solid var(--purple);color:var(--purple)">PLAN BY 2028</span>
+        </div>
+        <p>Private school nursery/LKG in metro: ₹10–20K/month. Not in any budget line today. Start School Fees Sinking Fund (₹10K/month) from Jan 2028 — you'll have 1 year of buffer before fees begin. Child 2 (2028–29) will overlap in school from 2031. Budget for dual school fees: ₹25–35K/month from 2031–2037.</p>
+      </div>
+    </div>
+
+    <div class="alert-item" style="border-left:3px solid var(--purple)">
+      <div class="alert-icon">&#127968;</div>
+      <div class="alert-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <h4>Home Purchase — Target 2031–33 (Plan Fund Now)</h4>
+          <span class="alert-badge" style="background:var(--purple-s);border:1px solid var(--purple);color:var(--purple)">5–7 YEARS AWAY</span>
+        </div>
+        <p>No home goal in plan. Rent will grow from ₹40K to ₹55–65K by 2030 (8–10%/year). Best window: 2031–33 when corpus crosses ₹1 Cr, salary has grown, and EMI is manageable. Start Home Down Payment fund: ₹10K/month from July 2026 → ~₹9L + returns by 2033 for 20–25% down payment on ₹50–80L flat (or contribution to larger purchase).</p>
       </div>
     </div>
 
@@ -2830,31 +3020,68 @@ tr.milestone{background:rgba(240,180,41,.05)}
       <div class="card j">
         <div class="ch3 j">EVERY APRIL (FY Start)</div>
         <div style="font-size:12px;line-height:1.8">
-          &#9744; Increase all SIPs by 10%<br>
-          &#9744; Choose tax regime (old vs new)<br>
-          &#9744; Submit 80C investment declarations<br>
-          &#9744; Review insurance coverage<br>
-          &#9744; Rebalance portfolio if needed
+          &#9744; Apply 10% SIP step-up on all 9 funds<br>
+          &#9744; Choose tax regime (confirm old still better)<br>
+          &#9744; Submit 80C / HRA / LTA declarations with proofs<br>
+          &#9744; Review all insurance coverage amounts (increase term as income grows)<br>
+          &#9744; Check if 80CCD(1B) maxed at ₹50K NPS<br>
+          &#9744; Rebalance if any asset class deviates &gt;5% from target<br>
+          &#9744; Open wife's PPF if not done yet
         </div>
       </div>
       <div class="card j">
-        <div class="ch3 j">EVERY DECEMBER</div>
+        <div class="ch3 j">EVERY JANUARY</div>
         <div style="font-size:12px;line-height:1.8">
-          &#9744; Review year's expenses vs budget<br>
-          &#9744; Check corpus growth vs projection<br>
-          &#9744; Plan next year's vacation<br>
-          &#9744; File advance tax if applicable<br>
-          &#9744; Review life insurance sum assured
+          &#9744; LTCG Harvest: book ₹1.25L gains per person (you + wife) — saves ₹31,250/year<br>
+          &#9744; Review year's expenses vs budget — catch lifestyle creep<br>
+          &#9744; Check corpus growth vs projection on this dashboard<br>
+          &#9744; Advance tax payment if applicable (15 Mar deadline)<br>
+          &#9744; Review life insurance sum assured (increase by ₹50L every ₹5L CTC increase)<br>
+          &#9744; Check RBI SGB window — if open, redirect 2–3 months gold SIP to SGB lump sum
         </div>
       </div>
       <div class="card j">
         <div class="ch3 j">5-YEAR MAJOR REVIEW</div>
         <div style="font-size:12px;line-height:1.8">
-          &#9744; Reassess retirement corpus target<br>
-          &#9744; Review education cost assumptions<br>
-          &#9744; Adjust asset allocation (glide path)<br>
-          &#9744; Consider house purchase decision<br>
-          &#9744; Update will &amp; nominee details
+          &#9744; Reassess retirement corpus target (inflation + lifestyle upgrade)<br>
+          &#9744; Review education cost assumptions for both children<br>
+          &#9744; Adjust asset allocation glide path (reduce equity 5% per decade post-40)<br>
+          &#9744; Home purchase decision: buy or continue renting?<br>
+          &#9744; Update Will + all nominees (especially after Child 2 birth)<br>
+          &#9744; Review mid-cap overlap (Motilal + HDFC) — consolidate if needed<br>
+          &#9744; Check if NPS annuity plan needs adjustment<br>
+          &#9744; Review parents' care fund adequacy
+        </div>
+      </div>
+    </div>
+
+    <!-- CASH FLOW REALITY CHECK -->
+    <div class="sh"><span class="sh-n">04</span><h2>Cash Flow Sustainability Check</h2></div>
+    <div class="alert warning">
+      &#9888;&#65039; <strong>IMPORTANT:</strong> Current SIP target (&#8377;1.91L/month) exceeds estimated available surplus (&#8377;80–90K/month from combined income after expenses). Activate SIPs in phases — forced SIP pauses during baby stress are worse than starting smaller. Phases: ₹1.1L now → ₹1.5L Jan 2027 → ₹1.91L Apr 2027.
+    </div>
+    <div class="g2" style="margin-top:12px">
+      <div class="card" style="border-left:3px solid var(--jt)">
+        <div class="ch3 j">FUNDED SUSTAINABLY</div>
+        <div style="font-size:12px;line-height:1.9">
+          ✅ Emergency fund: ₹20L secured (12 months)<br>
+          ✅ VPF: ₹12K/month from salary (auto)<br>
+          ✅ EPF: ₹33K/month total (employer + employee, auto)<br>
+          ✅ PPF: ₹12K/month (ICICI auto-debit)<br>
+          ✅ Core MF SIPs: Nifty 50 + Corp Bond + NPS running<br>
+          ✅ LTCG harvest: calendar reminder set for Jan
+        </div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--red)">
+        <div class="ch3 d">STILL NEEDS FUNDING</div>
+        <div style="font-size:12px;line-height:1.9">
+          ❌ Term life + health insurance: ₹9,167/month<br>
+          ❌ Wife's PPF: ₹12,000/month<br>
+          ❌ Home Down Payment fund: ₹10,000/month<br>
+          ❌ Parents Care fund: ₹5,000/month<br>
+          ❌ Baby over-run budget: ₹7–25K/month<br>
+          ❌ School fees fund (from 2028): ₹10,000/month<br>
+          <strong style="color:var(--red)">Total gap: ₹53–71K/month — fund progressively as income grows</strong>
         </div>
       </div>
     </div>
@@ -2923,7 +3150,7 @@ tr.milestone{background:rgba(240,180,41,.05)}
     <div class="g2">
       <div class="card j">
         <div class="ch3 j">UNIFIED FAMILY PORTFOLIO - Current Values (9 Funds)</div>
-        <div class="alert info" style="margin-bottom:12px;font-size:11px"> Track your actual portfolio values here to compare against projections. Portfolio live April 2026 — ₹1.91L/month MF SIP + PPF ₹12K/month (ICICI Bank, EEE returns, NOT additional 80C — EPF fills that cap).</div>
+        <div class="alert info" style="margin-bottom:12px;font-size:11px"> Track your actual portfolio values here to compare against projections. Portfolio live April 2026 — ₹1.91L/month MF SIP + PPF ₹12K/month (ICICI Bank, EEE 7.1%) + VPF ₹12K/month (salary deduction, EEE 8.25%) = <strong>₹2.15L/month total</strong>. EPF fills 80C cap; PPF+VPF are EEE vehicles.</div>
         <div class="field-row">
           <span class="field-label">1. Nifty 50 Index Fund (₹60K SIP)</span>
           <input type="number" class="field-input" id="rv-nifty50" placeholder="₹0" step="1000">
@@ -4914,6 +5141,128 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
     </div>
 
+    <!-- Phase 2: May–Dec 2026 Actions -->
+    <div class="sh"><span class="sh-n">02B</span><h2>Phase 2 — May–Dec 2026: Foundation Hardening</h2></div>
+    <div class="alert" style="margin-bottom:12px">
+      &#128680; <strong>April SIPs LIVE. Now secure the plan against life events before baby arrives Dec 2026.</strong>
+    </div>
+
+    <!-- Phase 2: May -->
+    <div class="checklist-week">
+      <div class="checklist-week-header">
+        <span>&#128680; MAY 2026 — Insurance &amp; Legal (NON-NEGOTIABLE)</span>
+        <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="p2-w1-progress">0/6</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-1" onclick="toggleChecklistItem('p2-1')">
+        <input type="checkbox" id="chk-p2-1" onclick="event.stopPropagation();toggleChecklistItem('p2-1')">
+        <span class="check-label">Apply for Term Life: ₹2 Cr, 30-year term — HDFC Click2Protect / ICICI iProtect / Max Smart Secure (45 min online)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-2" onclick="toggleChecklistItem('p2-2')">
+        <input type="checkbox" id="chk-p2-2" onclick="event.stopPropagation();toggleChecklistItem('p2-2')">
+        <span class="check-label">Add Disability + Accident Rider to term plan (+₹1,000–2,000/month — pays if disabled, not just deceased)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-3" onclick="toggleChecklistItem('p2-3')">
+        <input type="checkbox" id="chk-p2-3" onclick="event.stopPropagation();toggleChecklistItem('p2-3')">
+        <span class="check-label">Apply for ₹20L Family Health Floater — Niva Bupa / Star Health (include wife; add baby within 30 days of birth)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-4" onclick="toggleChecklistItem('p2-4')">
+        <input type="checkbox" id="chk-p2-4" onclick="event.stopPropagation();toggleChecklistItem('p2-4')">
+        <span class="check-label">Apply for ₹15L Parents Health — Star Senior Citizen / Care (upgrade from ₹10L — one ICU stay = ₹8–15L)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-5" onclick="toggleChecklistItem('p2-5')">
+        <input type="checkbox" id="chk-p2-5" onclick="event.stopPropagation();toggleChecklistItem('p2-5')">
+        <span class="check-label">Update nominees: all 9 MF folios + EPF (HR portal) + PPF (ICICI Bank) + bank accounts → wife</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-6" onclick="toggleChecklistItem('p2-6')">
+        <input type="checkbox" id="chk-p2-6" onclick="event.stopPropagation();toggleChecklistItem('p2-6')">
+        <span class="check-label">Draft + register a basic Will naming guardian for Child 1 (lawyer, ~₹10K — must be done before Dec 2026)</span>
+      </div>
+    </div>
+
+    <!-- Phase 2: June -->
+    <div class="checklist-week">
+      <div class="checklist-week-header">
+        <span>&#127981; JUNE 2026 — Wife's PPF + Portfolio Restructure</span>
+        <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="p2-w2-progress">0/5</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-7" onclick="toggleChecklistItem('p2-7')">
+        <input type="checkbox" id="chk-p2-7" onclick="event.stopPropagation();toggleChecklistItem('p2-7')">
+        <span class="check-label">Open wife's PPF account via ICICI Bank app (₹500 to activate → set ₹12,000/month standing instruction)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-8" onclick="toggleChecklistItem('p2-8')">
+        <input type="checkbox" id="chk-p2-8" onclick="event.stopPropagation();toggleChecklistItem('p2-8')">
+        <span class="check-label">Reduce HDFC Corp Bond SIP: ₹26K → ₹14K (VPF at 8.25% EEE covers debt; Corp Bond at 30% slab = 5.25% post-tax)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-9" onclick="toggleChecklistItem('p2-9')">
+        <input type="checkbox" id="chk-p2-9" onclick="event.stopPropagation();toggleChecklistItem('p2-9')">
+        <span class="check-label">Redirect freed ₹12K → Nifty 50 (₹60K → ₹72K) — same total SIP, stronger core, better debt allocation</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-10" onclick="toggleChecklistItem('p2-10')">
+        <input type="checkbox" id="chk-p2-10" onclick="event.stopPropagation();toggleChecklistItem('p2-10')">
+        <span class="check-label">Submit LTA claim with travel proof if not done (₹1.39L/year tax-exempt — needs actual travel receipts)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-11" onclick="toggleChecklistItem('p2-11')">
+        <input type="checkbox" id="chk-p2-11" onclick="event.stopPropagation();toggleChecklistItem('p2-11')">
+        <span class="check-label">Verify HRA exemption: rent agreement in your name + receipts submitted to employer (₹96K–₹1.2L annual saving)</span>
+      </div>
+    </div>
+
+    <!-- Phase 2: July–Sept -->
+    <div class="checklist-week">
+      <div class="checklist-week-header">
+        <span>&#128118; JULY–SEPT 2026 — Baby Prep + New Sinking Funds</span>
+        <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="p2-w3-progress">0/5</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-12" onclick="toggleChecklistItem('p2-12')">
+        <input type="checkbox" id="chk-p2-12" onclick="event.stopPropagation();toggleChecklistItem('p2-12')">
+        <span class="check-label">Redirect vacation sinking fund (₹20K/month) → baby fund until Jan 2028 (baby costs ₹27–45K/month; current budget only ₹20K)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-13" onclick="toggleChecklistItem('p2-13')">
+        <input type="checkbox" id="chk-p2-13" onclick="event.stopPropagation();toggleChecklistItem('p2-13')">
+        <span class="check-label">Build ₹1.4L maternity buffer in liquid fund by October (wife's 2-month income: covers income gap during maternity leave)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-14" onclick="toggleChecklistItem('p2-14')">
+        <input type="checkbox" id="chk-p2-14" onclick="event.stopPropagation();toggleChecklistItem('p2-14')">
+        <span class="check-label">Start Home Down Payment Fund: ₹10,000/month in liquid/short-term debt fund (target ₹9–10L by 2033 for purchase)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-15" onclick="toggleChecklistItem('p2-15')">
+        <input type="checkbox" id="chk-p2-15" onclick="event.stopPropagation();toggleChecklistItem('p2-15')">
+        <span class="check-label">Start Parents Care Fund: ₹5,000/month in liquid fund (target ₹10L by 2030 — for out-of-pocket medical beyond insurance)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-16" onclick="toggleChecklistItem('p2-16')">
+        <input type="checkbox" id="chk-p2-16" onclick="event.stopPropagation();toggleChecklistItem('p2-16')">
+        <span class="check-label">Book hospital delivery room. Confirm paediatrician. Buy nursery essentials (crib, pram, steriliser).</span>
+      </div>
+    </div>
+
+    <!-- Phase 2: Oct–Dec -->
+    <div class="checklist-week">
+      <div class="checklist-week-header">
+        <span>&#127881; OCT–DEC 2026 — Baby Arrival + Year-End Actions</span>
+        <span style="font-size:11px;font-family:monospace;color:var(--ink3)" id="p2-w4-progress">0/5</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-17" onclick="toggleChecklistItem('p2-17')">
+        <input type="checkbox" id="chk-p2-17" onclick="event.stopPropagation();toggleChecklistItem('p2-17')">
+        <span class="check-label">Apply for company car lease immediately when policy announced (30% deductible from salary = significant tax saving)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-18" onclick="toggleChecklistItem('p2-18')">
+        <input type="checkbox" id="chk-p2-18" onclick="event.stopPropagation();toggleChecklistItem('p2-18')">
+        <span class="check-label">On baby birth: add to family floater within 30 days. Start Child 1 SIP (Nifty 50 ₹5,000/month) immediately — don't delay even one month.</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-19" onclick="toggleChecklistItem('p2-19')">
+        <input type="checkbox" id="chk-p2-19" onclick="event.stopPropagation();toggleChecklistItem('p2-19')">
+        <span class="check-label">LTCG Harvest January 2027: book exactly ₹1.25L gains per person (you + wife) — saves ₹31,250/year at 12.5% LTCG. Set calendar NOW.</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-20" onclick="toggleChecklistItem('p2-20')">
+        <input type="checkbox" id="chk-p2-20" onclick="event.stopPropagation();toggleChecklistItem('p2-20')">
+        <span class="check-label">Set April 2027 calendar reminder for 10% SIP step-up on all 9 funds (critical for ₹66 Cr corpus target)</span>
+      </div>
+      <div class="checklist-item" id="ci-p2-21" onclick="toggleChecklistItem('p2-21')">
+        <input type="checkbox" id="chk-p2-21" onclick="event.stopPropagation();toggleChecklistItem('p2-21')">
+        <span class="check-label">Year-end review: baby budget vs actual, SIP corpus vs projection on dashboard, any sinking fund rebalancing needed</span>
+      </div>
+    </div>
+
     <!-- SECTION C: INSURANCE ACTION PANEL -->
     <div class="sh"><span class="sh-n">03</span><h2>Insurance Action Panel</h2></div>
 
@@ -5435,9 +5784,9 @@ function updateDashboardBanner() {
   var dashNet = document.getElementById('dash-netpay');
   if (dashNet) dashNet.textContent = '\u20b9' + (config.netPay / 100000).toFixed(2) + 'L';
 
-  // Household cashflow metrics
-  var combinedIncome = (config.netPay || 213586) + (config.wifeGross || 70000);
-  var totalSIP = (config.yourSIP || 191200);
+  // Household cashflow metrics (netPay already reflects VPF deduction)
+  var combinedIncome = (config.netPay || 201586) + (config.wifeGross || 70000);
+  var totalSIP = (config.yourSIP || 191200) + (config.ppfMonthly || 12000) + (config.vpfMonthly || 12000);
   var sipBurdenPct = Math.round((totalSIP / combinedIncome) * 100);
   var dashCombined = document.getElementById('dash-combined-income');
   var dashBurden   = document.getElementById('dash-sip-burden');
@@ -5451,11 +5800,13 @@ function updateDashboardBanner() {
 
     if (retirementData && retirementData.length > 0) {
       const finalYear = retirementData[retirementData.length - 1];
-      const corpusCr = (finalYear.corpus / 10000000).toFixed(0);
+      // Use totalWithVPF when available (includes VPF corpus alongside MF portfolio)
+      const totalCorpus = finalYear.totalWithVPF || finalYear.corpus;
+      const corpusCr = (totalCorpus / 10000000).toFixed(0);
       const inflAdjCr = (finalYear.inflAdj / 10000000).toFixed(0);
 
-      console.log('   Final year corpus:', finalYear.corpus);
-      console.log('   Corpus in Crores:', corpusCr);
+      console.log('   Final year MF corpus:', finalYear.corpus, '| VPF corpus:', finalYear.vpfCorpus);
+      console.log('   Total corpus (MF+VPF):', totalCorpus, '| Crores:', corpusCr);
 
       // Update all instances of retirement corpus
       const retGoal = document.getElementById('dash-retirement-goal');
@@ -7480,7 +7831,7 @@ function calculateStepUpSIP(targetCorpus, years, expectedReturn, stepUpRate) {
 
 // UNIFIED FAMILY PORTFOLIO (8 funds, ₹1.91L/month)
 // Consolidated from previous 18-fund fragmented structure (April 2026 optimization)
-// IMPORTANT: Order matches Settings page inputs (s-sip-0 through s-sip-7)
+// IMPORTANT: Order matches Settings page inputs (s-sip-0 through s-sip-8, sequential)
 const familyFunds = [
   { name: 'Nifty 50 Index Fund Direct Growth', schemeCode: '120716', monthlySIP: 60000, stepUp: 10, purpose: 'Core - Market Returns at Minimal Cost', category: 'Large Cap', benchmark: 'Nifty 50 TRI', expenseRatio: 0.07, owner: 'Combined (66% Shya, 34% Avantika for tax)', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
   { name: 'Parag Parikh Flexi Cap Direct Growth', schemeCode: '122639', monthlySIP: 18000, stepUp: 10, purpose: 'Satellite - International + Value Investing (NOT ELSS — claim 80C via PPF separately)', category: 'Flexi Cap', benchmark: 'Nifty 500 TRI', expenseRatio: 0.68, owner: 'Shya', historical: { cagr_1y: null, cagr_3y: null, cagr_5y: null, currentNAV: null, lastUpdated: null } },
@@ -8897,7 +9248,7 @@ function calculateScenarios(schemeCode, monthsFromStart) {
 let config = {
   annualCTC: 3634000,
   basicSalary: 139678,
-  netPay: 213586,
+  netPay: 201586,    // After EPF + VPF (₹2,13,586 - ₹12,000 VPF = ₹2,01,586)
   wifeGross: 70000,
   wifeInvestment: 0,  // Deprecated - portfolio is now unified
   rent: 40000,
@@ -8905,8 +9256,10 @@ let config = {
   fixedExpenses: 13000,
   livingExpenses: 49000,
   sinkingFunds: 60000,
-  yourSIP: 191200,  // Unified family portfolio - ₹1.91L/month (8 funds, April 2026 optimized)
+  yourSIP: 191200,  // Unified family portfolio - ₹1.91L/month (9 funds, April 2026 optimized)
   wifeSIP: 0,       // Deprecated - portfolio is now unified (use yourSIP for total)
+  vpfMonthly: 12000, // Voluntary PF — salary deduction, 8.25% EEE, same EPF account
+  ppfMonthly: 12000, // PPF — ICICI Bank, 7.1% EEE, till 2041
   // Investment assumptions
   expectedReturn: 9,   // Conservative base assumption (9% CAGR — CFP realistic floor)
   annualStepUp: 10,    // Annual SIP step-up percentage (tiered model overrides this in projections)
@@ -9008,16 +9361,24 @@ function calculateRetirementProjection() {
   let corpus = 0;
   let monthlySIP = currentSIP;
 
+  // VPF corpus — 8.25% p.a., flat ₹12K/month (no step-up; government rate)
+  const vpfMonthly = config.vpfMonthly || 12000;
+  const vpfAnnualRate = 0.0825;
+  let vpfCorpus = 0;
+
   for (let i = 0; i <= years; i++) {
     const year = startYear + i;
     const age = startAge + i;
 
-    // Annual contribution with step-up
+    // Annual contribution with step-up (MF SIPs)
     const annualContribution = monthlySIP * 12;
     totalInvested += annualContribution;
 
-    // Corpus grows by return rate + new contribution
+    // Corpus grows by return rate + new contribution (MF portfolio)
     corpus = corpus * (1 + expectedReturn / 100) + annualContribution;
+
+    // VPF corpus: 8.25% p.a. growth + flat annual contribution
+    vpfCorpus = vpfCorpus * (1 + vpfAnnualRate) + vpfMonthly * 12;
 
     // Inflation-adjusted corpus (present value in today's money)
     const inflAdjCorpus = corpus / Math.pow(1 + inflationRate / 100, i);
@@ -9028,7 +9389,9 @@ function calculateRetirementProjection() {
       sip: Math.round(monthlySIP),
       contrib: Math.round(annualContribution),
       corpus: Math.round(corpus),
-      inflAdj: Math.round(inflAdjCorpus)
+      inflAdj: Math.round(inflAdjCorpus),
+      vpfCorpus: Math.round(vpfCorpus),
+      totalWithVPF: Math.round(corpus + vpfCorpus)
     });
 
     // Apply tiered step-up for next year: 10% yr1-10, 7% yr11-20, 5% yr21+
@@ -10146,14 +10509,17 @@ function saveConfig() {
   const totalExpenses = rent + parents + fixed + living + sinking;
   const totalInsurance = lifeInsurancePremium + healthInsurancePremium + parentsHealthPremium;
 
-  // Calculate total SIP from unified 8-fund portfolio
+  // Calculate total SIP from unified 9-fund portfolio (s-sip-0 through s-sip-8)
   let totalSIP = 0;
-  for (let i = 0; i < 8; i++) {
+  const numSettingsFunds = typeof familyFunds !== 'undefined' ? familyFunds.length : 9;
+  for (let i = 0; i < numSettingsFunds; i++) {
     const sipValue = getValue(`s-sip-${i}`);
     if (sipValue > 0) {
       totalSIP += sipValue;
     }
   }
+  // Also add VPF to total monthly investment for cashflow check
+  const vpfAmount = getValue('s-vpf-monthly') || 0;
 
   // For backward compatibility, split into your/wife portions
   // Rough split: 66% yours, 33% wife's (matches ₹1.27L : ₹64K ratio)
@@ -10202,14 +10568,15 @@ function saveConfig() {
   console.log(`✅ Config updated: Unified Family SIP = ₹${totalSIP.toLocaleString()} (8 funds)`);
 
   // UPDATE familyFunds array with new SIP values from Settings inputs
-  if (typeof familyFunds !== 'undefined' && familyFunds.length === 8) {
-    for (let i = 0; i < 8; i++) {
+  if (typeof familyFunds !== 'undefined' && familyFunds.length >= 1) {
+    // Map sequential Settings IDs (s-sip-0..7) to familyFunds in array order
+    for (let i = 0; i < familyFunds.length; i++) {
       const newSIP = getValue(`s-sip-${i}`);
       if (newSIP >= 0) {  // Allow 0 to disable a fund
         familyFunds[i].monthlySIP = newSIP;
       }
     }
-    console.log('✅ familyFunds array updated with new SIP values');
+    console.log('✅ familyFunds array updated (' + familyFunds.length + ' funds)');
 
     // Also update yourFunds alias for backward compatibility
     if (typeof yourFunds !== 'undefined') {
@@ -10218,6 +10585,9 @@ function saveConfig() {
       }
     }
   }
+
+  // Update VPF monthly amount
+  config.vpfMonthly = getValue('s-vpf-monthly') || 12000;
 
   // Read investment assumptions (equityReturn and stepUp already declared in validation section above)
   if (equityReturn > 0) config.expectedReturn = equityReturn;
@@ -10378,6 +10748,12 @@ function populateSettingsInputs() {
   setValue('s-life-premium', config.lifeInsurancePremium || 0);
   setValue('s-health-premium', config.healthInsurancePremium || 0);
   setValue('s-parents-premium', config.parentsHealthPremium || 0);
+
+  // VPF
+  setValue('s-vpf-monthly', config.vpfMonthly || 12000);
+
+  // Refresh totals after populating
+  setTimeout(updateSettingsTotals, 50);
 }
 
 // ============================================
@@ -10386,15 +10762,24 @@ function populateSettingsInputs() {
 
 // Update SIP totals in Settings page as user types
 function updateSettingsTotals() {
-  // NEW: Unified 8-fund portfolio
+  // Unified portfolio: count all s-sip-N fields matching familyFunds length
   let familyTotal = 0;
-  for (let i = 0; i < 8; i++) {
+  const numFunds = typeof familyFunds !== 'undefined' ? familyFunds.length : 9;
+  for (let i = 0; i < numFunds; i++) {
     const el = document.getElementById(`s-sip-${i}`);
     if (el) familyTotal += parseFloat(el.value) || 0;
   }
 
   const familyTotalEl = document.getElementById('family-sip-total-settings');
   if (familyTotalEl) familyTotalEl.textContent = `₹${familyTotal.toLocaleString('en-IN')}`;
+
+  // Grand total = MF SIPs + PPF (fixed ₹12K) + VPF (editable)
+  const vpfEl = document.getElementById('s-vpf-monthly');
+  const vpf = vpfEl ? (parseFloat(vpfEl.value) || 0) : 12000;
+  const ppf = 12000;
+  const grandTotal = familyTotal + ppf + vpf;
+  const grandTotalEl = document.getElementById('grand-total-investment');
+  if (grandTotalEl) grandTotalEl.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
 }
 
 // Attach listeners when Settings page loads
@@ -10403,8 +10788,8 @@ function initializeSettingsListeners() {
   const settingsContainer = document.querySelector('.page#page-1') || document.body;
 
   settingsContainer.addEventListener('input', function(e) {
-    // Check if input is a SIP field (now unified, no more s-wife-sip)
-    if (e.target.id && e.target.id.startsWith('s-sip-')) {
+    // Trigger totals update on SIP fields or VPF field changes
+    if (e.target.id && (e.target.id.startsWith('s-sip-') || e.target.id === 's-vpf-monthly')) {
       updateSettingsTotals();
     }
   });
