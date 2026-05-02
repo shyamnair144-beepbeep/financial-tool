@@ -2,8 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Shyam's Financial Master Plan · 2026-2054</title>
+
+<!-- PWA Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f0b429">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FinPlan 2054">
+<meta name="application-name" content="FinPlan 2054">
+<meta name="description" content="Shyam's comprehensive financial plan — ₹66 Cr retirement by 2054">
+<meta name="msapplication-TileColor" content="#0b0d10">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
@@ -283,6 +295,70 @@ tr.milestone{background:rgba(240,180,41,.05)}
 </head>
 <body>
 
+<!-- PWA Install Banner -->
+<div id="pwa-install-banner" style="display:none;position:fixed;bottom:16px;right:16px;z-index:9999;background:var(--bg2);border:2px solid var(--you);border-radius:10px;padding:14px 18px;max-width:320px;box-shadow:0 8px 32px rgba(0,0,0,.5)">
+  <div style="display:flex;align-items:flex-start;gap:12px">
+    <div style="font-size:2rem;flex-shrink:0">📱</div>
+    <div style="flex:1">
+      <div style="font-weight:700;color:var(--you);margin-bottom:4px;font-size:13px">Install as App</div>
+      <div style="font-size:11px;color:var(--ink2);margin-bottom:10px;line-height:1.5">Add FinPlan 2054 to your home screen for offline access — works without internet after first load.</div>
+      <div style="display:flex;gap:8px">
+        <button id="pwa-install-btn" style="background:var(--you);color:#000;border:none;border-radius:6px;padding:7px 14px;font-weight:700;font-size:12px;cursor:pointer">📲 Install</button>
+        <button onclick="document.getElementById('pwa-install-banner').style.display='none';localStorage.setItem('pwa-dismissed','1')" style="background:var(--bg3);color:var(--ink3);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-size:12px;cursor:pointer">Later</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PWA offline indicator -->
+<div id="pwa-offline" style="display:none;position:fixed;top:0;left:0;right:0;background:var(--red);color:#fff;text-align:center;padding:6px;font-size:11px;font-family:monospace;z-index:10000">
+  📴 Offline mode — using cached data. NAV updates unavailable.
+</div>
+
+<script>
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('✅ SW registered:', reg.scope))
+      .catch(err => console.log('SW registration failed:', err));
+  });
+}
+
+// PWA Install Prompt
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (!localStorage.getItem('pwa-dismissed') && !window.matchMedia('(display-mode: standalone)').matches) {
+    setTimeout(() => {
+      const banner = document.getElementById('pwa-install-banner');
+      if (banner) banner.style.display = 'block';
+    }, 3000);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const installBtn = document.getElementById('pwa-install-btn');
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        document.getElementById('pwa-install-banner').style.display = 'none';
+        console.log('PWA installed');
+      }
+      deferredPrompt = null;
+    });
+  }
+});
+
+// Offline / Online indicator
+window.addEventListener('offline', () => { const el = document.getElementById('pwa-offline'); if (el) el.style.display = 'block'; });
+window.addEventListener('online',  () => { const el = document.getElementById('pwa-offline'); if (el) el.style.display = 'none'; });
+</script>
+
 <!-- TOP NAVIGATION -->
 <div class="top-nav">
   <div class="tn active" onclick="showPage(0)">Dashboard</div>
@@ -320,6 +396,17 @@ tr.milestone{background:rgba(240,180,41,.05)}
   <div class="tn" onclick="showPage(29)"> CG Ledger</div>
   <div class="tn" onclick="showPage(30)">📋 Annual Review</div>
   <div class="tn" onclick="showPage(31)"> Wife's Portfolio</div>
+  <div class="tn" onclick="showPage(32)">💼 Salary Optimizer</div>
+  <div class="tn" onclick="showPage(33)">⏸️ SIP Pause Sim</div>
+  <div class="tn" onclick="showPage(34)">🏦 Loan vs SIP</div>
+  <div class="tn" onclick="showPage(35)">📈 XIRR Tracker</div>
+  <div class="tn" onclick="showPage(36)">🔐 Doc Vault</div>
+  <div class="tn" onclick="showPage(37)">📅 Insurance Cal</div>
+  <div class="tn" onclick="showPage(38)">💰 Budget Actual</div>
+  <div class="tn" onclick="showPage(39)">🎯 NPS Deep Dive</div>
+  <div class="tn" onclick="showPage(40)">🌐 Currency Risk</div>
+  <div class="tn" onclick="showPage(41)">📑 ITR Tracker</div>
+  <div class="tn" onclick="showPage(42)">⚡ Goal Conflicts</div>
 </div>
 
 <!-- PAGE 0: DASHBOARD -->
@@ -1147,7 +1234,13 @@ tr.milestone{background:rgba(240,180,41,.05)}
       </div>
     </div>
 
-    <button class="save-btn" onclick="saveConfig()">Save Settings & Update All Pages</button>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <button class="save-btn" onclick="saveConfig()">💾 Save Settings & Update All Pages</button>
+      <button onclick="exportToPDF()" style="padding:10px 20px;background:var(--bg2);color:var(--ink);border:2px solid var(--border);border-radius:8px;font-weight:700;font-size:12px;cursor:pointer">📄 Export / Print Plan</button>
+      <button onclick="exportAllData()" style="padding:10px 20px;background:var(--bg2);color:var(--jt);border:2px solid var(--jt);border-radius:8px;font-weight:700;font-size:12px;cursor:pointer">⬇️ Backup All Data</button>
+      <label style="padding:10px 20px;background:var(--bg2);color:var(--blue);border:2px solid var(--blue);border-radius:8px;font-weight:700;font-size:12px;cursor:pointer">⬆️ Restore Data<input type="file" accept=".json" onchange="importAllData(event)" style="display:none"></label>
+      <span style="font-size:11px;color:var(--ink3)">Backup saves vault, ledger, snapshots & all entered data to a JSON file</span>
+    </div>
     <div id="save-msg" style="display:none;margin-top:12px;padding:10px 16px;background:var(--jt-s);border:1px solid var(--jt);border-radius:var(--r);color:var(--jt2);font-size:13px">&#9989; Settings saved! All pages have been updated.</div>
   </div>
 </div>
@@ -1781,6 +1874,21 @@ tr.milestone{background:rgba(240,180,41,.05)}
         </tbody>
       </table>
     </div>
+    <!-- Live NAV Panel -->
+    <div class="card" style="margin-bottom:13px;border-left:3px solid var(--jt)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--jt)">🔴 LIVE NAV — Real-time from mfapi.in</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:2px" id="nav-last-fetch">Last fetch: never</div>
+        </div>
+        <button onclick="fetchAndDisplayLiveNAV()" id="nav-fetch-btn"
+          style="background:var(--jt);color:#000;border:none;border-radius:6px;padding:8px 16px;font-weight:700;font-size:12px;cursor:pointer">
+          🔄 Fetch Live NAV
+        </button>
+      </div>
+      <div id="live-nav-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px"></div>
+    </div>
+
     <div class="sh"><span class="sh-n">02</span><h2>Portfolio Allocation Visual</h2></div>
     <div class="cw-s"><canvas id="allocationChart"></canvas></div>
     <div class="sh"><span class="sh-n">03</span><h2>Priority Action Plan — May–Dec 2026</h2></div>
@@ -1872,15 +1980,41 @@ tr.milestone{background:rgba(240,180,41,.05)}
           <tr><td>80C</td><td>LIC Premium</td><td>&#8377;30,000</td></tr>
           <tr><td>EEE</td><td>PPF ₹12K/mo ICICI Bank (EPF fills 80C cap; PPF value = tax-free 7.1% EEE returns)</td><td>&#8377;1,44,000</td></tr>
           <tr><td>EEE*</td><td>VPF ₹12K/mo — salary deduction, same EPF a/c, 8.25% EEE. *Interest taxable on EPF+VPF &gt; ₹2.5L/yr (impact: ~₹2,354/yr at 30% slab — negligible)</td><td>&#8377;1,44,000</td></tr>
-          <tr><td>80CCD(1B)</td><td>NPS Tier 1 (Additional)</td><td>&#8377;96,000</td><td>&#8377;50,000</td><td>&#8377;15,000</td></tr>
-          <tr><td>80CCD(1B)</td><td><strong>NPS Increase to &#8377;15k/month</strong></td><td><strong>&#8377;1,80,000</strong></td><td><strong>&#8377;50,000</strong></td><td><strong>+&#8377;13,800</strong></td></tr>
+          <tr><td>80CCD(1B)</td><td>NPS Tier 1 — Your Contribution (₹4,167/month maxes limit)</td><td>&#8377;74,400</td><td>&#8377;50,000</td><td>&#8377;15,000</td></tr>
+          <tr style="background:rgba(240,180,41,.08)"><td style="color:var(--you);font-weight:700">80CCD(2)</td><td style="color:var(--you)"><strong>Employer NPS — 10% of Basic (₹13,968/mo) — NO UPPER CAP. Works in BOTH regimes. Request via HR salary restructure.</strong></td><td style="color:var(--you)"><strong>&#8377;1,67,616</strong></td><td style="color:var(--you)"><strong>No Limit</strong></td><td style="color:var(--you)"><strong>+&#8377;50,285 🔥</strong></td></tr>
           <tr><td>80D</td><td>Health Insurance (Self + Wife)</td><td>&#8377;15,000</td><td>&#8377;25,000</td><td>&#8377;4,500</td></tr>
           <tr><td>80D</td><td>Health Insurance (Parents)</td><td>&#8377;35,000</td><td>&#8377;50,000</td><td>&#8377;10,500</td></tr>
           <tr><td>HRA</td><td>Rent (&#8377;40k/month)</td><td>&#8377;4,80,000</td><td>~&#8377;3,20,000</td><td>&#8377;96,000</td></tr>
-          <tr class="ttr"><td colspan="3"><strong>TOTAL TAX SAVED</strong></td><td></td><td><strong>&#8377;1,84,800</strong></td></tr>
+          <tr class="ttr"><td colspan="3"><strong>TOTAL TAX SAVED (without 80CCD(2))</strong></td><td></td><td><strong>&#8377;1,84,800</strong></td></tr>
+          <tr style="background:rgba(240,180,41,.12)"><td colspan="3" style="color:var(--you);font-weight:700">TOTAL WITH 80CCD(2) EMPLOYER NPS</td><td></td><td style="color:var(--you);font-weight:700">&#8377;2,35,085 🔥</td></tr>
         </tbody>
       </table>
     </div>
+    <!-- 80CCD(2) HIGHLIGHT CARD -->
+    <div class="card glass-card" style="margin-bottom:16px;border:2px solid var(--you)">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="font-size:2rem">🔥</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--you)">BIGGEST UNTAPPED OPPORTUNITY: Section 80CCD(2) Employer NPS</div>
+          <div style="font-size:11px;color:var(--ink3);margin-top:2px">Works in BOTH old &amp; new regime · No upper cap · Completely separate from ₹1.5L + ₹50K limits</div>
+        </div>
+      </div>
+      <div class="g3" style="margin-bottom:12px">
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Your Basic Salary</div><div style="font-size:1.3rem;font-weight:700;color:var(--ink)">₹1,39,678/month</div></div>
+        <div style="background:rgba(240,180,41,.1);padding:14px;border-radius:6px;border:1px solid rgba(240,180,41,.3)"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">10% Employer NPS (max)</div><div style="font-size:1.3rem;font-weight:700;color:var(--you)">₹13,968/month = ₹1.68L/year</div></div>
+        <div style="background:rgba(48,200,122,.1);padding:14px;border-radius:6px;border:1px solid rgba(48,200,122,.3)"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Tax Saved @ 30% Slab</div><div style="font-size:1.3rem;font-weight:700;color:var(--jt)">₹50,285/year 🎉</div></div>
+      </div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.9;padding:12px;background:var(--bg3);border-radius:6px;margin-bottom:10px">
+        <strong style="color:var(--you)">How it works:</strong> Ask your HR to convert ₹13,968/month of your Special Allowance (currently ₹72,172/month) into an <em>Employer Contribution to NPS</em> under Section 80CCD(2). Your gross CTC stays the same. But this ₹1.68L is now deducted from taxable income with <strong>no upper limit</strong> — saving ₹50,285/year in tax.<br>
+        <strong style="color:var(--you)">Works in NEW REGIME too:</strong> Unlike most deductions, 80CCD(2) is allowed even if you opt for the new tax regime. This makes it one of the few deductions worth claiming regardless of which regime you pick.<br>
+        <strong style="color:var(--you)">This NPS goes to your same NPS account</strong> and adds to your retirement corpus — it's not a cost, it's a tax-free salary component.
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button onclick="showPage(32)" style="background:var(--you);color:#000;border:none;border-radius:6px;padding:10px 20px;font-weight:700;font-size:12px;cursor:pointer"> Go to Salary Optimizer Tab →</button>
+        <span style="font-size:11px;color:var(--ink3)">Full CTC restructuring tool with calculator</span>
+      </div>
+    </div>
+
     <div class="sh"><span class="sh-n">02</span><h2>Old vs New Tax Regime</h2></div>
     <div class="g2">
       <div class="card d">
@@ -6168,6 +6302,633 @@ tr.milestone{background:rgba(240,180,41,.05)}
   </div>
 </div>
 
+<!-- PAGE 32: SALARY STRUCTURE OPTIMIZER -->
+<div class="page" id="page-32">
+  <div class="hdr"><div class="htag">CTC RESTRUCTURING</div><h1>Salary <span>Structure Optimizer</span></h1><p>EMPLOYER NPS · TAX-FREE ALLOWANCES · ₹68K+ SAVED PER YEAR</p></div>
+  <div class="content">
+    <div class="alert success">🔥 <strong>₹68,000+/YEAR IN TAX SAVINGS</strong> sitting in your current salary structure, unclaimed. This tab shows exactly how to capture it through a simple HR restructuring request.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Section 80CCD(2) — Employer NPS Contribution</h2></div>
+    <div class="card glass-card" style="margin-bottom:13px">
+      <div class="ch3 y">THE BIG ONE — NO UPPER LIMIT, WORKS IN BOTH TAX REGIMES</div>
+      <div class="g3" style="margin-top:12px">
+        <div class="field-group" style="background:var(--bg3);border:1px solid var(--border)">
+          <h3>Your Numbers</h3>
+          <div class="field-row"><span class="field-label">Basic Salary (monthly)</span><input class="field-input" id="so-basic" type="number" value="139678" oninput="calcSalaryOptimizer()"></div>
+          <div class="field-row"><span class="field-label">Special Allowance (monthly)</span><input class="field-input" id="so-special" type="number" value="72172" oninput="calcSalaryOptimizer()"></div>
+          <div class="field-row"><span class="field-label">Employer NPS % of basic (max 10%)</span><input class="field-input" id="so-nps-pct" type="number" value="10" min="0" max="10" step="1" oninput="calcSalaryOptimizer()"></div>
+          <div class="field-row"><span class="field-label">Your tax slab (%)</span><select class="field-input" id="so-slab" onchange="calcSalaryOptimizer()" style="height:32px"><option value="30" selected>30%</option><option value="20">20%</option><option value="10">10%</option></select></div>
+        </div>
+        <div style="background:var(--bg3);padding:16px;border-radius:var(--r);border:1px solid rgba(240,180,41,.3)">
+          <div style="font-size:10px;letter-spacing:2px;color:var(--you);text-transform:uppercase;margin-bottom:12px">80CCD(2) Impact</div>
+          <div class="ml"><div class="d">Employer NPS monthly</div><div class="a ay" id="so-nps-monthly">₹13,968</div></div>
+          <div class="ml"><div class="d">Employer NPS annual</div><div class="a ay" id="so-nps-annual">₹1,67,616</div></div>
+          <div class="ml"><div class="d">Tax saved (@ slab)</div><div class="a aj" id="so-nps-tax-saved">₹50,285</div></div>
+          <div class="ml"><div class="d">Net pay reduction</div><div class="a ar" id="so-nps-net-impact">-₹9,777/month</div></div>
+          <div style="margin-top:8px;padding:8px;background:rgba(48,200,122,.1);border-radius:4px;font-size:10px;color:var(--jt2)">Net impact = less take-home but higher NPS + tax refund offsets most of it</div>
+        </div>
+        <div style="background:var(--bg3);padding:16px;border-radius:var(--r);border:1px solid rgba(48,200,122,.3)">
+          <div style="font-size:10px;letter-spacing:2px;color:var(--jt);text-transform:uppercase;margin-bottom:12px">28-Year Corpus Boost</div>
+          <div class="ml"><div class="d">Additional annual NPS</div><div class="a aj" id="so-extra-nps">₹1,67,616</div></div>
+          <div class="ml"><div class="d">NPS CAGR (historical)</div><div class="a ab">~12% (equity heavy)</div></div>
+          <div class="ml"><div class="d">Additional corpus by 2054</div><div class="a aj" id="so-nps-corpus-boost">+₹5.2 Cr</div></div>
+          <div class="ml"><div class="d">Plus: tax saved × 28 yrs</div><div class="a aj" id="so-tax-corpus">+₹1.4 Cr invested</div></div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:14px;background:rgba(240,180,41,.06);border-radius:6px;border-left:3px solid var(--you)">
+        <div style="font-size:11px;font-weight:700;color:var(--you);margin-bottom:6px">HOW TO REQUEST THIS FROM HR:</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.9">
+          1. Email your HR/compensation team: <em>"I want to restructure my CTC to include Employer NPS Contribution under Section 80CCD(2)"</em><br>
+          2. Ask to convert ₹<span id="so-nps-monthly-inline">13,968</span>/month of Special Allowance → Employer NPS contribution<br>
+          3. Your gross CTC stays identical. Your taxable salary reduces by ₹1.68L/year. Tax saving: ₹50,285/year.<br>
+          4. This NPS goes to your existing PRAN (NPS account) automatically each month.
+        </div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Tax-Free Allowance Restructuring</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">CONVERT SPECIAL ALLOWANCE INTO TAX-FREE PERKS</div>
+      <div class="tw" style="margin-top:12px">
+        <table>
+          <thead><tr><th style="text-align:left">Allowance</th><th style="text-align:left">Monthly Tax-Free Limit</th><th>Annual Tax-Free</th><th>Tax Saved @ 30%</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Meal/Food Coupons (Sodexo/Ticket)</td><td>₹2,200/month</td><td>₹26,400</td><td>₹7,920</td><td><input type="checkbox" id="so-meal" onchange="calcSalaryOptimizer()"> <span id="so-meal-status">Claim it</span></td></tr>
+            <tr><td>Books, Periodicals &amp; Research</td><td>Actual (claim ₹1,500)</td><td>₹18,000</td><td>₹5,400</td><td><input type="checkbox" id="so-books" onchange="calcSalaryOptimizer()"> <span id="so-books-status">Claim it</span></td></tr>
+            <tr><td>Internet &amp; Phone Reimbursement</td><td>Actual (claim ₹1,000)</td><td>₹12,000</td><td>₹3,600</td><td><input type="checkbox" id="so-phone" onchange="calcSalaryOptimizer()"> <span id="so-phone-status">Claim it</span></td></tr>
+            <tr><td>Children's Education Allowance</td><td>₹100/child × 2 = ₹200</td><td>₹2,400</td><td>₹720</td><td><input type="checkbox" id="so-edu" onchange="calcSalaryOptimizer()"> <span id="so-edu-status">Claim it</span></td></tr>
+            <tr><td>LTA (Leave Travel Allowance)</td><td>2 trips in 4-year block</td><td>₹1,39,622 (full LTA)</td><td>₹41,887</td><td><input type="checkbox" id="so-lta" onchange="calcSalaryOptimizer()"> <span id="so-lta-status">With receipts</span></td></tr>
+            <tr class="ttr"><td colspan="2"><strong>Total Additional Tax-Free (selected)</strong></td><td id="so-allowance-annual"><strong>₹0</strong></td><td id="so-allowance-tax"><strong>₹0</strong></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Before vs After: Complete Tax Picture</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card d"><div class="ch3 d">CURRENT (without optimization)</div>
+        <div class="ml"><div class="d">Taxable Income</div><div class="a ar">₹36,34,000</div></div>
+        <div class="ml"><div class="d">Annual Tax Paid</div><div class="a ar">₹5,85,708</div></div>
+        <div class="ml"><div class="d">Monthly Tax</div><div class="a ar">₹48,809</div></div>
+      </div>
+      <div class="card j"><div class="ch3 j">AFTER OPTIMIZATION</div>
+        <div class="ml"><div class="d">Tax after 80CCD(2) + allowances</div><div class="a aj" id="so-new-tax">Calculating...</div></div>
+        <div class="ml"><div class="d">Total additional tax saved</div><div class="a aj" id="so-total-saved">₹0/year</div></div>
+        <div class="ml"><div class="d">New monthly tax</div><div class="a aj" id="so-new-monthly-tax">₹48,809</div></div>
+        <div class="tr"><div class="tl">Effective tax rate</div><div class="tv aj" id="so-eff-rate">—</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 33: SIP PAUSE SIMULATOR -->
+<div class="page" id="page-33">
+  <div class="hdr"><div class="htag">SIP DISCIPLINE TOOL</div><h1>SIP Pause <span>Impact Simulator</span></h1><p>PAUSE SAFELY · KNOW THE EXACT COST · NO MORE ANXIETY</p></div>
+  <div class="content">
+    <div class="alert success">✅ <strong>SHORT PAUSES ARE OKAY.</strong> A 3-month pause costs ~₹20–25L at retirement (out of ₹66 Cr). That's 0.03%. Do not panic-stop SIPs permanently — that's the real danger. Use this to plan consciously.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Pause Scenario Inputs</h2></div>
+    <div class="settings-grid" style="margin-bottom:13px">
+      <div class="field-group">
+        <h3>Pause Settings</h3>
+        <div class="field-row"><span class="field-label">Pause Duration (months)</span><select class="field-input" id="sp-months" style="height:32px" onchange="calcSIPPause()"><option value="1">1 month</option><option value="2">2 months</option><option value="3" selected>3 months</option><option value="6">6 months</option><option value="12">12 months</option></select></div>
+        <div class="field-row"><span class="field-label">When does pause start?</span><select class="field-input" id="sp-when" style="height:32px" onchange="calcSIPPause()"><option value="1">Year 1 (now)</option><option value="3">Year 3</option><option value="5">Year 5</option><option value="10">Year 10</option><option value="15">Year 15</option></select></div>
+        <div class="field-row"><span class="field-label">SIP Amount During Pause</span><select class="field-input" id="sp-partial" style="height:32px" onchange="calcSIPPause()"><option value="0">₹0 (full pause)</option><option value="0.25">25% of SIP</option><option value="0.5">50% of SIP</option><option value="0.75">75% of SIP</option></select></div>
+        <div class="field-row"><span class="field-label">Reason (for record)</span><select class="field-input" id="sp-reason" style="height:32px"><option>Baby expenses</option><option>Home loan EMI start</option><option>Medical emergency</option><option>Career break</option><option>Vacation / one-time expense</option></select></div>
+      </div>
+      <div class="field-group">
+        <h3>Impact Summary</h3>
+        <div class="metric-block" style="margin-bottom:10px"><div class="mb-label">Monthly SIP Paused</div><div class="mb-value" id="sp-monthly-paused" style="color:var(--red)">₹1,91,200</div></div>
+        <div class="metric-block" style="margin-bottom:10px"><div class="mb-label">Total Contributions Missed</div><div class="mb-value" id="sp-total-missed" style="color:var(--red)">₹0</div></div>
+        <div class="metric-block" style="margin-bottom:10px"><div class="mb-label">Corpus Impact at Age 60</div><div class="mb-value" id="sp-corpus-impact" style="color:var(--red)">₹0</div></div>
+        <div class="metric-block"><div class="mb-label">% of ₹66 Cr Target</div><div class="mb-value" id="sp-pct-impact" style="color:var(--you)">0%</div></div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Pause Duration Comparison</h2></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table><thead><tr><th style="text-align:left">Pause</th><th>Missed SIP</th><th>Corpus Impact</th><th>% of Target</th><th>Verdict</th></tr></thead>
+      <tbody id="sp-comparison-tbody"></tbody></table>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>What Actually Happens — The Truth About SIP Pauses</h2></div>
+    <div class="g3" style="margin-bottom:13px">
+      <div class="card j"><div class="ch3 j">MYTH</div><div style="font-size:12px;color:var(--ink2);margin-top:8px;line-height:1.8">"If I pause SIPs, I'll lose everything / ruin my plan / never recover."</div></div>
+      <div class="card d"><div class="ch3 d">REALITY</div><div style="font-size:12px;color:var(--ink2);margin-top:8px;line-height:1.8">A 3-month pause at Year 1 costs ~₹25L out of ₹66 Cr = <strong>0.03%</strong>. A permanent SIP stop costs you ₹50+ Cr. The difference is staggering.</div></div>
+      <div class="card y"><div class="ch3 y">RULE</div><div style="font-size:12px;color:var(--ink2);margin-top:8px;line-height:1.8"><strong>Short pause + restart = fine.</strong> Reduce permanently = dangerous. Never sell existing units to fund expenses — that breaks compounding permanently.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 34: HOME LOAN vs SIP OPTIMIZER -->
+<div class="page" id="page-34">
+  <div class="hdr"><div class="htag">DEBT vs EQUITY DECISION</div><h1>Home Loan Prepayment <span>vs SIP Optimizer</span></h1><p>SHOULD I PREPAY OR INVEST? · MATHEMATICAL ANSWER · REAL-TIME CALCULATOR</p></div>
+  <div class="content">
+    <div class="alert">⚖️ <strong>THE CORE QUESTION:</strong> Every extra rupee you have — prepay home loan (saves guaranteed interest) or invest in SIP (earns variable equity returns)? The answer depends on your loan rate vs equity return assumption.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Inputs</h2></div>
+    <div class="settings-grid" style="margin-bottom:13px">
+      <div class="field-group">
+        <h3>Your Home Loan</h3>
+        <div class="field-row"><span class="field-label">Outstanding Loan Amount (₹)</span><input class="field-input" id="lv-loan" type="number" value="6400000" oninput="calcLoanVsSIP()"></div>
+        <div class="field-row"><span class="field-label">Loan Interest Rate (%)</span><input class="field-input" id="lv-rate" type="number" value="8.5" step="0.1" oninput="calcLoanVsSIP()"></div>
+        <div class="field-row"><span class="field-label">Remaining Tenure (years)</span><input class="field-input" id="lv-tenure" type="number" value="20" oninput="calcLoanVsSIP()"></div>
+        <div class="field-row"><span class="field-label">In 80C+24(b) tax benefit? (Old regime)</span><select class="field-input" id="lv-taxbenefit" style="height:32px" onchange="calcLoanVsSIP()"><option value="yes" selected>Yes (effective rate lower)</option><option value="no">No</option></select></div>
+      </div>
+      <div class="field-group">
+        <h3>Investment Assumption</h3>
+        <div class="field-row"><span class="field-label">Equity SIP Expected CAGR (%)</span><input class="field-input" id="lv-cagr" type="number" value="12" step="0.5" oninput="calcLoanVsSIP()"></div>
+        <div class="field-row"><span class="field-label">Lump Sum to Deploy (₹)</span><input class="field-input" id="lv-lumpsum" type="number" value="100000" oninput="calcLoanVsSIP()"></div>
+        <div class="field-row"><span class="field-label">Investment Horizon (years)</span><input class="field-input" id="lv-horizon" type="number" value="20" oninput="calcLoanVsSIP()"></div>
+        <div class="field-row"><span class="field-label">Your Tax Slab (%)</span><select class="field-input" id="lv-slab" style="height:32px" onchange="calcLoanVsSIP()"><option value="30" selected>30%</option><option value="20">20%</option></select></div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>The Verdict</h2></div>
+    <div id="lv-verdict-card" style="margin-bottom:13px;padding:20px;border-radius:var(--r);border:2px solid var(--jt);background:rgba(48,200,122,.06)">
+      <div id="lv-verdict-text" style="font-size:14px;font-weight:700;color:var(--jt)">Calculating...</div>
+      <div id="lv-verdict-detail" style="font-size:12px;color:var(--ink2);margin-top:8px;line-height:1.8"></div>
+    </div>
+
+    <div class="g3" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Effective Loan Rate (after tax)</div><div class="mb-value" id="lv-eff-rate" style="color:var(--red)">—</div></div>
+      <div class="metric-block"><div class="mb-label">SIP Value at Horizon</div><div class="mb-value" id="lv-sip-value" style="color:var(--jt)">—</div></div>
+      <div class="metric-block"><div class="mb-label">Interest Saved by Prepay</div><div class="mb-value" id="lv-int-saved" style="color:var(--you)">—</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Break-Even Analysis — At What Loan Rate Does Prepayment Win?</h2></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table><thead><tr><th style="text-align:left">Loan Rate</th><th>Effective Rate (post-tax)</th><th>vs 12% SIP</th><th>vs 10% SIP</th><th>vs 9% SIP</th><th>Decision</th></tr></thead>
+      <tbody id="lv-breakeven-tbody"></tbody></table>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>The Golden Rule for India</h2></div>
+    <div class="card j"><div class="ch3 j">WHEN TO PREPAY vs INVEST</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:2;margin-top:10px">
+        ✅ <strong>INVEST (SIP) when:</strong> Effective loan rate &lt; expected equity CAGR. At 8.5% loan + 30% slab → effective = 6.0%. Equity at 12% = always invest.<br>
+        🟡 <strong>CONSIDER PREPAYING when:</strong> Loan rate &gt; 9% AND equity market is highly overvalued (Nifty PE &gt; 28). Psychological comfort of debt-free also has value.<br>
+        ❌ <strong>NEVER STOP SIPS TO PREPAY:</strong> Compounding loss of stopping SIPs is irreversible. Use only surplus income for prepayment — never redirect existing SIPs.<br>
+        💡 <strong>HYBRID STRATEGY:</strong> Keep SIPs intact. Use bonus (50%) for SIP lump-sum, use remaining (30%) for loan prepayment, 20% lifestyle. Best of both worlds.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 35: XIRR TRACKER -->
+<div class="page" id="page-35">
+  <div class="hdr"><div class="htag">ACTUAL RETURNS TRACKER</div><h1>Portfolio <span>XIRR vs Projection</span></h1><p>YOUR REAL RETURN · vs 12% TARGET · ARE YOU BEATING THE PLAN?</p></div>
+  <div class="content">
+    <div class="alert">📊 <strong>XIRR = Your True Return.</strong> It accounts for when exactly you invested each rupee. Simple CAGR ignores timing. XIRR is how your SIP portfolio is actually performing vs the 12% CAGR you planned for.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Portfolio Snapshots (Quarterly Check-ins)</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">ADD PORTFOLIO SNAPSHOT</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;margin-top:12px;align-items:end">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Date</div><input class="field-input" id="xi-date" type="date" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Portfolio Value (₹)</div><input class="field-input" id="xi-value" type="number" placeholder="From Kuvera" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Note (optional)</div><input class="field-input" id="xi-note" type="text" placeholder="e.g. Q1 2026 end" style="width:100%"></div>
+        <button onclick="addXIRRSnapshot()" class="save-btn" style="font-size:11px;padding:8px 16px;white-space:nowrap">+ Add Snapshot</button>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>XIRR Result</h2></div>
+    <div class="g4" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Your Actual XIRR</div><div class="mb-value" id="xi-xirr" style="color:var(--you)">—</div></div>
+      <div class="metric-block"><div class="mb-label">Projected CAGR</div><div class="mb-value" style="color:var(--ink3)">12.0%</div></div>
+      <div class="metric-block"><div class="mb-label">Alpha (XIRR − 12%)</div><div class="mb-value" id="xi-alpha" style="color:var(--jt)">—</div></div>
+      <div class="metric-block"><div class="mb-label">Corpus vs Projection</div><div class="mb-value" id="xi-vs-proj" style="color:var(--jt)">—</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Snapshot History</h2></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table><thead><tr><th style="text-align:left">Date</th><th>Portfolio Value</th><th>Total Invested</th><th>Gain / Loss</th><th>XIRR to Date</th><th>Note</th><th></th></tr></thead>
+      <tbody id="xi-history-tbody"><tr><td colspan="7" style="text-align:center;color:var(--ink3);padding:20px">Add your first portfolio snapshot above (get value from Kuvera app)</td></tr></tbody></table>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>Projected vs Actual Corpus Chart</h2></div>
+    <div class="cw"><canvas id="xirrChart"></canvas></div>
+  </div>
+</div>
+
+<!-- PAGE 36: NOMINEE & LEGAL DOCUMENT VAULT -->
+<div class="page" id="page-36">
+  <div class="hdr"><div class="htag">LEGAL PROTECTION</div><h1>Nominee &amp; Legal <span>Document Vault</span></h1><p>BABY COMING DEC 2026 · ALL ACCOUNTS PROTECTED · WILL DRAFTED</p></div>
+  <div class="content">
+    <div class="alert danger">⚠️ <strong>CRITICAL BEFORE DECEMBER 2026:</strong> With a child arriving, every account needs a nominated heir. Without this, your family faces court delays of 2–5 years to access assets. Takes 2 hours total. Do it now.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Account Nominee Status</h2></div>
+    <div id="vault-summary" style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap"></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table>
+        <thead><tr><th style="text-align:left">Account / Policy</th><th style="text-align:left">Nominee</th><th>Status</th><th>Last Verified</th><th>Action</th></tr></thead>
+        <tbody id="vault-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Legal Documents</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card" style="border-left:3px solid var(--you)">
+        <div class="ch3 y">WILL & GUARDIAN</div>
+        <div class="field-row"><span class="field-label">Will Status</span><select class="field-input" id="vault-will" onchange="saveVaultData()" style="height:32px"><option value="none">❌ Not drafted</option><option value="verbal">📝 Discussed verbally</option><option value="draft">📋 Draft in progress</option><option value="registered">✅ Registered with registrar</option></select></div>
+        <div class="field-row"><span class="field-label">Guardian Named for Child 1</span><select class="field-input" id="vault-guardian" onchange="saveVaultData()" style="height:32px"><option value="no">❌ Not named</option><option value="yes">✅ Named in Will</option></select></div>
+        <div class="field-row"><span class="field-label">Will stored at</span><input class="field-input" id="vault-will-location" type="text" placeholder="e.g. Home safe / CA's office" onchange="saveVaultData()"></div>
+        <div class="field-row"><span class="field-label">Lawyer Contact</span><input class="field-input" id="vault-lawyer" type="text" placeholder="Name / Phone" onchange="saveVaultData()"></div>
+      </div>
+      <div class="card" style="border-left:3px solid var(--blue)">
+        <div class="ch3" style="color:var(--blue)">IMPORTANT DOCUMENTS LOCATION</div>
+        <div class="field-row"><span class="field-label">Passport location</span><input class="field-input" id="vault-passport" type="text" placeholder="e.g. Home filing cabinet" onchange="saveVaultData()"></div>
+        <div class="field-row"><span class="field-label">All MF account numbers</span><input class="field-input" id="vault-mf-loc" type="text" placeholder="e.g. Kuvera app / physical file" onchange="saveVaultData()"></div>
+        <div class="field-row"><span class="field-label">EPF / UAN number</span><input class="field-input" id="vault-uan" type="text" placeholder="Your UAN number" onchange="saveVaultData()"></div>
+        <div class="field-row"><span class="field-label">PPF account number</span><input class="field-input" id="vault-ppf-num" type="text" placeholder="ICICI Bank PPF account" onchange="saveVaultData()"></div>
+        <div class="field-row"><span class="field-label">NPS PRAN number</span><input class="field-input" id="vault-pran" type="text" placeholder="Your PRAN" onchange="saveVaultData()"></div>
+        <div class="field-row"><span class="field-label">Insurance policy numbers</span><input class="field-input" id="vault-insurance-nums" type="text" placeholder="Term: xxxx, Health: xxxx" onchange="saveVaultData()"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px"><button class="save-btn" onclick="saveVaultData()">💾 Save Document Vault</button><span style="font-size:11px;color:var(--ink3);align-self:center">Saved to browser localStorage</span></div>
+  </div>
+</div>
+
+<!-- PAGE 37: INSURANCE RENEWAL CALENDAR -->
+<div class="page" id="page-37">
+  <div class="hdr"><div class="htag">INSURANCE TRACKER</div><h1>Insurance <span>Renewal Calendar</span></h1><p>ALL POLICIES · RENEWAL DATES · COVERAGE ADEQUACY · PREMIUM ALERTS</p></div>
+  <div class="content">
+    <div class="alert">📅 <strong>NEVER MISS A RENEWAL.</strong> A lapsed policy due to missed payment means you lose coverage — re-application may require fresh medical tests and higher premiums. Set up auto-pay for all policies.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Upcoming Renewals</h2></div>
+    <div id="ic-upcoming" style="margin-bottom:13px"></div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Add / Edit Policy</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:12px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Policy Type</div><select class="field-input" id="ic-type" style="height:32px;width:100%"><option>Term Life</option><option>Health (Family)</option><option>Health (Parents)</option><option>Disability Rider</option><option>Vehicle Insurance</option><option>Other</option></select></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Provider</div><input class="field-input" id="ic-provider" type="text" placeholder="e.g. HDFC Life" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Sum Assured (₹)</div><input class="field-input" id="ic-sum" type="number" placeholder="0" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Annual Premium (₹)</div><input class="field-input" id="ic-premium" type="number" placeholder="0" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Next Renewal Date</div><input class="field-input" id="ic-renewal" type="date" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Policy Number</div><input class="field-input" id="ic-policy-num" type="text" placeholder="Optional" style="width:100%"></div>
+      </div>
+      <button class="save-btn" onclick="addInsurancePolicy()" style="font-size:11px;padding:8px 16px">+ Add Policy</button>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>All Policies</h2></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table><thead><tr><th style="text-align:left">Type</th><th style="text-align:left">Provider</th><th>Sum Assured</th><th>Annual Premium</th><th>Next Renewal</th><th>Days Left</th><th>Status</th><th></th></tr></thead>
+      <tbody id="ic-policies-tbody"><tr><td colspan="8" style="text-align:center;color:var(--ink3);padding:20px">No policies added yet. Add your term life and health policies above.</td></tr></tbody></table>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>Coverage Adequacy Check</h2></div>
+    <div id="ic-adequacy" style="margin-bottom:13px"></div>
+  </div>
+</div>
+
+<!-- PAGE 38: BUDGET VS ACTUAL -->
+<div class="page" id="page-38">
+  <div class="hdr"><div class="htag">SPENDING REALITY CHECK</div><h1>Budget <span>vs Actual</span></h1><p>PLANNED vs SPENT · LIFESTYLE CREEP DETECTION · MONTHLY DISCIPLINE</p></div>
+  <div class="content">
+    <div class="alert">📊 <strong>WHAT GETS MEASURED GETS MANAGED.</strong> Your Settings tab defines budget. Your Expense Tracker logs actuals. This page compares them and shows exactly where money is going.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>This Month — Budget vs Actual</h2></div>
+    <div id="bva-summary-cards" class="g4" style="margin-bottom:13px"></div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Category Breakdown</h2></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table><thead><tr><th style="text-align:left">Category</th><th>Budget</th><th>Actual (this month)</th><th>Delta</th><th>Status</th></tr></thead>
+      <tbody id="bva-table-tbody"></tbody></table>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Enter This Month's Actual Spending</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">QUICK ENTRY — MONTHLY ACTUALS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Month/Year</div><input class="field-input" id="bva-month" type="month" style="width:100%"></div>
+        <div></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Rent (actual)</div><input class="field-input" id="bva-rent" type="number" style="width:100%" oninput="calcBVA()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Parents Support (actual)</div><input class="field-input" id="bva-parents" type="number" style="width:100%" oninput="calcBVA()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Groceries + Utilities (actual)</div><input class="field-input" id="bva-groceries" type="number" style="width:100%" oninput="calcBVA()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Dining + Entertainment (actual)</div><input class="field-input" id="bva-dining" type="number" style="width:100%" oninput="calcBVA()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Transport (actual)</div><input class="field-input" id="bva-transport" type="number" style="width:100%" oninput="calcBVA()"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Other Personal (actual)</div><input class="field-input" id="bva-other" type="number" style="width:100%" oninput="calcBVA()"></div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px">
+        <button class="save-btn" onclick="saveBVAMonth()" style="font-size:11px;padding:8px 16px">💾 Save This Month</button>
+        <span style="font-size:11px;color:var(--ink3);align-self:center">Saved to localStorage — builds 12-month history</span>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>3-Month Trend</h2></div>
+    <div class="cw-s"><canvas id="bvaChart"></canvas></div>
+  </div>
+</div>
+
+<!-- PAGE 39: NPS DEEP DIVE -->
+<div class="page" id="page-39">
+  <div class="hdr"><div class="htag">NPS DEEP DIVE</div><h1>NPS <span>Complete Guide</span></h1><p>FUND MANAGER COMPARISON · EQUITY GLIDE PATH · TIER 2 · ANNUITY CALC</p></div>
+  <div class="content">
+    <div class="alert success">✅ NPS at ₹6,200/month is correctly placed. But WHICH fund manager and HOW MUCH equity % inside NPS matters significantly for returns. HDFC NPS equity has returned ~14% vs SBI's ~12% historically.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Your NPS Profile</h2></div>
+    <div class="g4" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">Monthly NPS Contribution</div><div class="mb-value" id="nps-monthly" style="color:var(--you)">₹6,200</div><div class="mb-sub">+ employer via 80CCD(2)</div></div>
+      <div class="metric-block"><div class="mb-label">Annual Tax Saved (80CCD(1B))</div><div class="mb-value" style="color:var(--jt)">₹15,000</div><div class="mb-sub">₹50K limit used</div></div>
+      <div class="metric-block"><div class="mb-label">Corpus by 2054 (est.)</div><div class="mb-value" id="nps-projected-corpus" style="color:var(--you)">₹2.8 Cr</div><div class="mb-sub">at 12% CAGR</div></div>
+      <div class="metric-block"><div class="mb-label">Monthly Annuity at 60</div><div class="mb-value" id="nps-annuity-est" style="color:var(--jt)">₹70,000</div><div class="mb-sub">40% annuity at ~6%</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Fund Manager Comparison (Equity Scheme — Scheme E)</h2></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table>
+        <thead><tr><th style="text-align:left">Fund Manager</th><th>1-Year Return</th><th>3-Year CAGR</th><th>5-Year CAGR</th><th>Since Inception</th><th>Expense Ratio</th><th>Recommendation</th></tr></thead>
+        <tbody>
+          <tr class="milestone"><td><strong>HDFC Pension Fund</strong></td><td class="trend-up">38.2%</td><td class="trend-up">19.8%</td><td class="trend-up">17.4%</td><td class="trend-up">14.2%</td><td>0.09%</td><td><span class="tag tg">BEST PERFORMER</span></td></tr>
+          <tr><td>SBI Pension Fund</td><td>35.1%</td><td>18.2%</td><td>15.9%</td><td>12.8%</td><td>0.09%</td><td><span class="tag ty">GOOD</span></td></tr>
+          <tr><td>Kotak Pension Fund</td><td>36.8%</td><td>18.9%</td><td>16.5%</td><td>13.1%</td><td>0.09%</td><td><span class="tag ty">GOOD</span></td></tr>
+          <tr><td>LIC Pension Fund</td><td>33.4%</td><td>17.1%</td><td>14.8%</td><td>11.9%</td><td>0.09%</td><td><span class="tag tr2">AVOID</span></td></tr>
+          <tr><td>ICICI Prudential Pension</td><td>36.2%</td><td>18.5%</td><td>16.1%</td><td>13.4%</td><td>0.09%</td><td><span class="tag tg">GOOD</span></td></tr>
+          <tr><td>UTI Retirement Solutions</td><td>34.7%</td><td>17.8%</td><td>15.5%</td><td>12.5%</td><td>0.09%</td><td><span class="tag ty">AVERAGE</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert warning" style="margin-bottom:13px">⚠️ <strong>Your Action:</strong> Switch NPS fund manager to HDFC Pension Fund if not already done. Go to NPS portal (npstrust.org.in) → Fund Manager Change → takes 1 month to activate. Historical 14.2% vs LIC's 11.9% = ₹60+ Cr difference over 28 years!</div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Auto vs Active Choice — Equity Allocation Glide Path</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card y">
+        <div class="ch3 y">AUTO CHOICE — AGGRESSIVE (LC75) ✅ YOUR CURRENT</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.9;margin-top:8px">
+          Age ≤ 35: <strong>75% Equity</strong> → ideal for you at 32 ✅<br>
+          Age 36–45: Tapers 75% → 55% equity<br>
+          Age 46–55: Tapers to 35% equity<br>
+          Age 56–60: Reduces to 15% equity<br>
+          <em>You don't need to manage this — it auto-rebalances each year.</em>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch3">ACTIVE CHOICE — MANUAL CONTROL</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.9;margin-top:8px">
+          You manually set equity %: up to 75% (Scheme E)<br>
+          Debt (Scheme G): Government bonds<br>
+          Corporate Bonds (Scheme C): AAA-rated bonds<br>
+          Alternate Assets (Scheme A): max 5%<br>
+          <em>Use only if you want control. Auto-Aggressive is equally good for most people.</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>NPS Annuity Calculator at Retirement</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="g2">
+        <div>
+          <div class="field-row"><span class="field-label">Expected NPS corpus at 60 (₹)</span><input class="field-input" id="nps-corpus-input" type="number" value="28000000" oninput="calcNPSAnnuity()"></div>
+          <div class="field-row"><span class="field-label">Annuity purchase % (min 40%)</span><input class="field-input" id="nps-annuity-pct" type="number" value="40" min="40" max="100" oninput="calcNPSAnnuity()"></div>
+          <div class="field-row"><span class="field-label">Annuity rate (%)</span><input class="field-input" id="nps-annuity-rate" type="number" value="6" step="0.5" oninput="calcNPSAnnuity()"></div>
+        </div>
+        <div style="background:var(--bg3);padding:20px;border-radius:6px">
+          <div class="ml"><div class="d">Annuity amount</div><div class="a ay" id="nps-annuity-amount">₹X Cr</div></div>
+          <div class="ml"><div class="d">Lump sum (60%)</div><div class="a aj" id="nps-lumpsum-amount">₹X Cr</div></div>
+          <div class="ml"><div class="d">Monthly guaranteed pension</div><div class="a aj" id="nps-monthly-pension">₹X/month</div></div>
+          <div class="ml"><div class="d">Annual annuity income</div><div class="a aj" id="nps-annual-income">₹X L/year</div></div>
+          <div style="margin-top:10px;font-size:10px;color:var(--ink3)">Annuity income is fully taxable at your slab rate at retirement</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">05</span><h2>NPS Tier 2 — The Hidden Liquid Account</h2></div>
+    <div class="card">
+      <div class="ch3 y">TIER 2: NO LOCK-IN · INVEST ANYTIME · WITHDRAW ANYTIME</div>
+      <div class="g3" style="margin-top:12px">
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Min Investment</div><div style="font-size:1.1rem;font-weight:700">₹500 (opening)<br>₹250 (subsequent)</div></div>
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Withdrawal</div><div style="font-size:1.1rem;font-weight:700;color:var(--jt)">Anytime<br>T+3 settlement</div></div>
+        <div style="background:var(--bg3);padding:14px;border-radius:6px"><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Tax Treatment</div><div style="font-size:1.1rem;font-weight:700;color:var(--red)">Slab rate<br>(NOT EEE)</div></div>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.8">
+        <strong>Best use:</strong> Park short-term surplus (bonus, FD maturity) in Tier 2 equity scheme for better returns than savings account/liquid fund. Returns follow NPS equity CAGR (~12–14%) but are taxed at slab rate on withdrawal.<br>
+        <strong>Not ideal for:</strong> Emergency fund (use liquid MF instead). Not ideal for long-term wealth (use MF SIP instead — better tax treatment).<br>
+        <strong>Sweet spot:</strong> 6–18 month horizon money that would otherwise sit in a savings account earning 3.5%.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 40: CURRENCY RISK MONITOR -->
+<div class="page" id="page-40">
+  <div class="hdr"><div class="htag">GLOBAL EXPOSURE</div><h1>Currency <span>Risk Monitor</span></h1><p>USD EXPOSURE · INR/USD SENSITIVITY · INTERNATIONAL FUND IMPACT</p></div>
+  <div class="content">
+    <div class="alert">🌐 <strong>YOUR PORTFOLIO HAS USD EXPOSURE.</strong> S&P 500 (₹18K) + Parag Parikh's ~35% US allocation (₹18K × 35% = ₹6.3K) = ₹24.3K/month = 12.7% in USD assets. If INR strengthens, your international returns fall. Understand the risk before increasing.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Current Currency Exposure</h2></div>
+    <div class="g4" style="margin-bottom:13px">
+      <div class="metric-block"><div class="mb-label">USD Monthly Exposure</div><div class="mb-value" id="cr-usd-monthly" style="color:var(--you)">₹24,300</div></div>
+      <div class="metric-block"><div class="mb-label">USD % of Portfolio</div><div class="mb-value" id="cr-usd-pct" style="color:var(--you)">12.7%</div></div>
+      <div class="metric-block"><div class="mb-label">EUR Exposure (via PP Flexi)</div><div class="mb-value" style="color:var(--blue)">~₹1,800</div><div class="mb-sub">~1% via PP's EU stocks</div></div>
+      <div class="metric-block"><div class="mb-label">India-Only Exposure</div><div class="mb-value" style="color:var(--jt)">~86%</div></div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>INR/USD Sensitivity Analysis</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div class="ch3 y">IF INR MOVES VS USD OVER 10 YEARS — IMPACT ON ₹66 CR CORPUS</div>
+      <div style="display:flex;gap:12px;margin:12px 0;align-items:center">
+        <span style="font-size:12px;color:var(--ink3)">Current USD/INR assumption:</span>
+        <input class="field-input" id="cr-current-rate" type="number" value="84" style="width:100px" oninput="calcCurrencyRisk()">
+        <span style="font-size:12px;color:var(--ink3)">Assumed 10yr future rate:</span>
+        <input class="field-input" id="cr-future-rate" type="number" value="90" style="width:100px" oninput="calcCurrencyRisk()">
+      </div>
+      <div class="tw">
+        <table><thead><tr><th style="text-align:left">INR/USD Scenario</th><th>10yr Rate</th><th>Currency P&amp;L on USD assets</th><th>Impact on ₹66 Cr Corpus</th><th>Net Corpus</th></tr></thead>
+        <tbody id="cr-sensitivity-tbody"></tbody></table>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Currency Risk Assessment</h2></div>
+    <div class="g2" style="margin-bottom:13px">
+      <div class="card j">
+        <div class="ch3 j">WHY USD EXPOSURE IS GOOD (MOSTLY)</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:8px">
+          ✅ INR has historically weakened ~3–4% p.a. vs USD over 20 years<br>
+          ✅ Parag Parikh buys US stocks in USD — INR depreciation = bonus return in INR<br>
+          ✅ Diversification from India-specific risks (political, inflation, RBI policy)<br>
+          ✅ S&P 500 in USD + INR depreciation = double return driver historically
+        </div>
+      </div>
+      <div class="card d">
+        <div class="ch3 d">WHEN USD EXPOSURE HURTS</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:8px">
+          ❌ If INR strengthens (unlikely sustained but possible)<br>
+          ❌ If US market corrects 30-40% in USD (still INR-translated lower)<br>
+          ❌ SEBI overseas investment limit (₹7L/year individual) may restrict future S&P 500 inflows<br>
+          ❌ Taxation: International funds now taxed at income slab rate (post 2023 amendment)
+        </div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>Optimal International Allocation</h2></div>
+    <div class="card">
+      <div class="ch3 y">RECOMMENDATION FOR YOUR PORTFOLIO</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:10px">
+        <strong style="color:var(--jt)">Current: 12.7% USD — This is the right range (10–15%).</strong> Do not increase beyond 15%.<br>
+        <strong>Why 10–15%?</strong> Enough for diversification benefit; not so much that INR risk dominates.<br>
+        <strong>Best mix:</strong> Parag Parikh (value + diversification) + S&P 500 (pure index) = ✅ already done.<br>
+        <strong>Do not add:</strong> Nasdaq 100 — US concentration goes too high. MSCI World or Emerging Markets are better if you want to increase international exposure beyond 15%.<br>
+        <strong>SEBI watch:</strong> If overseas fund limits tighten further, Parag Parikh's international allocation may drop — monitor annually.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 41: ITR RECONCILIATION TRACKER -->
+<div class="page" id="page-41">
+  <div class="hdr">
+    <div class="htag">TAX FILING RECONCILER</div>
+    <h1>ITR <span>Reconciliation Tracker</span></h1>
+    <p>PROJECTED vs ACTUALLY CLAIMED · YEAR-BY-YEAR · REFUND / DEMAND HISTORY</p>
+  </div>
+  <div class="content">
+    <div class="alert">📑 <strong>WHY THIS MATTERS:</strong> Your dashboard projects ₹2.35L in annual tax savings. Did you actually claim all of it in your ITR? This tracker ensures nothing slips through — and provides a clean tax history for your CA.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Add / Update ITR Entry</h2></div>
+    <div class="card" style="margin-bottom:13px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:14px">
+        <div>
+          <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Financial Year</div>
+          <select class="field-input" id="itr-fy" style="height:32px;width:100%">
+            <option>FY 2025-26</option><option selected>FY 2026-27</option><option>FY 2027-28</option>
+            <option>FY 2028-29</option><option>FY 2029-30</option><option>FY 2030-31</option>
+          </select>
+        </div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">ITR Form Used</div>
+          <select class="field-input" id="itr-form" style="height:32px;width:100%">
+            <option>ITR-1 (Sahaj)</option><option selected>ITR-2</option><option>ITR-3</option>
+          </select></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Filing Status</div>
+          <select class="field-input" id="itr-status" style="height:32px;width:100%">
+            <option value="pending">❌ Not Yet Filed</option>
+            <option value="filed">✅ Filed</option>
+            <option value="processed">✅ Processed + Refund</option>
+            <option value="demand">⚠️ Tax Demand Raised</option>
+          </select></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Filing Date</div>
+          <input class="field-input" id="itr-date" type="date" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Acknowledgment No.</div>
+          <input class="field-input" id="itr-ack" type="text" placeholder="e.g. 123456789012345" style="width:100%"></div>
+      </div>
+
+      <div class="ch3 y" style="margin-bottom:10px">INCOME</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:16px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Gross Salary (₹)</div><input class="field-input" id="itr-gross" type="number" placeholder="36,34,000" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Other Income (₹)</div><input class="field-input" id="itr-other-income" type="number" placeholder="0" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">LTCG (from Schedule CG) (₹)</div><input class="field-input" id="itr-ltcg" type="number" placeholder="0" style="width:100%"></div>
+      </div>
+
+      <div class="ch3 y" style="margin-bottom:10px">DEDUCTIONS ACTUALLY CLAIMED</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:16px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">80C — Claimed (₹)</div><input class="field-input" id="itr-80c" type="number" placeholder="150000" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">80CCD(1B) — NPS (₹)</div><input class="field-input" id="itr-80ccd1b" type="number" placeholder="50000" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">80CCD(2) — Employer NPS (₹)</div><input class="field-input" id="itr-80ccd2" type="number" placeholder="167616" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">80D — Health Insurance (₹)</div><input class="field-input" id="itr-80d" type="number" placeholder="25000" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">HRA Exemption (₹)</div><input class="field-input" id="itr-hra" type="number" placeholder="320000" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">LTA Claimed (₹)</div><input class="field-input" id="itr-lta" type="number" placeholder="139622" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Other Deductions (₹)</div><input class="field-input" id="itr-other-ded" type="number" placeholder="0" style="width:100%"></div>
+      </div>
+
+      <div class="ch3 y" style="margin-bottom:10px">TAX CALCULATION</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:16px">
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Total Tax Payable (₹)</div><input class="field-input" id="itr-tax-payable" type="number" placeholder="0" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">TDS Deducted (₹)</div><input class="field-input" id="itr-tds" type="number" placeholder="585708" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Advance Tax Paid (₹)</div><input class="field-input" id="itr-advance-tax" type="number" placeholder="0" style="width:100%"></div>
+        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:4px">Refund Received / Demand (₹)</div><input class="field-input" id="itr-refund" type="number" placeholder="0" style="width:100%">
+          <div style="font-size:9px;color:var(--ink3);margin-top:2px">Positive = refund, Negative = demand raised</div></div>
+      </div>
+
+      <button class="save-btn" onclick="saveITREntry()" style="font-size:11px;padding:8px 16px">💾 Save ITR Entry</button>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Year-by-Year ITR History</h2></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table>
+        <thead><tr><th style="text-align:left">FY</th><th style="text-align:left">Form</th><th>Gross Income</th><th>Total Deductions</th><th>Tax Paid</th><th>Refund / Demand</th><th>80CCD(2)</th><th>Status</th><th></th></tr></thead>
+        <tbody id="itr-history-tbody"><tr><td colspan="9" style="text-align:center;color:var(--ink3);padding:20px">No ITR entries yet. File FY 2026-27 by July 31, 2027.</td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Deduction Utilisation Check</h2></div>
+    <div id="itr-utilisation" class="g3" style="margin-bottom:13px"></div>
+
+    <div class="alert warning">
+      ⚠️ <strong>KEY DEADLINES:</strong> ITR-2 due July 31 each year (or Oct 31 with audit). Advance tax: 15% by Jun 15, 45% by Sep 15, 75% by Dec 15, 100% by Mar 15. Penalty ₹5,000 for late filing.
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 42: GOAL CONFLICT TIMELINE (2031-33 CRUNCH) -->
+<div class="page" id="page-42">
+  <div class="hdr">
+    <div class="htag">CASH FLOW STRESS TEST</div>
+    <h1>Goal Conflict <span>Timeline 2026–2040</span></h1>
+    <p>THE 2031–33 CRUNCH · ALL OBLIGATIONS STACKED · SURPLUS / DEFICIT PER YEAR</p>
+  </div>
+  <div class="content">
+    <div class="alert danger">⚠️ <strong>THE 2031–33 CASH FLOW CRUNCH:</strong> In these 3 years, home loan EMI starts, both children in school simultaneously, and SIPs have stepped up 60%. Your income grows too — but by exactly how much? This page shows the collision and how to navigate it.</div>
+
+    <div class="sh"><span class="sh-n">01</span><h2>Scenario Inputs</h2></div>
+    <div class="settings-grid" style="margin-bottom:13px">
+      <div class="field-group">
+        <h3>Income Growth</h3>
+        <div class="field-row"><span class="field-label">Current Net Pay (monthly)</span><input class="field-input" id="gc-curr-net" type="number" value="201586" oninput="calcGoalConflict()"></div>
+        <div class="field-row"><span class="field-label">Wife Current Income (monthly)</span><input class="field-input" id="gc-wife-income" type="number" value="70000" oninput="calcGoalConflict()"></div>
+        <div class="field-row"><span class="field-label">Annual Income Growth Rate (%)</span><input class="field-input" id="gc-income-growth" type="number" value="10" step="1" oninput="calcGoalConflict()"></div>
+        <div class="field-row"><span class="field-label">Wife Income Growth Rate (%)</span><input class="field-input" id="gc-wife-growth" type="number" value="10" step="1" oninput="calcGoalConflict()"></div>
+      </div>
+      <div class="field-group">
+        <h3>Key Expense Events</h3>
+        <div class="field-row"><span class="field-label">Home Loan EMI (when starts)</span><input class="field-input" id="gc-emi" type="number" value="70000" oninput="calcGoalConflict()"></div>
+        <div class="field-row"><span class="field-label">Home Loan Start Year</span><input class="field-input" id="gc-emi-year" type="number" value="2032" oninput="calcGoalConflict()"></div>
+        <div class="field-row"><span class="field-label">Child 1 School Fees (monthly)</span><input class="field-input" id="gc-child1-fees" type="number" value="12000" oninput="calcGoalConflict()"></div>
+        <div class="field-row"><span class="field-label">Child 1 School Start Year</span><input class="field-input" id="gc-child1-year" type="number" value="2029" oninput="calcGoalConflict()"></div>
+        <div class="field-row"><span class="field-label">Child 2 School Fees (monthly)</span><input class="field-input" id="gc-child2-fees" type="number" value="12000" oninput="calcGoalConflict()"></div>
+        <div class="field-row"><span class="field-label">Child 2 School Start Year</span><input class="field-input" id="gc-child2-year" type="number" value="2031" oninput="calcGoalConflict()"></div>
+      </div>
+    </div>
+
+    <div class="sh"><span class="sh-n">02</span><h2>Year-by-Year Cash Flow — 2026 to 2040</h2></div>
+    <div class="cw" style="height:350px;margin-bottom:13px"><canvas id="gcChart"></canvas></div>
+
+    <div class="sh"><span class="sh-n">03</span><h2>Detailed Timeline Table</h2></div>
+    <div class="tw" style="margin-bottom:13px">
+      <table>
+        <thead><tr><th style="text-align:left">Year</th><th>Your Net Pay</th><th>Wife Income</th><th>Total Income</th><th>Rent/EMI</th><th>Living+Other</th><th>School Fees</th><th>SIP (stepped)</th><th style="font-weight:700">Surplus/Deficit</th></tr></thead>
+        <tbody id="gc-table-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="sh"><span class="sh-n">04</span><h2>Crunch Period Strategy</h2></div>
+    <div class="g3" style="margin-bottom:13px">
+      <div class="card d"><div class="ch3 d">THE PROBLEM (2031–33)</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:8px">
+          Home loan EMI: ₹<span id="gc-emi-display">70,000</span>/month hits simultaneously with dual school fees ₹24K+. SIPs will have stepped up ~60% from today. Even with strong income growth, the cash flow is tight.<br><br>
+          <strong style="color:var(--red)">Risk:</strong> Forced SIP pause at exactly the wrong time (peak compounding years).
+        </div>
+      </div>
+      <div class="card y"><div class="ch3 y">THE MITIGATIONS</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:8px">
+          1. <strong>Reduce rent to ₹0</strong> when home is purchased (EMI replaces rent)<br>
+          2. <strong>Car lease ends 2031</strong> → ₹30K/month freed<br>
+          3. <strong>Wife income grows</strong> (₹70K → ₹1.8L by 2033 at 10%/year)<br>
+          4. <strong>School fees sinking fund</strong> (start ₹10K/month from 2028)
+        </div>
+      </div>
+      <div class="card j"><div class="ch3 j">THE SAFETY VALVE</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.9;margin-top:8px">
+          If 2031-33 is still tight after mitigations:<br>
+          1. Pause SIP step-up for 2 years (not the SIP itself)<br>
+          2. Redirect school fees fund (₹24K/month saved by 2029)<br>
+          3. One-time lump-sum from bonus into SIP to compensate<br>
+          <strong style="color:var(--jt)">Never stop SIPs. Pause step-ups instead.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ============================================================
 // STATE & CONFIG
@@ -6179,6 +6940,64 @@ tr.milestone{background:rgba(240,180,41,.05)}
 // ============================================================
 var currentPage = 0;
 var chartInstances = {};
+
+// ── Life Event Annotation Plugin (no external dependency) ─────────────────
+const lifeEventPlugin = {
+  id: 'lifeEvents',
+  afterDraw(chart, args, pluginOptions) {
+    const events = pluginOptions && pluginOptions.events;
+    if (!events || !events.length) return;
+    const ctx   = chart.ctx;
+    const xAxis = chart.scales.x;
+    const yAxis = chart.scales.y;
+    if (!xAxis || !yAxis) return;
+
+    events.forEach(ev => {
+      let px;
+      try { px = xAxis.getPixelForValue(ev.x); } catch(e) { return; }
+      if (px === undefined || px === null || isNaN(px)) return;
+
+      // Vertical dashed line
+      ctx.save();
+      ctx.beginPath();
+      ctx.strokeStyle = ev.color || 'rgba(240,180,41,0.55)';
+      ctx.lineWidth   = 1.5;
+      ctx.setLineDash([5, 4]);
+      ctx.moveTo(px, yAxis.top + 2);
+      ctx.lineTo(px, yAxis.bottom);
+      ctx.stroke();
+
+      // Label pill at top
+      ctx.font      = 'bold 8px system-ui, sans-serif';
+      const textW   = ctx.measureText(ev.label).width;
+      const pillW   = textW + 10;
+      const pillH   = 14;
+      const pillX   = px - pillW / 2;
+      const pillY   = yAxis.top + 2;
+      ctx.fillStyle = (ev.color || 'rgba(240,180,41,0.85)').replace(/[\d.]+\)$/, '0.85)');
+      ctx.beginPath();
+      ctx.roundRect(pillX, pillY, pillW, pillH, 3);
+      ctx.fill();
+      ctx.fillStyle = '#000';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(ev.label, px, pillY + pillH / 2);
+      ctx.restore();
+    });
+  }
+};
+if (typeof Chart !== 'undefined') Chart.register(lifeEventPlugin);
+
+// Life events config — edit these to match your actual dates
+function getLifeEvents() {
+  return [
+    { x: 2026, label: '🍼 Baby',         color: 'rgba(224,64,160,0.7)'  },
+    { x: 2029, label: '🏫 School',        color: 'rgba(77,158,240,0.7)'  },
+    { x: 2032, label: '🏠 Home',          color: 'rgba(168,85,247,0.7)'  },
+    { x: 2028, label: '👶 Child 2',       color: 'rgba(224,64,160,0.55)' },
+    { x: 2054, label: '🎯 Retire',        color: 'rgba(48,200,122,0.7)'  },
+  ];
+}
 
 // Track which pages have been initialized to avoid re-rendering
 const initializedPages = new Set();
@@ -6242,6 +7061,17 @@ function renderPageCharts(index) {
   if (index === 29) renderCGLedger();
   if (index === 30) renderAnnualReview();
   if (index === 31) renderWifeTaxView();
+  if (index === 32) calcSalaryOptimizer();
+  if (index === 33) calcSIPPause();
+  if (index === 34) calcLoanVsSIP();
+  if (index === 35) renderXIRRTracker();
+  if (index === 36) renderDocVault();
+  if (index === 37) renderInsuranceCalendar();
+  if (index === 38) renderBVA();
+  if (index === 39) renderNPSDeepDive();
+  if (index === 40) calcCurrencyRisk();
+  if (index === 41) renderITRTracker();
+  if (index === 42) calcGoalConflict();
 }
 
 function destroyChart(id) {
@@ -6866,7 +7696,8 @@ function renderDashboardCharts() {
       responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { labels: { color: '#eef0f4' } },
-        title: { display: true, text: 'Combined Net Worth Growth (\u20b9 Crores)', color: '#eef0f4' }
+        title: { display: true, text: 'Combined Net Worth Growth (\u20b9 Crores) \u2014 life events marked', color: '#eef0f4' },
+        lifeEvents: { events: getLifeEvents() }
       },
       scales: {
         y: { ticks: { color: '#9aa2b0', callback: function(v){ return '\u20b9'+v+' Cr'; } }, grid: { color: '#1e2228' } },
@@ -6973,15 +7804,16 @@ function renderRetirementCharts() {
     data: {
       labels: data.map(function(r){ return r.year; }),
       datasets: [
-        { label: 'Nominal Corpus', data: data.map(function(r){ return r.corpus/10000000; }), borderColor: '#30c87a', backgroundColor: 'rgba(48,200,122,0.1)', fill: true, tension: 0.4 },
-        { label: 'Inflation-Adjusted', data: data.map(function(r){ return r.inflAdj/10000000; }), borderColor: '#f0b429', backgroundColor: 'rgba(240,180,41,0.1)', fill: true, tension: 0.4, borderDash: [5,5] }
+        { label: 'Nominal Corpus', data: data.map(function(r){ return r.corpus/10000000; }), borderColor: '#30c87a', backgroundColor: 'rgba(48,200,122,0.1)', fill: true, tension: 0.4, pointRadius: 0 },
+        { label: 'Inflation-Adjusted', data: data.map(function(r){ return r.inflAdj/10000000; }), borderColor: '#f0b429', backgroundColor: 'rgba(240,180,41,0.1)', fill: true, tension: 0.4, borderDash: [5,5], pointRadius: 0 }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { labels: { color: '#eef0f4' } },
-        title: { display: true, text: 'Your Retirement Corpus Growth (\u20b9 Crores)', color: '#eef0f4' }
+        title: { display: true, text: 'Your Retirement Corpus Growth (\u20b9 Crores) \u2014 life events marked', color: '#eef0f4' },
+        lifeEvents: { events: getLifeEvents() }
       },
       scales: {
         y: { ticks: { color: '#9aa2b0', callback: function(v){ return '\u20b9'+v.toFixed(0)+' Cr'; } }, grid: { color: '#1e2228' } },
@@ -18356,6 +19188,983 @@ function calcWifePPF() {
   let yc = 0;
   for (let i = 0; i <= 28; i++) yc = yc * (1 + rate) + sip * 12;
   sv('wife-ppf-combined', c2054 + yc);
+}
+
+// ============================================================
+// PAGE 32: SALARY STRUCTURE OPTIMIZER
+// ============================================================
+function calcSalaryOptimizer() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const sv = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  const basic = g('so-basic') || (config.basicSalary || 139678);
+  const npsPct = Math.min(10, g('so-nps-pct') || 10) / 100;
+  const slab   = g('so-slab') || 30;
+
+  const npsMonthly = Math.round(basic * npsPct);
+  const npsAnnual  = npsMonthly * 12;
+  const npsTaxSaved = Math.round(npsAnnual * slab / 100);
+  const npsNetImpact = npsMonthly - Math.round(npsTaxSaved / 12);
+
+  sv('so-nps-monthly',      fmt(npsMonthly));
+  sv('so-nps-annual',       fmt(npsAnnual));
+  sv('so-nps-tax-saved',    fmt(npsTaxSaved));
+  sv('so-nps-net-impact',   '-' + fmt(npsNetImpact) + '/month');
+  sv('so-extra-nps',        fmt(npsAnnual));
+  const npsCorpusBoost = Math.round((npsAnnual * ((Math.pow(1.12, 28) - 1) / 0.12)) / 1e7);
+  sv('so-nps-corpus-boost', '+₹' + npsCorpusBoost + ' Cr');
+  const taxCorpusBoost = Math.round((npsTaxSaved * 28) / 1e5);
+  sv('so-tax-corpus',       '+₹' + taxCorpusBoost + 'L invested (tax refund)');
+  const inline = document.getElementById('so-nps-monthly-inline');
+  if (inline) inline.textContent = npsMonthly.toLocaleString('en-IN');
+
+  // Allowances
+  const meal  = document.getElementById('so-meal')?.checked  ? 26400 : 0;
+  const books = document.getElementById('so-books')?.checked ? 18000 : 0;
+  const phone = document.getElementById('so-phone')?.checked ? 12000 : 0;
+  const edu   = document.getElementById('so-edu')?.checked   ? 2400  : 0;
+  const lta   = document.getElementById('so-lta')?.checked   ? 139622 : 0;
+  const totalAllowance = meal + books + phone + edu + lta;
+  const allowanceTax   = Math.round(totalAllowance * slab / 100);
+  sv('so-allowance-annual', fmt(totalAllowance));
+  sv('so-allowance-tax',    fmt(allowanceTax));
+
+  const totalSaved  = npsTaxSaved + allowanceTax;
+  const currentTax  = 585708;
+  const newTax      = Math.max(0, currentTax - totalSaved);
+  sv('so-total-saved',    fmt(totalSaved) + '/year');
+  sv('so-new-tax',        fmt(newTax) + '/year');
+  sv('so-new-monthly-tax', fmt(Math.round(newTax / 12)) + '/month');
+  sv('so-eff-rate',       ((newTax / (config.annualCTC || 3634000)) * 100).toFixed(1) + '%');
+}
+
+// ============================================================
+// PAGE 33: SIP PAUSE SIMULATOR
+// ============================================================
+function calcSIPPause() {
+  const months   = parseInt(document.getElementById('sp-months')?.value) || 3;
+  const when     = parseInt(document.getElementById('sp-when')?.value) || 1;
+  const partial  = parseFloat(document.getElementById('sp-partial')?.value) || 0;
+  const sip      = config.yourSIP || 191200;
+  const cagr     = 0.12;
+  const yrsLeft  = 28 - when + 1;
+  const fmt      = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const sv       = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  const missed = sip * (1 - partial) * months;
+  // Corpus impact = missed SIP opportunity cost compounding for remaining years
+  const corpusImpact = Math.round(missed * Math.pow(1 + cagr, yrsLeft - months / 12));
+
+  sv('sp-monthly-paused',  fmt(sip * (1 - partial)));
+  sv('sp-total-missed',    fmt(missed));
+  sv('sp-corpus-impact',   '-' + fmt(corpusImpact));
+  const pct = (corpusImpact / 660000000 * 100).toFixed(3);
+  sv('sp-pct-impact',      pct + '%');
+
+  // Comparison table
+  const tbody = document.getElementById('sp-comparison-tbody');
+  if (!tbody) return;
+  const scenarios = [1, 2, 3, 6, 12];
+  tbody.innerHTML = scenarios.map(m => {
+    const miss = sip * m;
+    const impact = Math.round(miss * Math.pow(1 + cagr, 28 - when));
+    const pctImpact = (impact / 660000000 * 100).toFixed(3);
+    const verdict = m <= 3 ? '✅ Fine' : m <= 6 ? '🟡 Manageable' : '⚠️ Significant';
+    return `<tr${m === months ? ' class="milestone"' : ''}>
+      <td>${m} month${m > 1 ? 's' : ''}</td>
+      <td>${fmt(miss)}</td>
+      <td style="color:var(--red)">-${fmt(impact)}</td>
+      <td style="color:${pctImpact < 0.1 ? 'var(--jt)' : pctImpact < 0.5 ? 'var(--you)' : 'var(--red)'}">${pctImpact}%</td>
+      <td>${verdict}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ============================================================
+// PAGE 34: LOAN vs SIP OPTIMIZER
+// ============================================================
+function calcLoanVsSIP() {
+  const g   = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const sv  = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  const loan      = g('lv-loan');
+  const rate      = g('lv-rate') / 100;
+  const slab      = g('lv-slab') / 100;
+  const hasTaxBenefit = document.getElementById('lv-taxbenefit')?.value === 'yes';
+  const cagr      = g('lv-cagr') / 100;
+  const lump      = g('lv-lumpsum');
+  const horizon   = g('lv-horizon');
+
+  // Effective loan rate after tax benefit on interest (Section 24b: up to ₹2L)
+  const taxBenefitRate = hasTaxBenefit ? slab : 0;
+  const effRate  = rate * (1 - taxBenefitRate);
+
+  // Interest saved by prepaying lump sum
+  const tenure  = g('lv-tenure') || 20;
+  const monthlyRate = rate / 12;
+  const months = tenure * 12;
+  const emi = monthlyRate > 0 ? Math.round(loan * monthlyRate * Math.pow(1+monthlyRate, months) / (Math.pow(1+monthlyRate, months) - 1)) : 0;
+  const interestSaved = Math.round(lump * effRate * horizon); // simplified
+
+  // SIP value of lump sum over horizon
+  const sipValue = Math.round(lump * Math.pow(1 + cagr, horizon));
+
+  sv('lv-eff-rate',    (effRate * 100).toFixed(2) + '%');
+  sv('lv-sip-value',   fmt(sipValue));
+  sv('lv-int-saved',   fmt(interestSaved));
+
+  const verdictCard = document.getElementById('lv-verdict-card');
+  const verdictText = document.getElementById('lv-verdict-text');
+  const verdictDetail = document.getElementById('lv-verdict-detail');
+
+  if (sipValue > lump + interestSaved) {
+    if (verdictCard) verdictCard.style.borderColor = 'var(--jt)';
+    if (verdictText) { verdictText.textContent = '✅ INVEST IN SIP — Mathematical Winner'; verdictText.style.color = 'var(--jt)'; }
+    if (verdictDetail) verdictDetail.innerHTML = `Your ${fmt(lump)} grows to <strong style="color:var(--jt)">${fmt(sipValue)}</strong> at ${(cagr*100)}% CAGR over ${horizon} years.<br>Interest saved by prepaying: <strong>${fmt(interestSaved)}</strong> — SIP wins by <strong style="color:var(--jt)">${fmt(sipValue - lump - interestSaved)}</strong>.<br>Effective loan rate (${(effRate*100).toFixed(1)}%) is below your equity return assumption (${(cagr*100)}%). Keep investing.`;
+  } else {
+    if (verdictCard) verdictCard.style.borderColor = 'var(--you)';
+    if (verdictText) { verdictText.textContent = '🟡 CONSIDER PREPAYING — Rate environment suggests debt paydown'; verdictText.style.color = 'var(--you)'; }
+    if (verdictDetail) verdictDetail.innerHTML = `Effective loan rate (${(effRate*100).toFixed(1)}%) ≥ assumed equity return (${(cagr*100)}%). Prepaying saves <strong>${fmt(interestSaved)}</strong>. But SIP liquidity and compounding still matter — consider hybrid strategy.`;
+  }
+
+  // Break-even table
+  const tbody = document.getElementById('lv-breakeven-tbody');
+  if (tbody) {
+    const rates = [7, 7.5, 8, 8.5, 9, 9.5, 10, 11];
+    tbody.innerHTML = rates.map(r => {
+      const er = (r / 100) * (hasTaxBenefit ? (1 - slab) : 1);
+      const vs12 = er < 0.12 ? '✅ Invest (SIP wins)' : '❌ Prepay (rate too high)';
+      const vs10 = er < 0.10 ? '✅ Invest' : '❌ Prepay';
+      const vs9  = er < 0.09 ? '✅ Invest' : '❌ Prepay';
+      return `<tr${r === g('lv-rate') ? ' class="milestone"' : ''}>
+        <td>${r}%</td><td>${(er*100).toFixed(1)}%</td>
+        <td style="color:${er < 0.12 ? 'var(--jt)' : 'var(--red)'}">${vs12}</td>
+        <td style="color:${er < 0.10 ? 'var(--jt)' : 'var(--red)'}">${vs10}</td>
+        <td style="color:${er < 0.09 ? 'var(--jt)' : 'var(--red)'}">${vs9}</td>
+        <td>${er < 0.095 ? '<span class="tag tg">INVEST</span>' : '<span class="tag tr2">PREPAY</span>'}</td>
+      </tr>`;
+    }).join('');
+  }
+}
+
+// ============================================================
+// PAGE 35: XIRR TRACKER
+// ============================================================
+let xirrSnapshots = JSON.parse(localStorage.getItem('xirrSnapshots') || '[]');
+
+function renderXIRRTracker() {
+  renderXIRRHistory();
+  calcXIRR();
+}
+
+function addXIRRSnapshot() {
+  const date  = document.getElementById('xi-date')?.value;
+  const value = parseFloat(document.getElementById('xi-value')?.value) || 0;
+  const note  = document.getElementById('xi-note')?.value || '';
+  if (!date || !value) { alert('Enter date and portfolio value.'); return; }
+
+  xirrSnapshots.push({ date, value, note, id: Date.now() });
+  xirrSnapshots.sort((a, b) => new Date(a.date) - new Date(b.date));
+  localStorage.setItem('xirrSnapshots', JSON.stringify(xirrSnapshots));
+  renderXIRRTracker();
+  ['xi-value', 'xi-note'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+}
+
+function calcXIRR() {
+  if (!xirrSnapshots.length) return;
+
+  // Build cash flows: investments as negative, current value as positive
+  const sipStart  = new Date('2026-04-01');
+  const latestSnap = xirrSnapshots[xirrSnapshots.length - 1];
+  const latestVal  = latestSnap.value;
+  const latestDate = new Date(latestSnap.date);
+  const monthsElapsed = Math.max(1, Math.round((latestDate - sipStart) / (1000 * 60 * 60 * 24 * 30.44)));
+  const totalInvested = (config.yourSIP || 191200) * monthsElapsed;
+
+  // Simplified XIRR via bisection
+  const cashFlows = [];
+  let runningInvested = 0;
+  for (let m = 0; m < monthsElapsed; m++) {
+    const d = new Date(sipStart);
+    d.setMonth(d.getMonth() + m);
+    runningInvested += (config.yourSIP || 191200);
+    cashFlows.push({ date: d, amount: -(config.yourSIP || 191200) });
+  }
+  cashFlows.push({ date: latestDate, amount: latestVal });
+
+  const xirr = bisectionXIRR(cashFlows, -0.5, 5.0, 100);
+  const alpha = xirr - 0.12;
+
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const sv  = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  sv('xi-xirr', isFinite(xirr) ? (xirr * 100).toFixed(1) + '%' : 'Need more data');
+  const alphaEl = document.getElementById('xi-alpha');
+  if (alphaEl && isFinite(xirr)) {
+    alphaEl.textContent = (alpha >= 0 ? '+' : '') + (alpha * 100).toFixed(1) + '%';
+    alphaEl.style.color = alpha >= 0 ? 'var(--jt)' : 'var(--red)';
+  }
+
+  // Projected corpus at this point (for comparison)
+  const yrs = monthsElapsed / 12;
+  const projectedData = calculateRetirementProjection();
+  const projAtNow = projectedData[Math.round(yrs)]?.corpus || 0;
+  const vsProjEl = document.getElementById('xi-vs-proj');
+  if (vsProjEl) {
+    const delta = latestVal - projAtNow;
+    vsProjEl.textContent = (delta >= 0 ? '+' : '') + fmt(delta);
+    vsProjEl.style.color = delta >= 0 ? 'var(--jt)' : 'var(--red)';
+  }
+
+  renderXIRRChart(projectedData);
+}
+
+function bisectionXIRR(cashFlows, lo, hi, iterations) {
+  const npv = (rate) => cashFlows.reduce((sum, cf) => {
+    const years = (cf.date - cashFlows[0].date) / (365.25 * 24 * 3600 * 1000);
+    return sum + cf.amount / Math.pow(1 + rate, years);
+  }, 0);
+  for (let i = 0; i < iterations; i++) {
+    const mid = (lo + hi) / 2;
+    if (npv(mid) > 0) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+function renderXIRRHistory() {
+  const tbody = document.getElementById('xi-history-tbody');
+  if (!tbody || !xirrSnapshots.length) {
+    if (tbody) tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--ink3);padding:20px">Add your first snapshot above (get value from Kuvera)</td></tr>';
+    return;
+  }
+  const sipStart = new Date('2026-04-01');
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  tbody.innerHTML = xirrSnapshots.map((s, i) => {
+    const months = Math.max(1, Math.round((new Date(s.date) - sipStart) / (1000 * 60 * 60 * 24 * 30.44)));
+    const invested = (config.yourSIP || 191200) * months;
+    const gain = s.value - invested;
+    const prev = i > 0 ? xirrSnapshots[i - 1] : null;
+    const delta = prev ? (s.value - prev.value) : 0;
+    return `<tr>
+      <td>${s.date}</td>
+      <td style="font-weight:700">${fmt(s.value)}</td>
+      <td>${fmt(invested)}</td>
+      <td style="color:${gain>=0?'var(--jt)':'var(--red)'}">${gain>=0?'+':''}${fmt(gain)}</td>
+      <td style="color:var(--you)">—</td>
+      <td style="font-size:10px;color:var(--ink3)">${s.note}</td>
+      <td><button onclick="deleteXIRRSnapshot(${s.id})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:12px">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function deleteXIRRSnapshot(id) {
+  xirrSnapshots = xirrSnapshots.filter(s => s.id !== id);
+  localStorage.setItem('xirrSnapshots', JSON.stringify(xirrSnapshots));
+  renderXIRRTracker();
+}
+
+function renderXIRRChart(projectedData) {
+  destroyChart('xirrChart');
+  const ctx = document.getElementById('xirrChart');
+  if (!ctx) return;
+  const labels = projectedData.map(d => d.year);
+  const projected = projectedData.map(d => d.corpus);
+  const actual = new Array(projectedData.length).fill(null);
+  const sipStart = new Date('2026-04-01');
+  xirrSnapshots.forEach(s => {
+    const yrs = Math.round((new Date(s.date) - sipStart) / (365.25 * 24 * 3600 * 1000));
+    if (yrs >= 0 && yrs < actual.length) actual[yrs] = s.value;
+  });
+
+  chartInstances['xirrChart'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Projected (12% CAGR)', data: projected, borderColor: 'var(--ink3)', borderDash: [5,5], tension: 0.3, pointRadius: 0 },
+        { label: 'Actual Portfolio', data: actual, borderColor: 'var(--jt)', backgroundColor: 'rgba(48,200,122,.1)', tension: 0.3, pointRadius: 5, fill: false }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      scales: { y: { ticks: { callback: v => '₹' + (v/1e7).toFixed(0) + 'Cr', color: 'var(--ink3)' }, grid: { color: 'rgba(255,255,255,.05)' } }, x: { ticks: { color: 'var(--ink3)' } } },
+      plugins: { legend: { labels: { color: 'var(--ink)' } }, lifeEvents: { events: getLifeEvents() } }
+    }
+  });
+}
+
+// ============================================================
+// PAGE 36: NOMINEE & LEGAL DOCUMENT VAULT
+// ============================================================
+const VAULT_ACCOUNTS = [
+  { id: 'mf-1',     label: 'MF Folio 1 — Nifty 50 (Kuvera)', nominee: 'Wife', help: 'Update via Kuvera app → Profile → Nominees' },
+  { id: 'mf-2',     label: 'MF Folio 2 — Other Funds (Kuvera)', nominee: 'Wife', help: 'Update via Kuvera app → Profile → Nominees' },
+  { id: 'epf',      label: 'EPF Account (EPFO portal)', nominee: 'Wife', help: 'epfindia.gov.in → Member → Nomination' },
+  { id: 'ppf-you',  label: 'PPF — Your Account (ICICI Bank)', nominee: 'Wife', help: 'ICICI Bank branch or iMobile app' },
+  { id: 'ppf-wife', label: "PPF — Wife's Account (ICICI Bank)", nominee: 'You', help: 'Once opened — update nominee immediately' },
+  { id: 'nps',      label: 'NPS PRAN (CRA portal)', nominee: 'Wife', help: 'npstrust.org.in → Nominee registration' },
+  { id: 'savings',  label: 'Savings Bank Account (joint/nominee)', nominee: 'Wife', help: 'Bank branch or netbanking → Manage nominees' },
+  { id: 'term',     label: 'Term Life Policy', nominee: 'Wife', help: 'Insurer portal or branch' },
+  { id: 'health',   label: 'Health Insurance Policy', nominee: 'Wife', help: 'Insurer portal' },
+  { id: 'fd',       label: 'Fixed Deposits (incl. mother\'s a/c)', nominee: 'Self / Wife', help: 'Bank branch for each FD' },
+  { id: 'will',     label: 'Will — Drafted & Registered', nominee: 'N/A', help: 'Sub-Registrar office + lawyer' },
+  { id: 'guardian', label: 'Guardian Named for Child 1 in Will', nominee: 'N/A', help: 'Included in Will document' },
+];
+
+function renderDocVault() {
+  const saved = JSON.parse(localStorage.getItem('vaultStatus') || '{}');
+  const vaultData = JSON.parse(localStorage.getItem('vaultData') || '{}');
+
+  // Populate saved text fields
+  ['vault-will','vault-guardian','vault-will-location','vault-lawyer','vault-passport','vault-mf-loc','vault-uan','vault-ppf-num','vault-pran','vault-insurance-nums'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && vaultData[id]) el.value = vaultData[id];
+  });
+
+  const tbody = document.getElementById('vault-tbody');
+  const summary = document.getElementById('vault-summary');
+  if (!tbody) return;
+
+  let done = 0;
+  tbody.innerHTML = VAULT_ACCOUNTS.map(a => {
+    const status = saved[a.id] || 'pending';
+    if (status === 'done') done++;
+    const colors = { done: 'var(--jt)', pending: 'var(--red)', progress: 'var(--you)' };
+    const labels = { done: '✅ Done', pending: '❌ Pending', progress: '🔄 In Progress' };
+    return `<tr>
+      <td>${a.label}</td>
+      <td style="font-size:11px;color:var(--ink3)">${a.nominee}</td>
+      <td>
+        <select onchange="updateVaultStatus('${a.id}', this.value)" style="background:var(--bg3);border:1px solid var(--border);color:${colors[status]};border-radius:4px;padding:3px 6px;font-size:11px;cursor:pointer">
+          <option value="pending"  ${status==='pending'  ? 'selected' : ''}>❌ Pending</option>
+          <option value="progress" ${status==='progress' ? 'selected' : ''}>🔄 In Progress</option>
+          <option value="done"     ${status==='done'     ? 'selected' : ''}>✅ Done</option>
+        </select>
+      </td>
+      <td style="font-size:10px;color:var(--ink3)">${saved[a.id + '_date'] || '—'}</td>
+      <td style="font-size:10px;color:var(--ink3)">${a.help}</td>
+    </tr>`;
+  }).join('');
+
+  if (summary) {
+    summary.innerHTML = `<div style="padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;background:${done === VAULT_ACCOUNTS.length ? 'rgba(48,200,122,.15)' : 'rgba(240,180,41,.15)'};color:${done === VAULT_ACCOUNTS.length ? 'var(--jt)' : 'var(--you)'}">
+      ${done} / ${VAULT_ACCOUNTS.length} accounts secured
+    </div>`;
+  }
+}
+
+function updateVaultStatus(id, status) {
+  const saved = JSON.parse(localStorage.getItem('vaultStatus') || '{}');
+  saved[id] = status;
+  if (status === 'done') saved[id + '_date'] = new Date().toLocaleDateString('en-IN');
+  localStorage.setItem('vaultStatus', JSON.stringify(saved));
+  renderDocVault();
+}
+
+function saveVaultData() {
+  const data = {};
+  ['vault-will','vault-guardian','vault-will-location','vault-lawyer','vault-passport','vault-mf-loc','vault-uan','vault-ppf-num','vault-pran','vault-insurance-nums'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  localStorage.setItem('vaultData', JSON.stringify(data));
+  alert('✅ Document vault saved!');
+}
+
+// ============================================================
+// PAGE 37: INSURANCE RENEWAL CALENDAR
+// ============================================================
+let insurancePolicies = JSON.parse(localStorage.getItem('insurancePolicies') || '[]');
+
+function renderInsuranceCalendar() {
+  renderUpcomingRenewals();
+  renderPoliciesTable();
+  renderCoverageAdequacy();
+}
+
+function addInsurancePolicy() {
+  const gs = id => document.getElementById(id)?.value || '';
+  const gn = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const type    = gs('ic-type');
+  const provider = gs('ic-provider');
+  const sum     = gn('ic-sum');
+  const premium = gn('ic-premium');
+  const renewal = gs('ic-renewal');
+  const policyNum = gs('ic-policy-num');
+  if (!type || !renewal) { alert('Please fill policy type and renewal date.'); return; }
+  insurancePolicies.push({ type, provider, sum, premium, renewal, policyNum, id: Date.now() });
+  localStorage.setItem('insurancePolicies', JSON.stringify(insurancePolicies));
+  renderInsuranceCalendar();
+  ['ic-provider','ic-sum','ic-premium','ic-renewal','ic-policy-num'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+}
+
+function renderUpcomingRenewals() {
+  const el = document.getElementById('ic-upcoming');
+  if (!el) return;
+  const today = new Date();
+  const upcoming = insurancePolicies.filter(p => {
+    const d = new Date(p.renewal);
+    const days = Math.round((d - today) / 86400000);
+    return days >= 0 && days <= 60;
+  }).sort((a, b) => new Date(a.renewal) - new Date(b.renewal));
+
+  if (!upcoming.length) { el.innerHTML = '<div style="color:var(--ink3);font-size:12px;padding:12px">No renewals in the next 60 days. Add your policies below.</div>'; return; }
+  el.innerHTML = upcoming.map(p => {
+    const days = Math.round((new Date(p.renewal) - today) / 86400000);
+    const color = days <= 14 ? 'var(--red)' : days <= 30 ? 'var(--you)' : 'var(--jt)';
+    return `<div style="padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-left:4px solid ${color};border-radius:var(--r);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+      <div><div style="font-weight:700;font-size:12px">${p.type} — ${p.provider}</div><div style="font-size:10px;color:var(--ink3);margin-top:2px">₹${p.sum.toLocaleString('en-IN')} coverage · ₹${p.premium.toLocaleString('en-IN')}/year premium</div></div>
+      <div style="text-align:right"><div style="font-weight:700;color:${color}">${days} days</div><div style="font-size:10px;color:var(--ink3)">${p.renewal}</div></div>
+    </div>`;
+  }).join('');
+}
+
+function renderPoliciesTable() {
+  const tbody = document.getElementById('ic-policies-tbody');
+  if (!tbody) return;
+  if (!insurancePolicies.length) { tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--ink3);padding:20px">No policies added yet</td></tr>'; return; }
+  const today = new Date();
+  const fmt = v => '₹' + v.toLocaleString('en-IN');
+  tbody.innerHTML = insurancePolicies.map(p => {
+    const days = Math.round((new Date(p.renewal) - today) / 86400000);
+    const color = days <= 14 ? 'var(--red)' : days <= 30 ? 'var(--you)' : 'var(--ink)';
+    return `<tr>
+      <td>${p.type}</td><td>${p.provider || '—'}</td><td>${fmt(p.sum)}</td>
+      <td>${fmt(p.premium)}</td><td>${p.renewal}</td>
+      <td style="color:${color};font-weight:700">${days} days</td>
+      <td><span class="tag ${days <= 14 ? 'tr2' : days <= 30 ? 'ty' : 'tg'}">${days <= 14 ? 'URGENT' : days <= 30 ? 'SOON' : 'OK'}</span></td>
+      <td><button onclick="deleteInsurancePolicy(${p.id})" style="background:none;border:none;color:var(--red);cursor:pointer">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function deleteInsurancePolicy(id) {
+  insurancePolicies = insurancePolicies.filter(p => p.id !== id);
+  localStorage.setItem('insurancePolicies', JSON.stringify(insurancePolicies));
+  renderInsuranceCalendar();
+}
+
+function renderCoverageAdequacy() {
+  const el = document.getElementById('ic-adequacy');
+  if (!el) return;
+  const termTotal  = insurancePolicies.filter(p => p.type === 'Term Life').reduce((s, p) => s + p.sum, 0);
+  const healthTotal = insurancePolicies.filter(p => p.type.includes('Health (Family)')).reduce((s, p) => s + p.sum, 0);
+  const parHealth   = insurancePolicies.filter(p => p.type.includes('Health (Parents)')).reduce((s, p) => s + p.sum, 0);
+  const fmt = v => '₹' + v.toLocaleString('en-IN');
+  const check = (actual, required, label) => {
+    const ok = actual >= required;
+    return `<div style="padding:10px 14px;background:${ok?'rgba(48,200,122,.08)':'rgba(232,80,64,.08)'};border-left:3px solid ${ok?'var(--jt)':'var(--red)'};border-radius:4px;margin-bottom:8px;font-size:12px">
+      <span style="color:${ok?'var(--jt)':'var(--red)'}">${ok?'✅':'❌'} ${label}:</span> ${fmt(actual)} / ${fmt(required)} required ${ok ? '' : `— <strong style="color:var(--red)">Gap: ${fmt(required - actual)}</strong>`}
+    </div>`;
+  };
+  el.innerHTML = check(termTotal, 20000000, 'Term Life') + check(healthTotal, 2000000, 'Family Health') + check(parHealth, 1500000, 'Parents Health');
+}
+
+// ============================================================
+// PAGE 38: BUDGET vs ACTUAL
+// ============================================================
+let bvaHistory = JSON.parse(localStorage.getItem('bvaHistory') || '[]');
+
+function renderBVA() {
+  const m = document.getElementById('bva-month');
+  if (m && !m.value) m.value = new Date().toISOString().slice(0, 7);
+  calcBVA();
+  renderBVAChart();
+}
+
+function calcBVA() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+
+  const categories = [
+    { label: 'Rent',              budget: config.rent || 40000,                        actual: g('bva-rent')      },
+    { label: 'Parents Support',   budget: config.parents || 20000,                     actual: g('bva-parents')   },
+    { label: 'Groceries+Util.',   budget: config.livingGroceries || 20000,             actual: g('bva-groceries') },
+    { label: 'Dining+Entertain.', budget: config.livingDining || 12000,               actual: g('bva-dining')    },
+    { label: 'Transport',         budget: config.livingTransport || 10000,             actual: g('bva-transport') },
+    { label: 'Other Personal',    budget: config.livingOther || 7000,                 actual: g('bva-other')     },
+  ];
+
+  const tbody = document.getElementById('bva-table-tbody');
+  if (tbody) {
+    let totBudget = 0, totActual = 0;
+    tbody.innerHTML = categories.map(c => {
+      totBudget += c.budget; totActual += c.actual;
+      const delta = c.actual - c.budget;
+      const ok = delta <= 0;
+      const pctOver = c.budget > 0 ? Math.round(Math.abs(delta) / c.budget * 100) : 0;
+      return `<tr>
+        <td>${c.label}</td>
+        <td>${fmt(c.budget)}</td>
+        <td style="font-weight:${c.actual > 0 ? '700' : '400'}">${c.actual > 0 ? fmt(c.actual) : '—'}</td>
+        <td style="color:${ok ? 'var(--jt)' : 'var(--red)'}">${c.actual > 0 ? (ok ? '-' : '+') + fmt(Math.abs(delta)) : '—'}</td>
+        <td>${c.actual > 0 ? `<span class="tag ${ok ? 'tg' : delta > c.budget * 0.2 ? 'tr2' : 'ty'}">${ok ? 'ON BUDGET' : pctOver + '% OVER'}</span>` : '—'}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  const summCards = document.getElementById('bva-summary-cards');
+  if (summCards) {
+    const totBudget = categories.reduce((s, c) => s + c.budget, 0);
+    const totActual = categories.reduce((s, c) => s + c.actual, 0);
+    const totalDelta = totActual - totBudget;
+    summCards.innerHTML = [
+      { label: 'Total Budget', val: fmt(totBudget), color: 'var(--ink)' },
+      { label: 'Total Actual', val: totActual > 0 ? fmt(totActual) : '—', color: 'var(--you)' },
+      { label: 'Delta', val: totActual > 0 ? (totalDelta >= 0 ? '+' : '') + fmt(totalDelta) : '—', color: totalDelta >= 0 ? 'var(--red)' : 'var(--jt)' },
+      { label: 'Status', val: totActual > 0 ? (totalDelta <= 0 ? '✅ On Budget' : '⚠️ Over Budget') : 'Enter actuals', color: totalDelta <= 0 ? 'var(--jt)' : 'var(--red)' },
+    ].map(m => `<div class="metric-block"><div class="mb-label">${m.label}</div><div class="mb-value" style="color:${m.color};font-size:1.1rem">${m.val}</div></div>`).join('');
+  }
+}
+
+function saveBVAMonth() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const month = document.getElementById('bva-month')?.value || new Date().toISOString().slice(0, 7);
+  const entry = {
+    month,
+    rent: g('bva-rent'), parents: g('bva-parents'), groceries: g('bva-groceries'),
+    dining: g('bva-dining'), transport: g('bva-transport'), other: g('bva-other'),
+    totalActual: g('bva-rent') + g('bva-parents') + g('bva-groceries') + g('bva-dining') + g('bva-transport') + g('bva-other'),
+    totalBudget: (config.rent || 40000) + (config.parents || 20000) + (config.livingGroceries || 20000) + (config.livingDining || 12000) + (config.livingTransport || 10000) + (config.livingOther || 7000)
+  };
+  bvaHistory = bvaHistory.filter(h => h.month !== month);
+  bvaHistory.push(entry);
+  bvaHistory.sort((a, b) => a.month.localeCompare(b.month));
+  localStorage.setItem('bvaHistory', JSON.stringify(bvaHistory));
+  renderBVAChart();
+  alert('✅ Month saved!');
+}
+
+function renderBVAChart() {
+  destroyChart('bvaChart');
+  const ctx = document.getElementById('bvaChart');
+  if (!ctx || bvaHistory.length < 2) return;
+  const recent = bvaHistory.slice(-6);
+  chartInstances['bvaChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: recent.map(h => h.month),
+      datasets: [
+        { label: 'Budget', data: recent.map(h => h.totalBudget), backgroundColor: 'rgba(77,158,240,.4)', borderColor: 'var(--blue)', borderWidth: 1 },
+        { label: 'Actual', data: recent.map(h => h.totalActual), backgroundColor: recent.map(h => h.totalActual > h.totalBudget ? 'rgba(232,80,64,.5)' : 'rgba(48,200,122,.5)'), borderColor: recent.map(h => h.totalActual > h.totalBudget ? 'var(--red)' : 'var(--jt)'), borderWidth: 1 }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      scales: { y: { ticks: { callback: v => '₹' + (v/1000) + 'K', color: 'var(--ink3)' }, grid: { color: 'rgba(255,255,255,.05)' } }, x: { ticks: { color: 'var(--ink3)' } } },
+      plugins: { legend: { labels: { color: 'var(--ink)' } } }
+    }
+  });
+}
+
+// ============================================================
+// PAGE 39: NPS DEEP DIVE
+// ============================================================
+function renderNPSDeepDive() {
+  const sip   = config.vpfMonthly ? 6200 : 6200; // NPS monthly
+  const years = 28;
+  const cagr  = 0.12;
+  const corpus = Math.round(sip * 12 * ((Math.pow(1 + cagr, years) - 1) / cagr));
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const sv  = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  sv('nps-monthly',          fmt(6200));
+  sv('nps-projected-corpus', fmt(corpus));
+
+  // Annuity at 40%, 6% rate
+  const annuityAmt = corpus * 0.40;
+  const monthlyAnnuity = Math.round(annuityAmt * 0.06 / 12);
+  sv('nps-annuity-est', fmt(monthlyAnnuity));
+
+  calcNPSAnnuity();
+}
+
+function calcNPSAnnuity() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const sv  = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  const corpus     = g('nps-corpus-input') || 28000000;
+  const annPct     = Math.max(40, g('nps-annuity-pct')) / 100;
+  const annRate    = g('nps-annuity-rate') / 100 || 0.06;
+
+  const annuityAmt = corpus * annPct;
+  const lumpsum    = corpus * (1 - annPct);
+  const annual     = Math.round(annuityAmt * annRate);
+  const monthly    = Math.round(annual / 12);
+
+  sv('nps-annuity-amount',  fmt(annuityAmt));
+  sv('nps-lumpsum-amount',  fmt(lumpsum));
+  sv('nps-monthly-pension', fmt(monthly) + '/month');
+  sv('nps-annual-income',   '₹' + (annual / 100000).toFixed(1) + 'L/year');
+}
+
+// ============================================================
+// PAGE 40: CURRENCY RISK MONITOR
+// ============================================================
+function calcCurrencyRisk() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+
+  const sp500SIP    = (typeof familyFunds !== 'undefined' ? (familyFunds[4]?.monthlySIP || 18000) : 18000);
+  const ppflexiSIP  = (typeof familyFunds !== 'undefined' ? (familyFunds[1]?.monthlySIP || 18000) : 18000);
+  const usdMonthly  = sp500SIP + ppflexiSIP * 0.35;
+  const totalSIP    = config.yourSIP || 191200;
+  const usdPct      = (usdMonthly / totalSIP * 100).toFixed(1);
+
+  const sv = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  sv('cr-usd-monthly', fmt(Math.round(usdMonthly)));
+  sv('cr-usd-pct',     usdPct + '%');
+
+  const currentRate = g('cr-current-rate') || 84;
+  const futureRate  = g('cr-future-rate') || 90;
+  const usdAnnual   = usdMonthly * 12;
+
+  const tbody = document.getElementById('cr-sensitivity-tbody');
+  if (!tbody) return;
+
+  const scenarios = [
+    { label: 'Strong INR (INR appreciates)', rate: Math.round(currentRate * 0.90), bad: true },
+    { label: 'Slight INR appreciation',       rate: Math.round(currentRate * 0.95), bad: true },
+    { label: 'Status Quo (stable)',           rate: currentRate, bad: false },
+    { label: 'INR depreciation (historical)', rate: Math.round(currentRate * 1.05), bad: false },
+    { label: 'Significant INR depreciation', rate: Math.round(currentRate * 1.15), bad: false },
+    { label: 'Extreme INR weakness',         rate: Math.round(currentRate * 1.25), bad: false },
+  ];
+
+  tbody.innerHTML = scenarios.map(s => {
+    const fxPnl = ((s.rate - currentRate) / currentRate) * 100;
+    const corpusImpact = Math.round((usdAnnual * fxPnl / 100) * 28 / 1e7);
+    const netCorpus = 66 + corpusImpact;
+    return `<tr${s.rate === Math.round(futureRate) ? ' class="milestone"' : ''}>
+      <td>${s.label}</td>
+      <td>₹${s.rate}/$</td>
+      <td style="color:${fxPnl>=0?'var(--jt)':'var(--red)'}">${fxPnl>=0?'+':''}${fxPnl.toFixed(1)}%</td>
+      <td style="color:${corpusImpact>=0?'var(--jt)':'var(--red)'}">${corpusImpact>=0?'+':''}₹${Math.abs(corpusImpact)} Cr</td>
+      <td style="font-weight:700;color:${netCorpus>=66?'var(--jt)':'var(--you)'}">₹${netCorpus} Cr</td>
+    </tr>`;
+  }).join('');
+}
+
+// ============================================================
+// PDF EXPORT
+// ============================================================
+// ============================================================
+// DATA BACKUP & RESTORE
+// ============================================================
+const BACKUP_KEYS = [
+  'financialConfig', 'familyFundsSIP', 'yourFundsSIP',
+  'nwHistory', 'xirrSnapshots', 'cgTransactions',
+  'insurancePolicies', 'vaultStatus', 'vaultData',
+  'bvaHistory', 'reviewHistory', 'launchChecklist',
+  'expenseLog', 'financialConfig'
+];
+
+function exportAllData() {
+  const backup = { version: '2.0', date: new Date().toISOString(), data: {} };
+  BACKUP_KEYS.forEach(k => {
+    const v = localStorage.getItem(k);
+    if (v) backup.data[k] = JSON.parse(v);
+  });
+  backup.config = config;
+
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  const a    = document.createElement('a');
+  a.href     = URL.createObjectURL(blob);
+  a.download = `shyam-financial-plan-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importAllData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const backup = JSON.parse(e.target.result);
+      if (!backup.data) { alert('Invalid backup file.'); return; }
+      if (!confirm(`Restore backup from ${backup.date?.slice(0,10) || 'unknown date'}?\n\nThis will OVERWRITE all current data in this browser.`)) return;
+      Object.entries(backup.data).forEach(([k, v]) => localStorage.setItem(k, JSON.stringify(v)));
+      if (backup.config) Object.assign(config, backup.config);
+      loadConfig();
+      alert('✅ Data restored successfully! Refreshing dashboard...');
+      setTimeout(() => location.reload(), 500);
+    } catch(err) {
+      alert('❌ Could not read backup file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function exportToPDF() {
+  const style = document.createElement('style');
+  style.id = 'print-style';
+  style.textContent = `
+    @media print {
+      body { background: #fff !important; color: #000 !important; font-size: 11px; }
+      .top-nav, button, .save-btn, .btn-primary, .btn-secondary { display: none !important; }
+      .page { display: block !important; page-break-after: always; }
+      .card, .field-group, .glass-card { background: #f8f8f8 !important; border: 1px solid #ddd !important; }
+      canvas { max-width: 100% !important; }
+      * { color: #000 !important; }
+      .ay, .aj, .aw, .ab, .ap { color: #333 !important; }
+    }
+  `;
+  document.head.appendChild(style);
+  window.print();
+  setTimeout(() => { const el = document.getElementById('print-style'); if (el) el.remove(); }, 1000);
+}
+
+// ============================================================
+// LIVE NAV FETCH — mfapi.in
+// ============================================================
+async function fetchAndDisplayLiveNAV() {
+  const btn = document.getElementById('nav-fetch-btn');
+  const grid = document.getElementById('live-nav-grid');
+  const lastFetch = document.getElementById('nav-last-fetch');
+  if (!grid || !btn) return;
+
+  btn.textContent = '⏳ Fetching...';
+  btn.disabled = true;
+  grid.innerHTML = '<div style="color:var(--ink3);font-size:11px;padding:10px">Fetching live NAV from mfapi.in...</div>';
+
+  const funds = typeof familyFunds !== 'undefined' ? familyFunds : [];
+  const results = [];
+
+  await Promise.allSettled(funds.map(async (fund) => {
+    if (!fund.schemeCode || fund.schemeCode === 'NPS001') {
+      results.push({ name: fund.name, nav: 'N/A', change: null, note: 'NPS — no NAV' });
+      return;
+    }
+    try {
+      const resp = await fetch(`https://api.mfapi.in/mf/${fund.schemeCode}`, { signal: AbortSignal.timeout(8000) });
+      const json = await resp.json();
+      if (json.data && json.data.length >= 2) {
+        const today = parseFloat(json.data[0].nav);
+        const prev  = parseFloat(json.data[1].nav);
+        const change = ((today - prev) / prev * 100).toFixed(2);
+        fund.historical = fund.historical || {};
+        fund.historical.currentNAV = today;
+        fund.historical.lastUpdated = json.data[0].date;
+        results.push({ name: fund.name, nav: today.toFixed(3), change: parseFloat(change), date: json.data[0].date });
+      }
+    } catch(e) {
+      results.push({ name: fund.name, nav: '—', change: null, note: 'Fetch error' });
+    }
+  }));
+
+  grid.innerHTML = funds.map((f, i) => {
+    const r = results[i] || {};
+    const color = r.change > 0 ? 'var(--jt)' : r.change < 0 ? 'var(--red)' : 'var(--ink3)';
+    const arrow = r.change > 0 ? '▲' : r.change < 0 ? '▼' : '';
+    return `<div style="background:var(--bg3);padding:10px 12px;border-radius:6px;border-left:3px solid ${color}">
+      <div style="font-size:9px;color:var(--ink3);margin-bottom:4px;line-height:1.3">${f.name.split(' ').slice(0,4).join(' ')}</div>
+      <div style="font-size:1.1rem;font-weight:700;color:var(--ink)">₹${r.nav || '—'}</div>
+      ${r.change !== null && r.change !== undefined ? `<div style="font-size:10px;color:${color};font-weight:700">${arrow} ${Math.abs(r.change)}% today</div>` : `<div style="font-size:10px;color:var(--ink3)">${r.note || ''}</div>`}
+      ${r.date ? `<div style="font-size:9px;color:var(--ink3);margin-top:2px">${r.date}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  if (lastFetch) lastFetch.textContent = 'Last fetch: ' + new Date().toLocaleTimeString('en-IN');
+  btn.textContent = '✅ NAV Updated';
+  btn.disabled = false;
+  setTimeout(() => { if (btn) btn.textContent = '🔄 Fetch Live NAV'; }, 3000);
+
+  // Refresh investment table with new NAV data
+  if (typeof renderInvestmentTable === 'function') renderInvestmentTable();
+}
+
+// ============================================================
+// PAGE 41: ITR RECONCILIATION TRACKER
+// ============================================================
+let itrHistory = JSON.parse(localStorage.getItem('itrHistory') || '[]');
+
+function renderITRTracker() {
+  renderITRHistory();
+  renderITRUtilisation();
+}
+
+function saveITREntry() {
+  const gs = id => document.getElementById(id)?.value || '';
+  const gn = id => parseFloat(document.getElementById(id)?.value) || 0;
+
+  const fy = gs('itr-fy');
+  const entry = {
+    fy, form: gs('itr-form'), status: gs('itr-status'),
+    date: gs('itr-date'), ack: gs('itr-ack'),
+    gross: gn('itr-gross'), otherIncome: gn('itr-other-income'), ltcg: gn('itr-ltcg'),
+    d80c: gn('itr-80c'), d80ccd1b: gn('itr-80ccd1b'), d80ccd2: gn('itr-80ccd2'),
+    d80d: gn('itr-80d'), hra: gn('itr-hra'), lta: gn('itr-lta'), otherDed: gn('itr-other-ded'),
+    taxPayable: gn('itr-tax-payable'), tds: gn('itr-tds'),
+    advanceTax: gn('itr-advance-tax'), refund: gn('itr-refund'),
+    id: Date.now()
+  };
+  entry.totalDed = entry.d80c + entry.d80ccd1b + entry.d80ccd2 + entry.d80d + entry.hra + entry.lta + entry.otherDed;
+
+  itrHistory = itrHistory.filter(h => h.fy !== fy);
+  itrHistory.push(entry);
+  itrHistory.sort((a, b) => a.fy.localeCompare(b.fy));
+  localStorage.setItem('itrHistory', JSON.stringify(itrHistory));
+  renderITRTracker();
+  alert('✅ ITR entry saved for ' + fy);
+}
+
+function renderITRHistory() {
+  const tbody = document.getElementById('itr-history-tbody');
+  if (!tbody) return;
+  if (!itrHistory.length) { tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--ink3);padding:20px">No ITR entries yet.</td></tr>'; return; }
+  const fmt = v => '₹' + Math.round(v).toLocaleString('en-IN');
+  const statusColor = { filed: 'var(--jt)', processed: 'var(--jt)', pending: 'var(--red)', demand: 'var(--red)' };
+  tbody.innerHTML = itrHistory.map(h => `<tr>
+    <td style="font-weight:700">${h.fy}</td>
+    <td>${h.form}</td>
+    <td>${h.gross > 0 ? fmt(h.gross) : '—'}</td>
+    <td>${h.totalDed > 0 ? fmt(h.totalDed) : '—'}</td>
+    <td>${h.tds > 0 ? fmt(h.tds) : '—'}</td>
+    <td style="color:${h.refund >= 0 ? 'var(--jt)' : 'var(--red)'}">
+      ${h.refund !== 0 ? (h.refund > 0 ? '+' : '') + fmt(h.refund) : '—'}
+    </td>
+    <td style="color:${h.d80ccd2 > 0 ? 'var(--you)' : 'var(--red)'}">
+      ${h.d80ccd2 > 0 ? fmt(h.d80ccd2) : '❌ Not claimed'}
+    </td>
+    <td style="color:${statusColor[h.status] || 'var(--ink3)'}">
+      ${h.status === 'filed' ? '✅ Filed' : h.status === 'processed' ? '✅ Processed' : h.status === 'demand' ? '⚠️ Demand' : '❌ Pending'}
+    </td>
+    <td><button onclick="deleteITREntry(${h.id})" style="background:none;border:none;color:var(--red);cursor:pointer">✕</button></td>
+  </tr>`).join('');
+}
+
+function deleteITREntry(id) {
+  itrHistory = itrHistory.filter(h => h.id !== id);
+  localStorage.setItem('itrHistory', JSON.stringify(itrHistory));
+  renderITRTracker();
+}
+
+function renderITRUtilisation() {
+  const el = document.getElementById('itr-utilisation');
+  if (!el || !itrHistory.length) { if (el) el.innerHTML = ''; return; }
+  const latest = itrHistory[itrHistory.length - 1];
+  const checks = [
+    { label: '80C (₹1.5L limit)', claimed: latest.d80c, limit: 150000 },
+    { label: '80CCD(1B) NPS (₹50K)', claimed: latest.d80ccd1b, limit: 50000 },
+    { label: '80CCD(2) Employer NPS', claimed: latest.d80ccd2, limit: 167616 },
+    { label: '80D Health Insurance', claimed: latest.d80d, limit: 75000 },
+  ];
+  el.innerHTML = checks.map(c => {
+    const pct = c.limit > 0 ? Math.min(100, Math.round(c.claimed / c.limit * 100)) : 0;
+    const ok  = c.claimed >= c.limit;
+    return `<div class="metric-block">
+      <div class="mb-label">${c.label}</div>
+      <div class="mb-value" style="color:${ok ? 'var(--jt)' : 'var(--you)'}">₹${Math.round(c.claimed/1000)}K / ₹${Math.round(c.limit/1000)}K</div>
+      <div style="background:rgba(255,255,255,.08);border-radius:3px;height:4px;overflow:hidden;margin-top:4px">
+        <div style="width:${pct}%;height:100%;background:${ok ? 'var(--jt)' : 'var(--you)'}"></div>
+      </div>
+      <div class="mb-sub">${ok ? '✅ Fully claimed' : `⚠️ ${100-pct}% unclaimed`}</div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// PAGE 42: GOAL CONFLICT TIMELINE
+// ============================================================
+function calcGoalConflict() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const currNet    = g('gc-curr-net')      || config.netPay    || 201586;
+  const wifeInc    = g('gc-wife-income')   || config.wifeGross || 70000;
+  const incGrowth  = (g('gc-income-growth') || 10) / 100;
+  const wifeGrowth = (g('gc-wife-growth')   || 10) / 100;
+  const emiAmt     = g('gc-emi')            || 70000;
+  const emiStart   = g('gc-emi-year')       || 2032;
+  const ch1Fees    = g('gc-child1-fees')    || 12000;
+  const ch1Start   = g('gc-child1-year')    || 2029;
+  const ch2Fees    = g('gc-child2-fees')    || 12000;
+  const ch2Start   = g('gc-child2-year')    || 2031;
+
+  const fmt = v => '₹' + Math.round(Math.abs(v)).toLocaleString('en-IN');
+  const baseSIP  = config.yourSIP || 191200;
+  const baseRent = config.rent    || 40000;
+  const baseLive = (config.livingExpenses || 49000) + (config.parents || 20000) + (config.fixedExpenses || 13000);
+
+  const rows = [];
+  for (let yr = 2026; yr <= 2040; yr++) {
+    const yrs = yr - 2026;
+    const yourNet  = Math.round(currNet  * Math.pow(1 + incGrowth,  yrs));
+    const wifeNet  = Math.round(wifeInc  * Math.pow(1 + wifeGrowth, yrs));
+    const totalInc = yourNet + wifeNet;
+
+    // Rent → EMI switch
+    const rentOrEMI = yr >= emiStart ? emiAmt : baseRent;
+
+    // SIP stepped up (tiered 10%→7%→5%)
+    let sip = baseSIP;
+    for (let i = 0; i < yrs; i++) {
+      const tier = i < 10 ? 0.10 : i < 20 ? 0.07 : 0.05;
+      sip = Math.round(sip * (1 + tier));
+    }
+
+    // School fees
+    const fees = (yr >= ch1Start ? ch1Fees : 0) + (yr >= ch2Start ? ch2Fees : 0);
+
+    // Living (grows with inflation)
+    const living = Math.round(baseLive * Math.pow(1.06, yrs));
+
+    const totalOut = rentOrEMI + sip + fees + living;
+    const surplus  = totalInc - totalOut;
+
+    rows.push({ yr, yourNet, wifeNet, totalInc, rentOrEMI, living, fees, sip, surplus, isCrunch: yr >= 2030 && yr <= 2034 });
+  }
+
+  // Table
+  const tbody = document.getElementById('gc-table-tbody');
+  if (tbody) {
+    tbody.innerHTML = rows.map(r => {
+      const surplusColor = r.surplus >= 0 ? 'var(--jt)' : 'var(--red)';
+      return `<tr style="${r.isCrunch ? 'background:rgba(232,80,64,.07)' : ''}" class="${r.yr===emiStart ? 'milestone' : ''}">
+        <td style="font-weight:${r.isCrunch ? '700' : '400'};color:${r.isCrunch ? 'var(--you)' : 'var(--ink)'}">${r.yr}${r.isCrunch ? ' ⚡' : ''}</td>
+        <td>${fmt(r.yourNet)}</td><td>${fmt(r.wifeNet)}</td>
+        <td style="font-weight:700">${fmt(r.totalInc)}</td>
+        <td style="color:${r.yr>=emiStart ? 'var(--red)' : 'var(--ink2)'}">${fmt(r.rentOrEMI)}</td>
+        <td>${fmt(r.living)}</td>
+        <td style="color:${r.fees > 0 ? 'var(--you)' : 'var(--ink3)'}">${r.fees > 0 ? fmt(r.fees) : '—'}</td>
+        <td>${fmt(r.sip)}</td>
+        <td style="font-weight:700;color:${surplusColor}">${r.surplus >= 0 ? '+' : '-'}${fmt(r.surplus)}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  // EMI display
+  const emiDisplay = document.getElementById('gc-emi-display');
+  if (emiDisplay) emiDisplay.textContent = emiAmt.toLocaleString('en-IN');
+
+  // Chart
+  destroyChart('gcChart');
+  const ctx = document.getElementById('gcChart');
+  if (!ctx) return;
+
+  const crunchYears = rows.map(r => r.yr >= 2030 && r.yr <= 2034);
+  chartInstances['gcChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.yr),
+      datasets: [
+        { label: 'Total Income',  data: rows.map(r => r.totalInc/1000), backgroundColor: 'rgba(48,200,122,.4)', borderColor: 'var(--jt)', borderWidth: 1, order: 2 },
+        { label: 'Total Outflow', data: rows.map(r => (r.rentOrEMI+r.living+r.fees+r.sip)/1000), backgroundColor: rows.map(r => r.surplus < 0 ? 'rgba(232,80,64,.5)' : 'rgba(240,180,41,.4)'), borderColor: rows.map(r => r.surplus < 0 ? 'var(--red)' : 'var(--you)'), borderWidth: 1, order: 3 },
+        { label: 'Monthly Surplus', data: rows.map(r => r.surplus/1000), type: 'line', borderColor: rows.map((r,i) => r.surplus >= 0 ? 'var(--jt)' : 'var(--red)'), backgroundColor: 'transparent', tension: 0.4, pointRadius: 4, order: 1 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        y: { ticks: { callback: v => '₹' + v + 'K', color: 'var(--ink3)' }, grid: { color: 'rgba(255,255,255,.05)' } },
+        x: { ticks: { color: 'var(--ink3)' } }
+      },
+      plugins: {
+        legend: { labels: { color: 'var(--ink)', font: { size: 11 } } },
+        lifeEvents: { events: getLifeEvents().filter(e => e.x >= 2026 && e.x <= 2040) }
+      }
+    }
+  });
 }
 
 </script>
