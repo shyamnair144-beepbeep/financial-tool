@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-10-06 01:23:14 UTC",
-  "timestamp": 1791249794466,
+  "lastUpdated": "2026-10-06 23:59:42 UTC",
+  "timestamp": 1791331182213,
   "cars": [
     {
       "name": "Maruti Suzuki Swift",
@@ -60,37 +60,37 @@
       "name": "Hyundai Verna",
       "exShowroomPrice": 0,
       "onRoadBangalore": 0,
-      "lastChecked": "2026-10-06"
+      "lastChecked": "2026-10-07"
     },
     {
       "name": "Skoda Kushaq",
       "exShowroomPrice": 0,
       "onRoadBangalore": 0,
-      "lastChecked": "2026-10-06"
+      "lastChecked": "2026-10-07"
     },
     {
       "name": "Volkswagen Virtus",
       "exShowroomPrice": 0,
       "onRoadBangalore": 0,
-      "lastChecked": "2026-10-06"
+      "lastChecked": "2026-10-07"
     },
     {
       "name": "MG Astor",
       "exShowroomPrice": 0,
       "onRoadBangalore": 0,
-      "lastChecked": "2026-10-06"
+      "lastChecked": "2026-10-07"
     },
     {
       "name": "Mahindra XUV700",
       "exShowroomPrice": 0,
       "onRoadBangalore": 0,
-      "lastChecked": "2026-10-06"
+      "lastChecked": "2026-10-07"
     },
     {
       "name": "Tata Harrier",
       "exShowroomPrice": 0,
       "onRoadBangalore": 0,
-      "lastChecked": "2026-10-06"
+      "lastChecked": "2026-10-07"
     }
   ]
 }
